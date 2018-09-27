@@ -34,8 +34,12 @@ export default class ContractUtil {
 	public readonly tokenBAddr: string;
 
 	public readonly inceptionBlk: number = 0;
+	private live: boolean;
+	private provider: string;
 
 	constructor(window: any, source: string, provider: string, live: boolean) {
+		this.live = live;
+		this.provider = provider;
 		if (window && typeof window.web3 !== 'undefined') {
 			this.web3 = new Web3(window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
@@ -62,12 +66,12 @@ export default class ContractUtil {
 		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
 	}
 
-	public switchToMetaMask(window: any, provider: string) {
+	public switchToMetaMask(window: any) {
 		if (window && typeof (window as any).web3 !== 'undefined') {
 			this.web3 = new Web3((window as any).web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else {
-			this.web3 = new Web3(new Web3.providers.HttpProvider(provider));
+			this.web3 = new Web3(new Web3.providers.HttpProvider(this.provider));
 			this.wallet = Wallet.None;
 		}
 
@@ -78,11 +82,11 @@ export default class ContractUtil {
 		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
 	}
 
-	public async switchToLedger(live: boolean) {
+	public async switchToLedger() {
 		const engine = new ProviderEngine();
 		const getTransport = () => TransportU2F.create();
-		const networkId = live ? CST.ETH_MAINNET_ID : CST.ETH_KOVAN_ID;
-		const rpcUrl = live ? CST.PROVIDER_MYETHER_MAIN : CST.PROVIDER_INFURA_KOVAN;
+		const networkId = this.live ? CST.ETH_MAINNET_ID : CST.ETH_KOVAN_ID;
+		const rpcUrl = this.provider;
 		const ledger = createLedgerSubprovider(getTransport, {
 			networkId,
 			accountsLength: 5
