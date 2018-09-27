@@ -1,3 +1,16 @@
+export const ETH_MAINNET_ID = 1;
+export const ETH_KOVAN_ID = 42;
+
+export const DUMMY_ADDR = '0x0';
+
+export const CTD_INCEPTION = 'Inception';
+export const CTD_TRADING = 'Trading';
+export const CTD_PRERESET = 'PreReset';
+export const CTD_UP_RESET = 'UpwardReset';
+export const CTD_DOWN_RESET = 'DownwardReset';
+export const CTD_PERIOD_RESET = 'PeriodicReset';
+export const CTD_LOADING = 'Loading';
+
 // wallet and contract
 export const DUO_CONTRACT_ADDR_KOVAN = '0xa8Cac43aA0C2B61BA4e0C10DC85bCa02662E1Bee';
 export const CUSTODIAN_ADDR_KOVAN = '0x0f80F055c7482b919183EcD06e0dd5FD7991D309'; // '0x72c89F7e11C845c4ADb7280d1990b3e54F84B417'; // 7648017

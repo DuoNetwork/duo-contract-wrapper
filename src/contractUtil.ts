@@ -1,39 +1,129 @@
 import Web3 from 'web3';
 import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
-import { IEvent } from './types';
-
+import custodianAbi from './static/Custodian.json';
+import duoAbi from './static/DUO.json';
+import tokenAAbi from './static/TokenA.json';
+import tokenBAbi from './static/TokenB.json';
+import { IAddresses, IBalances, ICustodianPrices, ICustodianStates, IEvent } from './types';
+const ProviderEngine = require('web3-provider-engine');
+const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
+const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
+const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
+const abiDecoder = require('abi-decoder');
 const Tx = require('ethereumjs-tx');
+
+export enum Wallet {
+	None,
+	Local,
+	MetaMask,
+	Ledger
+}
 
 export default class ContractUtil {
 	public web3: Web3;
-	public abi: any;
-	public contract: Contract;
-	public time: number = 0;
-	public lastPrice: number = 400;
-	public readonly inceptionBlk: number = 0;
-	private readonly custodianAddr: string;
-	private readonly duoAddr: string;
-	private readonly aContractAddr: string;
-	private readonly bContractAddr: string;
+	public duo: Contract;
+	public tokenA: Contract;
+	public tokenB: Contract;
+	public custodian: Contract;
+	public wallet: Wallet = Wallet.None;
+	public accountIndex: number = 0;
+	public readonly custodianAddr: string;
+	public readonly duoAddr: string;
+	public readonly tokenAAddr: string;
+	public readonly tokenBAddr: string;
 
-	constructor(source: string, provider: string, live: boolean) {
-		this.web3 = new Web3(
-			source
-				? new Web3.providers.HttpProvider(provider)
-				: new Web3.providers.WebsocketProvider(provider)
-		);
-		this.abi = require('./static/Custodian.json');
+	public readonly inceptionBlk: number = 0;
+
+	constructor(window: any, source: string, provider: string, live: boolean) {
+		if (window && typeof window.web3 !== 'undefined') {
+			this.web3 = new Web3(window.web3.currentProvider);
+			this.wallet = Wallet.MetaMask;
+		} else if (window) {
+			this.web3 = new Web3(new Web3.providers.HttpProvider(provider));
+			this.wallet = Wallet.None;
+		} else {
+			this.web3 = new Web3(
+				source
+					? new Web3.providers.HttpProvider(provider)
+					: new Web3.providers.WebsocketProvider(provider)
+			);
+			this.wallet = Wallet.Local;
+		}
+
 		this.custodianAddr = live ? CST.CUSTODIAN_ADDR_MAIN : CST.CUSTODIAN_ADDR_KOVAN;
 		this.duoAddr = live ? CST.DUO_CONTRACT_ADDR_MAIN : CST.DUO_CONTRACT_ADDR_KOVAN;
-		this.aContractAddr = live ? CST.A_CONTRACT_ADDR_MAIN : CST.A_CONTRACT_ADDR_KOVAN;
-		this.bContractAddr = live ? CST.B_CONTRACT_ADDR_MAIN : CST.B_CONTRACT_ADDR_KOVAN;
+		this.tokenAAddr = live ? CST.A_CONTRACT_ADDR_MAIN : CST.A_CONTRACT_ADDR_KOVAN;
+		this.tokenBAddr = live ? CST.B_CONTRACT_ADDR_MAIN : CST.B_CONTRACT_ADDR_KOVAN;
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
-		this.contract = new this.web3.eth.Contract(this.abi.abi, this.custodianAddr);
+		this.custodian = new this.web3.eth.Contract(custodianAbi.abi, this.custodianAddr);
+		this.duo = new this.web3.eth.Contract(duoAbi.abi, this.duoAddr);
+		this.tokenA = new this.web3.eth.Contract(tokenAAbi.abi, this.tokenAAddr);
+		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
 	}
 
-	public readSysStates() {
-		return this.contract.methods.getSystemStates().call();
+	public switchToMetaMask(window: any, provider: string) {
+		if (window && typeof (window as any).web3 !== 'undefined') {
+			this.web3 = new Web3((window as any).web3.currentProvider);
+			this.wallet = Wallet.MetaMask;
+		} else {
+			this.web3 = new Web3(new Web3.providers.HttpProvider(provider));
+			this.wallet = Wallet.None;
+		}
+
+		this.accountIndex = 0;
+		this.custodian = new this.web3.eth.Contract(custodianAbi.abi, this.custodianAddr);
+		this.duo = new this.web3.eth.Contract(duoAbi.abi, this.duoAddr);
+		this.tokenA = new this.web3.eth.Contract(tokenAAbi.abi, this.tokenAAddr);
+		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
+	}
+
+	public async switchToLedger(live: boolean) {
+		const engine = new ProviderEngine();
+		const getTransport = () => TransportU2F.create();
+		const networkId = live ? CST.ETH_MAINNET_ID : CST.ETH_KOVAN_ID;
+		const rpcUrl = live ? CST.PROVIDER_MYETHER_MAIN : CST.PROVIDER_INFURA_KOVAN;
+		const ledger = createLedgerSubprovider(getTransport, {
+			networkId,
+			accountsLength: 5
+		});
+		engine.addProvider(ledger);
+		engine.addProvider(new FetchSubprovider({ rpcUrl }));
+		engine.start();
+		const newWeb3 = new Web3(engine);
+		const accounts = await newWeb3.eth.getAccounts();
+		this.web3 = newWeb3;
+		this.custodian = new this.web3.eth.Contract(custodianAbi.abi, this.custodianAddr);
+		this.duo = new this.web3.eth.Contract(duoAbi.abi, this.duoAddr);
+		this.tokenA = new this.web3.eth.Contract(tokenAAbi.abi, this.tokenAAddr);
+		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
+		this.wallet = Wallet.Ledger;
+		return accounts;
+	}
+
+	public onWeb3AccountUpdate(onUpdate: (addr: string, network: number) => any) {
+		if (this.wallet !== Wallet.MetaMask) return;
+
+		const store = (this.web3.currentProvider as any).publicConfigStore;
+		if (store)
+			store.on('update', () => {
+				onUpdate(
+					store.getState().selectedAddress || '',
+					Number(store.getState().networkVersion || '')
+				);
+			});
+	}
+
+	public isReadOnly() {
+		return this.wallet === Wallet.None;
+	}
+
+	private readOnlyReject() {
+		return Promise.reject('Read Only Mode');
+	}
+
+	private wrongEnvReject() {
+		return Promise.reject('Wrong Env');
 	}
 
 	public generateTxString(abi: object, input: any[]): string {
@@ -82,6 +172,8 @@ export default class ContractUtil {
 		gasLimit: number,
 		isInception: boolean = false
 	) {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		const priceInWei: string = this.web3.utils.toWei(price + '', 'ether');
 		const priceInSeconds: string = Math.floor(timestamp / 1000) + '';
 		console.log('ETH price is ' + priceInWei + ' at timestamp ' + priceInSeconds);
@@ -122,11 +214,11 @@ export default class ContractUtil {
 		const command = this.generateTxString(abi, [
 			priceInWei,
 			priceInSeconds,
-			this.web3.utils.toChecksumAddress(this.aContractAddr),
-			this.web3.utils.toChecksumAddress(this.bContractAddr)
+			this.web3.utils.toChecksumAddress(this.tokenAAddr),
+			this.web3.utils.toChecksumAddress(this.tokenBAddr)
 		]);
 		// sending out transaction
-		this.web3.eth
+		return this.web3.eth
 			.sendSignedTransaction(
 				'0x' +
 					this.signTx(
@@ -145,7 +237,7 @@ export default class ContractUtil {
 			.catch(error => console.log(error));
 	}
 
-	public async create(
+	public async createRaw(
 		address: string,
 		privateKey: string,
 		gasPrice: number,
@@ -153,6 +245,8 @@ export default class ContractUtil {
 		eth: number,
 		nonce: number = -1
 	) {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		console.log('the account ' + address + ' is creating tokens with ' + privateKey);
 		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
 		const abi = {
@@ -180,7 +274,7 @@ export default class ContractUtil {
 				eth
 		);
 		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
+		return this.web3.eth
 			.sendSignedTransaction(
 				'0x' +
 					this.signTx(
@@ -199,7 +293,24 @@ export default class ContractUtil {
 			.catch(err => console.log(err));
 	}
 
-	public async redeem(
+	public create(
+		address: string,
+		value: number,
+		payFeeInEth: boolean,
+		onTxHash: (hash: string) => any
+	) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		return this.custodian.methods
+			.create(payFeeInEth)
+			.send({
+				from: address,
+				value: this.toWei(value)
+			})
+			.on('transactionHash', onTxHash);
+	}
+
+	public async redeemRaw(
 		address: string,
 		privateKey: string,
 		amtA: number,
@@ -208,10 +319,12 @@ export default class ContractUtil {
 		gasLimit: number,
 		nonce: number = -1
 	) {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		console.log('the account ' + address + ' privateKey is ' + privateKey);
 		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const balanceOfA = await this.contract.methods.balanceOf(0, address).call();
-		const balanceOfB = await this.contract.methods.balanceOf(1, address).call();
+		const balanceOfA = await this.custodian.methods.balanceOf(0, address).call();
+		const balanceOfB = await this.custodian.methods.balanceOf(1, address).call();
 		console.log('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
 		const abi = {
 			name: 'redeem',
@@ -248,7 +361,7 @@ export default class ContractUtil {
 				amtB
 		);
 		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
+		return this.web3.eth
 			.sendSignedTransaction(
 				'0x' +
 					this.signTx(
@@ -267,13 +380,32 @@ export default class ContractUtil {
 			.catch(error => console.log(error));
 	}
 
-	public async transferEth(
+	public redeem(
+		address: string,
+		amtA: number,
+		amtB: number,
+		payFeeInEth: boolean,
+		onTxHash: (hash: string) => any
+	) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		return this.custodian.methods
+			.redeem(this.toWei(amtA), this.toWei(amtB), payFeeInEth)
+			.send({
+				from: address
+			})
+			.on('transactionHash', onTxHash);
+	}
+
+	public async ethTransferRaw(
 		from: string,
 		privatekey: string,
 		to: string,
 		amt: number,
 		nonce: number
 	) {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		const rawTx = {
 			nonce: nonce,
 			gasPrice: this.web3.utils.toHex((await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE),
@@ -282,140 +414,12 @@ export default class ContractUtil {
 			to: to,
 			value: this.web3.utils.toHex(this.web3.utils.toWei(amt.toPrecision(3) + '', 'ether'))
 		};
-		await this.web3.eth
+		return this.web3.eth
 			.sendSignedTransaction('0x' + this.signTx(rawTx, privatekey))
 			.then(receipt => console.log(JSON.stringify(receipt, null, 4)));
 	}
 
-	public async setValue(
-		from: string,
-		privatekey: string,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number,
-		index: number,
-		newValue: number
-	) {
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(from) : nonce;
-		const abi = {
-			name: 'setValue',
-			type: 'function',
-			inputs: [
-				{
-					name: 'idx',
-					type: 'uint256'
-				},
-				{
-					name: 'newValue',
-					type: 'uint256'
-				}
-			]
-		};
-		const input = [index, newValue];
-		const command = this.generateTxString(abi, input);
-		// sending out transaction
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		console.log(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' index is ' +
-				index +
-				' newValue is ' +
-				newValue
-		);
-		this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.custodianAddr,
-							0,
-							command
-						),
-						privatekey
-					)
-			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
-	}
-
-	public async transferToken(
-		index: number,
-		address: string,
-		privateKey: string,
-		to: string,
-		value: number,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number = -1
-	) {
-		console.log(
-			'the account ' +
-				address +
-				' privateKey is ' +
-				privateKey +
-				' transfering ' +
-				index +
-				' to ' +
-				to +
-				' with amt ' +
-				value
-		);
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const abi = {
-			name: 'transfer',
-			type: 'function',
-			inputs: [
-				{
-					name: 'index',
-					type: 'uint256'
-				},
-				{
-					name: 'from',
-					type: 'address'
-				},
-				{
-					name: 'to',
-					type: 'address'
-				},
-				{
-					name: 'tokens',
-					type: 'uint256'
-				}
-			]
-		};
-		const input = [index, address, to, value];
-		const command = this.generateTxString(abi, input);
-		// sending out transaction
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.custodianAddr,
-							0,
-							command
-						),
-						privateKey
-					)
-			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
-	}
-
-	public async transferDuoToken(
+	public async duoTransferRaw(
 		address: string,
 		privateKey: string,
 		to: string,
@@ -424,6 +428,8 @@ export default class ContractUtil {
 		gasLimit: number,
 		nonce: number = -1
 	): Promise<any> {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		console.log(
 			'the account ' +
 				address +
@@ -454,247 +460,17 @@ export default class ContractUtil {
 		// sending out transaction
 		gasPrice = (await this.getGasPrice()) * 2 || gasPrice;
 		// gasPrice = gasPrice || await web3.eth.
-		return new Promise((resolve, reject) => {
-			return this.web3.eth
-				.sendSignedTransaction(
-					'0x' +
-						this.signTx(
-							this.createTxCommand(
-								nonce,
-								gasPrice,
-								gasLimit,
-								this.duoAddr,
-								0,
-								command
-							),
-							privateKey
-						)
-				)
-				.then(receipt => resolve(receipt))
-				.catch(error => reject(error));
-		});
-	}
-
-	public async collectFee(
-		address: string,
-		privateKey: string,
-		amountInWei: number,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number = -1
-	) {
-		console.log('the account ' + address + ' privateKey is ' + privateKey);
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const abi = {
-			name: 'collectFee',
-			type: 'function',
-			inputs: [
-				{
-					name: 'amountInWei',
-					type: 'uint256'
-				}
-			]
-		};
-		const input = [amountInWei];
-		const command = this.generateTxString(abi, input);
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		console.log(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' amountInWei ' +
-				amountInWei
-		);
-		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
+		return this.web3.eth
 			.sendSignedTransaction(
 				'0x' +
 					this.signTx(
-						this.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.custodianAddr,
-							0,
-							command
-						),
+						this.createTxCommand(nonce, gasPrice, gasLimit, this.duoAddr, 0, command),
 						privateKey
 					)
-			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
+			);
 	}
 
-	public async addAddress(
-		address: string,
-		privateKey: string,
-		addr1: string,
-		addr2: string,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number
-	) {
-		console.log('the account ' + address + ' privateKey is ' + privateKey);
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const abi = {
-			name: 'addAddress',
-			type: 'function',
-			inputs: [
-				{
-					name: 'addr1',
-					type: 'address'
-				},
-				{
-					name: 'addr2',
-					type: 'address'
-				}
-			]
-		};
-		const input = [addr1, addr2];
-		const command = this.generateTxString(abi, input);
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		console.log(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' address1 ' +
-				addr1 +
-				' address2 ' +
-				addr2
-		);
-		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.custodianAddr,
-							0,
-							command
-						),
-						privateKey
-					)
-			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
-	}
-
-	public async updateAddress(
-		address: string,
-		privateKey: string,
-		current: string,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number
-	) {
-		console.log('the account ' + address + ' privateKey is ' + privateKey);
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const abi = {
-			name: 'updateAddress',
-			type: 'function',
-			inputs: [
-				{
-					name: 'current',
-					type: 'address'
-				}
-			]
-		};
-		const input = [current];
-		const command = this.generateTxString(abi, input);
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		console.log(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' currentAddress ' +
-				current
-		);
-		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.custodianAddr,
-							0,
-							command
-						),
-						privateKey
-					)
-			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
-	}
-
-	public async removeAddress(
-		address: string,
-		privateKey: string,
-		addr: string,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number
-	) {
-		console.log('the account ' + address + ' privateKey is ' + privateKey);
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const abi = {
-			name: 'removeAddress',
-			type: 'function',
-			inputs: [
-				{
-					name: 'addr',
-					type: 'address'
-				}
-			]
-		};
-		const input = [addr];
-		const command = this.generateTxString(abi, input);
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		console.log(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' address ' +
-				addr
-		);
-		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.custodianAddr,
-							0,
-							command
-						),
-						privateKey
-					)
-			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
-	}
-
-	public async trigger(
+	private async trigger(
 		address: string,
 		privateKey: string,
 		abi: object,
@@ -725,6 +501,8 @@ export default class ContractUtil {
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		const abi = {
 			name: 'startReset',
 			type: 'function',
@@ -738,10 +516,12 @@ export default class ContractUtil {
 				this.trigger(address, privateKey, abi, [], gasPrice, CST.RESET_GAS_LIMIT)
 			);
 
-		await Promise.all(promiseList);
+		return Promise.all(promiseList);
 	}
 
 	public async triggerPreReset(address: string, privateKey: string) {
+		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+
 		const abi = {
 			name: 'startPreReset',
 			type: 'function',
@@ -749,7 +529,7 @@ export default class ContractUtil {
 		};
 		const gasPrice = (await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
 		console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
-		await this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
+		return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
 	}
 
 	public getCurrentBlock() {
@@ -779,12 +559,271 @@ export default class ContractUtil {
 		end: number,
 		event: string
 	): Promise<EventLog[]> {
-		return contract.getPastEvents(
-			event,
-			{
-				fromBlock: start,
-				toBlock: end
+		return contract.getPastEvents(event, {
+			fromBlock: start,
+			toBlock: end
+		});
+	}
+
+	public convertCustodianState(rawState: string) {
+		switch (rawState) {
+			case CST.STATE_INCEPTION:
+				return CST.CTD_INCEPTION;
+			case CST.STATE_TRADING:
+				return CST.CTD_TRADING;
+			case CST.STATE_PRERESET:
+				return CST.CTD_PRERESET;
+			case CST.STATE_UP_RESET:
+				return CST.CTD_UP_RESET;
+			case CST.STATE_DOWN_RESET:
+				return CST.CTD_DOWN_RESET;
+			case CST.STATE_PERIOD_RESET:
+				return CST.CTD_PERIOD_RESET;
+			default:
+				return CST.CTD_LOADING;
+		}
+	}
+
+	public async getCustodianStates(): Promise<ICustodianStates> {
+		const [states, duoBalance] = await Promise.all([
+			this.custodian.methods.getSystemStates().call(),
+			this.getDuoBalance(this.custodianAddr)
+		]);
+		return {
+			state: this.convertCustodianState(states[0].valueOf()),
+			navA: this.fromWei(states[1]),
+			navB: this.fromWei(states[2]),
+			totalSupplyA: this.fromWei(states[3]),
+			totalSupplyB: this.fromWei(states[4]),
+			ethBalance: this.fromWei(states[5]),
+			alpha: states[6].valueOf() / 10000,
+			beta: this.fromWei(states[7]),
+			feeAccumulated: this.fromWei(states[8]),
+			periodCoupon: this.fromWei(states[9]),
+			limitPeriodic: this.fromWei(states[10]),
+			limitUpper: this.fromWei(states[11]),
+			limitLower: this.fromWei(states[12]),
+			createCommRate: states[13] / 10000,
+			period: Number(states[14].valueOf()),
+			iterationGasThreshold: Number(states[15].valueOf()),
+			ethDuoFeeRatio: Number(states[16].valueOf()),
+			preResetWaitingBlocks: Number(states[17].valueOf()),
+			priceTol: Number(states[18].valueOf() / 10000),
+			priceFeedTol: Number(states[19].valueOf() / 10000),
+			priceFeedTimeTol: Number(states[20].valueOf()),
+			priceUpdateCoolDown: Number(states[21].valueOf()),
+			numOfPrices: Number(states[22].valueOf()),
+			nextResetAddrIndex: Number(states[23].valueOf()),
+			lastAdminTime: Number(states[24].valueOf()),
+			adminCoolDown: Number(states[25]),
+			usersLength: Number(states[26].valueOf()),
+			addrPoolLength: Number(states[27].valueOf()),
+			redeemCommRate: states[states.length > 28 ? 28 : 13] / 10000,
+			duoBalance: duoBalance
+		};
+	}
+
+	public async getCustodianAddresses(): Promise<IAddresses> {
+		const addr: string[] = await this.custodian.methods.getSystemAddresses().call();
+		const balances = await Promise.all(addr.map(a => this.getEthBalance(a)));
+		return {
+			operator: {
+				address: addr[0],
+				balance: balances[0]
+			},
+			feeCollector: {
+				address: addr[1],
+				balance: balances[1]
+			},
+			priceFeed1: {
+				address: addr[2],
+				balance: balances[2]
+			},
+			priceFeed2: {
+				address: addr[3],
+				balance: balances[3]
+			},
+			priceFeed3: {
+				address: addr[4],
+				balance: balances[4]
+			},
+			poolManager: {
+				address: addr[5],
+				balance: balances[5]
 			}
-		)
+		};
+	}
+
+	public async getCustodianPrices(): Promise<ICustodianPrices> {
+		const prices = await this.custodian.methods.getSystemPrices().call();
+		const custodianPrices = [0, 1, 2, 3].map(i => ({
+			address: prices[i * 3].valueOf(),
+			price: this.fromWei(prices[1 + i * 3]),
+			timestamp: prices[2 + i * 3].valueOf() * 1000
+		}));
+
+		return {
+			first: custodianPrices[0],
+			second: custodianPrices[1],
+			reset: custodianPrices[2],
+			last: custodianPrices[3]
+		};
+	}
+
+	public async getBalances(address: string): Promise<IBalances> {
+		if (!address)
+			return {
+				eth: 0,
+				duo: 0,
+				allowance: 0,
+				tokenA: 0,
+				tokenB: 0
+			};
+
+		const balances = await Promise.all([
+			this.getEthBalance(address),
+			this.getDuoBalance(address),
+			this.getDuoAllowance(address),
+			this.getTokenBalance(address, true),
+			this.getTokenBalance(address, false)
+		]);
+
+		return {
+			eth: balances[0],
+			duo: balances[1],
+			allowance: balances[2],
+			tokenA: balances[3],
+			tokenB: balances[4]
+		};
+	}
+
+	public getUserAddress(index: number) {
+		return this.custodian.methods.users(index).call();
+	}
+
+	public getPoolAddress(index: number) {
+		return this.custodian.methods.addrPool(index).call();
+	}
+
+	public async getCurrentAddress(): Promise<string> {
+		const accounts = await this.web3.eth.getAccounts();
+		return accounts[this.accountIndex] || CST.DUMMY_ADDR;
+	}
+
+	public getCurrentNetwork(): Promise<number> {
+		return this.web3.eth.net.getId();
+	}
+
+	public async getEthBalance(address: string): Promise<number> {
+		return this.fromWei(await this.web3.eth.getBalance(address));
+	}
+
+	private async getDuoBalance(address: string): Promise<number> {
+		return this.fromWei(await this.duo.methods.balanceOf(address).call());
+	}
+
+	private async getDuoAllowance(address: string): Promise<number> {
+		return this.fromWei(await this.duo.methods.allowance(address, this.custodianAddr).call());
+	}
+
+	private async getTokenBalance(address: string, isA: boolean): Promise<number> {
+		return this.fromWei(await this.custodian.methods.balanceOf(isA ? 0 : 1, address).call());
+	}
+
+	public fromWei(value: string | number) {
+		return Number(this.web3.utils.fromWei(value, 'ether'));
+	}
+
+	public toWei(value: string | number) {
+		return this.web3.utils.toWei(value + '', 'ether');
+	}
+
+	public checkAddress(addr: string) {
+		if (!addr.startsWith('0x') || addr.length !== 42) return false;
+		return this.web3.utils.checkAddressChecksum(this.web3.utils.toChecksumAddress(addr));
+	}
+
+	public getTransactionReceipt(txHash: string) {
+		return this.web3.eth.getTransactionReceipt(txHash);
+	}
+
+	public duoApprove(address: string, spender: string, value: number) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		return this.duo.methods.approve(spender, this.toWei(value)).send({
+			from: address
+		});
+	}
+
+	public duoTransfer(address: string, to: string, value: number) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		return this.duo.methods.transfer(to, this.toWei(value)).send({
+			from: address
+		});
+	}
+
+	public tokenApprove(address: string, spender: string, value: number, isA: boolean) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		return isA
+			? this.tokenA.methods.approve(spender, this.toWei(value)).send({
+					from: address
+			})
+			: this.tokenB.methods.approve(spender, this.toWei(value)).send({
+					from: address
+			});
+	}
+
+	public tokenTransfer(address: string, to: string, value: number, isA: boolean) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		return isA
+			? this.tokenA.methods.transfer(to, this.toWei(value)).send({
+					from: address
+			})
+			: this.tokenB.methods.transfer(to, this.toWei(value)).send({
+					from: address
+			});
+	}
+
+	public collectFee(address: string, amount: number) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+		return this.custodian.methods.collectFee(this.toWei(amount)).send({
+			from: address
+		});
+	}
+
+	public setValue(address: string, index: number, newValue: number) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+		return this.custodian.methods.setValue(index, newValue).send({
+			from: address
+		});
+	}
+
+	public addAddress(address: string, addr1: string, addr2: string) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+		return this.custodian.methods.addAddress(addr1, addr2).send({
+			from: address
+		});
+	}
+
+	public removeAddress(address: string, addr: string) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+		return this.custodian.methods.addAddress(addr).send({
+			from: address
+		});
+	}
+
+	public updateAddress(address: string, currentRole: string) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+		return this.custodian.methods.addAddress(currentRole).send({
+			from: address
+		});
+	}
+
+	public decode(input: string): any {
+		abiDecoder.addABI(custodianAbi.abi);
+		return abiDecoder.decodeMethod(input);
 	}
 }
