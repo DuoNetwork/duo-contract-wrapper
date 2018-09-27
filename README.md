@@ -1,17 +1,5 @@
 # Introduction
-Supporting process and utilities for DUO Network modules.
-
-## Price Fetch
-Fetch live trades from Bitfinex,  GDAX, Gemini and Kraken.
-
-## Price Commit
-Commit aggregated traded price to smart contract.
-
-## Event Trigger
-Trigger smart contract state transition based on events emitted from smart contract.
-
-## Event Storage
-Subscribe to state changing events from smart contract and store into database for UI and other usage.
+Contract utilities for DUO Network smart contracts
 
 # How to run test
 clone the depository and install all dependencies     
