@@ -1,6 +1,7 @@
 import Web3 from 'web3';
-import { Contract } from 'web3/types';
+import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
+import { IEvent } from './types';
 
 const Tx = require('ethereumjs-tx');
 
@@ -753,5 +754,37 @@ export default class ContractUtil {
 
 	public getCurrentBlock() {
 		return this.web3.eth.getBlockNumber();
+	}
+
+	public parseEvent(eventLog: EventLog, timestamp: number): IEvent {
+		const returnValue = eventLog.returnValues;
+		const output: IEvent = {
+			type: eventLog.event,
+			id: (eventLog as any)['id'],
+			blockHash: eventLog.blockHash,
+			blockNumber: eventLog.blockNumber,
+			transactionHash: eventLog.transactionHash,
+			logStatus: (eventLog as any)['type'],
+			parameters: {},
+			timestamp: timestamp
+		};
+		for (const key in returnValue) output.parameters[key] = returnValue[key];
+
+		return output;
+	}
+
+	public async pullEvents(
+		contract: Contract,
+		start: number,
+		end: number,
+		event: string
+	): Promise<EventLog[]> {
+		return contract.getPastEvents(
+			event,
+			{
+				fromBlock: start,
+				toBlock: end
+			}
+		)
 	}
 }
