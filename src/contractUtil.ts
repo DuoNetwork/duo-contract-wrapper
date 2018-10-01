@@ -6,6 +6,7 @@ import duoAbi from './static/DUO.json';
 import tokenAAbi from './static/TokenA.json';
 import tokenBAbi from './static/TokenB.json';
 import { IAddresses, IBalances, ICustodianPrices, ICustodianStates, IEvent } from './types';
+import util from './util';
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
@@ -464,14 +465,13 @@ export default class ContractUtil {
 		// sending out transaction
 		gasPrice = (await this.getGasPrice()) * 2 || gasPrice;
 		// gasPrice = gasPrice || await web3.eth.
-		return this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(nonce, gasPrice, gasLimit, this.duoAddr, 0, command),
-						privateKey
-					)
-			);
+		return this.web3.eth.sendSignedTransaction(
+			'0x' +
+				this.signTx(
+					this.createTxCommand(nonce, gasPrice, gasLimit, this.duoAddr, 0, command),
+					privateKey
+				)
+		);
 	}
 
 	private async trigger(
@@ -502,6 +502,75 @@ export default class ContractUtil {
 			)
 			.then(receipt => console.log(receipt))
 			.catch(error => console.log(error));
+	}
+
+	public async tokenTransferRaw(
+		index: number,
+		address: string,
+		privateKey: string,
+		to: string,
+		value: number,
+		gasPrice: number,
+		gasLimit: number,
+		nonce: number = -1
+	) {
+		util.log(
+			'the account ' +
+				address +
+				' privateKey is ' +
+				privateKey +
+				' transfering ' +
+				index +
+				' to ' +
+				to +
+				' with amt ' +
+				value
+		);
+		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
+		const abi = {
+			name: 'transfer',
+			type: 'function',
+			inputs: [
+				{
+					name: 'index',
+					type: 'uint256'
+				},
+				{
+					name: 'from',
+					type: 'address'
+				},
+				{
+					name: 'to',
+					type: 'address'
+				},
+				{
+					name: 'tokens',
+					type: 'uint256'
+				}
+			]
+		};
+		const input = [index, address, to, value];
+		const command = this.generateTxString(abi, input);
+		// sending out transaction
+		gasPrice = (await this.getGasPrice()) || gasPrice;
+		// gasPrice = gasPrice || await web3.eth.
+		this.web3.eth
+			.sendSignedTransaction(
+				'0x' +
+					this.signTx(
+						this.createTxCommand(
+							nonce,
+							gasPrice,
+							gasLimit,
+							this.custodianAddr,
+							0,
+							command
+						),
+						privateKey
+					)
+			)
+			.then(receipt => util.log(receipt))
+			.catch(error => util.log(error));
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {
