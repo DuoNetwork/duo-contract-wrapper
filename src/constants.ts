@@ -1,26 +1,3 @@
-export const CREATE_ACCOUNT = 'createAccount';
-export const ACCOUNTS_INFO = 'accountsInfo';
-export const FUEL_ACCOUNTS = 'fuelAccounts';
-export const COLLECT_ETHER = 'collectEther';
-export const MAKE_CREATION = 'makeCreation';
-export const SET_VALUE = 'setValue';
-export const MAKE_REDEMPTION = 'makeRedemption';
-export const MAKE_TOKEN_TRANSFER = 'makeTokenTransfer';
-export const COLLECT_FEE = 'collectFee';
-export const ADD_ADDRESS = 'addAddress';
-export const UPDATE_ADDRES = 'updateAddress';
-export const REMOVE_ADDRESS = 'removeAddress';
-export const GAS_PRICE = 'gasPrice';
-export const GET_CONVERSION = 'getConversion';
-export const RELEASE_DUO = 'releaseDuo';
-export const RELEASE_DUO_TX = 'releaseDuoTx';
-export const FAUCET_DUO = 'faucetDuo';
-export const REBATE_DUO = 'rebateDuo';
-export const FAUCET_ETH = 'faucetEth';
-export const FIND_PERSON = 'findPerson';
-export const KYC_VERIFY = 'kycVerify';
-export const ORACLE_HTML = 'oracleHtml';
-
 export const ETH_MAINNET_ID = 1;
 export const ETH_KOVAN_ID = 42;
 
@@ -86,9 +63,6 @@ export const STATE_DOWN_RESET = '4';
 export const STATE_PERIOD_RESET = '5';
 export const FN_START_CONTRACT = 'startContract';
 export const FN_COMMIT_PRICE = 'commitPrice';
-export const NETWORK_MAIN = 'main';
-export const NETWORK_KOVAN = 'kovan';
-export const NETWORK_DEV = 'dev';
 export const SRC_MYETHER = 'myether';
 export const SRC_INFURA = 'infura';
 export const PROVIDER_LOCAL_HTTP = 'http://localhost:8545';

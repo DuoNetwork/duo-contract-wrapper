@@ -6,7 +6,6 @@ import duoAbi from './static/DUO.json';
 import tokenAAbi from './static/TokenA.json';
 import tokenBAbi from './static/TokenB.json';
 import { IAddresses, IBalances, ICustodianPrices, ICustodianStates, IEvent } from './types';
-import util from './util';
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
@@ -514,7 +513,7 @@ export default class ContractUtil {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		util.log(
+		console.log(
 			'the account ' +
 				address +
 				' privateKey is ' +
@@ -569,8 +568,8 @@ export default class ContractUtil {
 						privateKey
 					)
 			)
-			.then(receipt => util.log(receipt))
-			.catch(error => util.log(error));
+			.then(receipt => console.log(receipt))
+			.catch(error => console.log(error));
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {

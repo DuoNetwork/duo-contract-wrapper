@@ -38,51 +38,6 @@ export interface ICustodianPrice {
 	timestamp: number;
 }
 
-export interface IAccount {
-	address: string;
-	privateKey: string;
-}
-
-export interface IOption {
-	// live: boolean;
-	dbLive: boolean;
-	server: boolean;
-	dynamo: boolean;
-	aws: boolean;
-	gcp: boolean;
-	azure: boolean;
-	force: boolean;
-	gasPrice: number;
-	gasLimit: number;
-	eth: number;
-	address: string;
-	addr1: string;
-	addr2: string;
-	privateKey: string;
-	price: number;
-	source: string;
-	pwd: string;
-	event: string;
-	provider: string;
-	contractState: string;
-	accountNum: number;
-	saveAccount: boolean;
-	from: string;
-	to: string;
-	value: number;
-	index: number;
-	total: number;
-	minEther: number;
-	alpha: number;
-	amtA: number;
-	amtB: number;
-	numOfMinutes: number;
-	numOfHours: number;
-	key: string;
-	endBlk: number;
-	network: string;
-}
-
 export interface ICustodianStates {
 	state: string;
 	navA: number;
