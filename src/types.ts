@@ -1,4 +1,5 @@
 export interface IEvent {
+	contractAddress: string;
 	type: string;
 	id: string;
 	blockHash: string;

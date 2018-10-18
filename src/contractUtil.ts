@@ -611,6 +611,7 @@ export default class ContractUtil {
 	public parseEvent(eventLog: EventLog, timestamp: number): IEvent {
 		const returnValue = eventLog.returnValues;
 		const output: IEvent = {
+			contractAddress: eventLog.address,
 			type: eventLog.event,
 			id: (eventLog as any)['id'],
 			blockHash: eventLog.blockHash,
