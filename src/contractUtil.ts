@@ -5,7 +5,7 @@ import custodianAbi from './static/Custodian.json';
 import duoAbi from './static/DUO.json';
 import tokenAAbi from './static/TokenA.json';
 import tokenBAbi from './static/TokenB.json';
-import { IAddresses, IBalances, ICustodianPrices, ICustodianStates, IEvent } from './types';
+import { IBeethovanAddresses, IBeethovanBalances, IBeethovanPrices, IBeethovanStates, IEvent } from './types';
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
@@ -657,7 +657,7 @@ export default class ContractUtil {
 		}
 	}
 
-	public async getCustodianStates(): Promise<ICustodianStates> {
+	public async getCustodianStates(): Promise<IBeethovanStates> {
 		const [states, duoBalance] = await Promise.all([
 			this.custodian.methods.getSystemStates().call(),
 			this.getDuoBalance(this.custodianAddr)
@@ -696,7 +696,7 @@ export default class ContractUtil {
 		};
 	}
 
-	public async getCustodianAddresses(): Promise<IAddresses> {
+	public async getCustodianAddresses(): Promise<IBeethovanAddresses> {
 		const addr: string[] = await this.custodian.methods.getSystemAddresses().call();
 		const balances = await Promise.all(addr.map(a => this.getEthBalance(a)));
 		return {
@@ -727,7 +727,7 @@ export default class ContractUtil {
 		};
 	}
 
-	public async getCustodianPrices(): Promise<ICustodianPrices> {
+	public async getCustodianPrices(): Promise<IBeethovanPrices> {
 		const prices = await this.custodian.methods.getSystemPrices().call();
 		const custodianPrices = [0, 1, 2, 3].map(i => ({
 			address: prices[i * 3].valueOf(),
@@ -743,7 +743,7 @@ export default class ContractUtil {
 		};
 	}
 
-	public async getBalances(address: string): Promise<IBalances> {
+	public async getBalances(address: string): Promise<IBeethovanBalances> {
 		if (!address)
 			return {
 				eth: 0,

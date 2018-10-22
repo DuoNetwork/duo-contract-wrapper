@@ -10,12 +10,18 @@ export interface IEvent {
 	timestamp: number;
 }
 
+export interface IContractPrice {
+	address: string;
+	price: number;
+	timestamp: number;
+}
+
 export interface IAddress {
 	address: string;
 	balance: number;
 }
 
-export interface IAddresses {
+export interface IBeethovanAddresses {
 	operator: IAddress;
 	feeCollector: IAddress;
 	priceFeed1: IAddress;
@@ -25,7 +31,7 @@ export interface IAddresses {
 	[role: string]: IAddress;
 }
 
-export interface IBalances {
+export interface IBeethovanBalances {
 	eth: number;
 	duo: number;
 	allowance: number;
@@ -33,13 +39,7 @@ export interface IBalances {
 	tokenB: number;
 }
 
-export interface ICustodianPrice {
-	address: string;
-	price: number;
-	timestamp: number;
-}
-
-export interface ICustodianStates {
+export interface IBeethovanStates {
 	state: string;
 	navA: number;
 	navB: number;
@@ -72,9 +72,9 @@ export interface ICustodianStates {
 	duoBalance: number;
 }
 
-export interface ICustodianPrices {
-	first: ICustodianPrice;
-	second: ICustodianPrice;
-	reset: ICustodianPrice;
-	last: ICustodianPrice;
+export interface IBeethovanPrices {
+	first: IContractPrice;
+	second: IContractPrice;
+	reset: IContractPrice;
+	last: IContractPrice;
 }
