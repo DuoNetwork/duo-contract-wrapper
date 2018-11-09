@@ -748,20 +748,23 @@ export default class ContractUtil {
 		if (!address)
 			return {
 				eth: 0,
+				duo: 0,
 				tokenA: 0,
 				tokenB: 0
 			};
 
 		const balances = await Promise.all([
 			this.getEthBalance(address),
+			this.getDuoBalance(address),
 			this.getTokenBalance(address, true),
 			this.getTokenBalance(address, false)
 		]);
 
 		return {
 			eth: balances[0],
-			tokenA: balances[1],
-			tokenB: balances[2]
+			duo: balances[1],
+			tokenA: balances[2],
+			tokenB: balances[3]
 		};
 	}
 
@@ -786,7 +789,7 @@ export default class ContractUtil {
 		return this.fromWei(await this.web3.eth.getBalance(address));
 	}
 
-	public async getDuoBalance(address: string): Promise<number> {
+	private async getDuoBalance(address: string): Promise<number> {
 		return this.fromWei(await this.duo.methods.balanceOf(address).call());
 	}
 
