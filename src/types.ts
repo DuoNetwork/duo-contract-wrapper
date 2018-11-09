@@ -33,8 +33,6 @@ export interface IBeethovanAddresses {
 
 export interface IBeethovanBalances {
 	eth: number;
-	duo: number;
-	allowance: number;
 	tokenA: number;
 	tokenB: number;
 }
@@ -56,7 +54,6 @@ export interface IBeethovanStates {
 	redeemCommRate: number;
 	period: number;
 	iterationGasThreshold: number;
-	ethDuoFeeRatio: number;
 	preResetWaitingBlocks: number;
 	priceTol: number;
 	priceFeedTol: number;
@@ -69,7 +66,6 @@ export interface IBeethovanStates {
 	usersLength: number;
 	addrPoolLength: number;
 	ethBalance: number;
-	duoBalance: number;
 }
 
 export interface IBeethovanPrices {

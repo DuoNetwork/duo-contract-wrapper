@@ -5,7 +5,13 @@ import custodianAbi from './static/Custodian.json';
 import duoAbi from './static/DUO.json';
 import tokenAAbi from './static/TokenA.json';
 import tokenBAbi from './static/TokenB.json';
-import { IBeethovanAddresses, IBeethovanBalances, IBeethovanPrices, IBeethovanStates, IEvent } from './types';
+import {
+	IBeethovanAddresses,
+	IBeethovanBalances,
+	IBeethovanPrices,
+	IBeethovanStates,
+	IEvent
+} from './types';
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
@@ -658,10 +664,7 @@ export default class ContractUtil {
 	}
 
 	public async getCustodianStates(): Promise<IBeethovanStates> {
-		const [states, duoBalance] = await Promise.all([
-			this.custodian.methods.getSystemStates().call(),
-			this.getDuoBalance(this.custodianAddr)
-		]);
+		const states = await this.custodian.methods.getSystemStates().call();
 		return {
 			state: this.convertCustodianState(states[0].valueOf()),
 			navA: this.fromWei(states[1]),
@@ -679,7 +682,6 @@ export default class ContractUtil {
 			createCommRate: states[13] / 10000,
 			period: Number(states[14].valueOf()),
 			iterationGasThreshold: Number(states[15].valueOf()),
-			ethDuoFeeRatio: Number(states[16].valueOf()),
 			preResetWaitingBlocks: Number(states[17].valueOf()),
 			priceTol: Number(states[18].valueOf() / 10000),
 			priceFeedTol: Number(states[19].valueOf() / 10000),
@@ -691,8 +693,7 @@ export default class ContractUtil {
 			adminCoolDown: Number(states[25]),
 			usersLength: Number(states[26].valueOf()),
 			addrPoolLength: Number(states[27].valueOf()),
-			redeemCommRate: states[states.length > 28 ? 28 : 13] / 10000,
-			duoBalance: duoBalance
+			redeemCommRate: states[states.length > 28 ? 28 : 13] / 10000
 		};
 	}
 
@@ -747,26 +748,20 @@ export default class ContractUtil {
 		if (!address)
 			return {
 				eth: 0,
-				duo: 0,
-				allowance: 0,
 				tokenA: 0,
 				tokenB: 0
 			};
 
 		const balances = await Promise.all([
 			this.getEthBalance(address),
-			this.getDuoBalance(address),
-			this.getDuoAllowance(address),
 			this.getTokenBalance(address, true),
 			this.getTokenBalance(address, false)
 		]);
 
 		return {
 			eth: balances[0],
-			duo: balances[1],
-			allowance: balances[2],
-			tokenA: balances[3],
-			tokenB: balances[4]
+			tokenA: balances[1],
+			tokenB: balances[2]
 		};
 	}
 
@@ -791,11 +786,11 @@ export default class ContractUtil {
 		return this.fromWei(await this.web3.eth.getBalance(address));
 	}
 
-	private async getDuoBalance(address: string): Promise<number> {
+	public async getDuoBalance(address: string): Promise<number> {
 		return this.fromWei(await this.duo.methods.balanceOf(address).call());
 	}
 
-	private async getDuoAllowance(address: string): Promise<number> {
+	public async getDuoAllowance(address: string): Promise<number> {
 		return this.fromWei(await this.duo.methods.allowance(address, this.custodianAddr).call());
 	}
 
@@ -839,24 +834,26 @@ export default class ContractUtil {
 	public tokenApprove(address: string, spender: string, value: number, isA: boolean) {
 		if (this.isReadOnly()) return this.readOnlyReject();
 
-		return isA
-			? this.tokenA.methods.approve(spender, this.toWei(value)).send({
-					from: address
-			})
-			: this.tokenB.methods.approve(spender, this.toWei(value)).send({
-					from: address
+		if (isA)
+			return this.tokenA.methods.approve(spender, this.toWei(value)).send({
+				from: address
+			});
+		else
+			return this.tokenB.methods.approve(spender, this.toWei(value)).send({
+				from: address
 			});
 	}
 
 	public tokenTransfer(address: string, to: string, value: number, isA: boolean) {
 		if (this.isReadOnly()) return this.readOnlyReject();
 
-		return isA
-			? this.tokenA.methods.transfer(to, this.toWei(value)).send({
-					from: address
-			})
-			: this.tokenB.methods.transfer(to, this.toWei(value)).send({
-					from: address
+		if (isA)
+			return this.tokenA.methods.transfer(to, this.toWei(value)).send({
+				from: address
+			});
+		else
+			return this.tokenB.methods.transfer(to, this.toWei(value)).send({
+				from: address
 			});
 	}
 
