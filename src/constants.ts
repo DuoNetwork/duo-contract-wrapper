@@ -6,7 +6,7 @@ export const DUMMY_ADDR = '0x0';
 export const CTD_INCEPTION = 'Inception';
 export const CTD_TRADING = 'Trading';
 export const CTD_PRERESET = 'PreReset';
-export const CTD_RESET = 'RESET';
+export const CTD_RESET = 'Reset';
 export const CTD_LOADING = 'Loading';
 
 export const BTV_UP_RESET = 'UpwardReset';

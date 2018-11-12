@@ -36,9 +36,7 @@ export default class EsplanadeWapper {
 		return hot ? 1 : 0;
 	}
 
-	public async getVotingStage() {
-		const stage = await this.contract.methods.votingStage().call();
-
+	public static convertVotingStage(stage: string) {
 		switch (stage.valueOf()) {
 			case CST.VOTING_MODERATOR:
 				return CST.ESP_MODERATOR;
@@ -47,6 +45,11 @@ export default class EsplanadeWapper {
 			default:
 				return CST.ESP_NOT_STARTED;
 		}
+	}
+
+	public async getVotingStage() {
+		const stage = await this.contract.methods.votingStage().call();
+		return EsplanadeWapper.convertVotingStage(stage.valueOf());
 	}
 
 	public async getModerator(): Promise<IAddress> {

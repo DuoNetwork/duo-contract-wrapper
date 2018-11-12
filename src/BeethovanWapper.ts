@@ -256,7 +256,7 @@ export default class BeethovanWapper {
 		return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
 	}
 
-	public convertCustodianState(rawState: string) {
+	public static convertCustodianState(rawState: string) {
 		switch (rawState) {
 			case CST.STATE_INCEPTION:
 				return CST.CTD_INCEPTION;
@@ -271,7 +271,7 @@ export default class BeethovanWapper {
 		}
 	}
 
-	public convertResetState(rawState: string) {
+	public static convertResetState(rawState: string) {
 		switch (rawState) {
 			case CST.RESET_STATE_UP:
 				return CST.BTV_UP_RESET;
@@ -289,7 +289,7 @@ export default class BeethovanWapper {
 		return {
 			lastOperationTime: Number(states[0].valueOf()) * 1000,
 			operationCoolDown: Number(states[1].valueOf()) * 1000,
-			state: this.convertCustodianState(states[2].valueOf()),
+			state: BeethovanWapper.convertCustodianState(states[2].valueOf()),
 			minBalance: this.web3Wrapper.fromWei(states[3]),
 			totalSupplyA: this.web3Wrapper.fromWei(states[4]),
 			totalSupplyB: this.web3Wrapper.fromWei(states[5]),
@@ -308,7 +308,7 @@ export default class BeethovanWapper {
 			nextResetAddrIndex: Number(states[18].valueOf()),
 			totalUsers: Number(states[19].valueOf()),
 			feeBalance: this.web3Wrapper.fromWei(states[20]),
-			resetState: this.convertResetState(states[21].valueOf()),
+			resetState: BeethovanWapper.convertResetState(states[21].valueOf()),
 			alpha: Number(states[22].valueOf()) / 10000,
 			beta: this.web3Wrapper.fromWei(states[23]),
 			periodCoupon: this.web3Wrapper.fromWei(states[24]),
