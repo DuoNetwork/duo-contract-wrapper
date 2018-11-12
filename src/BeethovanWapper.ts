@@ -35,6 +35,59 @@ export default class BeethovanWapper {
 		return accounts;
 	}
 
+	public async startCustodian(
+		address: string,
+		privateKey: string,
+		aAddr: string,
+		bAddr: string,
+		oracleAddr: string,
+		gasPrice: number,
+		gasLimit: number,
+		nonce: number = -1
+	) {
+		util.logInfo('the account ' + address + ' is starting custodian');
+		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		const abi = {
+			name: 'startCustodian',
+			type: 'function',
+			inputs: [
+				{
+					name: 'aAddr',
+					type: 'address'
+				},
+				{
+					name: 'bAddr',
+					type: 'address'
+				},
+				{
+					name: 'oracleAddr',
+					type: 'address'
+				}
+			]
+		};
+		const input = [aAddr, bAddr, oracleAddr];
+
+		const command = this.web3Wrapper.generateTxString(abi, input);
+		// sending out transaction
+		this.web3Wrapper.web3.eth
+			.sendSignedTransaction(
+				'0x' +
+					this.web3Wrapper.signTx(
+						this.web3Wrapper.createTxCommand(
+							nonce,
+							gasPrice,
+							gasLimit,
+							this.address,
+							0,
+							command
+						),
+						privateKey
+					)
+			)
+			.then(receipt => util.logInfo(receipt))
+			.catch(error => util.logInfo(error));
+	}
+
 	public async createRaw(
 		address: string,
 		privateKey: string,
@@ -45,7 +98,7 @@ export default class BeethovanWapper {
 	) {
 		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-		util.logInfo('the account ' + address + ' is creating tokens with ' + privateKey);
+		util.logInfo('the account ' + address + ' is creating tokens');
 		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'create',
@@ -308,7 +361,9 @@ export default class BeethovanWapper {
 			nextResetAddrIndex: Number(states[CST.BTV_STATE.NEXT_RESET_ADDR_INDEX].valueOf()),
 			totalUsers: Number(states[CST.BTV_STATE.TOTAL_USERS].valueOf()),
 			feeBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_INWEI]),
-			resetState: BeethovanWapper.convertResetState(states[CST.BTV_STATE.RESET_STATE].valueOf()),
+			resetState: BeethovanWapper.convertResetState(
+				states[CST.BTV_STATE.RESET_STATE].valueOf()
+			),
 			alpha: Number(states[CST.BTV_STATE.ALPHA_INBP].valueOf()) / 10000,
 			beta: this.web3Wrapper.fromWei(states[CST.BTV_STATE.BETA_INWEI]),
 			periodCoupon: this.web3Wrapper.fromWei(states[CST.BTV_STATE.PERIOD_COUPON_INWEI]),
