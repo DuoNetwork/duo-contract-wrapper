@@ -263,6 +263,12 @@ export default class Web3Wapper {
 		return this.fromWei(await this.web3.eth.getBalance(address));
 	}
 
+	public async getErc20Balance(contractAddress: string, address: string) {
+		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+
+		return this.fromWei(await erc20Contract.methods.balanceOf(address).call());
+	}
+
 	public fromWei(value: string | number) {
 		return Number(this.web3.utils.fromWei(value, 'ether'));
 	}
