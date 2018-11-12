@@ -74,3 +74,8 @@ export interface IBeethovanPrices {
 	reset: IContractPrice;
 	last: IContractPrice;
 }
+
+export interface IMagiPrice {
+	price: number;
+	timeInSecond: number;
+}
