@@ -101,3 +101,12 @@ export const PRE_RESET_GAS_LIMIT = 120000;
 export const RESET_GAS_LIMIT = 4000000;
 export const EVENT_FETCH_BLOCK_INTERVAL = 100;
 export const EVENT_FETCH_TIME_INVERVAL = 600000;
+
+export const LOG_INFO = 'INFO';
+export const LOG_DEBUG = 'DEBUG';
+export const LOG_ERROR = 'ERROR';
+export const LOG_RANKING: { [level: string]: number } = {
+	[LOG_ERROR]: 0,
+	[LOG_INFO]: 1,
+	[LOG_DEBUG]: 2
+};
