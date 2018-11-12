@@ -33,7 +33,6 @@ export interface IBeethovanAddresses {
 
 export interface IBeethovanBalances {
 	eth: number;
-	duo: number;
 	tokenA: number;
 	tokenB: number;
 }

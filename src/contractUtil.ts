@@ -2,9 +2,7 @@ import Web3 from 'web3';
 import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import custodianAbi from './static/Custodian.json';
-import duoAbi from './static/DUO.json';
-import tokenAAbi from './static/TokenA.json';
-import tokenBAbi from './static/TokenB.json';
+import erc20Abi from './static/ERC20.json';
 import {
 	IBeethovanAddresses,
 	IBeethovanBalances,
@@ -67,9 +65,9 @@ export default class ContractUtil {
 		this.tokenBAddr = live ? CST.B_CONTRACT_ADDR_MAIN : CST.B_CONTRACT_ADDR_KOVAN;
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 		this.custodian = new this.web3.eth.Contract(custodianAbi.abi, this.custodianAddr);
-		this.duo = new this.web3.eth.Contract(duoAbi.abi, this.duoAddr);
-		this.tokenA = new this.web3.eth.Contract(tokenAAbi.abi, this.tokenAAddr);
-		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
+		this.duo = new this.web3.eth.Contract(erc20Abi.abi, this.duoAddr);
+		this.tokenA = new this.web3.eth.Contract(erc20Abi.abi, this.tokenAAddr);
+		this.tokenB = new this.web3.eth.Contract(erc20Abi.abi, this.tokenBAddr);
 	}
 
 	public switchToMetaMask(window: any) {
@@ -83,9 +81,9 @@ export default class ContractUtil {
 
 		this.accountIndex = 0;
 		this.custodian = new this.web3.eth.Contract(custodianAbi.abi, this.custodianAddr);
-		this.duo = new this.web3.eth.Contract(duoAbi.abi, this.duoAddr);
-		this.tokenA = new this.web3.eth.Contract(tokenAAbi.abi, this.tokenAAddr);
-		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
+		this.duo = new this.web3.eth.Contract(erc20Abi.abi, this.duoAddr);
+		this.tokenA = new this.web3.eth.Contract(erc20Abi.abi, this.tokenAAddr);
+		this.tokenB = new this.web3.eth.Contract(erc20Abi.abi, this.tokenBAddr);
 	}
 
 	public async switchToLedger() {
@@ -104,9 +102,9 @@ export default class ContractUtil {
 		const accounts = await newWeb3.eth.getAccounts();
 		this.web3 = newWeb3;
 		this.custodian = new this.web3.eth.Contract(custodianAbi.abi, this.custodianAddr);
-		this.duo = new this.web3.eth.Contract(duoAbi.abi, this.duoAddr);
-		this.tokenA = new this.web3.eth.Contract(tokenAAbi.abi, this.tokenAAddr);
-		this.tokenB = new this.web3.eth.Contract(tokenBAbi.abi, this.tokenBAddr);
+		this.duo = new this.web3.eth.Contract(erc20Abi.abi, this.duoAddr);
+		this.tokenA = new this.web3.eth.Contract(erc20Abi.abi, this.tokenAAddr);
+		this.tokenB = new this.web3.eth.Contract(erc20Abi.abi, this.tokenBAddr);
 		this.wallet = Wallet.Ledger;
 		return accounts;
 	}
@@ -748,7 +746,6 @@ export default class ContractUtil {
 		if (!address)
 			return {
 				eth: 0,
-				duo: 0,
 				tokenA: 0,
 				tokenB: 0
 			};
@@ -762,7 +759,6 @@ export default class ContractUtil {
 
 		return {
 			eth: balances[0],
-			duo: balances[1],
 			tokenA: balances[2],
 			tokenB: balances[3]
 		};
