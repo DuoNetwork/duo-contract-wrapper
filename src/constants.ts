@@ -13,6 +13,10 @@ export const BTV_UP_RESET = 'UpwardReset';
 export const BTV_DOWN_RESET = 'DownwardReset';
 export const BTV_PERIOD_RESET = 'PeriodicReset';
 
+export const ESP_NOT_STARTED = 'NotStarted';
+export const ESP_MODERATOR = 'Moderator';
+export const ESP_CONTRACT = 'Contract';
+
 // wallet and contract
 export const MAGI_ADDR_KOVAN = '0x2739135A37750590B6679083fCDBfD0D7a459923';
 export const ESPLANADE_ADDR_KOVAN = '0xd0a5439300c09ab75ee8a3de920cb03cec87cc0f';
@@ -66,6 +70,9 @@ export const STATE_RESET = '3';
 export const RESET_STATE_UP = '0';
 export const RESET_STATE_DOWN = '1';
 export const RESET_STATE_PERIOD = '2';
+export const VOTING_NOT_STARTED = '0';
+export const VOTING_MODERATOR = '1';
+export const VOTING_CONTRACT = '2';
 export const FN_START_CONTRACT = 'startContract';
 export const FN_COMMIT_PRICE = 'commitPrice';
 export const SRC_MYETHER = 'myether';

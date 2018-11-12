@@ -9,7 +9,6 @@ const abiDecoder = require('abi-decoder');
 export default class BeethovanWapper {
 	public web3Wrapper: Web3Wrapper;
 	public contract: Contract;
-	public accountIndex: number = 0;
 	public readonly address: string;
 
 	public readonly inceptionBlk: number = 0;

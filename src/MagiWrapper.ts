@@ -8,7 +8,6 @@ import Web3Wrapper from './Web3Wrapper';
 export default class MagiWapper {
 	public web3Wrapper: Web3Wrapper;
 	public contract: Contract;
-	public accountIndex: number = 0;
 	public readonly address: string;
 
 	// private live: boolean;
