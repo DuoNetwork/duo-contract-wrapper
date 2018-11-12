@@ -20,6 +20,11 @@ export default class MagiWapper {
 		this.contract = new this.web3Wrapper.web3.eth.Contract(magiAbi.abi, this.address);
 	}
 
+	public async getStarted(): Promise<boolean> {
+		const started = await this.contract.methods.started().call();
+		return started === 'true' ? true : false;
+	}
+
 	public async startMagiRaw(
 		address: string,
 		privateKey: string,
