@@ -6,7 +6,7 @@ export interface IEvent {
 	blockNumber: number;
 	transactionHash: string;
 	logStatus: string;
-	parameters: {[key: string]: string};
+	parameters: { [key: string]: string };
 	timestamp: number;
 }
 
@@ -73,4 +73,11 @@ export interface IBeethovanStates extends ICustodianStates {
 	limitUpper: number;
 	limitLower: number;
 	iterationGasThreshold: number;
+}
+
+export interface IVotingData {
+	started: number;
+	votedFor: number;
+	votedAgainst: number;
+	totalVoters: number;
 }

@@ -1,7 +1,7 @@
 import { Contract } from 'web3/types';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import { IAddress } from './types';
+import { IAddress, IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWapper {
@@ -32,7 +32,7 @@ export default class EsplanadeWapper {
 		return accounts;
 	}
 
-	public getPoolIndex(hot: boolean) {
+	public getAddressPoolIndex(hot: boolean) {
 		return hot ? 1 : 0;
 	}
 
@@ -57,9 +57,17 @@ export default class EsplanadeWapper {
 		};
 	}
 
+	public async getCandidate(): Promise<IAddress> {
+		const candidate = await this.contract.methods.candidate().call();
+		return {
+			address: candidate,
+			balance: await this.web3Wrapper.getEthBalance(candidate)
+		};
+	}
+
 	public async getPoolAddresses(hot: boolean): Promise<IAddress[]> {
-		const poolIndex = this.getPoolIndex(hot);
-		const poolSizes = await this.contract.methods.getPoolSize().call();
+		const poolIndex = this.getAddressPoolIndex(hot);
+		const poolSizes = await this.contract.methods.getAddressPoolSizes().call();
 		const length = Number(poolSizes[poolIndex].valueOf());
 		const addresses: IAddress[] = [];
 		for (let i = 0; i < length; i++) {
@@ -71,6 +79,45 @@ export default class EsplanadeWapper {
 		}
 
 		return addresses;
+	}
+
+	public async getContractAddresses(custodian: boolean): Promise<IAddress[]> {
+		const poolSizes = await this.contract.methods.getContractPoolSizes().call();
+		const length = Number(poolSizes[custodian ? 0 : 1].valueOf());
+		const addresses: IAddress[] = [];
+		for (let i = 0; i < length; i++) {
+			const poolAddr = custodian
+				? await this.contract.methods.custodianPool(i).call()
+				: await this.contract.methods.otherContractPool(i).call();
+			addresses.push({
+				address: poolAddr,
+				balance: await this.web3Wrapper.getEthBalance(poolAddr)
+			});
+		}
+
+		return addresses;
+	}
+
+	public async getOperationCoolDown() {
+		return Number((await this.contract.methods.operatorCoolDown().call()).valueOf()) * 1000;
+	}
+
+	public async getLastOperationTime() {
+		return Number((await this.contract.methods.lastOperationTime().call()).valueOf()) * 1000;
+	}
+
+	public async isStarted(): Promise<boolean> {
+		const started = await this.contract.methods.started().call();
+		return started === 'true' ? true : false;
+	}
+
+	public async getVotingData(): Promise<IVotingData> {
+		return {
+			started: Number((await this.contract.methods.voteStartTimestamp().call()).valueof()) * 1000,
+			votedFor: Number((await this.contract.methods.votedFor().call()).valueof()),
+			votedAgainst: Number((await this.contract.methods.votedAgainst().call()).valueof()),
+			totalVoters: Number((await this.contract.methods.getAddressPoolSizes().call())[this.getAddressPoolIndex(false)].valueof())
+		}
 	}
 
 	public startContractVoting(address: string, candidateAddress: string) {
@@ -139,14 +186,14 @@ export default class EsplanadeWapper {
 
 	public addAddress(address: string, addr1: string, addr2: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.addAddress(addr1, addr2, this.getPoolIndex(hot)).send({
+		return this.contract.methods.addAddress(addr1, addr2, this.getAddressPoolIndex(hot)).send({
 			from: address
 		});
 	}
 
 	public removeAddress(address: string, addr: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.removeAddress(addr, this.getPoolIndex(hot)).send({
+		return this.contract.methods.removeAddress(addr, this.getAddressPoolIndex(hot)).send({
 			from: address
 		});
 	}
