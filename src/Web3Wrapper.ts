@@ -3,6 +3,7 @@ import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import erc20Abi from './static/ERC20.json';
 import { IEvent } from './types';
+import util from './util';
 
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
@@ -126,7 +127,7 @@ export default class Web3Wapper {
 			tx.sign(new Buffer(privateKey, 'hex'));
 			return tx.serialize().toString('hex');
 		} catch (err) {
-			console.log(err);
+			util.logError(err);
 			return '';
 		}
 	}
@@ -154,7 +155,7 @@ export default class Web3Wapper {
 		};
 		return this.web3.eth
 			.sendSignedTransaction('0x' + this.signTx(rawTx, privatekey))
-			.then(receipt => console.log(JSON.stringify(receipt, null, 4)));
+			.then(receipt => util.logInfo(JSON.stringify(receipt, null, 4)));
 	}
 
 	public async erc20TransferRaw(
@@ -167,7 +168,7 @@ export default class Web3Wapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		console.log(
+		util.logInfo(
 			'the account ' +
 				address +
 				' privateKey is ' +
@@ -211,8 +212,8 @@ export default class Web3Wapper {
 						privateKey
 					)
 			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
+			.then(receipt => util.logInfo(receipt))
+			.catch(error => util.logError(error));
 	}
 
 	public erc20Transfer(contractAddress: string, address: string, to: string, value: number) {

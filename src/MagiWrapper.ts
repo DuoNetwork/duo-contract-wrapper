@@ -118,8 +118,8 @@ export default class MagiWapper {
 						privateKey
 					)
 			)
-			.then(receipt => console.log(receipt))
-			.catch(err => console.log(err));
+			.then(receipt => util.logInfo(receipt))
+			.catch(err => util.logError(err));
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {

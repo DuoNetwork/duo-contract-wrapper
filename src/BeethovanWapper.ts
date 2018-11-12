@@ -2,6 +2,7 @@ import { Contract } from 'web3/types';
 import * as CST from './constants';
 import beethovanAbi from './static/Beethoven.json';
 import { IBeethovanStates, ICustodianAddresses } from './types';
+import util from './util';
 import Web3Wrapper, { Wallet } from './Web3Wrapper';
 
 const abiDecoder = require('abi-decoder');
@@ -44,7 +45,7 @@ export default class BeethovanWapper {
 	) {
 		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-		console.log('the account ' + address + ' is creating tokens with ' + privateKey);
+		util.logInfo('the account ' + address + ' is creating tokens with ' + privateKey);
 		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'create',
@@ -60,7 +61,7 @@ export default class BeethovanWapper {
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
 		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
-		console.log(
+		util.logInfo(
 			'gasPrice price ' +
 				gasPrice +
 				' gasLimit is ' +
@@ -85,8 +86,8 @@ export default class BeethovanWapper {
 						privateKey
 					)
 			)
-			.then(receipt => console.log(receipt))
-			.catch(err => console.log(err));
+			.then(receipt => util.logInfo(receipt))
+			.catch(err => util.logInfo(err));
 	}
 
 	public create(
@@ -117,11 +118,11 @@ export default class BeethovanWapper {
 	) {
 		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-		console.log('the account ' + address + ' privateKey is ' + privateKey);
+		util.logInfo('the account ' + address + ' privateKey is ' + privateKey);
 		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
 		const balanceOfA = await this.contract.methods.balanceOf(0, address).call();
 		const balanceOfB = await this.contract.methods.balanceOf(1, address).call();
-		console.log('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
+		util.logInfo('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
 		const abi = {
 			name: 'redeem',
 			type: 'function',
@@ -144,7 +145,7 @@ export default class BeethovanWapper {
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
 		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
-		console.log(
+		util.logInfo(
 			'gasPrice price ' +
 				gasPrice +
 				' gasLimit is ' +
@@ -172,8 +173,8 @@ export default class BeethovanWapper {
 						privateKey
 					)
 			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
+			.then(receipt => util.logInfo(receipt))
+			.catch(error => util.logInfo(error));
 	}
 
 	public redeem(
@@ -219,8 +220,8 @@ export default class BeethovanWapper {
 						privateKey
 					)
 			)
-			.then(receipt => console.log(receipt))
-			.catch(error => console.log(error));
+			.then(receipt => util.logInfo(receipt))
+			.catch(error => util.logInfo(error));
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {
@@ -232,7 +233,7 @@ export default class BeethovanWapper {
 			inputs: []
 		};
 		const gasPrice = (await this.web3Wrapper.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
-		console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.RESET_GAS_LIMIT);
+		util.logInfo('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.RESET_GAS_LIMIT);
 		const promiseList: Array<Promise<void>> = [];
 		for (let i = 0; i < count; i++)
 			promiseList.push(
@@ -251,7 +252,7 @@ export default class BeethovanWapper {
 			inputs: []
 		};
 		const gasPrice = (await this.web3Wrapper.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
-		console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
+		util.logInfo('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
 		return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
 	}
 
