@@ -243,6 +243,13 @@ export default class Web3Wapper {
 		return this.web3.eth.getBlockNumber();
 	}
 
+	public async getCurrentBlockTime(): Promise<number> {
+		const blkNumber = await this.getCurrentBlock();
+		const blk = await this.web3.eth.getBlock(blkNumber);
+		return blk.timestamp;
+
+	}
+
 	public async getCurrentAddress(): Promise<string> {
 		const accounts = await this.web3.eth.getAccounts();
 		return accounts[this.accountIndex] || CST.DUMMY_ADDR;
