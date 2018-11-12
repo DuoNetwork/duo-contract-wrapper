@@ -1,5 +1,8 @@
 import Web3 from 'web3';
+import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
+import { IEvent } from './types';
+
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
@@ -86,11 +89,11 @@ export default class Web3Wapper {
 		return this.wallet === Wallet.None;
 	}
 
-	private readOnlyReject() {
+	public readOnlyReject() {
 		return Promise.reject('Read Only Mode');
 	}
 
-	private wrongEnvReject() {
+	public wrongEnvReject() {
 		return Promise.reject('Wrong Env');
 	}
 
@@ -243,5 +246,35 @@ export default class Web3Wapper {
 
 	public getTransactionReceipt(txHash: string) {
 		return this.web3.eth.getTransactionReceipt(txHash);
+	}
+
+	public static parseEvent(eventLog: EventLog, timestamp: number): IEvent {
+		const returnValue = eventLog.returnValues;
+		const output: IEvent = {
+			contractAddress: eventLog.address,
+			type: eventLog.event,
+			id: (eventLog as any)['id'],
+			blockHash: eventLog.blockHash,
+			blockNumber: eventLog.blockNumber,
+			transactionHash: eventLog.transactionHash,
+			logStatus: (eventLog as any)['type'],
+			parameters: {},
+			timestamp: timestamp
+		};
+		for (const key in returnValue) output.parameters[key] = returnValue[key];
+
+		return output;
+	}
+
+	public static async pullEvents(
+		contract: Contract,
+		start: number,
+		end: number,
+		event: string
+	): Promise<EventLog[]> {
+		return contract.getPastEvents(event, {
+			fromBlock: start,
+			toBlock: end
+		});
 	}
 }

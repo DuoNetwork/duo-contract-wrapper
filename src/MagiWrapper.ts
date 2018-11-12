@@ -1,7 +1,7 @@
 import { Contract } from 'web3/types';
 import * as CST from './constants';
 import magiAbi from './static/Magi.json';
-import { IMagiPrice } from './types';
+import { IContractPrice } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -118,11 +118,11 @@ export default class MagiWapper {
 			.catch(err => console.log(err));
 	}
 
-	public async getLastPrice(): Promise<IMagiPrice> {
+	public async getLastPrice(): Promise<IContractPrice> {
 		const lastPrice = await this.contract.methods.getLastPrice().call();
 		return {
 			price: this.web3Wrapper.fromWei(lastPrice[0].valueOf()),
-			timeInSecond: lastPrice[1].valueOf()
+			timestamp: Number(lastPrice[1].valueOf()) * 1000
 		};
 	}
 }

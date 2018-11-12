@@ -5,10 +5,9 @@ import beethovanAbi from './static/Beethoven.json';
 // 	IBeethovanAddresses,
 // 	IBeethovanBalances,
 // 	IBeethovanPrices,
-// 	IBeethovanStates,
-// 	IEvent
+// 	IBeethovanStates
 // } from './types';
-import Web3Wrapper from './Web3Wrapper';
+import Web3Wrapper, { Wallet } from './Web3Wrapper';
 
 export default class BeethovanWapper {
 	public web3Wrapper: Web3Wrapper;
@@ -39,404 +38,228 @@ export default class BeethovanWapper {
 		return accounts;
 	}
 
-	// public async createRaw(
-	// 	address: string,
-	// 	privateKey: string,
-	// 	gasPrice: number,
-	// 	gasLimit: number,
-	// 	eth: number,
-	// 	nonce: number = -1
-	// ) {
-	// 	if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
+	public async createRaw(
+		address: string,
+		privateKey: string,
+		gasPrice: number,
+		gasLimit: number,
+		eth: number,
+		nonce: number = -1
+	) {
+		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-	// 	console.log('the account ' + address + ' is creating tokens with ' + privateKey);
-	// 	nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
-	// 	const abi = {
-	// 		name: 'create',
-	// 		type: 'function',
-	// 		inputs: [
-	// 			{
-	// 				name: 'payFeeInEth',
-	// 				type: 'bool'
-	// 			}
-	// 		]
-	// 	};
-	// 	const input = [true];
-	// 	const command = this.generateTxString(abi, input);
-	// 	// sending out transaction
-	// 	gasPrice = (await this.getGasPrice()) || gasPrice;
-	// 	console.log(
-	// 		'gasPrice price ' +
-	// 			gasPrice +
-	// 			' gasLimit is ' +
-	// 			gasLimit +
-	// 			' nonce ' +
-	// 			nonce +
-	// 			' eth ' +
-	// 			eth
-	// 	);
-	// 	// gasPrice = gasPrice || await web3.eth.
-	// 	return this.web3.eth
-	// 		.sendSignedTransaction(
-	// 			'0x' +
-	// 				this.signTx(
-	// 					this.createTxCommand(
-	// 						nonce,
-	// 						gasPrice,
-	// 						gasLimit,
-	// 						this.custodianAddr,
-	// 						eth,
-	// 						command
-	// 					),
-	// 					privateKey
-	// 				)
-	// 		)
-	// 		.then(receipt => console.log(receipt))
-	// 		.catch(err => console.log(err));
-	// }
+		console.log('the account ' + address + ' is creating tokens with ' + privateKey);
+		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		const abi = {
+			name: 'create',
+			type: 'function',
+			inputs: [
+				{
+					name: 'payFeeInEth',
+					type: 'bool'
+				}
+			]
+		};
+		const input = [true];
+		const command = this.web3Wrapper.generateTxString(abi, input);
+		// sending out transaction
+		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
+		console.log(
+			'gasPrice price ' +
+				gasPrice +
+				' gasLimit is ' +
+				gasLimit +
+				' nonce ' +
+				nonce +
+				' eth ' +
+				eth
+		);
+		return this.web3Wrapper.web3.eth
+			.sendSignedTransaction(
+				'0x' +
+					this.web3Wrapper.signTx(
+						this.web3Wrapper.createTxCommand(
+							nonce,
+							gasPrice,
+							gasLimit,
+							this.address,
+							eth,
+							command
+						),
+						privateKey
+					)
+			)
+			.then(receipt => console.log(receipt))
+			.catch(err => console.log(err));
+	}
 
-	// public create(
-	// 	address: string,
-	// 	value: number,
-	// 	payFeeInEth: boolean,
-	// 	onTxHash: (hash: string) => any
-	// ) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
+	public create(
+		address: string,
+		value: number,
+		payFeeInEth: boolean,
+		onTxHash: (hash: string) => any
+	) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-	// 	return this.custodian.methods
-	// 		.create(payFeeInEth)
-	// 		.send({
-	// 			from: address,
-	// 			value: this.toWei(value)
-	// 		})
-	// 		.on('transactionHash', onTxHash);
-	// }
+		return this.contract.methods
+			.create(payFeeInEth)
+			.send({
+				from: address,
+				value: this.web3Wrapper.toWei(value)
+			})
+			.on('transactionHash', onTxHash);
+	}
 
-	// public async redeemRaw(
-	// 	address: string,
-	// 	privateKey: string,
-	// 	amtA: number,
-	// 	amtB: number,
-	// 	gasPrice: number,
-	// 	gasLimit: number,
-	// 	nonce: number = -1
-	// ) {
-	// 	if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+	public async redeemRaw(
+		address: string,
+		privateKey: string,
+		amtA: number,
+		amtB: number,
+		gasPrice: number,
+		gasLimit: number,
+		nonce: number = -1
+	) {
+		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-	// 	console.log('the account ' + address + ' privateKey is ' + privateKey);
-	// 	nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-	// 	const balanceOfA = await this.custodian.methods.balanceOf(0, address).call();
-	// 	const balanceOfB = await this.custodian.methods.balanceOf(1, address).call();
-	// 	console.log('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
-	// 	const abi = {
-	// 		name: 'redeem',
-	// 		type: 'function',
-	// 		inputs: [
-	// 			{
-	// 				name: 'amtInWeiA',
-	// 				type: 'uint256'
-	// 			},
-	// 			{
-	// 				name: 'amtInWeiB',
-	// 				type: 'uint256'
-	// 			},
-	// 			{
-	// 				name: 'payFeeInEth',
-	// 				type: 'bool'
-	// 			}
-	// 		]
-	// 	};
-	// 	const input = [amtA, amtB, true];
-	// 	const command = this.generateTxString(abi, input);
-	// 	// sending out transaction
-	// 	gasPrice = (await this.getGasPrice()) || gasPrice;
-	// 	console.log(
-	// 		'gasPrice price ' +
-	// 			gasPrice +
-	// 			' gasLimit is ' +
-	// 			gasLimit +
-	// 			' nonce ' +
-	// 			nonce +
-	// 			' amtA ' +
-	// 			amtA +
-	// 			' amtB ' +
-	// 			amtB
-	// 	);
-	// 	// gasPrice = gasPrice || await web3.eth.
-	// 	return this.web3.eth
-	// 		.sendSignedTransaction(
-	// 			'0x' +
-	// 				this.signTx(
-	// 					this.createTxCommand(
-	// 						nonce,
-	// 						gasPrice,
-	// 						gasLimit,
-	// 						this.custodianAddr,
-	// 						0,
-	// 						command
-	// 					),
-	// 					privateKey
-	// 				)
-	// 		)
-	// 		.then(receipt => console.log(receipt))
-	// 		.catch(error => console.log(error));
-	// }
+		console.log('the account ' + address + ' privateKey is ' + privateKey);
+		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		const balanceOfA = await this.contract.methods.balanceOf(0, address).call();
+		const balanceOfB = await this.contract.methods.balanceOf(1, address).call();
+		console.log('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
+		const abi = {
+			name: 'redeem',
+			type: 'function',
+			inputs: [
+				{
+					name: 'amtInWeiA',
+					type: 'uint256'
+				},
+				{
+					name: 'amtInWeiB',
+					type: 'uint256'
+				},
+				{
+					name: 'payFeeInEth',
+					type: 'bool'
+				}
+			]
+		};
+		const input = [amtA, amtB, true];
+		const command = this.web3Wrapper.generateTxString(abi, input);
+		// sending out transaction
+		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
+		console.log(
+			'gasPrice price ' +
+				gasPrice +
+				' gasLimit is ' +
+				gasLimit +
+				' nonce ' +
+				nonce +
+				' amtA ' +
+				amtA +
+				' amtB ' +
+				amtB
+		);
+		// gasPrice = gasPrice || await web3.eth.
+		return this.web3Wrapper.web3.eth
+			.sendSignedTransaction(
+				'0x' +
+					this.web3Wrapper.signTx(
+						this.web3Wrapper.createTxCommand(
+							nonce,
+							gasPrice,
+							gasLimit,
+							this.address,
+							0,
+							command
+						),
+						privateKey
+					)
+			)
+			.then(receipt => console.log(receipt))
+			.catch(error => console.log(error));
+	}
 
-	// public redeem(
-	// 	address: string,
-	// 	amtA: number,
-	// 	amtB: number,
-	// 	payFeeInEth: boolean,
-	// 	onTxHash: (hash: string) => any
-	// ) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
+	public redeem(
+		address: string,
+		amtA: number,
+		amtB: number,
+		payFeeInEth: boolean,
+		onTxHash: (hash: string) => any
+	) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-	// 	return this.custodian.methods
-	// 		.redeem(this.toWei(amtA), this.toWei(amtB), payFeeInEth)
-	// 		.send({
-	// 			from: address
-	// 		})
-	// 		.on('transactionHash', onTxHash);
-	// }
+		return this.contract.methods
+			.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB), payFeeInEth)
+			.send({
+				from: address
+			})
+			.on('transactionHash', onTxHash);
+	}
 
-	// public async ethTransferRaw(
-	// 	from: string,
-	// 	privatekey: string,
-	// 	to: string,
-	// 	amt: number,
-	// 	nonce: number
-	// ) {
-	// 	if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+	private async trigger(
+		address: string,
+		privateKey: string,
+		abi: object,
+		input: any[],
+		gasPrice: number,
+		gasLimit: number
+	) {
+		const nonce = await this.web3Wrapper.web3.eth.getTransactionCount(address);
+		const command = this.web3Wrapper.generateTxString(abi, input);
+		// sending out transaction
+		this.web3Wrapper.web3.eth
+			.sendSignedTransaction(
+				'0x' +
+					this.web3Wrapper.signTx(
+						this.web3Wrapper.createTxCommand(
+							nonce,
+							gasPrice,
+							gasLimit,
+							this.address,
+							0,
+							command
+						),
+						privateKey
+					)
+			)
+			.then(receipt => console.log(receipt))
+			.catch(error => console.log(error));
+	}
 
-	// 	const rawTx = {
-	// 		nonce: nonce,
-	// 		gasPrice: this.web3.utils.toHex((await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE),
-	// 		gasLimit: this.web3.utils.toHex(23000),
-	// 		from: from,
-	// 		to: to,
-	// 		value: this.web3.utils.toHex(this.web3.utils.toWei(amt.toPrecision(3) + '', 'ether'))
-	// 	};
-	// 	return this.web3.eth
-	// 		.sendSignedTransaction('0x' + this.signTx(rawTx, privatekey))
-	// 		.then(receipt => console.log(JSON.stringify(receipt, null, 4)));
-	// }
+	public async triggerReset(address: string, privateKey: string, count: number = 1) {
+		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-	// public async duoTransferRaw(
-	// 	address: string,
-	// 	privateKey: string,
-	// 	to: string,
-	// 	value: number,
-	// 	gasPrice: number,
-	// 	gasLimit: number,
-	// 	nonce: number = -1
-	// ): Promise<any> {
-	// 	if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+		const abi = {
+			name: 'startReset',
+			type: 'function',
+			inputs: []
+		};
+		const gasPrice = (await this.web3Wrapper.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
+		console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.RESET_GAS_LIMIT);
+		const promiseList: Array<Promise<void>> = [];
+		for (let i = 0; i < count; i++)
+			promiseList.push(
+				this.trigger(address, privateKey, abi, [], gasPrice, CST.RESET_GAS_LIMIT)
+			);
 
-	// 	console.log(
-	// 		'the account ' +
-	// 			address +
-	// 			' privateKey is ' +
-	// 			privateKey +
-	// 			' transfering DUO token to ' +
-	// 			to +
-	// 			' with amt ' +
-	// 			value
-	// 	);
-	// 	nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-	// 	const abi = {
-	// 		name: 'transfer',
-	// 		type: 'function',
-	// 		inputs: [
-	// 			{
-	// 				name: 'to',
-	// 				type: 'address'
-	// 			},
-	// 			{
-	// 				name: 'value',
-	// 				type: 'uint256'
-	// 			}
-	// 		]
-	// 	};
-	// 	const input = [to, this.web3.utils.toWei(value + '', 'ether')];
-	// 	const command = this.generateTxString(abi, input);
-	// 	// sending out transaction
-	// 	gasPrice = (await this.getGasPrice()) * 2 || gasPrice;
-	// 	// gasPrice = gasPrice || await web3.eth.
-	// 	return this.web3.eth.sendSignedTransaction(
-	// 		'0x' +
-	// 			this.signTx(
-	// 				this.createTxCommand(nonce, gasPrice, gasLimit, this.duoAddr, 0, command),
-	// 				privateKey
-	// 			)
-	// 	);
-	// }
+		return Promise.all(promiseList);
+	}
 
-	// private async trigger(
-	// 	address: string,
-	// 	privateKey: string,
-	// 	abi: object,
-	// 	input: any[],
-	// 	gasPrice: number,
-	// 	gasLimit: number
-	// ) {
-	// 	const nonce = await this.web3.eth.getTransactionCount(address);
-	// 	const command = this.generateTxString(abi, input);
-	// 	// sending out transaction
-	// 	this.web3.eth
-	// 		.sendSignedTransaction(
-	// 			'0x' +
-	// 				this.signTx(
-	// 					this.createTxCommand(
-	// 						nonce,
-	// 						gasPrice,
-	// 						gasLimit,
-	// 						this.custodianAddr,
-	// 						0,
-	// 						command
-	// 					),
-	// 					privateKey
-	// 				)
-	// 		)
-	// 		.then(receipt => console.log(receipt))
-	// 		.catch(error => console.log(error));
-	// }
+	public async triggerPreReset(address: string, privateKey: string) {
+		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
 
-	// public async tokenTransferRaw(
-	// 	index: number,
-	// 	address: string,
-	// 	privateKey: string,
-	// 	to: string,
-	// 	value: number,
-	// 	gasPrice: number,
-	// 	gasLimit: number,
-	// 	nonce: number = -1
-	// ) {
-	// 	console.log(
-	// 		'the account ' +
-	// 			address +
-	// 			' privateKey is ' +
-	// 			privateKey +
-	// 			' transfering ' +
-	// 			index +
-	// 			' to ' +
-	// 			to +
-	// 			' with amt ' +
-	// 			value
-	// 	);
-	// 	nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-	// 	const abi = {
-	// 		name: 'transfer',
-	// 		type: 'function',
-	// 		inputs: [
-	// 			{
-	// 				name: 'index',
-	// 				type: 'uint256'
-	// 			},
-	// 			{
-	// 				name: 'from',
-	// 				type: 'address'
-	// 			},
-	// 			{
-	// 				name: 'to',
-	// 				type: 'address'
-	// 			},
-	// 			{
-	// 				name: 'tokens',
-	// 				type: 'uint256'
-	// 			}
-	// 		]
-	// 	};
-	// 	const input = [index, address, to, value];
-	// 	const command = this.generateTxString(abi, input);
-	// 	// sending out transaction
-	// 	gasPrice = (await this.getGasPrice()) || gasPrice;
-	// 	// gasPrice = gasPrice || await web3.eth.
-	// 	this.web3.eth
-	// 		.sendSignedTransaction(
-	// 			'0x' +
-	// 				this.signTx(
-	// 					this.createTxCommand(
-	// 						nonce,
-	// 						gasPrice,
-	// 						gasLimit,
-	// 						this.custodianAddr,
-	// 						0,
-	// 						command
-	// 					),
-	// 					privateKey
-	// 				)
-	// 		)
-	// 		.then(receipt => console.log(receipt))
-	// 		.catch(error => console.log(error));
-	// }
+		const abi = {
+			name: 'startPreReset',
+			type: 'function',
+			inputs: []
+		};
+		const gasPrice = (await this.web3Wrapper.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
+		console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
+		return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
+	}
 
-	// public async triggerReset(address: string, privateKey: string, count: number = 1) {
-	// 	if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
-
-	// 	const abi = {
-	// 		name: 'startReset',
-	// 		type: 'function',
-	// 		inputs: []
-	// 	};
-	// 	const gasPrice = (await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
-	// 	console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.RESET_GAS_LIMIT);
-	// 	const promiseList: Array<Promise<void>> = [];
-	// 	for (let i = 0; i < count; i++)
-	// 		promiseList.push(
-	// 			this.trigger(address, privateKey, abi, [], gasPrice, CST.RESET_GAS_LIMIT)
-	// 		);
-
-	// 	return Promise.all(promiseList);
-	// }
-
-	// public async triggerPreReset(address: string, privateKey: string) {
-	// 	if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
-
-	// 	const abi = {
-	// 		name: 'startPreReset',
-	// 		type: 'function',
-	// 		inputs: []
-	// 	};
-	// 	const gasPrice = (await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
-	// 	console.log('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
-	// 	return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
-	// }
-
-	// public getCurrentBlock() {
-	// 	return this.web3.eth.getBlockNumber();
-	// }
-
-	// public parseEvent(eventLog: EventLog, timestamp: number): IEvent {
-	// 	const returnValue = eventLog.returnValues;
-	// 	const output: IEvent = {
-	// 		contractAddress: eventLog.address,
-	// 		type: eventLog.event,
-	// 		id: (eventLog as any)['id'],
-	// 		blockHash: eventLog.blockHash,
-	// 		blockNumber: eventLog.blockNumber,
-	// 		transactionHash: eventLog.transactionHash,
-	// 		logStatus: (eventLog as any)['type'],
-	// 		parameters: {},
-	// 		timestamp: timestamp
-	// 	};
-	// 	for (const key in returnValue) output.parameters[key] = returnValue[key];
-
-	// 	return output;
-	// }
-
-	// public async pullEvents(
-	// 	contract: Contract,
-	// 	start: number,
-	// 	end: number,
-	// 	event: string
-	// ): Promise<EventLog[]> {
-	// 	return contract.getPastEvents(event, {
-	// 		fromBlock: start,
-	// 		toBlock: end
-	// 	});
-	// }
-
-	// public convertCustodianState(rawState: string) {
+	// public convertBeethovanState(rawState: string) {
 	// 	switch (rawState) {
 	// 		case CST.STATE_INCEPTION:
 	// 			return CST.CTD_INCEPTION;
@@ -456,9 +279,10 @@ export default class BeethovanWapper {
 	// }
 
 	// public async getCustodianStates(): Promise<IBeethovanStates> {
-	// 	const states = await this.custodian.methods.getSystemStates().call();
+	// 	const states = await this.contract.methods.getSystemStates().call();
 	// 	return {
 	// 		state: this.convertCustodianState(states[0].valueOf()),
+	// 		resetState
 	// 		navA: this.fromWei(states[1]),
 	// 		navB: this.fromWei(states[2]),
 	// 		totalSupplyA: this.fromWei(states[3]),

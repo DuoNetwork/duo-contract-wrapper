@@ -37,7 +37,6 @@ class Util {
 	public getUTCNowTimestamp() {
 		return moment().valueOf();
 	}
-
 }
 
 const util = new Util();

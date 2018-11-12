@@ -11,9 +11,13 @@ export interface IEvent {
 }
 
 export interface IContractPrice {
-	address: string;
 	price: number;
 	timestamp: number;
+}
+
+export interface ICustodianPrices {
+	reset: IContractPrice;
+	last: IContractPrice;
 }
 
 export interface IAddress {
@@ -21,61 +25,52 @@ export interface IAddress {
 	balance: number;
 }
 
-export interface IBeethovanAddresses {
+export interface IManagedAddresses {
 	operator: IAddress;
+	roleManager: IAddress;
+}
+
+export interface ICustodianAddresses extends IManagedAddresses {
 	feeCollector: IAddress;
-	priceFeed1: IAddress;
-	priceFeed2: IAddress;
-	priceFeed3: IAddress;
-	poolManager: IAddress;
-	[role: string]: IAddress;
+	oracleAddress: IAddress;
+	aTokenAddress: IAddress;
+	bTokenAddress: IAddress;
 }
 
-export interface IBeethovanBalances {
-	eth: number;
-	tokenA: number;
-	tokenB: number;
+export interface IManagedStates {
+	lastOperationTime: number;
+	operationCoolDown: number;
 }
 
-export interface IBeethovanStates {
+export interface ICustodianStates extends IManagedStates {
 	state: string;
-	navA: number;
-	navB: number;
+	minBalance: number;
 	totalSupplyA: number;
 	totalSupplyB: number;
+	ethCollateral: number;
+	navA: number;
+	navB: number;
+	lastPrice: number;
+	lastPriceTime: number;
+	resetPrice: number;
+	resetPriceTime: number;
+	createCommRate: number;
+	redeemCommRate: number;
+	period: number;
+	preResetWaitingBlocks: number;
+	priceFetchCoolDown: number;
+	nextResetAddrIndex: number;
+	totalUsers: number;
+	feeBalance: number;
+}
+
+export interface IBeethovanStates extends ICustodianStates {
+	resetState: string;
 	alpha: number;
 	beta: number;
-	feeAccumulated: number;
 	periodCoupon: number;
 	limitPeriodic: number;
 	limitUpper: number;
 	limitLower: number;
-	createCommRate: number;
-	redeemCommRate: number;
-	period: number;
 	iterationGasThreshold: number;
-	preResetWaitingBlocks: number;
-	priceTol: number;
-	priceFeedTol: number;
-	priceFeedTimeTol: number;
-	priceUpdateCoolDown: number;
-	numOfPrices: number;
-	nextResetAddrIndex: number;
-	lastAdminTime: number;
-	adminCoolDown: number;
-	usersLength: number;
-	addrPoolLength: number;
-	ethBalance: number;
-}
-
-export interface IBeethovanPrices {
-	first: IContractPrice;
-	second: IContractPrice;
-	reset: IContractPrice;
-	last: IContractPrice;
-}
-
-export interface IMagiPrice {
-	price: number;
-	timeInSecond: number;
 }
