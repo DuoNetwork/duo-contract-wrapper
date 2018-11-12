@@ -81,21 +81,6 @@
       "signature": "0x0d550b75"
     },
     {
-      "constant": true,
-      "inputs": [],
-      "name": "bTokenAddress",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x0ddd2e65"
-    },
-    {
       "constant": false,
       "inputs": [
         {
@@ -244,21 +229,6 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "resetPriceInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x4127058a"
-    },
-    {
-      "constant": true,
-      "inputs": [],
       "name": "operationCoolDown",
       "outputs": [
         {
@@ -289,51 +259,6 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "redeemCommInBP",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x66e14f25"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceFetchCoolDown",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x6aefe5bb"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "resetPriceTimeInSecond",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x6bafbc7b"
-    },
-    {
-      "constant": true,
-      "inputs": [],
       "name": "totalSupplyA",
       "outputs": [
         {
@@ -349,51 +274,6 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "alphaInBP",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x744b6bb5"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "limitUpperInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x81a6a1ee"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "ethCollateralInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x8d0686a7"
-    },
-    {
-      "constant": true,
-      "inputs": [],
       "name": "feeBalanceInWei",
       "outputs": [
         {
@@ -405,36 +285,6 @@
       "stateMutability": "view",
       "type": "function",
       "signature": "0x912be04b"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "lastPriceInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xa0e73ca7"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "oracleAddress",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xa89ae4ba"
     },
     {
       "constant": false,
@@ -455,36 +305,6 @@
       "stateMutability": "nonpayable",
       "type": "function",
       "signature": "0xa969ff0a"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "preResetWaitingBlocks",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xad9d86fc"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "createCommInBP",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xb2710db9"
     },
     {
       "constant": true,
@@ -509,21 +329,6 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "navBInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xbf1f6d45"
-    },
-    {
-      "constant": true,
-      "inputs": [],
       "name": "totalUsers",
       "outputs": [
         {
@@ -535,51 +340,6 @@
       "stateMutability": "view",
       "type": "function",
       "signature": "0xbff1f9e1"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "state",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint8"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xc19d93fb"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "feeCollector",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xc415b95c"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "minBalance",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xc5bb8758"
     },
     {
       "constant": true,
@@ -612,111 +372,6 @@
       "signature": "0xd5934b76"
     },
     {
-      "constant": true,
-      "inputs": [],
-      "name": "iterationGasThreshold",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xd68533aa"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "aTokenAddress",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xdcfc0ced"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "periodCouponInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xddfcb19a"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "betaInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xec2b0bfd"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "lastPriceTimeInSecond",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xed9e4789"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "period",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xef78d4fd"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "limitPeriodicInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xf01265e8"
-    },
-    {
       "constant": false,
       "inputs": [
         {
@@ -747,36 +402,6 @@
       "stateMutability": "nonpayable",
       "type": "function",
       "signature": "0xf20f76ba"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "limitLowerInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xf3d1ccc9"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "navAInWei",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xf7078179"
     },
     {
       "inputs": [
@@ -1369,17 +994,32 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "getUserSize",
+      "name": "getStates",
       "outputs": [
         {
           "name": "",
-          "type": "uint256"
+          "type": "uint256[29]"
         }
       ],
       "payable": false,
       "stateMutability": "view",
       "type": "function",
-      "signature": "0xc040ebec"
+      "signature": "0xd8ab8274"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getAddresses",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address[6]"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xa39fac12"
     }
   ]
 }

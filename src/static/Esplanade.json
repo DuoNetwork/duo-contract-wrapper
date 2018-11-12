@@ -757,7 +757,7 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "getPoolSize",
+      "name": "getAddressPoolSizes",
       "outputs": [
         {
           "name": "",
@@ -771,7 +771,26 @@
       "payable": false,
       "stateMutability": "view",
       "type": "function",
-      "signature": "0x23845e4b"
+      "signature": "0xea0ec2c5"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getContractPoolSizes",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function",
+      "signature": "0xe3e8a052"
     }
   ]
 }
