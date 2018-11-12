@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
+import erc20Abi from './static/ERC20.json';
 import { IEvent } from './types';
 
 const ProviderEngine = require('web3-provider-engine');
@@ -156,7 +157,7 @@ export default class Web3Wapper {
 			.then(receipt => console.log(JSON.stringify(receipt, null, 4)));
 	}
 
-	public async tokenTransferRaw(
+	public async erc20TransferRaw(
 		tokenAddress: string,
 		address: string,
 		privateKey: string,
@@ -212,6 +213,26 @@ export default class Web3Wapper {
 			)
 			.then(receipt => console.log(receipt))
 			.catch(error => console.log(error));
+	}
+
+	public erc20Transfer(contractAddress: string, address: string, to: string, value: number) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+
+		return erc20Contract.methods.transfer(to, this.toWei(value)).send({
+			from: address
+		});
+	}
+
+	public erc20Approve(contractAddress: string, address: string, spender: string, value: number) {
+		if (this.isReadOnly()) return this.readOnlyReject();
+
+		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+
+		return erc20Contract.methods.approve(spender, this.toWei(value)).send({
+			from: address
+		});
 	}
 
 	public getCurrentBlock() {

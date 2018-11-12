@@ -20,12 +20,12 @@ export default class MagiWapper {
 		this.contract = new this.web3Wrapper.web3.eth.Contract(magiAbi.abi, this.address);
 	}
 
-	public async getStarted(): Promise<boolean> {
+	public async isStarted(): Promise<boolean> {
 		const started = await this.contract.methods.started().call();
 		return started === 'true' ? true : false;
 	}
 
-	public async startMagiRaw(
+	public async startMagi(
 		address: string,
 		privateKey: string,
 		gasPrice: number,
@@ -57,7 +57,7 @@ export default class MagiWapper {
 		await this.commitInternal(input, command, address, privateKey, gasPrice, gasLimit, nonce);
 	}
 
-	public async commitPriceRaw(
+	public async commitPrice(
 		address: string,
 		privateKey: string,
 		gasPrice: number,
