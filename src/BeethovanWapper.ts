@@ -1,13 +1,10 @@
 import { Contract } from 'web3/types';
 import * as CST from './constants';
 import beethovanAbi from './static/Beethoven.json';
-// import {
-// 	IBeethovanAddresses,
-// 	IBeethovanBalances,
-// 	IBeethovanPrices,
-// 	IBeethovanStates
-// } from './types';
+import { IBeethovanStates, ICustodianAddresses } from './types';
 import Web3Wrapper, { Wallet } from './Web3Wrapper';
+
+const abiDecoder = require('abi-decoder');
 
 export default class BeethovanWapper {
 	public web3Wrapper: Web3Wrapper;
@@ -259,258 +256,120 @@ export default class BeethovanWapper {
 		return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
 	}
 
-	// public convertBeethovanState(rawState: string) {
-	// 	switch (rawState) {
-	// 		case CST.STATE_INCEPTION:
-	// 			return CST.CTD_INCEPTION;
-	// 		case CST.STATE_TRADING:
-	// 			return CST.CTD_TRADING;
-	// 		case CST.STATE_PRERESET:
-	// 			return CST.CTD_PRERESET;
-	// 		case CST.STATE_UP_RESET:
-	// 			return CST.CTD_UP_RESET;
-	// 		case CST.STATE_DOWN_RESET:
-	// 			return CST.CTD_DOWN_RESET;
-	// 		case CST.STATE_PERIOD_RESET:
-	// 			return CST.CTD_PERIOD_RESET;
-	// 		default:
-	// 			return CST.CTD_LOADING;
-	// 	}
-	// }
+	public convertCustodianState(rawState: string) {
+		switch (rawState) {
+			case CST.STATE_INCEPTION:
+				return CST.CTD_INCEPTION;
+			case CST.STATE_TRADING:
+				return CST.CTD_TRADING;
+			case CST.STATE_PRERESET:
+				return CST.CTD_PRERESET;
+			case CST.STATE_RESET:
+				return CST.CTD_RESET;
+			default:
+				return CST.CTD_LOADING;
+		}
+	}
 
-	// public async getCustodianStates(): Promise<IBeethovanStates> {
-	// 	const states = await this.contract.methods.getSystemStates().call();
-	// 	return {
-	// 		state: this.convertCustodianState(states[0].valueOf()),
-	// 		resetState
-	// 		navA: this.fromWei(states[1]),
-	// 		navB: this.fromWei(states[2]),
-	// 		totalSupplyA: this.fromWei(states[3]),
-	// 		totalSupplyB: this.fromWei(states[4]),
-	// 		ethBalance: this.fromWei(states[5]),
-	// 		alpha: states[6].valueOf() / 10000,
-	// 		beta: this.fromWei(states[7]),
-	// 		feeAccumulated: this.fromWei(states[8]),
-	// 		periodCoupon: this.fromWei(states[9]),
-	// 		limitPeriodic: this.fromWei(states[10]),
-	// 		limitUpper: this.fromWei(states[11]),
-	// 		limitLower: this.fromWei(states[12]),
-	// 		createCommRate: states[13] / 10000,
-	// 		period: Number(states[14].valueOf()),
-	// 		iterationGasThreshold: Number(states[15].valueOf()),
-	// 		preResetWaitingBlocks: Number(states[17].valueOf()),
-	// 		priceTol: Number(states[18].valueOf() / 10000),
-	// 		priceFeedTol: Number(states[19].valueOf() / 10000),
-	// 		priceFeedTimeTol: Number(states[20].valueOf()),
-	// 		priceUpdateCoolDown: Number(states[21].valueOf()),
-	// 		numOfPrices: Number(states[22].valueOf()),
-	// 		nextResetAddrIndex: Number(states[23].valueOf()),
-	// 		lastAdminTime: Number(states[24].valueOf()),
-	// 		adminCoolDown: Number(states[25]),
-	// 		usersLength: Number(states[26].valueOf()),
-	// 		addrPoolLength: Number(states[27].valueOf()),
-	// 		redeemCommRate: states[states.length > 28 ? 28 : 13] / 10000
-	// 	};
-	// }
+	public convertResetState(rawState: string) {
+		switch (rawState) {
+			case CST.RESET_STATE_UP:
+				return CST.BTV_UP_RESET;
+			case CST.RESET_STATE_DOWN:
+				return CST.BTV_DOWN_RESET;
+			case CST.RESET_STATE_PERIOD:
+				return CST.BTV_PERIOD_RESET;
+			default:
+				return '';
+		}
+	}
 
-	// public async getCustodianAddresses(): Promise<IBeethovanAddresses> {
-	// 	const addr: string[] = await this.custodian.methods.getSystemAddresses().call();
-	// 	const balances = await Promise.all(addr.map(a => this.getEthBalance(a)));
-	// 	return {
-	// 		operator: {
-	// 			address: addr[0],
-	// 			balance: balances[0]
-	// 		},
-	// 		feeCollector: {
-	// 			address: addr[1],
-	// 			balance: balances[1]
-	// 		},
-	// 		priceFeed1: {
-	// 			address: addr[2],
-	// 			balance: balances[2]
-	// 		},
-	// 		priceFeed2: {
-	// 			address: addr[3],
-	// 			balance: balances[3]
-	// 		},
-	// 		priceFeed3: {
-	// 			address: addr[4],
-	// 			balance: balances[4]
-	// 		},
-	// 		poolManager: {
-	// 			address: addr[5],
-	// 			balance: balances[5]
-	// 		}
-	// 	};
-	// }
+	public async getStates(): Promise<IBeethovanStates> {
+		const states = await this.contract.methods.getStates().call();
+		return {
+			lastOperationTime: Number(states[0].valueOf()) * 1000,
+			operationCoolDown: Number(states[1].valueOf()) * 1000,
+			state: this.convertCustodianState(states[2].valueOf()),
+			minBalance: this.web3Wrapper.fromWei(states[3]),
+			totalSupplyA: this.web3Wrapper.fromWei(states[4]),
+			totalSupplyB: this.web3Wrapper.fromWei(states[5]),
+			ethCollateral: this.web3Wrapper.fromWei(states[6]),
+			navA: this.web3Wrapper.fromWei(states[7]),
+			navB: this.web3Wrapper.fromWei(states[8]),
+			lastPrice: this.web3Wrapper.fromWei(states[9]),
+			lastPriceTime: Number(states[10].valueOf()) * 1000,
+			resetPrice: this.web3Wrapper.fromWei(states[11]),
+			resetPriceTime: Number(states[12].valueOf()) * 1000,
+			createCommRate: Number(states[13].valueOf()) / 10000,
+			redeemCommRate: Number(states[14].valueOf()) / 10000,
+			period: Number(states[15].valueOf()) * 1000,
+			preResetWaitingBlocks: Number(states[16].valueOf()),
+			priceFetchCoolDown: Number(states[17].valueOf()) * 1000,
+			nextResetAddrIndex: Number(states[18].valueOf()),
+			totalUsers: Number(states[19].valueOf()),
+			feeBalance: this.web3Wrapper.fromWei(states[20]),
+			resetState: this.convertResetState(states[21].valueOf()),
+			alpha: Number(states[22].valueOf()) / 10000,
+			beta: this.web3Wrapper.fromWei(states[23]),
+			periodCoupon: this.web3Wrapper.fromWei(states[24]),
+			limitPeriodic: this.web3Wrapper.fromWei(states[25]),
+			limitUpper: this.web3Wrapper.fromWei(states[26]),
+			limitLower: this.web3Wrapper.fromWei(states[27]),
+			iterationGasThreshold: Number(states[28].valueOf)
+		};
+	}
 
-	// public async getCustodianPrices(): Promise<IBeethovanPrices> {
-	// 	const prices = await this.custodian.methods.getSystemPrices().call();
-	// 	const custodianPrices = [0, 1, 2, 3].map(i => ({
-	// 		address: prices[i * 3].valueOf(),
-	// 		price: this.fromWei(prices[1 + i * 3]),
-	// 		timestamp: prices[2 + i * 3].valueOf() * 1000
-	// 	}));
+	public async getAddresses(): Promise<ICustodianAddresses> {
+		const addr: string[] = await this.contract.methods.getSystemAddresses().call();
+		const balances = await Promise.all(addr.map(a => this.web3Wrapper.getEthBalance(a)));
+		return {
+			roleManager: {
+				address: addr[0],
+				balance: balances[0]
+			},
+			operator: {
+				address: addr[1],
+				balance: balances[1]
+			},
+			feeCollector: {
+				address: addr[2],
+				balance: balances[2]
+			},
+			oracle: {
+				address: addr[3],
+				balance: balances[3]
+			},
+			aToken: {
+				address: addr[4],
+				balance: balances[4]
+			},
+			bToken: {
+				address: addr[4],
+				balance: balances[5]
+			}
+		};
+	}
 
-	// 	return {
-	// 		first: custodianPrices[0],
-	// 		second: custodianPrices[1],
-	// 		reset: custodianPrices[2],
-	// 		last: custodianPrices[3]
-	// 	};
-	// }
+	public getUserAddress(index: number) {
+		return this.contract.methods.users(index).call();
+	}
 
-	// public async getBalances(address: string): Promise<IBeethovanBalances> {
-	// 	if (!address)
-	// 		return {
-	// 			eth: 0,
-	// 			tokenA: 0,
-	// 			tokenB: 0
-	// 		};
+	public collectFee(address: string, amount: number) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+		return this.contract.methods.collectFee(this.web3Wrapper.toWei(amount)).send({
+			from: address
+		});
+	}
 
-	// 	const balances = await Promise.all([
-	// 		this.getEthBalance(address),
-	// 		this.getDuoBalance(address),
-	// 		this.getTokenBalance(address, true),
-	// 		this.getTokenBalance(address, false)
-	// 	]);
+	public setValue(address: string, index: number, newValue: number) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+		return this.contract.methods.setValue(index, newValue).send({
+			from: address
+		});
+	}
 
-	// 	return {
-	// 		eth: balances[0],
-	// 		tokenA: balances[2],
-	// 		tokenB: balances[3]
-	// 	};
-	// }
-
-	// public getUserAddress(index: number) {
-	// 	return this.custodian.methods.users(index).call();
-	// }
-
-	// public getPoolAddress(index: number) {
-	// 	return this.custodian.methods.addrPool(index).call();
-	// }
-
-	// public async getCurrentAddress(): Promise<string> {
-	// 	const accounts = await this.web3.eth.getAccounts();
-	// 	return accounts[this.accountIndex] || CST.DUMMY_ADDR;
-	// }
-
-	// public getCurrentNetwork(): Promise<number> {
-	// 	return this.web3.eth.net.getId();
-	// }
-
-	// public async getEthBalance(address: string): Promise<number> {
-	// 	return this.fromWei(await this.web3.eth.getBalance(address));
-	// }
-
-	// private async getDuoBalance(address: string): Promise<number> {
-	// 	return this.fromWei(await this.duo.methods.balanceOf(address).call());
-	// }
-
-	// public async getDuoAllowance(address: string): Promise<number> {
-	// 	return this.fromWei(await this.duo.methods.allowance(address, this.custodianAddr).call());
-	// }
-
-	// private async getTokenBalance(address: string, isA: boolean): Promise<number> {
-	// 	return this.fromWei(await this.custodian.methods.balanceOf(isA ? 0 : 1, address).call());
-	// }
-
-	// public fromWei(value: string | number) {
-	// 	return Number(this.web3.utils.fromWei(value, 'ether'));
-	// }
-
-	// public toWei(value: string | number) {
-	// 	return this.web3.utils.toWei(value + '', 'ether');
-	// }
-
-	// public checkAddress(addr: string) {
-	// 	if (!addr.startsWith('0x') || addr.length !== 42) return false;
-	// 	return this.web3.utils.checkAddressChecksum(this.web3.utils.toChecksumAddress(addr));
-	// }
-
-	// public getTransactionReceipt(txHash: string) {
-	// 	return this.web3.eth.getTransactionReceipt(txHash);
-	// }
-
-	// public duoApprove(address: string, spender: string, value: number) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-
-	// 	return this.duo.methods.approve(spender, this.toWei(value)).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public duoTransfer(address: string, to: string, value: number) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-
-	// 	return this.duo.methods.transfer(to, this.toWei(value)).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public tokenApprove(address: string, spender: string, value: number, isA: boolean) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-
-	// 	if (isA)
-	// 		return this.tokenA.methods.approve(spender, this.toWei(value)).send({
-	// 			from: address
-	// 		});
-	// 	else
-	// 		return this.tokenB.methods.approve(spender, this.toWei(value)).send({
-	// 			from: address
-	// 		});
-	// }
-
-	// public tokenTransfer(address: string, to: string, value: number, isA: boolean) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-
-	// 	if (isA)
-	// 		return this.tokenA.methods.transfer(to, this.toWei(value)).send({
-	// 			from: address
-	// 		});
-	// 	else
-	// 		return this.tokenB.methods.transfer(to, this.toWei(value)).send({
-	// 			from: address
-	// 		});
-	// }
-
-	// public collectFee(address: string, amount: number) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-	// 	return this.custodian.methods.collectFee(this.toWei(amount)).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public setValue(address: string, index: number, newValue: number) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-	// 	return this.custodian.methods.setValue(index, newValue).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public addAddress(address: string, addr1: string, addr2: string) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-	// 	return this.custodian.methods.addAddress(addr1, addr2).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public removeAddress(address: string, addr: string) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-	// 	return this.custodian.methods.addAddress(addr).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public updateAddress(address: string, currentRole: string) {
-	// 	if (this.isReadOnly()) return this.readOnlyReject();
-	// 	return this.custodian.methods.addAddress(currentRole).send({
-	// 		from: address
-	// 	});
-	// }
-
-	// public decode(input: string): any {
-	// 	abiDecoder.addABI(custodianAbi.abi);
-	// 	return abiDecoder.decodeMethod(input);
-	// }
+	public decode(input: string): any {
+		abiDecoder.addABI(beethovanAbi.abi);
+		return abiDecoder.decodeMethod(input);
+	}
 }

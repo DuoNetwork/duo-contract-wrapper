@@ -32,9 +32,9 @@ export interface IManagedAddresses {
 
 export interface ICustodianAddresses extends IManagedAddresses {
 	feeCollector: IAddress;
-	oracleAddress: IAddress;
-	aTokenAddress: IAddress;
-	bTokenAddress: IAddress;
+	oracle: IAddress;
+	aToken: IAddress;
+	bToken: IAddress;
 }
 
 export interface IManagedStates {
