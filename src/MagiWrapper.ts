@@ -87,7 +87,7 @@ export default class MagiWapper {
 		await this.commitInternal(input, command, address, privateKey, gasPrice, gasLimit, nonce);
 	}
 
-	private async commitInternal(
+	public async commitInternal(
 		input: number[],
 		command: string,
 		address: string,
