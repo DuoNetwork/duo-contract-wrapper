@@ -88,6 +88,42 @@ export default class BeethovanWapper {
 			.catch(error => util.logInfo(error));
 	}
 
+	public async fetchPrice(
+		address: string,
+		privateKey: string,
+		gasPrice: number,
+		gasLimit: number,
+		nonce: number = -1
+	) {
+		util.logInfo('the account ' + address + ' is starting custodian');
+		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		const abi = {
+			type: 'function',
+			inputs: [],
+			name: 'fetchPrice'
+		};
+
+		const command = this.web3Wrapper.generateTxString(abi, []);
+		// sending out transaction
+		this.web3Wrapper.web3.eth
+			.sendSignedTransaction(
+				'0x' +
+					this.web3Wrapper.signTx(
+						this.web3Wrapper.createTxCommand(
+							nonce,
+							gasPrice,
+							gasLimit,
+							this.address,
+							0,
+							command
+						),
+						privateKey
+					)
+			)
+			.then(receipt => util.logInfo(receipt))
+			.catch(error => util.logInfo(error));
+	}
+
 	public async createRaw(
 		address: string,
 		privateKey: string,
