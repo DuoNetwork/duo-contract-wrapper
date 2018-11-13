@@ -20,21 +20,16 @@ export interface ICustodianPrices {
 	last: IContractPrice;
 }
 
-export interface IAddress {
-	address: string;
-	balance: number;
-}
-
 export interface IManagedAddresses {
-	operator: IAddress;
-	roleManager: IAddress;
+	operator: string;
+	roleManager: string;
 }
 
 export interface ICustodianAddresses extends IManagedAddresses {
-	feeCollector: IAddress;
-	oracle: IAddress;
-	aToken: IAddress;
-	bToken: IAddress;
+	feeCollector: string;
+	oracle: string;
+	aToken: string;
+	bToken: string;
 }
 
 export interface IManagedStates {
@@ -80,4 +75,16 @@ export interface IVotingData {
 	votedFor: number;
 	votedAgainst: number;
 	totalVoters: number;
+}
+
+export interface ICustodianContractAddress {
+	custodian: string;
+	aToken: string;
+	bToken: string;
+}
+
+export interface IContractAddresses {
+	Beethovan: ICustodianContractAddress,
+	Esplanade: string;
+	Magi: string;
 }

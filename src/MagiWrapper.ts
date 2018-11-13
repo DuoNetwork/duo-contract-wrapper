@@ -1,5 +1,5 @@
 import { Contract } from 'web3/types';
-import * as CST from './constants';
+// import * as CST from './constants';
 import magiAbi from './static/Magi.json';
 import { IContractPrice } from './types';
 import util from './util';
@@ -8,15 +8,16 @@ import Web3Wrapper from './Web3Wrapper';
 export default class MagiWapper {
 	public web3Wrapper: Web3Wrapper;
 	public contract: Contract;
-	public readonly address: string;
 
 	// private live: boolean;
 
-	constructor(web3Wrapper: Web3Wrapper, live: boolean) {
+	constructor(web3Wrapper: Web3Wrapper) {
 		// this.live = live;
 		this.web3Wrapper = web3Wrapper;
-		this.address = live ? CST.MAGI_ADDR_MAIN : CST.MAGI_ADDR_KOVAN;
-		this.contract = new this.web3Wrapper.web3.eth.Contract(magiAbi.abi, this.address);
+		this.contract = this.web3Wrapper.createContract(
+			magiAbi.abi,
+			this.web3Wrapper.contractAddresses.Magi
+		);
 	}
 
 	public async isStarted(): Promise<boolean> {
@@ -96,27 +97,26 @@ export default class MagiWapper {
 		gasLimit: number,
 		nonce: number
 	) {
-		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
 		util.logInfo(
 			`price: ${input[0]}, time: ${
 				input[1]
 			}  gasPrice: ${gasPrice}, gasLimit: ${gasLimit}, nonce: ${nonce} `
 		);
-		return this.web3Wrapper.web3.eth
+		return this.web3Wrapper
 			.sendSignedTransaction(
-				'0x' +
-					this.web3Wrapper.signTx(
-						this.web3Wrapper.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.address,
-							0,
-							command
-						),
-						privateKey
-					)
+				this.web3Wrapper.signTx(
+					this.web3Wrapper.createTxCommand(
+						nonce,
+						gasPrice,
+						gasLimit,
+						this.web3Wrapper.contractAddresses.Magi,
+						0,
+						command
+					),
+					privateKey
+				)
 			)
 			.then(receipt => util.logInfo(receipt))
 			.catch(err => util.logError(err));

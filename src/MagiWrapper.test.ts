@@ -3,8 +3,7 @@ import MagiWrapper from './MagiWrapper';
 import Web3Wrapper from './Web3Wrapper';
 
 const magiWrapper = new MagiWrapper(
-	new Web3Wrapper(null, 'source', CST.PROVIDER_INFURA_KOVAN, false),
-	false
+	new Web3Wrapper(null, 'source', CST.PROVIDER_INFURA_KOVAN, false)
 );
 
 test('startMagi', async () => {

@@ -3,14 +3,13 @@ import * as CST from './constants';
 import beethovanAbi from './static/Beethoven.json';
 import { IBeethovanStates, ICustodianAddresses } from './types';
 import util from './util';
-import Web3Wrapper, { Wallet } from './Web3Wrapper';
+import Web3Wrapper from './Web3Wrapper';
 
 const abiDecoder = require('abi-decoder');
 
 export default class BeethovanWapper {
 	public web3Wrapper: Web3Wrapper;
 	public contract: Contract;
-	public readonly address: string;
 
 	public readonly inceptionBlk: number = 0;
 	// private live: boolean;
@@ -19,19 +18,27 @@ export default class BeethovanWapper {
 		// this.live = live;
 		this.web3Wrapper = web3Wrapper;
 
-		this.address = live ? CST.BEETHOVAN_ADDR_MAIN : CST.BEETHOVAN_ADDR_KOVAN;
-		this.contract = new this.web3Wrapper.web3.eth.Contract(beethovanAbi.abi, this.address);
+		this.contract = this.web3Wrapper.createContract(
+			beethovanAbi.abi,
+			this.web3Wrapper.contractAddresses.Beethovan.custodian
+		);
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 	}
 
 	public switchToMetaMask(window: any) {
 		this.web3Wrapper.switchToMetaMask(window);
-		this.contract = new this.web3Wrapper.web3.eth.Contract(beethovanAbi.abi, this.address);
+		this.contract = this.web3Wrapper.createContract(
+			beethovanAbi.abi,
+			this.web3Wrapper.contractAddresses.Beethovan.custodian
+		);
 	}
 
 	public async switchToLedger() {
 		const accounts = this.web3Wrapper.switchToLedger();
-		this.contract = new this.web3Wrapper.web3.eth.Contract(beethovanAbi.abi, this.address);
+		this.contract = this.web3Wrapper.createContract(
+			beethovanAbi.abi,
+			this.web3Wrapper.contractAddresses.Beethovan.custodian
+		);
 		return accounts;
 	}
 
@@ -46,7 +53,7 @@ export default class BeethovanWapper {
 		nonce: number = -1
 	) {
 		util.logInfo('the account ' + address + ' is starting custodian');
-		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'startCustodian',
 			type: 'function',
@@ -69,20 +76,19 @@ export default class BeethovanWapper {
 
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
-		this.web3Wrapper.web3.eth
+		this.web3Wrapper
 			.sendSignedTransaction(
-				'0x' +
-					this.web3Wrapper.signTx(
-						this.web3Wrapper.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.address,
-							0,
-							command
-						),
-						privateKey
-					)
+				this.web3Wrapper.signTx(
+					this.web3Wrapper.createTxCommand(
+						nonce,
+						gasPrice,
+						gasLimit,
+						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						0,
+						command
+					),
+					privateKey
+				)
 			)
 			.then(receipt => util.logInfo(receipt))
 			.catch(error => util.logInfo(error));
@@ -96,7 +102,7 @@ export default class BeethovanWapper {
 		nonce: number = -1
 	) {
 		util.logInfo('the account ' + address + ' is starting custodian');
-		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			type: 'function',
 			inputs: [],
@@ -105,20 +111,19 @@ export default class BeethovanWapper {
 
 		const command = this.web3Wrapper.generateTxString(abi, []);
 		// sending out transaction
-		this.web3Wrapper.web3.eth
+		this.web3Wrapper
 			.sendSignedTransaction(
-				'0x' +
-					this.web3Wrapper.signTx(
-						this.web3Wrapper.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.address,
-							0,
-							command
-						),
-						privateKey
-					)
+				this.web3Wrapper.signTx(
+					this.web3Wrapper.createTxCommand(
+						nonce,
+						gasPrice,
+						gasLimit,
+						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						0,
+						command
+					),
+					privateKey
+				)
 			)
 			.then(receipt => util.logInfo(receipt))
 			.catch(error => util.logInfo(error));
@@ -132,10 +137,10 @@ export default class BeethovanWapper {
 		eth: number,
 		nonce: number = -1
 	) {
-		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		util.logInfo('the account ' + address + ' is creating tokens');
-		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'create',
 			type: 'function',
@@ -160,20 +165,19 @@ export default class BeethovanWapper {
 				' eth ' +
 				eth
 		);
-		return this.web3Wrapper.web3.eth
+		return this.web3Wrapper
 			.sendSignedTransaction(
-				'0x' +
-					this.web3Wrapper.signTx(
-						this.web3Wrapper.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.address,
-							eth,
-							command
-						),
-						privateKey
-					)
+				this.web3Wrapper.signTx(
+					this.web3Wrapper.createTxCommand(
+						nonce,
+						gasPrice,
+						gasLimit,
+						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						eth,
+						command
+					),
+					privateKey
+				)
 			)
 			.then(receipt => util.logInfo(receipt))
 			.catch(err => util.logInfo(err));
@@ -205,10 +209,10 @@ export default class BeethovanWapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		util.logInfo('the account ' + address + ' privateKey is ' + privateKey);
-		nonce = nonce === -1 ? await this.web3Wrapper.web3.eth.getTransactionCount(address) : nonce;
+		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const balanceOfA = await this.contract.methods.balanceOf(0, address).call();
 		const balanceOfB = await this.contract.methods.balanceOf(1, address).call();
 		util.logInfo('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
@@ -247,20 +251,19 @@ export default class BeethovanWapper {
 				amtB
 		);
 		// gasPrice = gasPrice || await web3.eth.
-		return this.web3Wrapper.web3.eth
+		return this.web3Wrapper
 			.sendSignedTransaction(
-				'0x' +
-					this.web3Wrapper.signTx(
-						this.web3Wrapper.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.address,
-							0,
-							command
-						),
-						privateKey
-					)
+				this.web3Wrapper.signTx(
+					this.web3Wrapper.createTxCommand(
+						nonce,
+						gasPrice,
+						gasLimit,
+						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						0,
+						command
+					),
+					privateKey
+				)
 			)
 			.then(receipt => util.logInfo(receipt))
 			.catch(error => util.logInfo(error));
@@ -291,30 +294,29 @@ export default class BeethovanWapper {
 		gasPrice: number,
 		gasLimit: number
 	) {
-		const nonce = await this.web3Wrapper.web3.eth.getTransactionCount(address);
+		const nonce = await this.web3Wrapper.getTransactionCount(address);
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
-		this.web3Wrapper.web3.eth
+		this.web3Wrapper
 			.sendSignedTransaction(
-				'0x' +
-					this.web3Wrapper.signTx(
-						this.web3Wrapper.createTxCommand(
-							nonce,
-							gasPrice,
-							gasLimit,
-							this.address,
-							0,
-							command
-						),
-						privateKey
-					)
+				this.web3Wrapper.signTx(
+					this.web3Wrapper.createTxCommand(
+						nonce,
+						gasPrice,
+						gasLimit,
+						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						0,
+						command
+					),
+					privateKey
+				)
 			)
 			.then(receipt => util.logInfo(receipt))
 			.catch(error => util.logInfo(error));
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {
-		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		const abi = {
 			name: 'startReset',
@@ -333,7 +335,7 @@ export default class BeethovanWapper {
 	}
 
 	public async triggerPreReset(address: string, privateKey: string) {
-		if (this.web3Wrapper.wallet !== Wallet.Local) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		const abi = {
 			name: 'startPreReset',
@@ -412,32 +414,13 @@ export default class BeethovanWapper {
 
 	public async getAddresses(): Promise<ICustodianAddresses> {
 		const addr: string[] = await this.contract.methods.getSystemAddresses().call();
-		const balances = await Promise.all(addr.map(a => this.web3Wrapper.getEthBalance(a)));
 		return {
-			roleManager: {
-				address: addr[0],
-				balance: balances[0]
-			},
-			operator: {
-				address: addr[1],
-				balance: balances[1]
-			},
-			feeCollector: {
-				address: addr[2],
-				balance: balances[2]
-			},
-			oracle: {
-				address: addr[3],
-				balance: balances[3]
-			},
-			aToken: {
-				address: addr[4],
-				balance: balances[4]
-			},
-			bToken: {
-				address: addr[4],
-				balance: balances[5]
-			}
+			roleManager: addr[0],
+			operator: addr[1],
+			feeCollector: addr[2],
+			oracle: addr[3],
+			aToken: addr[4],
+			bToken: addr[4]
 		};
 	}
 

@@ -5,7 +5,7 @@ import Web3 from 'web3';
 import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import erc20Abi from './static/ERC20.json';
-import { IEvent } from './types';
+import { IContractAddresses, IEvent } from './types';
 import util from './util';
 
 const ProviderEngine = require('web3-provider-engine');
@@ -22,14 +22,35 @@ export enum Wallet {
 }
 
 export default class Web3Wapper {
-	public web3: Web3;
-	public wallet: Wallet = Wallet.None;
-	public accountIndex: number = 0;
+	private web3: Web3;
+	private wallet: Wallet = Wallet.None;
+	private accountIndex: number = 0;
 	private live: boolean;
 	private provider: string;
+	public readonly contractAddresses: IContractAddresses;
 
 	constructor(window: any, source: string, provider: string, live: boolean) {
 		this.live = live;
+		if (this.live)
+			this.contractAddresses = {
+				Beethovan: {
+					custodian: CST.BEETHOVAN_A_ADDR_MAIN,
+					aToken: CST.BEETHOVAN_A_ADDR_MAIN,
+					bToken: CST.BEETHOVAN_B_ADDR_MAIN
+				},
+				Esplanade: CST.ESPLANADE_ADDR_MAIN,
+				Magi: CST.MAGI_ADDR_MAIN
+			};
+		else
+			this.contractAddresses = {
+				Beethovan: {
+					custodian: CST.BEETHOVAN_A_ADDR_KOVAN,
+					aToken: CST.BEETHOVAN_A_ADDR_KOVAN,
+					bToken: CST.BEETHOVAN_B_ADDR_KOVAN
+				},
+				Esplanade: CST.ESPLANADE_ADDR_KOVAN,
+				Magi: CST.MAGI_ADDR_KOVAN
+			};
 		this.provider = provider;
 		if (window && typeof window.web3 !== 'undefined') {
 			this.web3 = new Web3(window.web3.currentProvider);
@@ -96,6 +117,10 @@ export default class Web3Wapper {
 
 	public readOnlyReject() {
 		return Promise.reject('Read Only Mode');
+	}
+
+	public isLocal() {
+		return this.wallet === Wallet.Local;
 	}
 
 	public wrongEnvReject() {
@@ -247,7 +272,6 @@ export default class Web3Wapper {
 		const blkNumber = await this.getCurrentBlock();
 		const blk = await this.web3.eth.getBlock(blkNumber);
 		return blk.timestamp;
-
 	}
 
 	public async getCurrentAddress(): Promise<string> {
@@ -314,5 +338,17 @@ export default class Web3Wapper {
 			fromBlock: start,
 			toBlock: end
 		});
+	}
+
+	public createContract(abi: any[], address: string): Contract {
+		return new this.web3.eth.Contract(abi, address);
+	}
+
+	public getTransactionCount(address: string) {
+		return this.web3.eth.getTransactionCount(address);
+	}
+
+	public sendSignedTransaction(signedTx: string) {
+		return this.web3.eth.sendSignedTransaction('0x' + signedTx);
 	}
 }
