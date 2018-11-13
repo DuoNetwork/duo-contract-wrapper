@@ -54,7 +54,7 @@ export interface ICustodianStates extends IManagedStates {
 	feeBalance: number;
 }
 
-export interface IBeethovanStates extends ICustodianStates {
+export interface IBeethovenStates extends ICustodianStates {
 	resetState: string;
 	alpha: number;
 	beta: number;
@@ -79,7 +79,7 @@ export interface ICustodianContractAddress {
 }
 
 export interface IContractAddresses {
-	Beethovan: ICustodianContractAddress,
+	Beethoven: ICustodianContractAddress,
 	Esplanade: string;
 	Magi: string;
 }

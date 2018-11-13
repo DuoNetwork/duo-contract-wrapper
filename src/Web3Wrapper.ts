@@ -35,20 +35,20 @@ export default class Web3Wapper {
 		this.live = live;
 		if (this.live)
 			this.contractAddresses = {
-				Beethovan: {
-					custodian: CST.BEETHOVAN_ADDR_MAIN,
-					aToken: CST.BEETHOVAN_A_ADDR_MAIN,
-					bToken: CST.BEETHOVAN_B_ADDR_MAIN
+				Beethoven: {
+					custodian: CST.BEETHOVEN_ADDR_MAIN,
+					aToken: CST.BEETHOVEN_A_ADDR_MAIN,
+					bToken: CST.BEETHOVEN_B_ADDR_MAIN
 				},
 				Esplanade: CST.ESPLANADE_ADDR_MAIN,
 				Magi: CST.MAGI_ADDR_MAIN
 			};
 		else
 			this.contractAddresses = {
-				Beethovan: {
-					custodian: CST.BEETHOVAN_ADDR_KOVAN,
-					aToken: CST.BEETHOVAN_A_ADDR_KOVAN,
-					bToken: CST.BEETHOVAN_B_ADDR_KOVAN
+				Beethoven: {
+					custodian: CST.BEETHOVEN_ADDR_KOVAN,
+					aToken: CST.BEETHOVEN_A_ADDR_KOVAN,
+					bToken: CST.BEETHOVEN_B_ADDR_KOVAN
 				},
 				Esplanade: CST.ESPLANADE_ADDR_KOVAN,
 				Magi: CST.MAGI_ADDR_KOVAN

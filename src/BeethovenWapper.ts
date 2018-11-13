@@ -1,13 +1,13 @@
 import { Contract } from 'web3/types';
 import * as CST from './constants';
-import beethovanAbi from './static/Beethoven.json';
-import { IBeethovanStates, ICustodianAddresses } from './types';
+import beethovenAbi from './static/Beethoven.json';
+import { IBeethovenStates, ICustodianAddresses } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
 const abiDecoder = require('abi-decoder');
 
-export default class BeethovanWapper {
+export default class BeethovenWapper {
 	public web3Wrapper: Web3Wrapper;
 	public contract: Contract;
 
@@ -19,20 +19,20 @@ export default class BeethovanWapper {
 		this.web3Wrapper = web3Wrapper;
 
 		this.contract = this.web3Wrapper.createContract(
-			beethovanAbi.abi,
-			this.web3Wrapper.contractAddresses.Beethovan.custodian
+			beethovenAbi.abi,
+			this.web3Wrapper.contractAddresses.Beethoven.custodian
 		);
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 		this.web3Wrapper.onSwitchToMetaMask(() => {
 			this.contract = this.web3Wrapper.createContract(
-				beethovanAbi.abi,
-				this.web3Wrapper.contractAddresses.Beethovan.custodian
+				beethovenAbi.abi,
+				this.web3Wrapper.contractAddresses.Beethoven.custodian
 			);
 		});
 		this.web3Wrapper.onSwitchToLedger(() => {
 			this.contract = this.web3Wrapper.createContract(
-				beethovanAbi.abi,
-				this.web3Wrapper.contractAddresses.Beethovan.custodian
+				beethovenAbi.abi,
+				this.web3Wrapper.contractAddresses.Beethoven.custodian
 			);
 		});
 	}
@@ -78,7 +78,7 @@ export default class BeethovanWapper {
 						nonce,
 						gasPrice,
 						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						this.web3Wrapper.contractAddresses.Beethoven.custodian,
 						0,
 						command
 					),
@@ -113,7 +113,7 @@ export default class BeethovanWapper {
 						nonce,
 						gasPrice,
 						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						this.web3Wrapper.contractAddresses.Beethoven.custodian,
 						0,
 						command
 					),
@@ -167,7 +167,7 @@ export default class BeethovanWapper {
 						nonce,
 						gasPrice,
 						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						this.web3Wrapper.contractAddresses.Beethoven.custodian,
 						eth,
 						command
 					),
@@ -248,7 +248,7 @@ export default class BeethovanWapper {
 						nonce,
 						gasPrice,
 						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						this.web3Wrapper.contractAddresses.Beethoven.custodian,
 						0,
 						command
 					),
@@ -288,7 +288,7 @@ export default class BeethovanWapper {
 						nonce,
 						gasPrice,
 						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethovan.custodian,
+						this.web3Wrapper.contractAddresses.Beethoven.custodian,
 						0,
 						command
 					),
@@ -359,12 +359,12 @@ export default class BeethovanWapper {
 		}
 	}
 
-	public async getStates(): Promise<IBeethovanStates> {
+	public async getStates(): Promise<IBeethovenStates> {
 		const states = await this.contract.methods.getStates().call();
 		return {
 			lastOperationTime: Number(states[CST.BTV_STATE.LAST_OPERATION_TIME].valueOf()) * 1000,
 			operationCoolDown: Number(states[CST.BTV_STATE.OPERATION_COOLDOWN].valueOf()) * 1000,
-			state: BeethovanWapper.convertCustodianState(states[CST.BTV_STATE.STATE].valueOf()),
+			state: BeethovenWapper.convertCustodianState(states[CST.BTV_STATE.STATE].valueOf()),
 			minBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.MIN_BALANCE]),
 			totalSupplyA: this.web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYA]),
 			totalSupplyB: this.web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYB]),
@@ -383,7 +383,7 @@ export default class BeethovanWapper {
 			nextResetAddrIndex: Number(states[CST.BTV_STATE.NEXT_RESET_ADDR_INDEX].valueOf()),
 			totalUsers: Number(states[CST.BTV_STATE.TOTAL_USERS].valueOf()),
 			feeBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_INWEI]),
-			resetState: BeethovanWapper.convertResetState(
+			resetState: BeethovenWapper.convertResetState(
 				states[CST.BTV_STATE.RESET_STATE].valueOf()
 			),
 			alpha: Number(states[CST.BTV_STATE.ALPHA_INBP].valueOf()) / 10000,
@@ -427,7 +427,7 @@ export default class BeethovanWapper {
 	}
 
 	public decode(input: string): any {
-		abiDecoder.addABI(beethovanAbi.abi);
+		abiDecoder.addABI(beethovenAbi.abi);
 		return abiDecoder.decodeMethod(input);
 	}
 }
