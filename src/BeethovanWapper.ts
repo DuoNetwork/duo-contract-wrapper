@@ -183,16 +183,11 @@ export default class BeethovanWapper {
 			.catch(err => util.logInfo(err));
 	}
 
-	public create(
-		address: string,
-		value: number,
-		payFeeInEth: boolean,
-		onTxHash: (hash: string) => any
-	) {
+	public create(address: string, value: number, onTxHash: (hash: string) => any) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods
-			.create(payFeeInEth)
+			.create()
 			.send({
 				from: address,
 				value: this.web3Wrapper.toWei(value)
@@ -269,17 +264,11 @@ export default class BeethovanWapper {
 			.catch(error => util.logInfo(error));
 	}
 
-	public redeem(
-		address: string,
-		amtA: number,
-		amtB: number,
-		payFeeInEth: boolean,
-		onTxHash: (hash: string) => any
-	) {
+	public redeem(address: string, amtA: number, amtB: number, onTxHash: (hash: string) => any) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods
-			.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB), payFeeInEth)
+			.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
 			.send({
 				from: address
 			})
