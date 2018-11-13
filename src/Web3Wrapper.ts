@@ -268,6 +268,10 @@ export default class Web3Wapper {
 		return this.web3.eth.getBlockNumber();
 	}
 
+	public getBlock(blkNumber: number) {
+		return this.web3.eth.getBlock(blkNumber);
+	}
+
 	public async getCurrentBlockTime(): Promise<number> {
 		const blkNumber = await this.getCurrentBlock();
 		const blk = await this.web3.eth.getBlock(blkNumber);
