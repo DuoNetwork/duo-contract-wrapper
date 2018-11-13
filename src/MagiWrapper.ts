@@ -21,8 +21,7 @@ export default class MagiWapper {
 	}
 
 	public async isStarted(): Promise<boolean> {
-		const started = await this.contract.methods.started().call();
-		return started === 'true' ? true : false;
+		return await this.contract.methods.started().call();
 	}
 
 	public async startMagi(
