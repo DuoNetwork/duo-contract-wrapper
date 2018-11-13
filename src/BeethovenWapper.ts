@@ -96,7 +96,7 @@ export default class BeethovenWapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		util.logInfo('the account ' + address + ' is starting custodian');
+		util.logInfo('the account ' + address + ' is fetching price');
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			type: 'function',
