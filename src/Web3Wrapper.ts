@@ -34,7 +34,7 @@ export default class Web3Wapper {
 		if (this.live)
 			this.contractAddresses = {
 				Beethovan: {
-					custodian: CST.BEETHOVAN_A_ADDR_MAIN,
+					custodian: CST.BEETHOVAN_ADDR_MAIN,
 					aToken: CST.BEETHOVAN_A_ADDR_MAIN,
 					bToken: CST.BEETHOVAN_B_ADDR_MAIN
 				},
@@ -44,7 +44,7 @@ export default class Web3Wapper {
 		else
 			this.contractAddresses = {
 				Beethovan: {
-					custodian: CST.BEETHOVAN_A_ADDR_KOVAN,
+					custodian: CST.BEETHOVAN_ADDR_KOVAN,
 					aToken: CST.BEETHOVAN_A_ADDR_KOVAN,
 					bToken: CST.BEETHOVAN_B_ADDR_KOVAN
 				},
