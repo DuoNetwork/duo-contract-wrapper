@@ -23,11 +23,13 @@ export enum Wallet {
 
 export default class Web3Wapper {
 	private web3: Web3;
-	private wallet: Wallet = Wallet.None;
+	public wallet: Wallet = Wallet.None;
 	private accountIndex: number = 0;
 	private live: boolean;
 	private provider: string;
 	public readonly contractAddresses: IContractAddresses;
+	private handleSwitchToMetaMask: Array<() => any>;
+	private handleSwitchToLedger: Array<() => any>;
 
 	constructor(window: any, source: string, provider: string, live: boolean) {
 		this.live = live;
@@ -66,6 +68,16 @@ export default class Web3Wapper {
 			);
 			this.wallet = Wallet.Local;
 		}
+		this.handleSwitchToMetaMask = [];
+		this.handleSwitchToLedger = [];
+	}
+
+	public onSwitchToMetaMask(handleSwitchToMetaMask: () => any) {
+		this.handleSwitchToMetaMask.push(handleSwitchToMetaMask);
+	}
+
+	public onSwitchToLedger(handleSwitchToLedger: () => any) {
+		this.handleSwitchToLedger.push(handleSwitchToLedger);
 	}
 
 	public switchToMetaMask(window: any) {
@@ -78,6 +90,14 @@ export default class Web3Wapper {
 		}
 
 		this.accountIndex = 0;
+
+		this.handleSwitchToMetaMask.forEach(h => {
+			try {
+				h();
+			} catch (error) {
+				util.logError(error);
+			}
+		});
 	}
 
 	public async switchToLedger() {
@@ -95,6 +115,14 @@ export default class Web3Wapper {
 		const newWeb3 = new Web3(engine);
 		const accounts = await newWeb3.eth.getAccounts();
 		this.web3 = newWeb3;
+
+		this.handleSwitchToLedger.forEach(h => {
+			try {
+				h();
+			} catch (error) {
+				util.logError(error);
+			}
+		});
 		return accounts;
 	}
 

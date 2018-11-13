@@ -20,23 +20,18 @@ export default class EsplanadeWapper {
 			this.web3Wrapper.contractAddresses.Esplanade
 		);
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
-	}
-
-	public switchToMetaMask(window: any) {
-		this.web3Wrapper.switchToMetaMask(window);
-		this.contract = this.web3Wrapper.createContract(
-			esplanadeAbi.abi,
-			this.web3Wrapper.contractAddresses.Esplanade
-		);
-	}
-
-	public async switchToLedger() {
-		const accounts = this.web3Wrapper.switchToLedger();
-		this.contract = this.web3Wrapper.createContract(
-			esplanadeAbi.abi,
-			this.web3Wrapper.contractAddresses.Esplanade
-		);
-		return accounts;
+		this.web3Wrapper.onSwitchToMetaMask(() => {
+			this.contract = this.web3Wrapper.createContract(
+				esplanadeAbi.abi,
+				this.web3Wrapper.contractAddresses.Esplanade
+			);
+		});
+		this.web3Wrapper.onSwitchToLedger(() => {
+			this.contract = this.web3Wrapper.createContract(
+				esplanadeAbi.abi,
+				this.web3Wrapper.contractAddresses.Esplanade
+			);
+		});
 	}
 
 	public getAddressPoolIndex(hot: boolean) {
