@@ -27,10 +27,10 @@ export default class MagiWapper {
 	public async startMagi(
 		address: string,
 		privateKey: string,
-		gasPrice: number,
-		gasLimit: number,
 		price: number,
 		timeInSecond: number,
+		gasPrice: number,
+		gasLimit: number,
 		nonce: number = -1
 	) {
 		util.logInfo('the account ' + address + ' is starting Magi contract ');
@@ -59,10 +59,10 @@ export default class MagiWapper {
 	public async commitPrice(
 		address: string,
 		privateKey: string,
-		gasPrice: number,
-		gasLimit: number,
 		price: number,
 		timeInSecond: number,
+		gasPrice: number,
+		gasLimit: number,
 		nonce: number = -1
 	) {
 		util.logInfo('the account ' + address + ' is committing price to Magi contract ');
