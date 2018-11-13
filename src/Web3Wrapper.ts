@@ -24,7 +24,7 @@ export enum Wallet {
 export default class Web3Wapper {
 	private web3: Web3;
 	public wallet: Wallet = Wallet.None;
-	private accountIndex: number = 0;
+	public accountIndex: number = 0;
 	private live: boolean;
 	private provider: string;
 	public readonly contractAddresses: IContractAddresses;
