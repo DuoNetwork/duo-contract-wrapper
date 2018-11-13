@@ -15,11 +15,6 @@ export interface IContractPrice {
 	timestamp: number;
 }
 
-export interface ICustodianPrices {
-	reset: IContractPrice;
-	last: IContractPrice;
-}
-
 export interface IManagedAddresses {
 	operator: string;
 	roleManager: string;
