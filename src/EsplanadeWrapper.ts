@@ -167,7 +167,16 @@ export default class EsplanadeWapper extends BaseWrapper {
 		};
 
 		const command = this.web3Wrapper.generateTxString(abi, []);
-		await this.sendTransactionRaw(address, privateKey, gasPrice, gasLimit, command, nonce);
+		await this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Esplanade,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public addCustodian(address: string, custodianAddr: string) {
@@ -200,7 +209,16 @@ export default class EsplanadeWapper extends BaseWrapper {
 
 		const input = [custodianAddr];
 		const command = this.web3Wrapper.generateTxString(abi, input);
-		await this.sendTransactionRaw(address, privateKey, gasPrice, gasLimit, command, nonce);
+		await this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Esplanade,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public addOtherContracts(address: string, contractAddr: string) {

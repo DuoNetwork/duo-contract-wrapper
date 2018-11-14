@@ -4,7 +4,6 @@ import beethovenAbi from './static/Beethoven.json';
 import { IBeethovenStates, ICustodianAddresses } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
-
 const abiDecoder = require('abi-decoder');
 
 export default class BeethovenWapper extends BaseWrapper {
@@ -29,7 +28,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		super(web3Wrapper, beethovenAbi.abi, web3Wrapper.contractAddresses.Beethoven.custodian);
 	}
 
-	public async startCustodian(
+	public async startCustodianRaw(
 		address: string,
 		privateKey: string,
 		aAddr: string,
@@ -39,7 +38,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		util.logInfo('the account ' + address + ' is starting custodian');
+		util.logInfo(`the account ${address} is starting custodian`);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'startCustodian',
@@ -63,32 +62,26 @@ export default class BeethovenWapper extends BaseWrapper {
 
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
-		this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethoven.custodian,
-						0,
-						command
-					),
-					privateKey
-				)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(error => util.logInfo(error));
+		await this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
-	public async fetchPrice(
+	public async fetchPriceRaw(
 		address: string,
 		privateKey: string,
 		gasPrice: number,
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		util.logInfo('the account ' + address + ' is fetching price');
+		util.logInfo(`the account ${address} is fetching price`);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			type: 'function',
@@ -97,23 +90,16 @@ export default class BeethovenWapper extends BaseWrapper {
 		};
 
 		const command = this.web3Wrapper.generateTxString(abi, []);
-		// sending out transaction
-		this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethoven.custodian,
-						0,
-						command
-					),
-					privateKey
-				)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(error => util.logInfo(error));
+		await this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public async createRaw(
@@ -126,7 +112,7 @@ export default class BeethovenWapper extends BaseWrapper {
 	) {
 		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
-		util.logInfo('the account ' + address + ' is creating tokens');
+		util.logInfo(`the account ${address} is creating tokens`);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'create',
@@ -143,31 +129,18 @@ export default class BeethovenWapper extends BaseWrapper {
 		// sending out transaction
 		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
 		util.logInfo(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' eth ' +
-				eth
+			`gasPrice price :${gasPrice} gasLimit : ${gasLimit} nonce : ${nonce} eth : ${eth}`
 		);
-		return this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethoven.custodian,
-						eth,
-						command
-					),
-					privateKey
-				)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(err => util.logInfo(err));
+		return this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			eth,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public create(address: string, value: number, onTxHash: (hash: string) => any) {
@@ -219,36 +192,19 @@ export default class BeethovenWapper extends BaseWrapper {
 		const input = [amtA, amtB, true];
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
-		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
 		util.logInfo(
-			'gasPrice price ' +
-				gasPrice +
-				' gasLimit is ' +
-				gasLimit +
-				' nonce ' +
-				nonce +
-				' amtA ' +
-				amtA +
-				' amtB ' +
-				amtB
+			`gasPrice price :${gasPrice} gasLimit : ${gasLimit} nonce : ${nonce} amtA : ${amtA} amtB : ${amtB}`
 		);
-		// gasPrice = gasPrice || await web3.eth.
-		return this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethoven.custodian,
-						0,
-						command
-					),
-					privateKey
-				)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(error => util.logInfo(error));
+		return this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public redeem(address: string, amtA: number, amtB: number, onTxHash: (hash: string) => any) {
@@ -273,22 +229,16 @@ export default class BeethovenWapper extends BaseWrapper {
 		const nonce = await this.web3Wrapper.getTransactionCount(address);
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
-		this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						this.web3Wrapper.contractAddresses.Beethoven.custodian,
-						0,
-						command
-					),
-					privateKey
-				)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(error => util.logInfo(error));
+		this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {

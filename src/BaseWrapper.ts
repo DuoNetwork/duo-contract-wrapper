@@ -20,10 +20,12 @@ export default abstract class BaseWrapper {
 	public async sendTransactionRaw(
 		address: string,
 		privateKey: string,
+		contractAddr: string,
+		value: number,
 		gasPrice: number,
 		gasLimit: number,
-		command: string,
-		nonce: number
+		nonce: number,
+		command: string
 	) {
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
@@ -34,8 +36,8 @@ export default abstract class BaseWrapper {
 						nonce,
 						gasPrice,
 						gasLimit,
-						this.web3Wrapper.contractAddresses.Esplanade,
-						0,
+						contractAddr,
+						value,
 						command
 					),
 					privateKey

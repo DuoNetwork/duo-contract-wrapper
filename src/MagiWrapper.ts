@@ -101,22 +101,16 @@ export default class MagiWapper extends BaseWrapper {
 				input[1]
 			}  gasPrice: ${gasPrice}, gasLimit: ${gasLimit}, nonce: ${nonce} `
 		);
-		return this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						this.web3Wrapper.contractAddresses.Magi,
-						0,
-						command
-					),
-					privateKey
-				)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(err => util.logError(err));
+		return this.sendTransactionRaw(
+			address,
+			privateKey,
+			this.web3Wrapper.contractAddresses.Magi,
+			0,
+			gasPrice,
+			gasLimit,
+			nonce,
+			command
+		);
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {
