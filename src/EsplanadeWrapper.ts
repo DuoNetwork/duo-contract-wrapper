@@ -2,6 +2,7 @@ import BaseWrapper from './BaseWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
 import { IVotingData } from './types';
+import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWapper extends BaseWrapper {
@@ -85,8 +86,7 @@ export default class EsplanadeWapper extends BaseWrapper {
 	}
 
 	public async isStarted(): Promise<boolean> {
-		const started = await this.contract.methods.started().call();
-		return started === 'true' ? true : false;
+		return await this.contract.methods.started().call();
 	}
 
 	public async getVotingData(): Promise<IVotingData> {
@@ -151,12 +151,56 @@ export default class EsplanadeWapper extends BaseWrapper {
 		});
 	}
 
+	public async startManagerRaw(
+		address: string,
+		privateKey: string,
+		gasPrice: number,
+		gasLimit: number,
+		nonce: number = -1
+	) {
+		util.logInfo(`the account ${address} is starting esplanade`);
+
+		const abi = {
+			name: 'startManager',
+			type: 'function',
+			inputs: []
+		};
+
+		const command = this.web3Wrapper.generateTxString(abi, []);
+		await this.sendTransactionRaw(address, privateKey, gasPrice, gasLimit, command, nonce);
+	}
+
 	public addCustodian(address: string, custodianAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.addCustodian(custodianAddr).send({
 			from: address
 		});
+	}
+
+	public async addCustodianRaw(
+		address: string,
+		privateKey: string,
+		custodianAddr: string,
+		gasPrice: number,
+		gasLimit: number,
+		nonce: number = -1
+	) {
+		util.logInfo(`the account ${address} is addCustodian ${custodianAddr}`);
+		const abi = {
+			type: 'function',
+			inputs: [
+				{
+					name: 'custodianAddr',
+					type: 'address'
+				}
+			],
+			name: 'addCustodian'
+		};
+
+		const input = [custodianAddr];
+		const command = this.web3Wrapper.generateTxString(abi, input);
+		await this.sendTransactionRaw(address, privateKey, gasPrice, gasLimit, command, nonce);
 	}
 
 	public addOtherContracts(address: string, contractAddr: string) {
