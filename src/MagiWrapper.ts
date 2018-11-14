@@ -1,23 +1,13 @@
-import { Contract } from 'web3/types';
+import BaseWrapper from './BaseWrapper';
 // import * as CST from './constants';
 import magiAbi from './static/Magi.json';
 import { IContractPrice } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class MagiWapper {
-	public web3Wrapper: Web3Wrapper;
-	public contract: Contract;
-
-	// private live: boolean;
-
+export default class MagiWapper extends BaseWrapper {
 	constructor(web3Wrapper: Web3Wrapper) {
-		// this.live = live;
-		this.web3Wrapper = web3Wrapper;
-		this.contract = this.web3Wrapper.createContract(
-			magiAbi.abi,
-			this.web3Wrapper.contractAddresses.Magi
-		);
+		super(web3Wrapper, magiAbi.abi, web3Wrapper.contractAddresses.Magi);
 	}
 
 	public async isStarted(): Promise<boolean> {

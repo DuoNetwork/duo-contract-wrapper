@@ -1,4 +1,4 @@
-import { Contract } from 'web3/types';
+import BaseWrapper from './BaseWrapper';
 import * as CST from './constants';
 import beethovenAbi from './static/Beethoven.json';
 import { IBeethovenStates, ICustodianAddresses } from './types';
@@ -7,34 +7,11 @@ import Web3Wrapper from './Web3Wrapper';
 
 const abiDecoder = require('abi-decoder');
 
-export default class BeethovenWapper {
-	public web3Wrapper: Web3Wrapper;
-	public contract: Contract;
-
+export default class BeethovenWapper extends BaseWrapper {
 	public readonly inceptionBlk: number = 0;
-	// private live: boolean;
-
 	constructor(web3Wrapper: Web3Wrapper, live: boolean) {
-		// this.live = live;
-		this.web3Wrapper = web3Wrapper;
-
-		this.contract = this.web3Wrapper.createContract(
-			beethovenAbi.abi,
-			this.web3Wrapper.contractAddresses.Beethoven.custodian
-		);
+		super(web3Wrapper, beethovenAbi.abi, web3Wrapper.contractAddresses.Beethoven.custodian);
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
-		this.web3Wrapper.onSwitchToMetaMask(() => {
-			this.contract = this.web3Wrapper.createContract(
-				beethovenAbi.abi,
-				this.web3Wrapper.contractAddresses.Beethoven.custodian
-			);
-		});
-		this.web3Wrapper.onSwitchToLedger(() => {
-			this.contract = this.web3Wrapper.createContract(
-				beethovenAbi.abi,
-				this.web3Wrapper.contractAddresses.Beethoven.custodian
-			);
-		});
 	}
 
 	public async startCustodian(

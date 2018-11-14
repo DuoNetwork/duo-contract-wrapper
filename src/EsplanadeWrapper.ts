@@ -1,37 +1,14 @@
-import { Contract } from 'web3/types';
+import BaseWrapper from './BaseWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
 import { IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class EsplanadeWapper {
-	public web3Wrapper: Web3Wrapper;
-	public contract: Contract;
-
+export default class EsplanadeWapper extends BaseWrapper {
 	public readonly inceptionBlk: number = 0;
-	// private live: boolean;
-
 	constructor(web3Wrapper: Web3Wrapper, live: boolean) {
-		// this.live = live;
-		this.web3Wrapper = web3Wrapper;
-
-		this.contract = this.web3Wrapper.createContract(
-			esplanadeAbi.abi,
-			this.web3Wrapper.contractAddresses.Esplanade
-		);
+		super(web3Wrapper, esplanadeAbi.abi, web3Wrapper.contractAddresses.Esplanade);
 		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
-		this.web3Wrapper.onSwitchToMetaMask(() => {
-			this.contract = this.web3Wrapper.createContract(
-				esplanadeAbi.abi,
-				this.web3Wrapper.contractAddresses.Esplanade
-			);
-		});
-		this.web3Wrapper.onSwitchToLedger(() => {
-			this.contract = this.web3Wrapper.createContract(
-				esplanadeAbi.abi,
-				this.web3Wrapper.contractAddresses.Esplanade
-			);
-		});
 	}
 
 	public getAddressPoolIndex(hot: boolean) {
