@@ -1,13 +1,14 @@
 import BaseWrapper from './BaseWrapper';
-// import * as CST from './constants';
+import * as CST from './constants';
 import magiAbi from './static/Magi.json';
 import { IContractPrice } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class MagiWapper extends BaseWrapper {
-	constructor(web3Wrapper: Web3Wrapper) {
+	constructor(web3Wrapper: Web3Wrapper, live: boolean) {
 		super(web3Wrapper, magiAbi.abi, web3Wrapper.contractAddresses.Magi);
+		this.inceptionBlockNumber = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 	}
 
 	public async isStarted(): Promise<boolean> {

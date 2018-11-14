@@ -5,10 +5,9 @@ import { IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWapper extends BaseWrapper {
-	public readonly inceptionBlk: number = 0;
 	constructor(web3Wrapper: Web3Wrapper, live: boolean) {
 		super(web3Wrapper, esplanadeAbi.abi, web3Wrapper.contractAddresses.Esplanade);
-		this.inceptionBlk = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
+		this.inceptionBlockNumber = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 	}
 
 	public getAddressPoolIndex(hot: boolean) {
