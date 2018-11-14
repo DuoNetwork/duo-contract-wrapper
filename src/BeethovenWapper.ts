@@ -338,7 +338,7 @@ export default class BeethovenWapper extends BaseWrapper {
 	}
 
 	public async getAddresses(): Promise<ICustodianAddresses> {
-		const addr: string[] = await this.contract.methods.getSystemAddresses().call();
+		const addr: string[] = await this.contract.methods.getAddresses().call();
 		return {
 			roleManager: addr[0],
 			operator: addr[1],
