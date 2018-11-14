@@ -292,7 +292,7 @@ export default class Web3Wapper {
 		});
 	}
 
-	public getCurrentBlock() {
+	public getCurrentBlockNumber() {
 		return this.web3.eth.getBlockNumber();
 	}
 
@@ -300,8 +300,9 @@ export default class Web3Wapper {
 		return this.web3.eth.getBlock(blkNumber);
 	}
 
-	public async getCurrentBlockTimestamp(): Promise<number> {
-		const blkNumber = await this.getCurrentBlock();
+	public async getBlockTimestamp(blkNumber: number = 0): Promise<number> {
+		if (!blkNumber)
+			blkNumber = await this.getCurrentBlockNumber();
 		const blk = await this.web3.eth.getBlock(blkNumber);
 		return blk.timestamp * 1000;
 	}
