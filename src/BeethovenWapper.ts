@@ -4,7 +4,6 @@ import beethovenAbi from './static/Beethoven.json';
 import { IBeethovenStates, ICustodianAddresses } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
-const abiDecoder = require('abi-decoder');
 
 export default class BeethovenWapper extends BaseWrapper {
 	public readonly events = [
@@ -366,10 +365,5 @@ export default class BeethovenWapper extends BaseWrapper {
 		return this.contract.methods.setValue(index, newValue).send({
 			from: address
 		});
-	}
-
-	public decode(input: string): any {
-		abiDecoder.addABI(beethovenAbi.abi);
-		return abiDecoder.decodeMethod(input);
 	}
 }
