@@ -32,38 +32,45 @@ export const BEETHOVEN_A_ADDR_MAIN = '0xb30cB711E88bd226bCD31a0e190a43A6dA197eE4
 export const BEETHOVEN_B_ADDR_MAIN = '0x57044839157c8749b8EfF63564647f0Ca2044B30';
 export const INCEPTION_BLK_KOVAN = 9355871;
 export const INCEPTION_BLK_MAIN = 0;
-export const EVENT_ACCEPT_PRICE = 'AcceptPrice';
+
+// managed
+export const EVENT_UPDATE_ROLE_MANAGER = 'UpdateRoleManager';
+export const EVENT_UPDATE_OPERATOR = 'UpdateOperator';
+
+// esplanade
+export const EVENT_ADD_ADDRESS = 'AddAddress';
+export const EVENT_REMOVE_ADDRESS = 'RemoveAddress';
+export const EVENT_PROVIDE_ADDRESS = 'ProvideAddress';
+export const EVENT_ADD_CUSTODIAN = 'AddCustodian';
+export const EVENT_ADD_OTHER_CONTRACT = 'AddOtherContract';
+export const EVENT_START_CONTRACT_VOTING = 'StartContractVoting';
+export const EVENT_TERMINATE_CONTRACT_VOTING = 'TerminateContractVoting';
+export const EVENT_START_MODERATOR_VOTING = 'StartModeratorVoting';
+export const EVENT_TERMINATEBY_TIMEOUT = 'TerminateByTimeOut';
+export const EVENT_VOTE = 'Vote';
+export const EVENT_COMPLETE_VOTING = 'CompleteVoting';
+export const EVENT_REPLACE_MODERATOR = 'ReplaceModerator';
+
+// custodian
+export const EVENT_START_TRADING = 'StartTrading';
 export const EVENT_START_PRE_RESET = 'StartPreReset';
 export const EVENT_START_RESET = 'StartReset';
-export const EVENT_START_TRADING = 'StartTrading';
+export const EVENT_ACCEPT_PRICE = 'AcceptPrice';
 export const EVENT_CREATE = 'Create';
 export const EVENT_REDEEM = 'Redeem';
-export const EVENT_COMMIT_PRICE = 'CommitPrice';
+export const EVENT_TOTAL_SUPPLY = 'TotalSupply';
 export const EVENT_TRANSFER = 'Transfer';
 export const EVENT_APPROVAL = 'Approval';
-export const EVENT_ADD_ADDRESS = 'AddAddress';
-export const EVENT_UPDATE_ADDRESS = 'UpdateAddress';
-export const EVENT_REMOVE_ADDRESS = 'RemoveAddress';
-export const EVENT_SET_VALUE = 'SetValue';
 export const EVENT_COLLECT_FEE = 'CollectFee';
-export const EVENT_TOTAL_SUPPLY = 'TotalSupply';
 export const EVENT_UPDATE_ORACLE = 'UpdateOracle';
 export const EVENT_UPDATE_FEE_COLLECTOR = 'UpdateFeeCollector';
-export const EVENTS = [
-	EVENT_START_TRADING,
-	EVENT_START_PRE_RESET,
-	EVENT_START_RESET,
-	EVENT_ACCEPT_PRICE,
-	EVENT_CREATE,
-	EVENT_REDEEM,
-	EVENT_TOTAL_SUPPLY,
-	EVENT_TRANSFER,
-	EVENT_APPROVAL,
-	EVENT_COLLECT_FEE,
-	EVENT_UPDATE_ORACLE,
-	EVENT_UPDATE_FEE_COLLECTOR,
-	EVENT_SET_VALUE
-];
+
+// beethovan
+export const EVENT_SET_VALUE = 'SetValue';
+
+// magi
+export const EVENT_COMMIT_PRICE = 'CommitPrice';
+export const EVENT_UPDATE_PRICE_FEED = 'UpdatePriceFeed';
 
 export const STATE_INCEPTION = '0';
 export const STATE_TRADING = '1';

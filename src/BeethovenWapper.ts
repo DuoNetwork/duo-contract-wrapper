@@ -8,6 +8,23 @@ import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
 export default class BeethovenWapper extends BaseWrapper {
+	public readonly events = [
+		CST.EVENT_UPDATE_ROLE_MANAGER,
+		CST.EVENT_UPDATE_OPERATOR,
+		CST.EVENT_START_TRADING,
+		CST.EVENT_START_PRE_RESET,
+		CST.EVENT_START_RESET,
+		CST.EVENT_ACCEPT_PRICE,
+		CST.EVENT_CREATE,
+		CST.EVENT_REDEEM,
+		CST.EVENT_TOTAL_SUPPLY,
+		CST.EVENT_TRANSFER,
+		CST.EVENT_APPROVAL,
+		CST.EVENT_COLLECT_FEE,
+		CST.EVENT_UPDATE_ORACLE,
+		CST.EVENT_UPDATE_FEE_COLLECTOR,
+		CST.EVENT_SET_VALUE
+	];
 	constructor(web3Wrapper: Web3Wrapper) {
 		super(web3Wrapper, beethovenAbi.abi, web3Wrapper.contractAddresses.Beethoven.custodian);
 	}

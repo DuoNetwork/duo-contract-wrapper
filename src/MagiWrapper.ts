@@ -1,11 +1,19 @@
 import BaseWrapper from './BaseWrapper';
-// import * as CST from './constants';
+import * as CST from './constants';
 import magiAbi from './static/Magi.json';
 import { IContractPrice } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class MagiWapper extends BaseWrapper {
+	public readonly events = [
+		CST.EVENT_UPDATE_ROLE_MANAGER,
+		CST.EVENT_UPDATE_OPERATOR,
+		CST.EVENT_COMMIT_PRICE,
+		CST.EVENT_ACCEPT_PRICE,
+		CST.EVENT_SET_VALUE,
+		CST.EVENT_UPDATE_PRICE_FEED
+	];
 	constructor(web3Wrapper: Web3Wrapper) {
 		super(web3Wrapper, magiAbi.abi, web3Wrapper.contractAddresses.Magi);
 	}

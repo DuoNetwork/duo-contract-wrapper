@@ -5,6 +5,20 @@ import { IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWapper extends BaseWrapper {
+	public readonly events = [
+		CST.EVENT_ADD_ADDRESS,
+		CST.EVENT_REMOVE_ADDRESS,
+		CST.EVENT_PROVIDE_ADDRESS,
+		CST.EVENT_ADD_CUSTODIAN,
+		CST.EVENT_ADD_OTHER_CONTRACT,
+		CST.EVENT_START_CONTRACT_VOTING,
+		CST.EVENT_TERMINATE_CONTRACT_VOTING,
+		CST.EVENT_START_MODERATOR_VOTING,
+		CST.EVENT_TERMINATEBY_TIMEOUT,
+		CST.EVENT_VOTE,
+		CST.EVENT_COMPLETE_VOTING,
+		CST.EVENT_REPLACE_MODERATOR
+	];
 	constructor(web3Wrapper: Web3Wrapper) {
 		super(web3Wrapper, esplanadeAbi.abi, web3Wrapper.contractAddresses.Esplanade);
 	}
