@@ -300,10 +300,10 @@ export default class Web3Wapper {
 		return this.web3.eth.getBlock(blkNumber);
 	}
 
-	public async getCurrentBlockTime(): Promise<number> {
+	public async getCurrentBlockTimeStamp(): Promise<number> {
 		const blkNumber = await this.getCurrentBlock();
 		const blk = await this.web3.eth.getBlock(blkNumber);
-		return blk.timestamp;
+		return blk.timestamp * 1000;
 	}
 
 	public async getCurrentAddress(): Promise<string> {
