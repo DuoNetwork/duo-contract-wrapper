@@ -8,9 +8,8 @@ import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
 export default class BeethovenWapper extends BaseWrapper {
-	constructor(web3Wrapper: Web3Wrapper, live: boolean) {
+	constructor(web3Wrapper: Web3Wrapper) {
 		super(web3Wrapper, beethovenAbi.abi, web3Wrapper.contractAddresses.Beethoven.custodian);
-		this.inceptionBlockNumber = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 	}
 
 	public async startCustodian(

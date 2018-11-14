@@ -28,6 +28,7 @@ export default class Web3Wapper {
 	private live: boolean;
 	private provider: string;
 	public readonly contractAddresses: IContractAddresses;
+	public readonly inceptionBlockNumber: number;
 	private handleSwitchToMetaMask: Array<() => any>;
 	private handleSwitchToLedger: Array<() => any>;
 
@@ -70,6 +71,7 @@ export default class Web3Wapper {
 		}
 		this.handleSwitchToMetaMask = [];
 		this.handleSwitchToLedger = [];
+		this.inceptionBlockNumber = live ? CST.INCEPTION_BLK_MAIN : CST.INCEPTION_BLK_KOVAN;
 	}
 
 	public onSwitchToMetaMask(handleSwitchToMetaMask: () => any) {
