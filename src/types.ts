@@ -73,13 +73,28 @@ export interface IVotingData {
 }
 
 export interface ICustodianContractAddress {
-	custodian: string;
-	aToken: string;
-	bToken: string;
+	custodian: IContractAddress;
+	aToken: IContractAddress;
+	bToken: IContractAddress;
+}
+
+export interface IContractAddress {
+	code: string;
+	address: string;
+}
+
+export interface ICustodianContractAddresses {
+	Perpetual: ICustodianContractAddress;
+	'6M': ICustodianContractAddress;
+	OffTheRun: {
+		'6M': ICustodianContractAddress[];
+	}
 }
 
 export interface IContractAddresses {
-	Beethoven: ICustodianContractAddress,
-	Esplanade: string;
-	Magi: string;
+	Custodians: {
+		Beethoven: ICustodianContractAddresses;
+	};
+	MultiSigManagers: IContractAddress[];
+	Oracles: IContractAddress[];
 }

@@ -2,9 +2,8 @@ import * as CST from './constants';
 import MagiWrapper from './MagiWrapper';
 import Web3Wrapper from './Web3Wrapper';
 
-const magiWrapper = new MagiWrapper(
-	new Web3Wrapper(null, 'source', CST.PROVIDER_INFURA_KOVAN, false)
-);
+const web3Wrapper = new Web3Wrapper(null, 'source', CST.PROVIDER_INFURA_KOVAN, false);
+const magiWrapper = new MagiWrapper(web3Wrapper, web3Wrapper.contractAddresses.Oracles[0].address);
 
 test('startMagi', async () => {
 	magiWrapper.commitInternal = jest.fn(() => Promise.resolve());

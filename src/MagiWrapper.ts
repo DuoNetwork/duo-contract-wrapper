@@ -14,8 +14,8 @@ export default class MagiWapper extends BaseWrapper {
 		CST.EVENT_SET_VALUE,
 		CST.EVENT_UPDATE_PRICE_FEED
 	];
-	constructor(web3Wrapper: Web3Wrapper) {
-		super(web3Wrapper, magiAbi.abi, web3Wrapper.contractAddresses.Magi);
+	constructor(web3Wrapper: Web3Wrapper, address: string) {
+		super(web3Wrapper, magiAbi.abi, address);
 	}
 
 	public async isStarted(): Promise<boolean> {
@@ -104,7 +104,7 @@ export default class MagiWapper extends BaseWrapper {
 		return this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Magi,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,

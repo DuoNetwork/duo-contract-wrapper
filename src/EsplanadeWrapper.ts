@@ -20,8 +20,8 @@ export default class EsplanadeWapper extends BaseWrapper {
 		CST.EVENT_COMPLETE_VOTING,
 		CST.EVENT_REPLACE_MODERATOR
 	];
-	constructor(web3Wrapper: Web3Wrapper) {
-		super(web3Wrapper, esplanadeAbi.abi, web3Wrapper.contractAddresses.Esplanade);
+	constructor(web3Wrapper: Web3Wrapper, address: string) {
+		super(web3Wrapper, esplanadeAbi.abi, address);
 	}
 
 	public getAddressPoolIndex(hot: boolean) {
@@ -170,7 +170,7 @@ export default class EsplanadeWapper extends BaseWrapper {
 		await this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Esplanade,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,
@@ -212,7 +212,7 @@ export default class EsplanadeWapper extends BaseWrapper {
 		await this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Esplanade,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,

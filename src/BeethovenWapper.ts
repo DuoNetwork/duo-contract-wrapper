@@ -23,8 +23,8 @@ export default class BeethovenWapper extends BaseWrapper {
 		CST.EVENT_UPDATE_FEE_COLLECTOR,
 		CST.EVENT_SET_VALUE
 	];
-	constructor(web3Wrapper: Web3Wrapper) {
-		super(web3Wrapper, beethovenAbi.abi, web3Wrapper.contractAddresses.Beethoven.custodian);
+	constructor(web3Wrapper: Web3Wrapper, address: string) {
+		super(web3Wrapper, beethovenAbi.abi, address);
 	}
 
 	public async startCustodianRaw(
@@ -64,7 +64,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		await this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,
@@ -92,7 +92,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		await this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,
@@ -133,7 +133,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		return this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			this.address,
 			eth,
 			gasPrice,
 			gasLimit,
@@ -197,7 +197,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		return this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,
@@ -231,7 +231,7 @@ export default class BeethovenWapper extends BaseWrapper {
 		this.sendTransactionRaw(
 			address,
 			privateKey,
-			this.web3Wrapper.contractAddresses.Beethoven.custodian,
+			this.address,
 			0,
 			gasPrice,
 			gasLimit,

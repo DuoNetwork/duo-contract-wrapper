@@ -4,6 +4,7 @@ import '@babel/polyfill';
 import Web3 from 'web3';
 import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
+import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
 import { IContractAddresses, IEvent } from './types';
 import util from './util';
@@ -34,26 +35,7 @@ export default class Web3Wapper {
 
 	constructor(window: any, source: string, provider: string, live: boolean) {
 		this.live = live;
-		if (this.live)
-			this.contractAddresses = {
-				Beethoven: {
-					custodian: CST.BEETHOVEN_ADDR_MAIN,
-					aToken: CST.BEETHOVEN_A_ADDR_MAIN,
-					bToken: CST.BEETHOVEN_B_ADDR_MAIN
-				},
-				Esplanade: CST.ESPLANADE_ADDR_MAIN,
-				Magi: CST.MAGI_ADDR_MAIN
-			};
-		else
-			this.contractAddresses = {
-				Beethoven: {
-					custodian: CST.BEETHOVEN_ADDR_KOVAN,
-					aToken: CST.BEETHOVEN_A_ADDR_KOVAN,
-					bToken: CST.BEETHOVEN_B_ADDR_KOVAN
-				},
-				Esplanade: CST.ESPLANADE_ADDR_KOVAN,
-				Magi: CST.MAGI_ADDR_KOVAN
-			};
+		this.contractAddresses = this.live ? mainnet : kovan;
 		this.provider = provider;
 		if (window && typeof window.web3 !== 'undefined') {
 			this.web3 = new Web3(window.web3.currentProvider);
@@ -303,8 +285,7 @@ export default class Web3Wapper {
 	}
 
 	public async getBlockTimestamp(blkNumber: number = 0): Promise<number> {
-		if (!blkNumber)
-			blkNumber = await this.getCurrentBlockNumber();
+		if (!blkNumber) blkNumber = await this.getCurrentBlockNumber();
 		const blk = await this.web3.eth.getBlock(blkNumber);
 		return blk.timestamp * 1000;
 	}

@@ -4,20 +4,22 @@ import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
 export default abstract class BaseWrapper {
-	public web3Wrapper: Web3Wrapper;
-	public contract: Contract;
-	public abi: any[];
+	public readonly web3Wrapper: Web3Wrapper;
+	public readonly address: string
+	public readonly abi: any[];
 	public readonly events: string[] = [];
+	public contract: Contract;
 
 	constructor(web3Wrapper: Web3Wrapper, abi: any[], contractAddress: string) {
 		this.web3Wrapper = web3Wrapper;
+		this.address = contractAddress;
 		this.abi = abi;
-		this.contract = this.web3Wrapper.createContract(this.abi, contractAddress);
+		this.contract = this.web3Wrapper.createContract(this.abi, this.address);
 		this.web3Wrapper.onSwitchToMetaMask(() => {
-			this.contract = this.web3Wrapper.createContract(this.abi, contractAddress);
+			this.contract = this.web3Wrapper.createContract(this.abi, this.address);
 		});
 		this.web3Wrapper.onSwitchToLedger(() => {
-			this.contract = this.web3Wrapper.createContract(this.abi, contractAddress);
+			this.contract = this.web3Wrapper.createContract(this.abi, this.address);
 		});
 	}
 
