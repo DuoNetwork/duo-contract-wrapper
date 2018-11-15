@@ -43,6 +43,7 @@ export const EVENT_REPLACE_MODERATOR = 'ReplaceModerator';
 export const EVENT_START_TRADING = 'StartTrading';
 export const EVENT_START_PRE_RESET = 'StartPreReset';
 export const EVENT_START_RESET = 'StartReset';
+export const EVENT_MATURED = 'Matured'
 export const EVENT_ACCEPT_PRICE = 'AcceptPrice';
 export const EVENT_CREATE = 'Create';
 export const EVENT_REDEEM = 'Redeem';
