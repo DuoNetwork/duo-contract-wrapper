@@ -218,6 +218,17 @@ export default class BeethovenWapper extends BaseWrapper {
 			.on('transactionHash', onTxHash);
 	}
 
+	public redeemAll(address: string, onTxHash: (hash: string) => any) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+
+		return this.contract.methods
+			.redeemAll()
+			.send({
+				from: address
+			})
+			.on('transactionHash', onTxHash);
+	}
+
 	private async trigger(
 		address: string,
 		privateKey: string,
