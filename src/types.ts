@@ -47,6 +47,7 @@ export interface ICustodianStates extends IManagedStates {
 	createCommRate: number;
 	redeemCommRate: number;
 	period: number;
+	maturity: number;
 	preResetWaitingBlocks: number;
 	priceFetchCoolDown: number;
 	nextResetAddrIndex: number;
