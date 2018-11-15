@@ -283,6 +283,8 @@ export default class BeethovenWapper extends BaseWrapper {
 				return CST.CTD_PRERESET;
 			case CST.STATE_RESET:
 				return CST.CTD_RESET;
+			case CST.STATE_MATURED:
+				return CST.CTD_MATURED;
 			default:
 				return CST.CTD_LOADING;
 		}

@@ -7,6 +7,7 @@ export const CTD_INCEPTION = 'Inception';
 export const CTD_TRADING = 'Trading';
 export const CTD_PRERESET = 'PreReset';
 export const CTD_RESET = 'Reset';
+export const CTD_MATURED = 'Matured';
 export const CTD_LOADING = 'Loading';
 
 export const BTV_UP_RESET = 'UpwardReset';
@@ -65,6 +66,7 @@ export const STATE_INCEPTION = '0';
 export const STATE_TRADING = '1';
 export const STATE_PRERESET = '2';
 export const STATE_RESET = '3';
+export const STATE_MATURED = '4';
 export const RESET_STATE_UP = '0';
 export const RESET_STATE_DOWN = '1';
 export const RESET_STATE_PERIOD = '2';

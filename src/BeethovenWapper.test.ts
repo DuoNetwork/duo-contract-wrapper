@@ -6,6 +6,7 @@ test('convertCustodianState', () => {
 	expect(BeethovenWapper.convertCustodianState(CST.STATE_PRERESET)).toBe(CST.CTD_PRERESET);
 	expect(BeethovenWapper.convertCustodianState(CST.STATE_RESET)).toBe(CST.CTD_RESET);
 	expect(BeethovenWapper.convertCustodianState(CST.STATE_TRADING)).toBe(CST.CTD_TRADING);
+	expect(BeethovenWapper.convertCustodianState(CST.STATE_MATURED)).toBe(CST.CTD_MATURED);
 	expect(BeethovenWapper.convertCustodianState('any')).toBe(CST.CTD_LOADING);
 });
 
