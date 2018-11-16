@@ -99,6 +99,7 @@ export default class Web3Wapper {
 		const newWeb3 = new Web3(engine);
 		const accounts = await newWeb3.eth.getAccounts();
 		this.web3 = newWeb3;
+		this.wallet = Wallet.Ledger;
 
 		this.handleSwitchToLedger.forEach(h => {
 			try {
