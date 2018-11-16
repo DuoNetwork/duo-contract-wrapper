@@ -20,15 +20,15 @@ export const kovan: IContractAddresses = {
 			[CST.TENOR_M19]: {
 				custodian: {
 					code: 'B-M19',
-					address: '0xeA41720A694915648E37FD236f45E544c4DD6AC2'
+					address: '0xf474e7E554D98a580282726434d1281aA273E87F'
 				},
 				aToken: {
 					code: 'B-M19-I0',
-					address: '0x754741185C6a95c9b1083C770b19E27287712bF7'
+					address: '0xAF83915280468c9DA6524700730c8f9cE35b8FA8'
 				},
 				bToken: {
 					code: 'B-M19-L2',
-					address: '0xDce7E1dEB0ca5Cd69449be9E1e2ADb5E23C1B610'
+					address: '0x63C88EEDa81C466Fa1cc60A7e914164412c33e08'
 				}
 			},
 		},
