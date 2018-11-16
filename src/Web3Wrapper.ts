@@ -117,10 +117,11 @@ export default class Web3Wapper {
 		const store = (this.web3.currentProvider as any).publicConfigStore;
 		if (store)
 			store.on('update', () => {
-				onUpdate(
-					store.getState().selectedAddress || '',
-					Number(store.getState().networkVersion || '')
-				);
+				if (this.wallet === Wallet.MetaMask)
+					onUpdate(
+						store.getState().selectedAddress || '',
+						Number(store.getState().networkVersion || '')
+					);
 			});
 	}
 
