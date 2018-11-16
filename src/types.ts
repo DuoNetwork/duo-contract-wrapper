@@ -85,16 +85,13 @@ export interface IContractAddress {
 }
 
 export interface ICustodianContractAddresses {
-	Perpetual: ICustodianContractAddress;
-	M19: ICustodianContractAddress;
-	Matured: {
-		[tenor: string]: ICustodianContractAddress
-	}
+	[tenor: string]: ICustodianContractAddress,
 }
 
 export interface IContractAddresses {
 	Custodians: {
 		Beethoven: ICustodianContractAddresses;
+		BeethovenMatured: ICustodianContractAddresses;
 	};
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];

@@ -31,8 +31,8 @@ export const kovan: IContractAddresses = {
 					address: '0xDce7E1dEB0ca5Cd69449be9E1e2ADb5E23C1B610'
 				}
 			},
-			[CST.TENOR_MATURED]: {}
-		}
+		},
+		BeethovenMatured: {}
 	},
 	Oracles: [
 		{
@@ -79,8 +79,8 @@ export const mainnet: IContractAddresses = {
 					address: '0xDce7E1dEB0ca5Cd69449be9E1e2ADb5E23C1B610'
 				}
 			},
-			[CST.TENOR_MATURED]: {}
-		}
+		},
+		BeethovenMatured: {}
 	},
 	Oracles: [
 		{

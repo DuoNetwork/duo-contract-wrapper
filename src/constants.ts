@@ -156,4 +156,3 @@ export const BTV_STATE = {
 
 export const TENOR_PPT = 'Perpetual';
 export const TENOR_M19 = 'M19';
-export const TENOR_MATURED = 'Matured';
