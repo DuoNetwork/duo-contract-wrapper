@@ -1,11 +1,11 @@
-import BaseWrapper from './BaseWrapper';
+import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
 import { IVotingData } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class EsplanadeWapper extends BaseWrapper {
+export default class EsplanadeWapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_ADD_ADDRESS,
 		CST.EVENT_REMOVE_ADDRESS,

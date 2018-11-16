@@ -3,7 +3,7 @@ import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
-export default abstract class BaseWrapper {
+export default abstract class BaseContractWrapper {
 	public readonly web3Wrapper: Web3Wrapper;
 	public readonly address: string
 	public readonly abi: any[];

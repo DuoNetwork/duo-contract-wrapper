@@ -1,11 +1,11 @@
-import BaseWrapper from './BaseWrapper';
+import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import beethovenAbi from './static/Beethoven.json';
 import { IBeethovenStates, ICustodianAddresses } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class BeethovenWapper extends BaseWrapper {
+export default class BeethovenWapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,
