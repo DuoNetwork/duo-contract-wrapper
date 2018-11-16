@@ -86,9 +86,9 @@ export interface IContractAddress {
 
 export interface ICustodianContractAddresses {
 	Perpetual: ICustodianContractAddress;
-	'6M': ICustodianContractAddress;
-	OffTheRun: {
-		'6M': ICustodianContractAddress[];
+	M19: ICustodianContractAddress;
+	Matured: {
+		[tenor: string]: ICustodianContractAddress
 	}
 }
 
