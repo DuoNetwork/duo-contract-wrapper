@@ -1,8 +1,9 @@
+import * as CST from './constants';
 import { IContractAddresses } from './types';
 export const kovan: IContractAddresses = {
 	Custodians: {
 		Beethoven: {
-			Perpetual: {
+			[CST.TENOR_PPT]: {
 				custodian: {
 					code: 'B-PPT',
 					address: '0x53a53B2Ab9aCe8F87ae81C866Ac0d977D72b6196'
@@ -16,7 +17,7 @@ export const kovan: IContractAddresses = {
 					address: '0xFeCd43cd0bc217e5513116c83F48498A018A1da6'
 				}
 			},
-			M19: {
+			[CST.TENOR_M19]: {
 				custodian: {
 					code: 'B-M19',
 					address: '0xeA41720A694915648E37FD236f45E544c4DD6AC2'
@@ -30,8 +31,7 @@ export const kovan: IContractAddresses = {
 					address: '0xDce7E1dEB0ca5Cd69449be9E1e2ADb5E23C1B610'
 				}
 			},
-			Matured: {
-			}
+			[CST.TENOR_MATURED]: {}
 		}
 	},
 	Oracles: [
@@ -51,7 +51,7 @@ export const kovan: IContractAddresses = {
 export const mainnet: IContractAddresses = {
 	Custodians: {
 		Beethoven: {
-			Perpetual: {
+			[CST.TENOR_PPT]: {
 				custodian: {
 					code: 'B-PPT',
 					address: '0x53a53B2Ab9aCe8F87ae81C866Ac0d977D72b6196'
@@ -65,7 +65,7 @@ export const mainnet: IContractAddresses = {
 					address: '0xFeCd43cd0bc217e5513116c83F48498A018A1da6'
 				}
 			},
-			M19: {
+			[CST.TENOR_M19]: {
 				custodian: {
 					code: 'B-M19',
 					address: '0xeA41720A694915648E37FD236f45E544c4DD6AC2'
@@ -79,8 +79,7 @@ export const mainnet: IContractAddresses = {
 					address: '0xDce7E1dEB0ca5Cd69449be9E1e2ADb5E23C1B610'
 				}
 			},
-			Matured: {
-			}
+			[CST.TENOR_MATURED]: {}
 		}
 	},
 	Oracles: [

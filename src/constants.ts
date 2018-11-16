@@ -153,3 +153,7 @@ export const BTV_STATE = {
 	LIMIT_LOWER_INWEI: 28,
 	ITERATION_GAS_THRESHOLD: 29
 };
+
+export const TENOR_PPT = 'Perpetual';
+export const TENOR_M19 = 'M19';
+export const TENOR_MATURED = 'Matured';
