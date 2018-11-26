@@ -110,7 +110,7 @@ export default class BeethovenWapper extends BaseContractWrapper {
 		eth: number,
 		nonce: number = -1
 	) {
-		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		util.logInfo(`the account ${address} is creating tokens`);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
@@ -164,7 +164,7 @@ export default class BeethovenWapper extends BaseContractWrapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		util.logInfo('the account ' + address + ' privateKey is ' + privateKey);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
@@ -253,7 +253,7 @@ export default class BeethovenWapper extends BaseContractWrapper {
 	}
 
 	public async triggerReset(address: string, privateKey: string, count: number = 1) {
-		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		const abi = {
 			name: 'startReset',
@@ -272,7 +272,7 @@ export default class BeethovenWapper extends BaseContractWrapper {
 	}
 
 	public async triggerPreReset(address: string, privateKey: string) {
-		if (this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
 		const abi = {
 			name: 'startPreReset',

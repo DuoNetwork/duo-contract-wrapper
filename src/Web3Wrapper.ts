@@ -49,7 +49,7 @@ export default class Web3Wapper {
 					? new Web3.providers.HttpProvider(provider)
 					: new Web3.providers.WebsocketProvider(provider)
 			);
-			this.wallet = Wallet.None;
+			this.wallet = Wallet.Local;
 		}
 		this.handleSwitchToMetaMask = [];
 		this.handleSwitchToLedger = [];
@@ -185,7 +185,7 @@ export default class Web3Wapper {
 		amt: number,
 		nonce: number
 	) {
-		if (this.wallet !== Wallet.Local) return this.wrongEnvReject();
+		if (!this.isLocal()) return this.wrongEnvReject();
 
 		const rawTx = {
 			nonce: nonce,
