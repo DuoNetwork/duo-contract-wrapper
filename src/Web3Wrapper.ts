@@ -49,7 +49,7 @@ export default class Web3Wapper {
 					? new Web3.providers.HttpProvider(provider)
 					: new Web3.providers.WebsocketProvider(provider)
 			);
-			this.wallet = Wallet.Local;
+			this.wallet = Wallet.None;
 		}
 		this.handleSwitchToMetaMask = [];
 		this.handleSwitchToLedger = [];
