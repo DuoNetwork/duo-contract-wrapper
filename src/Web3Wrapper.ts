@@ -37,8 +37,8 @@ export default class Web3Wapper {
 		this.live = live;
 		this.contractAddresses = this.live ? mainnet : kovan;
 		this.provider = provider;
-		if (window && typeof window.web3 !== 'undefined') {
-			this.web3 = new Web3(window.web3.currentProvider);
+		if (window && (window.ethereum || window.web3)) {
+			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else if (window) {
 			this.web3 = new Web3(new Web3.providers.HttpProvider(provider));
@@ -65,8 +65,8 @@ export default class Web3Wapper {
 	}
 
 	public switchToMetaMask(window: any) {
-		if (window && typeof (window as any).web3 !== 'undefined') {
-			this.web3 = new Web3((window as any).web3.currentProvider);
+		if (window && (window.ethereum || window.web3)) {
+			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else {
 			this.web3 = new Web3(new Web3.providers.HttpProvider(this.provider));
