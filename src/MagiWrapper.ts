@@ -5,7 +5,7 @@ import { IContractPrice } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class MagiWapper extends BaseContractWrapper {
+export default class MagiWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,

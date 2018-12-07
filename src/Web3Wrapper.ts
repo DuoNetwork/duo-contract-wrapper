@@ -22,7 +22,7 @@ export enum Wallet {
 	Ledger
 }
 
-export default class Web3Wapper {
+export default class Web3Wrapper {
 	private web3: Web3;
 	public wallet: Wallet = Wallet.None;
 	public accountIndex: number = 0;

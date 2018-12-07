@@ -1,4 +1,4 @@
-import DualClassCustodianWapper from './DualClassCustodianWrapper';
+import DualClassWrapper from './DualClassWrapper';
 
 export interface IEvent {
 	contractAddress: string;
@@ -75,7 +75,7 @@ export interface ICustodianStates extends IManagedStates {
 }
 export interface ICustodianWrappers {
 	[type: string]: {
-		[tenor: string]: DualClassCustodianWapper
+		[tenor: string]: DualClassWrapper
 	}
 }
 

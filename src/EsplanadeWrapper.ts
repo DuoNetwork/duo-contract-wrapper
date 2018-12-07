@@ -5,7 +5,7 @@ import { IEsplanadeStates, IVotingData } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class EsplanadeWapper extends BaseContractWrapper {
+export default class EsplanadeWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_ADD_ADDRESS,
 		CST.EVENT_REMOVE_ADDRESS,
@@ -56,7 +56,7 @@ export default class EsplanadeWapper extends BaseContractWrapper {
 
 	public async getVotingStage() {
 		const stage = await this.contract.methods.votingStage().call();
-		return EsplanadeWapper.convertVotingStage(stage.valueOf());
+		return EsplanadeWrapper.convertVotingStage(stage.valueOf());
 	}
 
 	public getModerator(): Promise<string> {

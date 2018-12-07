@@ -1,11 +1,11 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
-import dualClassCustodianAbi from './static/DualClassCustodian.json';
+import dualClassAbi from './static/DualClassCustodian.json';
 import { ICustodianAddresses, IDualClassStates} from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class DualClassCustodianWapper extends BaseContractWrapper {
+export default class DualClassWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,
@@ -25,7 +25,7 @@ export default class DualClassCustodianWapper extends BaseContractWrapper {
 		CST.EVENT_SET_VALUE
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
-		super(web3Wrapper, dualClassCustodianAbi.abi, address);
+		super(web3Wrapper, dualClassAbi.abi, address);
 	}
 
 	public async startCustodianRaw(
@@ -319,7 +319,7 @@ export default class DualClassCustodianWapper extends BaseContractWrapper {
 		return {
 			lastOperationTime: Number(states[CST.BTV_STATE.LAST_OPERATION_TIME].valueOf()) * 1000,
 			operationCoolDown: Number(states[CST.BTV_STATE.OPERATION_COOLDOWN].valueOf()) * 1000,
-			state: DualClassCustodianWapper.convertCustodianState(states[CST.BTV_STATE.STATE].valueOf()),
+			state: DualClassWrapper.convertCustodianState(states[CST.BTV_STATE.STATE].valueOf()),
 			minBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.MIN_BALANCE]),
 			totalSupplyA: this.web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYA]),
 			totalSupplyB: this.web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYB]),
@@ -339,7 +339,7 @@ export default class DualClassCustodianWapper extends BaseContractWrapper {
 			nextResetAddrIndex: Number(states[CST.BTV_STATE.NEXT_RESET_ADDR_INDEX].valueOf()),
 			totalUsers: Number(states[CST.BTV_STATE.TOTAL_USERS].valueOf()),
 			feeBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_INWEI]),
-			resetState: DualClassCustodianWapper.convertResetState(
+			resetState: DualClassWrapper.convertResetState(
 				states[CST.BTV_STATE.RESET_STATE].valueOf()
 			),
 			alpha: Number(states[CST.BTV_STATE.ALPHA_INBP].valueOf()) / 10000,
