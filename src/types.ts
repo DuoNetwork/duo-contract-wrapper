@@ -79,7 +79,7 @@ export interface ICustodianWrappers {
 	}
 }
 
-export interface IBeethovenStates extends ICustodianStates {
+export interface IDualClassStates extends ICustodianStates {
 	resetState: string;
 	alpha: number;
 	beta: number;

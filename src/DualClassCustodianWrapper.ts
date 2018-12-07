@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import dualClassCustodianAbi from './static/DualClassCustodian.json';
-import { IBeethovenStates, ICustodianAddresses } from './types';
+import { ICustodianAddresses, IDualClassStates} from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -314,7 +314,7 @@ export default class DualClassCustodianWapper extends BaseContractWrapper {
 		}
 	}
 
-	public async getStates(): Promise<IBeethovenStates> {
+	public async getStates(): Promise<IDualClassStates> {
 		const states = await this.contract.methods.getStates().call();
 		return {
 			lastOperationTime: Number(states[CST.BTV_STATE.LAST_OPERATION_TIME].valueOf()) * 1000,
