@@ -156,3 +156,5 @@ export const BTV_STATE = {
 
 export const TENOR_PPT = 'Perpetual';
 export const TENOR_M19 = 'M19';
+export const BEETHOVEN = 'Beethoven';
+export const MOZART = 'Mozart';

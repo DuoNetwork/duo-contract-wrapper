@@ -2,33 +2,63 @@ import * as CST from './constants';
 import { IContractAddresses } from './types';
 export const kovan: IContractAddresses = {
 	Custodians: {
-		Beethoven: {
+		[CST.BEETHOVEN]: {
 			[CST.TENOR_PPT]: {
 				custodian: {
-					code: 'B-PPT',
-					address: '0x53a53B2Ab9aCe8F87ae81C866Ac0d977D72b6196'
+					code: 'BEETHOVEN-PPT',
+					address: '0x42d490b6Efb8c15a8A10aC73D4094a4242155bA8'
 				},
 				aToken: {
-					code: 'B-PPT-I0',
-					address: '0xbc4e4029B41B0894353C31267CE86c2192545e53'
+					code: 'aETH',
+					address: '0x195D13ACCB7095e317EA309fc7C5aAB223DBcdc8'
 				},
 				bToken: {
-					code: 'B-PPT-L2',
-					address: '0xFeCd43cd0bc217e5513116c83F48498A018A1da6'
+					code: 'bETH',
+					address: '0xf18f43BA6bE57db9BB52Ad885E1863234D7b70dB'
 				}
 			},
 			[CST.TENOR_M19]: {
 				custodian: {
-					code: 'B-M19',
-					address: '0xf474e7E554D98a580282726434d1281aA273E87F'
+					code: 'BEETHOVEN-M19',
+					address: '0x3c581c6418846c928113ff0318D6e51e7ac388F1'
 				},
 				aToken: {
-					code: 'B-M19-I0',
-					address: '0xAF83915280468c9DA6524700730c8f9cE35b8FA8'
+					code: 'aETH-M19',
+					address: '0x818cdfcc47E6DeC9b0f42ED86c47A85C5547115A'
 				},
 				bToken: {
-					code: 'B-M19-L2',
-					address: '0x63C88EEDa81C466Fa1cc60A7e914164412c33e08'
+					code: 'bETH-M19',
+					address: '0x5daa81900f44e93e46c499903Bff9845448A16a5'
+				}
+			},
+		},
+		[CST.MOZART]: {
+			[CST.TENOR_PPT]: {
+				custodian: {
+					code: 'MOZART-PPT',
+					address: '0x2b4Cb433e7de73355AA3175445fec9837c049DEa'
+				},
+				aToken: {
+					code: 'sETH',
+					address: '0x106fa5f2cb0F3b49D543f577F37A6c5436FcD3b1'
+				},
+				bToken: {
+					code: 'LETH',
+					address: '0x00A6419081EeBC95EbB889C87df0557a6c7422Aa'
+				}
+			},
+			[CST.TENOR_M19]: {
+				custodian: {
+					code: 'MOZART-M19',
+					address: '0x67D1834a78502548cf53f49504Ee876516F70D99'
+				},
+				aToken: {
+					code: 'sETH-M19',
+					address: '0x5Fa6a47084511f6Fc63b01f0b4142c20F8584d64'
+				},
+				bToken: {
+					code: 'LETH-M19',
+					address: '0xE2b399F085D84A7B87271cAE114B48B4D529f601'
 				}
 			},
 		},
@@ -53,30 +83,60 @@ export const mainnet: IContractAddresses = {
 		Beethoven: {
 			[CST.TENOR_PPT]: {
 				custodian: {
-					code: 'B-PPT',
-					address: '0x53a53B2Ab9aCe8F87ae81C866Ac0d977D72b6196'
+					code: 'BEETHOVEN-PPT',
+					address: '0x42d490b6Efb8c15a8A10aC73D4094a4242155bA8'
 				},
 				aToken: {
-					code: 'B-PPT-I0',
-					address: '0xbc4e4029B41B0894353C31267CE86c2192545e53'
+					code: 'aETH',
+					address: '0x195D13ACCB7095e317EA309fc7C5aAB223DBcdc8'
 				},
 				bToken: {
-					code: 'B-PPT-L2',
-					address: '0xFeCd43cd0bc217e5513116c83F48498A018A1da6'
+					code: 'bETH',
+					address: '0xf18f43BA6bE57db9BB52Ad885E1863234D7b70dB'
 				}
 			},
 			[CST.TENOR_M19]: {
 				custodian: {
-					code: 'B-M19',
-					address: '0xeA41720A694915648E37FD236f45E544c4DD6AC2'
+					code: 'BEETHOVEN-M19',
+					address: '0x3c581c6418846c928113ff0318D6e51e7ac388F1'
 				},
 				aToken: {
-					code: 'B-M19-I0',
-					address: '0x754741185C6a95c9b1083C770b19E27287712bF7'
+					code: 'aETH-M19',
+					address: '0x818cdfcc47E6DeC9b0f42ED86c47A85C5547115A'
 				},
 				bToken: {
-					code: 'B-M19-L2',
-					address: '0xDce7E1dEB0ca5Cd69449be9E1e2ADb5E23C1B610'
+					code: 'bETH-M19',
+					address: '0x5daa81900f44e93e46c499903Bff9845448A16a5'
+				}
+			},
+		},
+		Mozart: {
+			[CST.TENOR_PPT]: {
+				custodian: {
+					code: 'MOZART-PPT',
+					address: '0x2b4Cb433e7de73355AA3175445fec9837c049DEa'
+				},
+				aToken: {
+					code: 'sETH',
+					address: '0x106fa5f2cb0F3b49D543f577F37A6c5436FcD3b1'
+				},
+				bToken: {
+					code: 'LETH',
+					address: '0x00A6419081EeBC95EbB889C87df0557a6c7422Aa'
+				}
+			},
+			[CST.TENOR_M19]: {
+				custodian: {
+					code: 'MOZART-M19',
+					address: '0x67D1834a78502548cf53f49504Ee876516F70D99'
+				},
+				aToken: {
+					code: 'sETH-M19',
+					address: '0x5Fa6a47084511f6Fc63b01f0b4142c20F8584d64'
+				},
+				bToken: {
+					code: 'LETH-M19',
+					address: '0xE2b399F085D84A7B87271cAE114B48B4D529f601'
 				}
 			},
 		},

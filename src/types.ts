@@ -1,3 +1,5 @@
+import DualClassCustodianWapper from './DualClassCustodianWrapper';
+
 export interface IEvent {
 	contractAddress: string;
 	type: string;
@@ -32,6 +34,23 @@ export interface IManagedStates {
 	operationCoolDown: number;
 }
 
+export interface IEsplanadeStates {
+	isStarted: boolean;
+	votingStage: string;
+	poolAddrsHot: string[];
+	poolAddrsCold: string[];
+	custodianContractAddrs: string[];
+	otherContractAddrs: string[];
+	operationCoolDown: number;
+	lastOperationTime: number;
+	votingData: IVotingData;
+}
+
+export interface IEsplanadeAddresses {
+	moderator: string;
+	candidate: string;
+}
+
 export interface ICustodianStates extends IManagedStates {
 	state: string;
 	minBalance: number;
@@ -53,6 +72,11 @@ export interface ICustodianStates extends IManagedStates {
 	nextResetAddrIndex: number;
 	totalUsers: number;
 	feeBalance: number;
+}
+export interface ICustodianWrappers {
+	[type: string]: {
+		[tenor: string]: DualClassCustodianWapper
+	}
 }
 
 export interface IBeethovenStates extends ICustodianStates {
@@ -90,8 +114,7 @@ export interface ICustodianContractAddresses {
 
 export interface IContractAddresses {
 	Custodians: {
-		Beethoven: ICustodianContractAddresses;
-		BeethovenMatured: ICustodianContractAddresses;
+		[type: string]: ICustodianContractAddresses
 	};
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];

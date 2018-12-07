@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import { IVotingData } from './types';
+import { IEsplanadeStates, IVotingData } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -22,6 +22,21 @@ export default class EsplanadeWapper extends BaseContractWrapper {
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
 		super(web3Wrapper, esplanadeAbi.abi, address);
+	}
+
+	public async getStates(): Promise<IEsplanadeStates> {
+		// const states = await this.contract.methods.getStates().call();
+		return {
+			isStarted: await this.isStarted(),
+			votingStage: await this.getVotingStage(),
+			poolAddrsHot: await this.getPoolAddresses(true),
+			poolAddrsCold: await this.getPoolAddresses(false),
+			custodianContractAddrs: await this.getContractAddresses(true),
+			otherContractAddrs: await this.getContractAddresses(false),
+			operationCoolDown: await this.getOperationCoolDown(),
+			lastOperationTime: await this.getLastOperationTime(),
+			votingData: await this.getVotingData()
+		};
 	}
 
 	public getAddressPoolIndex(hot: boolean) {

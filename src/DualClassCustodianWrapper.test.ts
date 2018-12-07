@@ -1,5 +1,5 @@
-import BeethovenWapper from './BeethovenWapper';
 import * as CST from './constants';
+import BeethovenWapper from './DualClassCustodianWrapper';
 
 test('convertCustodianState', () => {
 	expect(BeethovenWapper.convertCustodianState(CST.STATE_INCEPTION)).toBe(CST.CTD_INCEPTION);
