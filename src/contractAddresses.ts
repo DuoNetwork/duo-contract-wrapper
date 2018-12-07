@@ -61,8 +61,7 @@ export const kovan: IContractAddresses = {
 					address: '0xE2b399F085D84A7B87271cAE114B48B4D529f601'
 				}
 			},
-		},
-		BeethovenMatured: {}
+		}
 	},
 	Oracles: [
 		{

@@ -1,6 +1,6 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
-import beethovenAbi from './static/DualClassCustodian.json';
+import dualClassCustodianAbi from './static/DualClassCustodian.json';
 import { IBeethovenStates, ICustodianAddresses } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
@@ -25,7 +25,7 @@ export default class DualClassCustodianWapper extends BaseContractWrapper {
 		CST.EVENT_SET_VALUE
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
-		super(web3Wrapper, beethovenAbi.abi, address);
+		super(web3Wrapper, dualClassCustodianAbi.abi, address);
 	}
 
 	public async startCustodianRaw(

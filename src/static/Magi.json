@@ -1,574 +1,574 @@
 {
-  "contractName": "Magi",
-  "abi": [
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "lastPrice",
-      "outputs": [
-        {
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "name": "timeInSecond",
-          "type": "uint256"
-        },
-        {
-          "name": "source",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x053f14da"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "newManagerAddr",
-          "type": "address"
-        }
-      ],
-      "name": "updateRoleManager",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x0f36a16d"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "lastOperationTime",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x16d43a97"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "started",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x1f2698ab"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "firstPrice",
-      "outputs": [
-        {
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "name": "timeInSecond",
-          "type": "uint256"
-        },
-        {
-          "name": "source",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x39a3da4a"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceFeed3",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x427cb6fe"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceFeedTolInBP",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x537f5373"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "operationCoolDown",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x5623732e"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "operator",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x570ca735"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceFeedTimeTol",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x57ef7f57"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceTolInBP",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x61efd490"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "numOfPrices",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0x77680bb5"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceFeed1",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xab0ca0e1"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "secondPrice",
-      "outputs": [
-        {
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "name": "timeInSecond",
-          "type": "uint256"
-        },
-        {
-          "name": "source",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xd1e61e24"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "roleManagerAddress",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xd33b8d23"
-    },
-    {
-      "constant": false,
-      "inputs": [],
-      "name": "updateOperator",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0xd5934b76"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceUpdateCoolDown",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xdcfe4c53"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "priceFeed2",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xe5693f41"
-    },
-    {
-      "inputs": [
-        {
-          "name": "opt",
-          "type": "address"
-        },
-        {
-          "name": "pf1",
-          "type": "address"
-        },
-        {
-          "name": "pf2",
-          "type": "address"
-        },
-        {
-          "name": "pf3",
-          "type": "address"
-        },
-        {
-          "name": "roleManagerAddr",
-          "type": "address"
-        },
-        {
-          "name": "pxCoolDown",
-          "type": "uint256"
-        },
-        {
-          "name": "optCoolDown",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor",
-      "signature": "constructor"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "name": "timeInSecond",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "sender",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "index",
-          "type": "uint256"
-        }
-      ],
-      "name": "CommitPrice",
-      "type": "event",
-      "signature": "0xe95a7bb58ff5f75fa581ca00ff98b7a825caba174942abffb75a1d2b12d90dd9"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "name": "timeInSecond",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "sender",
-          "type": "address"
-        }
-      ],
-      "name": "AcceptPrice",
-      "type": "event",
-      "signature": "0x60a26741549361639cff0096d0c4599ee53831ec6dec262b89d7fb1ddde1726e"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "index",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "oldValue",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "newValue",
-          "type": "uint256"
-        }
-      ],
-      "name": "SetValue",
-      "type": "event",
-      "signature": "0xabd08d77cf1eed600c8ba851f4210365f6695aa58b9500aa52a83db7d8b534ba"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "updater",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "newPriceFeed",
-          "type": "address"
-        }
-      ],
-      "name": "UpdatePriceFeed",
-      "type": "event",
-      "signature": "0x0c19c511fd3cdf7b4524c00cd2176627ee9fdd2644d68683e6cc04b79280f316"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "newManagerAddress",
-          "type": "address"
-        }
-      ],
-      "name": "UpdateRoleManager",
-      "type": "event",
-      "signature": "0xce93baa0b608a7d420822b6b90cfcccb70574363ba4fd26ef5ac17dd465016c4"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "name": "updater",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "newOperator",
-          "type": "address"
-        }
-      ],
-      "name": "UpdateOperator",
-      "type": "event",
-      "signature": "0xf7fa3b6184cd955c4d8db1b118f541d29ad3cde98ac41ffac1864077b27acc5b"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "name": "timeInSecond",
-          "type": "uint256"
-        }
-      ],
-      "name": "startOracle",
-      "outputs": [
-        {
-          "name": "success",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x660d6eaf"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "getLastPrice",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function",
-      "signature": "0xd8cf24fd"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "priceInWei",
-          "type": "uint256"
-        },
-        {
-          "name": "timeInSecond",
-          "type": "uint256"
-        }
-      ],
-      "name": "commitPrice",
-      "outputs": [
-        {
-          "name": "success",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x03ee06f4"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "index",
-          "type": "uint256"
-        }
-      ],
-      "name": "updatePriceFeed",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0xf5b2aa75"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "idx",
-          "type": "uint256"
-        },
-        {
-          "name": "newValue",
-          "type": "uint256"
-        }
-      ],
-      "name": "setValue",
-      "outputs": [
-        {
-          "name": "success",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function",
-      "signature": "0x7b8d56e3"
-    }
-  ]
+	"contractName": "Magi",
+	"abi": [
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "lastPrice",
+			"outputs": [
+				{
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"name": "timeInSecond",
+					"type": "uint256"
+				},
+				{
+					"name": "source",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x053f14da"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "newManagerAddr",
+					"type": "address"
+				}
+			],
+			"name": "updateRoleManager",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function",
+			"signature": "0x0f36a16d"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "lastOperationTime",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x16d43a97"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "started",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x1f2698ab"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "firstPrice",
+			"outputs": [
+				{
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"name": "timeInSecond",
+					"type": "uint256"
+				},
+				{
+					"name": "source",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x39a3da4a"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceFeed3",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x427cb6fe"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceFeedTolInBP",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x537f5373"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "operationCoolDown",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x5623732e"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "operator",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x570ca735"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceFeedTimeTol",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x57ef7f57"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceTolInBP",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x61efd490"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "numOfPrices",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0x77680bb5"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceFeed1",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0xab0ca0e1"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "secondPrice",
+			"outputs": [
+				{
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"name": "timeInSecond",
+					"type": "uint256"
+				},
+				{
+					"name": "source",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0xd1e61e24"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "roleManagerAddress",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0xd33b8d23"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "updateOperator",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function",
+			"signature": "0xd5934b76"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceUpdateCoolDown",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0xdcfe4c53"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "priceFeed2",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0xe5693f41"
+		},
+		{
+			"inputs": [
+				{
+					"name": "opt",
+					"type": "address"
+				},
+				{
+					"name": "pf1",
+					"type": "address"
+				},
+				{
+					"name": "pf2",
+					"type": "address"
+				},
+				{
+					"name": "pf3",
+					"type": "address"
+				},
+				{
+					"name": "roleManagerAddr",
+					"type": "address"
+				},
+				{
+					"name": "pxCoolDown",
+					"type": "uint256"
+				},
+				{
+					"name": "optCoolDown",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "constructor",
+			"signature": "constructor"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"name": "timeInSecond",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "sender",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "index",
+					"type": "uint256"
+				}
+			],
+			"name": "CommitPrice",
+			"type": "event",
+			"signature": "0xe95a7bb58ff5f75fa581ca00ff98b7a825caba174942abffb75a1d2b12d90dd9"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"indexed": true,
+					"name": "timeInSecond",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "sender",
+					"type": "address"
+				}
+			],
+			"name": "AcceptPrice",
+			"type": "event",
+			"signature": "0x60a26741549361639cff0096d0c4599ee53831ec6dec262b89d7fb1ddde1726e"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "index",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "oldValue",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "newValue",
+					"type": "uint256"
+				}
+			],
+			"name": "SetValue",
+			"type": "event",
+			"signature": "0xabd08d77cf1eed600c8ba851f4210365f6695aa58b9500aa52a83db7d8b534ba"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "updater",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "newPriceFeed",
+					"type": "address"
+				}
+			],
+			"name": "UpdatePriceFeed",
+			"type": "event",
+			"signature": "0x0c19c511fd3cdf7b4524c00cd2176627ee9fdd2644d68683e6cc04b79280f316"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "newManagerAddress",
+					"type": "address"
+				}
+			],
+			"name": "UpdateRoleManager",
+			"type": "event",
+			"signature": "0xce93baa0b608a7d420822b6b90cfcccb70574363ba4fd26ef5ac17dd465016c4"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "updater",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "newOperator",
+					"type": "address"
+				}
+			],
+			"name": "UpdateOperator",
+			"type": "event",
+			"signature": "0xf7fa3b6184cd955c4d8db1b118f541d29ad3cde98ac41ffac1864077b27acc5b"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"name": "timeInSecond",
+					"type": "uint256"
+				}
+			],
+			"name": "startOracle",
+			"outputs": [
+				{
+					"name": "success",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function",
+			"signature": "0x660d6eaf"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getLastPrice",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				},
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function",
+			"signature": "0xd8cf24fd"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "priceInWei",
+					"type": "uint256"
+				},
+				{
+					"name": "timeInSecond",
+					"type": "uint256"
+				}
+			],
+			"name": "commitPrice",
+			"outputs": [
+				{
+					"name": "success",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function",
+			"signature": "0x03ee06f4"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "index",
+					"type": "uint256"
+				}
+			],
+			"name": "updatePriceFeed",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function",
+			"signature": "0xf5b2aa75"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "idx",
+					"type": "uint256"
+				},
+				{
+					"name": "newValue",
+					"type": "uint256"
+				}
+			],
+			"name": "setValue",
+			"outputs": [
+				{
+					"name": "success",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function",
+			"signature": "0x7b8d56e3"
+		}
+	]
 }

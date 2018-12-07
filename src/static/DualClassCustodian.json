@@ -954,46 +954,6 @@
 			"signature": "0x0fdb11cf"
 		},
 		{
-			"constant": true,
-			"inputs": [
-				{
-					"name": "priceInWei",
-					"type": "uint256"
-				},
-				{
-					"name": "timeInSecond",
-					"type": "uint256"
-				},
-				{
-					"name": "rstPriceInWei",
-					"type": "uint256"
-				},
-				{
-					"name": "rstTimeInSecond",
-					"type": "uint256"
-				},
-				{
-					"name": "bInWei",
-					"type": "uint256"
-				}
-			],
-			"name": "calculateNav",
-			"outputs": [
-				{
-					"name": "",
-					"type": "uint256"
-				},
-				{
-					"name": "",
-					"type": "uint256"
-				}
-			],
-			"payable": false,
-			"stateMutability": "view",
-			"type": "function",
-			"signature": "0x93b72fce"
-		},
-		{
 			"constant": false,
 			"inputs": [],
 			"name": "startPreReset",
