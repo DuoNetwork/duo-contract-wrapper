@@ -36,29 +36,29 @@ export const kovan: IContractAddresses = {
 			[CST.TENOR_PPT]: {
 				custodian: {
 					code: 'MOZART-PPT',
-					address: '0xCbee126472204d921c7FEafC83cbf23bbbcC36E4'
+					address: '0x9633f492380D977FE468f7c5DDa1193cD7240F2A'
 				},
 				aToken: {
 					code: 'sETH',
-					address: '0x7c705DB91495b811f97797db6F838868C8A38021'
+					address: '0x923642D9ca22a70E94B12C8fd0f7077D61548122'
 				},
 				bToken: {
 					code: 'LETH',
-					address: '0x9e497f7a996E702D3b0a1a57E5E237c88b84Bff3'
+					address: '0x9703f1D8758700cD04707c0908C1B0C9c7b505A1'
 				}
 			},
 			[CST.TENOR_M19]: {
 				custodian: {
 					code: 'MOZART-M19',
-					address: '0x2631220C48abc5C64b91bCCdCfDe05F9f0b5aC4E'
+					address: '0xe35662dD5637Fc897d6afe985756289A98313E66'
 				},
 				aToken: {
 					code: 'sETH-M19',
-					address: '0x9FD5dB8696848E0Fd72d64eD35b1653E326811De'
+					address: '0x77B6a3774e7f71CB7C1f69a4875B1E1D2C8381F0'
 				},
 				bToken: {
 					code: 'LETH-M19',
-					address: '0x0829a65aF5c4999A164A9b6C7e1A383bF8e82047'
+					address: '0x865D6E16ce3C16a7bf7635b1006cf46FB782eDb8'
 				}
 			},
 		}
