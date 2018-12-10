@@ -25,7 +25,6 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 	}
 
 	public async getStates(): Promise<IEsplanadeStates> {
-		// const states = await this.contract.methods.getStates().call();
 		return {
 			isStarted: await this.isStarted(),
 			votingStage: await this.getVotingStage(),
@@ -44,7 +43,7 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 	}
 
 	public static convertVotingStage(stage: string) {
-		switch (stage.valueOf()) {
+		switch (stage) {
 			case CST.VOTING_MODERATOR:
 				return CST.ESP_MODERATOR;
 			case CST.VOTING_CONTRACT:
@@ -54,7 +53,7 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		}
 	}
 
-	public async getVotingStage() {
+	public async getVotingStage(): Promise<string> {
 		const stage = await this.contract.methods.votingStage().call();
 		return EsplanadeWrapper.convertVotingStage(stage.valueOf());
 	}
@@ -72,8 +71,10 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		const poolSizes = await this.contract.methods.getAddressPoolSizes().call();
 		const length = Number(poolSizes[poolIndex].valueOf());
 		const addresses: string[] = [];
-		for (let i = 0; i < length; i++)
-			addresses.push(await this.contract.methods.addrPool(poolIndex, i).call());
+		for (let i = 0; i < length; i++) {
+			const addr = await this.contract.methods.addrPool(poolIndex, i).call();
+			addresses.push(addr.valueOf());
+		}
 
 		return addresses;
 	}
@@ -82,39 +83,36 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		const poolSizes = await this.contract.methods.getContractPoolSizes().call();
 		const length = Number(poolSizes[custodian ? 0 : 1].valueOf());
 		const addresses: string[] = [];
-		for (let i = 0; i < length; i++)
-			addresses.push(
-				custodian
-					? await this.contract.methods.custodianPool(i).call()
-					: await this.contract.methods.otherContractPool(i).call()
-			);
-
+		for (let i = 0; i < length; i++) {
+			const addr = custodian
+				? await this.contract.methods.custodianPool(i).call()
+				: await this.contract.methods.otherContractPool(i).call();
+			addresses.push(addr.valueOf());
+		}
 		return addresses;
 	}
 
-	public async getOperationCoolDown() {
+	public async getOperationCoolDown(): Promise<number> {
 		return Number((await this.contract.methods.operatorCoolDown().call()).valueOf()) * 1000;
 	}
 
-	public async getLastOperationTime() {
+	public async getLastOperationTime(): Promise<number> {
 		return Number((await this.contract.methods.lastOperationTime().call()).valueOf()) * 1000;
 	}
 
 	public async isStarted(): Promise<boolean> {
-		return await this.contract.methods.started().call();
+		const isStarted = await this.contract.methods.started().call();
+		return isStarted.valueOf();
 	}
 
 	public async getVotingData(): Promise<IVotingData> {
 		return {
-			started:
-				Number((await this.contract.methods.voteStartTimestamp().call()).valueof()) * 1000,
-			votedFor: Number((await this.contract.methods.votedFor().call()).valueof()),
-			votedAgainst: Number((await this.contract.methods.votedAgainst().call()).valueof()),
-			totalVoters: Number(
-				(await this.contract.methods.getAddressPoolSizes().call())[
-					this.getAddressPoolIndex(false)
-				].valueof()
-			)
+			started: (await this.contract.methods.voteStartTimestamp().call()) * 1000,
+			votedFor: await this.contract.methods.votedFor().call(),
+			votedAgainst: await this.contract.methods.votedAgainst().call(),
+			totalVoters: (await this.contract.methods.getAddressPoolSizes().call())[
+				this.getAddressPoolIndex(false)
+			]
 		};
 	}
 
