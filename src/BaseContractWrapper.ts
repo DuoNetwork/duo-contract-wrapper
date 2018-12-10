@@ -53,6 +53,11 @@ export default abstract class BaseContractWrapper {
 			.catch(error => util.logInfo(error));
 	}
 
+	public async getContractCode(): Promise<string> {
+		const code = await this.contract.methods.contractCode().call();
+		return code.valueOf();
+	}
+
 	public decode(input: string): any {
 		abiDecoder.addABI(this.abi);
 		return abiDecoder.decodeMethod(input);
