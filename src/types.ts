@@ -1,5 +1,12 @@
 import DualClassWrapper from './DualClassWrapper';
 
+export enum Wallet {
+	None,
+	Local,
+	MetaMask,
+	Ledger
+}
+
 export interface IEvent {
 	contractAddress: string;
 	type: string;

@@ -1,12 +1,9 @@
-// fix for @ledgerhq/hw-transport-u2f 4.28.0
-import '@babel/polyfill';
-
 import Web3 from 'web3';
 import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
-import { IContractAddresses, IEvent } from './types';
+import { IContractAddresses, IEvent, Wallet } from './types';
 import util from './util';
 
 const ProviderEngine = require('web3-provider-engine');
@@ -14,13 +11,6 @@ const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
 const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
 const Tx = require('ethereumjs-tx');
-
-export enum Wallet {
-	None,
-	Local,
-	MetaMask,
-	Ledger
-}
 
 export default class Web3Wrapper {
 	private web3: Web3;

@@ -1,3 +1,5 @@
+// fix for @ledgerhq/hw-transport-u2f 4.28.0
+import '@babel/polyfill';
 import * as CST from './constants';
 import MagiWrapper from './MagiWrapper';
 import Web3Wrapper from './Web3Wrapper';
