@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import { IEsplanadeStates, IVotingData } from './types';
+import {IAddress, IEsplanadeAddresses, IEsplanadeStates, IVotingData } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -38,6 +38,21 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		};
 	}
 
+	public async getAddrs(): Promise<IEsplanadeAddresses> {
+		const moderator: string = await this.getModerator();
+		const candidate: string = await this.getCandidate();
+		return {
+			moderator: {
+				address: moderator,
+				balance: (await this.web3Wrapper.getEthBalance(moderator)).valueOf()
+			},
+			candidate: {
+				address: candidate,
+				balance: (await this.web3Wrapper.getEthBalance(candidate)).valueOf()
+			}
+		};
+	}
+
 	public getAddressPoolIndex(hot: boolean) {
 		return hot ? 1 : 0;
 	}
@@ -58,36 +73,44 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		return EsplanadeWrapper.convertVotingStage(stage.valueOf());
 	}
 
-	public getModerator(): Promise<string> {
-		return this.contract.methods.moderator().call();
+	public async getModerator(): Promise<string> {
+		return (await this.contract.methods.moderator().call()).valueOf();
 	}
 
-	public getCandidate(): Promise<string> {
-		return this.contract.methods.candidate().call();
+	public async getCandidate(): Promise<string> {
+		return (await this.contract.methods.candidate().call()).valueOf();
 	}
 
-	public async getPoolAddresses(hot: boolean): Promise<string[]> {
+	public async getPoolAddresses(hot: boolean): Promise<IAddress[]> {
 		const poolIndex = this.getAddressPoolIndex(hot);
 		const poolSizes = await this.contract.methods.getAddressPoolSizes().call();
 		const length = Number(poolSizes[poolIndex].valueOf());
-		const addresses: string[] = [];
+		const addresses: IAddress[] = [];
 		for (let i = 0; i < length; i++) {
-			const addr = await this.contract.methods.addrPool(poolIndex, i).call();
-			addresses.push(addr.valueOf());
+			const addr: string = (await this.contract.methods
+				.addrPool(poolIndex, i)
+				.call()).valueOf();
+			addresses.push({
+				address: addr,
+				balance: await this.web3Wrapper.getEthBalance(addr)
+			});
 		}
 
 		return addresses;
 	}
 
-	public async getContractAddresses(custodian: boolean): Promise<string[]> {
+	public async getContractAddresses(custodian: boolean): Promise<IAddress[]> {
 		const poolSizes = await this.contract.methods.getContractPoolSizes().call();
 		const length = Number(poolSizes[custodian ? 0 : 1].valueOf());
-		const addresses: string[] = [];
+		const addresses: IAddress[] = [];
 		for (let i = 0; i < length; i++) {
 			const addr = custodian
 				? await this.contract.methods.custodianPool(i).call()
 				: await this.contract.methods.otherContractPool(i).call();
-			addresses.push(addr.valueOf());
+			addresses.push({
+				address: addr.valueOf(),
+				balance: await this.web3Wrapper.getEthBalance(addr.valueOf())
+			});
 		}
 		return addresses;
 	}

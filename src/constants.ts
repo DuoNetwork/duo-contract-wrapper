@@ -14,6 +14,7 @@ export const BTV_UP_RESET = 'UpwardReset';
 export const BTV_DOWN_RESET = 'DownwardReset';
 export const BTV_PERIOD_RESET = 'PeriodicReset';
 
+export const ESPLANADE = 'Esplanade';
 export const ESP_NOT_STARTED = 'NotStarted';
 export const ESP_MODERATOR = 'Moderator';
 export const ESP_CONTRACT = 'Contract';
