@@ -155,6 +155,17 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			.on('transactionHash', onTxHash);
 	}
 
+	public createWithWETH(address: string, value: number, wethAddr: string, onTxHash: (hash: string) => any) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+
+		return this.contract.methods
+			.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
+			.send({
+				from: address
+			})
+			.on('transactionHash', onTxHash);
+	}
+
 	public async redeemRaw(
 		address: string,
 		privateKey: string,
