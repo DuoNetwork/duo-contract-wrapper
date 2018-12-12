@@ -6,29 +6,29 @@ export const kovan: IContractAddresses = {
 			[CST.TENOR_PPT]: {
 				custodian: {
 					code: 'BEETHOVEN-PPT',
-					address: '0x95B3BE483e9e3685Ed631e9611b8cDba4C13641E'
+					address: '0x13016f27945f3f7b39A5Daae068D698e34E55491'
 				},
 				aToken: {
 					code: 'aETH',
-					address: '0xC600fe64CDa57b607B251aa0879b8386e9FEd9f7'
+					address: '0x59E6B3d43F762310626d2905148939973db2BBd3'
 				},
 				bToken: {
 					code: 'bETH',
-					address: '0xa03b5171fE58fD2d6a018693E8D2CeD83b73ce00'
+					address: '0x8A3bEca74E0E737460bDE45a09594A8D7D8c9886'
 				}
 			},
 			[CST.TENOR_M19]: {
 				custodian: {
 					code: 'BEETHOVEN-M19',
-					address: '0xe71eF76530278A4071EdE7aEB625aff9D9851b72'
+					address: '0x1e20057a6Ddc009b275926d7d54cCA19625c974E'
 				},
 				aToken: {
 					code: 'aETH-M19',
-					address: '0x057Cb8fBE06545Ec76667417C641017060411C6e'
+					address: '0xB608f08d94662453ac8fce91f5956CCd00031449'
 				},
 				bToken: {
 					code: 'bETH-M19',
-					address: '0x9bE03Fb668E3923a85Bb7337b21AEd127b0a1A64'
+					address: '0xe6c92061a8890FFC429485c36fa76853ddC4f07D'
 				}
 			},
 		},
@@ -36,29 +36,29 @@ export const kovan: IContractAddresses = {
 			[CST.TENOR_PPT]: {
 				custodian: {
 					code: 'MOZART-PPT',
-					address: '0x9633f492380D977FE468f7c5DDa1193cD7240F2A'
+					address: '0x00be45Fe5903AB1b33a9d3969b05b29552a6d18b'
 				},
 				aToken: {
 					code: 'sETH',
-					address: '0x923642D9ca22a70E94B12C8fd0f7077D61548122'
+					address: '0x2cB7CDDF82AD7fF2b207AD43586976FEB19BA985'
 				},
 				bToken: {
 					code: 'LETH',
-					address: '0x9703f1D8758700cD04707c0908C1B0C9c7b505A1'
+					address: '0x977feC72C295EdAf7E7deA5681E42CaFf69749e3'
 				}
 			},
 			[CST.TENOR_M19]: {
 				custodian: {
 					code: 'MOZART-M19',
-					address: '0xe35662dD5637Fc897d6afe985756289A98313E66'
+					address: '0x56e2727e56F9D6717e462418f822a8FE08Be4711'
 				},
 				aToken: {
 					code: 'sETH-M19',
-					address: '0x77B6a3774e7f71CB7C1f69a4875B1E1D2C8381F0'
+					address: '0x2B675f1A282954Ce4FEeb93b9504a6f78B616DE9'
 				},
 				bToken: {
 					code: 'LETH-M19',
-					address: '0x865D6E16ce3C16a7bf7635b1006cf46FB782eDb8'
+					address: '0x47aC357b44d1b3A0799D91741fA1bD717C1f7900'
 				}
 			},
 		}
