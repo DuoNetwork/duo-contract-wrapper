@@ -6,6 +6,7 @@ import erc20Abi from './static/ERC20.json';
 import { IContractAddresses, IEvent, Wallet } from './types';
 import util from './util';
 
+const BigNumber = require('bignumber.js');
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
@@ -258,14 +259,22 @@ export default class Web3Wrapper {
 		});
 	}
 
-	public erc20Approve(contractAddress: string, address: string, spender: string, value: number) {
+	public erc20Approve(
+		contractAddress: string,
+		address: string,
+		spender: string,
+		value: number,
+		unlimited: boolean = false
+	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
 
 		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
 
-		return erc20Contract.methods.approve(spender, this.toWei(value)).send({
-			from: address
-		});
+		return erc20Contract.methods
+			.approve(spender, unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value))
+			.send({
+				from: address
+			});
 	}
 
 	public getCurrentBlockNumber() {
@@ -299,6 +308,12 @@ export default class Web3Wrapper {
 		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
 
 		return this.fromWei(await erc20Contract.methods.balanceOf(address).call());
+	}
+
+	public async getErc20Allowance(contractAddress: string, address: string, spender: string) {
+		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+
+		return this.fromWei(await erc20Contract.methods.allowance(address, spender).call());
 	}
 
 	public fromWei(value: string | number) {
