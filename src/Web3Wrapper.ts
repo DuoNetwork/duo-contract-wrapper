@@ -264,6 +264,7 @@ export default class Web3Wrapper {
 		address: string,
 		spender: string,
 		value: number,
+		onTxHash: (hash: string) => any,
 		unlimited: boolean = false
 	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
@@ -274,7 +275,7 @@ export default class Web3Wrapper {
 			.approve(spender, unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value))
 			.send({
 				from: address
-			});
+			}).on('transactionHash', onTxHash);
 	}
 
 	public getCurrentBlockNumber() {
