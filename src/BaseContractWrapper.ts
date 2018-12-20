@@ -49,8 +49,8 @@ export default abstract class BaseContractWrapper {
 					privateKey
 				)
 			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(error => util.logInfo(error));
+			.then((receipt: any) => util.logInfo(receipt))
+			.catch((error: any) => util.logInfo(error));
 	}
 
 	public async getContractCode(): Promise<string> {
