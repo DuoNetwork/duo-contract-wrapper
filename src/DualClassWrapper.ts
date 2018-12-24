@@ -117,17 +117,12 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const abi = {
 			name: 'create',
 			type: 'function',
-			inputs: [
-				{
-					name: 'payFeeInEth',
-					type: 'bool'
-				}
-			]
+			inputs: []
 		};
-		const input = [true];
-		const command = this.web3Wrapper.generateTxString(abi, input);
+		// const input = [];
+		const command = this.web3Wrapper.generateTxString(abi, []);
 		// sending out transaction
-		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
+		gasPrice = Math.max((await this.web3Wrapper.getGasPrice()) || gasPrice, 5000000000);
 		util.logInfo(
 			`gasPrice price :${gasPrice} gasLimit : ${gasLimit} nonce : ${nonce} eth : ${eth}`
 		);
