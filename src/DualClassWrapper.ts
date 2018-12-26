@@ -330,6 +330,18 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return [bTokenPerEth * states.alpha, bTokenPerEth];
 	}
 
+	public static getTokenInterestOrLeverage(
+		states: IDualClassStates,
+		isBeethoven: boolean,
+		isA: boolean
+	) {
+		if (isA && isBeethoven)
+			return (states.periodCoupon * 365 * 24 * 3600000) / (states.period || 1);
+		if (isA && !isBeethoven) return (states.navA - 2) / states.navA;
+
+		return ((isBeethoven ? 1 : 2) * states.alpha + states.navB) / states.navB;
+	}
+
 	public async getStates(): Promise<IDualClassStates> {
 		const states = await this.contract.methods.getStates().call();
 		return {

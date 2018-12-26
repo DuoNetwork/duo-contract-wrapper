@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`getTokenInterestOrLeverage 1`] = `0.8760000000000001`;
+
+exports[`getTokenInterestOrLeverage 2`] = `1.6666666666666667`;
+
+exports[`getTokenInterestOrLeverage 3`] = `-0.6666666666666667`;
+
+exports[`getTokenInterestOrLeverage 4`] = `1.6666666666666667`;
+
 exports[`getTokensPerEth 1`] = `
 Array [
   50,

@@ -47,3 +47,45 @@ test('getTokensPerEth', () => {
 		} as any)
 	).toMatchSnapshot();
 });
+
+test('getTokenInterestOrLeverage', () => {
+	expect(
+		DualClassWrapper.getTokenInterestOrLeverage(
+			{
+				periodCoupon: 0.0001,
+				period: 3600000
+			} as any,
+			true,
+			true
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getTokenInterestOrLeverage(
+			{
+				alpha: 1,
+				navB: 1.5
+			} as any,
+			true,
+			false
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getTokenInterestOrLeverage(
+			{
+				navA: 1.2
+			} as any,
+			false,
+			true
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getTokenInterestOrLeverage(
+			{
+				alpha: 0.5,
+				navB: 1.5
+			} as any,
+			false,
+			false
+		)
+	).toMatchSnapshot();
+});
