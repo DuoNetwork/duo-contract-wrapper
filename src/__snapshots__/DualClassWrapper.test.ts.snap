@@ -1,5 +1,131 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`calculateNav beethoven 1`] = `
+Array [
+  1,
+  1.4,
+]
+`;
+
+exports[`calculateNav beethoven 2`] = `
+Array [
+  1,
+  0.6000000000000001,
+]
+`;
+
+exports[`calculateNav beethoven 3`] = `
+Array [
+  0.8,
+  0,
+]
+`;
+
+exports[`calculateNav beethoven 4`] = `
+Array [
+  1,
+  1.5999999999999996,
+]
+`;
+
+exports[`calculateNav beethoven 5`] = `
+Array [
+  1,
+  0.40000000000000036,
+]
+`;
+
+exports[`calculateNav beethoven 6`] = `
+Array [
+  0.6000000000000001,
+  0,
+]
+`;
+
+exports[`calculateNav beethoven 7`] = `
+Array [
+  1,
+  1.2999999999999998,
+]
+`;
+
+exports[`calculateNav beethoven 8`] = `
+Array [
+  1,
+  0.7000000000000002,
+]
+`;
+
+exports[`calculateNav beethoven 9`] = `
+Array [
+  0.6000000000000001,
+  0,
+]
+`;
+
+exports[`calculateNav mozart 1`] = `
+Array [
+  0.8,
+  1.5999999999999996,
+]
+`;
+
+exports[`calculateNav mozart 2`] = `
+Array [
+  1.2,
+  0.40000000000000036,
+]
+`;
+
+exports[`calculateNav mozart 3`] = `
+Array [
+  0.8,
+  0,
+]
+`;
+
+exports[`calculateNav mozart 4`] = `
+Array [
+  0.8,
+  2,
+]
+`;
+
+exports[`calculateNav mozart 5`] = `
+Array [
+  1.2000000000000002,
+  0,
+]
+`;
+
+exports[`calculateNav mozart 6`] = `
+Array [
+  0.6000000000000001,
+  0,
+]
+`;
+
+exports[`calculateNav mozart 7`] = `
+Array [
+  0.8,
+  1.4,
+]
+`;
+
+exports[`calculateNav mozart 8`] = `
+Array [
+  1.2,
+  0.6000000000000001,
+]
+`;
+
+exports[`calculateNav mozart 9`] = `
+Array [
+  0.6000000000000001,
+  0,
+]
+`;
+
 exports[`getTokenInterestOrLeverage 1`] = `0.8760000000000001`;
 
 exports[`getTokenInterestOrLeverage 2`] = `1.6666666666666667`;

@@ -342,6 +342,31 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return ((isBeethoven ? 1 : 2) * states.alpha + states.navB) / states.navB;
 	}
 
+	public static calculateNav(
+		states: IDualClassStates,
+		isBeethoven: boolean,
+		price: number,
+		time: number
+	) {
+		const { resetPrice, resetPriceTime, period, periodCoupon, alpha, beta } = states;
+		if (isBeethoven) {
+			const navParent = (price / resetPrice / beta) * (1 + alpha);
+
+			const navA = 1 + Math.floor((time - resetPriceTime) / 1000 / period) * periodCoupon;
+			const navAAdj = navA * alpha;
+			if (navParent <= navAAdj) return [navParent / alpha, 0];
+			else return [navA, navParent - navAAdj];
+		} else {
+			const navEth = price / resetPrice;
+			const navParent = navEth * (1 + alpha);
+
+			if (navEth >= 2) return [0, navParent];
+
+			if (navEth <= (2 * alpha) / (2 * alpha + 1)) return [navParent / alpha, 0];
+			return [2 - navEth, (2 * alpha + 1) * navEth - 2 * alpha];
+		}
+	}
+
 	public async getStates(): Promise<IDualClassStates> {
 		const states = await this.contract.methods.getStates().call();
 		return {

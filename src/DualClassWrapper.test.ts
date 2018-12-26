@@ -89,3 +89,281 @@ test('getTokenInterestOrLeverage', () => {
 		)
 	).toMatchSnapshot();
 });
+
+test('calculateNav beethoven', () => {
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 1,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			120,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 1,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			80,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 1,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			40,
+			10
+		)
+	).toMatchSnapshot();
+
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 2,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			120,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 2,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			80,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 2,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			40,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 0.5,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			120,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 0.5,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			80,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 0.5,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			true,
+			20,
+			10
+		)
+	).toMatchSnapshot();
+});
+
+test('calculateNav mozart', () => {
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 1,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			120,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 1,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			80,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 1,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			40,
+			10
+		)
+	).toMatchSnapshot();
+
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 2,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			120,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 2,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			80,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 2,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			40,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 0.5,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			120,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 0.5,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			80,
+			10
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.calculateNav(
+			{
+				resetPrice: 100,
+				resetPriceTime: 0,
+				alpha: 0.5,
+				beta: 1,
+				period: 5,
+				periodCoupon: 0.000001
+			} as any,
+			false,
+			20,
+			10
+		)
+	).toMatchSnapshot();
+});
