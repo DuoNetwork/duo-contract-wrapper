@@ -16,3 +16,34 @@ test('convertCustodianState', () => {
 	expect(DualClassWrapper.convertResetState(CST.RESET_STATE_PERIOD)).toBe(CST.BTV_PERIOD_RESET);
 	expect(DualClassWrapper.convertResetState('any')).toBe('');
 });
+
+test('getTokensPerEth', () => {
+	expect(
+		DualClassWrapper.getTokensPerEth({
+			resetPrice: 100,
+			beta: 1,
+			alpha: 1
+		} as any)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getTokensPerEth({
+			resetPrice: 100,
+			beta: 0.8,
+			alpha: 1
+		} as any)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getTokensPerEth({
+			resetPrice: 100,
+			beta: 1,
+			alpha: 0.5
+		} as any)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getTokensPerEth({
+			resetPrice: 100,
+			beta: 1,
+			alpha: 2
+		} as any)
+	).toMatchSnapshot();
+});

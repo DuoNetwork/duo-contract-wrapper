@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import dualClassAbi from './static/DualClassCustodian.json';
-import { ICustodianAddresses, IDualClassStates} from './types';
+import { ICustodianAddresses, IDualClassStates } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -150,7 +150,12 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			.on('transactionHash', onTxHash);
 	}
 
-	public createWithWETH(address: string, value: number, wethAddr: string, onTxHash: (hash: string) => any) {
+	public createWithWETH(
+		address: string,
+		value: number,
+		wethAddr: string,
+		onTxHash: (hash: string) => any
+	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods
@@ -318,6 +323,11 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			default:
 				return '';
 		}
+	}
+
+	public static getTokensPerEth(states: IDualClassStates) {
+		const bTokenPerEth = (states.resetPrice * states.beta) / (1 + states.alpha);
+		return [bTokenPerEth * states.alpha, bTokenPerEth];
 	}
 
 	public async getStates(): Promise<IDualClassStates> {

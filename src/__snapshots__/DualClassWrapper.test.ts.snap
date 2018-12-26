@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getTokensPerEth 1`] = `
+Array [
+  50,
+  50,
+]
+`;
+
+exports[`getTokensPerEth 2`] = `
+Array [
+  40,
+  40,
+]
+`;
+
+exports[`getTokensPerEth 3`] = `
+Array [
+  33.333333333333336,
+  66.66666666666667,
+]
+`;
+
+exports[`getTokensPerEth 4`] = `
+Array [
+  66.66666666666667,
+  33.333333333333336,
+]
+`;
