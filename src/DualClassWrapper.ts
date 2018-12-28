@@ -330,6 +330,13 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return [bTokenPerEth * states.alpha, bTokenPerEth];
 	}
 
+	public static getEthWithTokens(states: IDualClassStates, amtA: number, amtB: number): number {
+		const adjAmtA = amtA  / states.alpha;
+		const deductAmtB = Math.min(adjAmtA, amtB);
+		const deductAmtA = (deductAmtB * states.alpha);
+		return (deductAmtA + deductAmtB) / states.resetPrice;
+	}
+
 	public static getTokenInterestOrLeverage(
 		states: IDualClassStates,
 		isBeethoven: boolean,
