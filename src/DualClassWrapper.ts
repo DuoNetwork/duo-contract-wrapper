@@ -334,7 +334,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const adjAmtA = amtA  / states.alpha;
 		const deductAmtB = Math.min(adjAmtA, amtB);
 		const deductAmtA = (deductAmtB * states.alpha);
-		return (deductAmtA + deductAmtB) / states.resetPrice;
+		return (deductAmtA + deductAmtB) / states.resetPrice / states.beta;
 	}
 
 	public static getTokenInterestOrLeverage(

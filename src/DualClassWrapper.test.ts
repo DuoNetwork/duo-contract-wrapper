@@ -48,6 +48,64 @@ test('getTokensPerEth', () => {
 	).toMatchSnapshot();
 });
 
+test('getEthWithTokens', () => {
+	expect(
+		DualClassWrapper.getEthWithTokens(
+			{
+				resetPrice: 100,
+				beta: 1,
+				alpha: 1
+			} as any,
+			100,
+			100
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getEthWithTokens(
+			{
+				resetPrice: 100,
+				beta: 1,
+				alpha: 1
+			} as any,
+			100,
+			200
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getEthWithTokens(
+			{
+				resetPrice: 100,
+				beta: 0.8,
+				alpha: 1
+			} as any,
+			100,
+			100
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getEthWithTokens(
+			{
+				resetPrice: 100,
+				beta: 1,
+				alpha: 0.5
+			} as any,
+			100,
+			100
+		)
+	).toMatchSnapshot();
+	expect(
+		DualClassWrapper.getEthWithTokens(
+			{
+				resetPrice: 100,
+				beta: 1,
+				alpha: 0.5
+			} as any,
+			100,
+			200
+		)
+	).toMatchSnapshot();
+});
+
 test('getTokenInterestOrLeverage', () => {
 	expect(
 		DualClassWrapper.getTokenInterestOrLeverage(
