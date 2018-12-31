@@ -1,6 +1,6 @@
 version: 2
 jobs:
-    build-duo-contract-wrapper:
+    build:
         working_directory: /home/circleci/duo-contract-wrapper
         docker: 
             - image: circleci/node:8.11.1
