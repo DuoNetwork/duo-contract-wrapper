@@ -10,9 +10,9 @@ jobs:
             - run:
                 name: Install npm wee
                 command: npm install
-			- run:
-			    name: test coverage
-				command: npm test -- --coverage
+            - run:
+                name: test coverage
+            	command: npm test -- --coverage
             - save_cache:
                 key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
