@@ -126,6 +126,16 @@ Array [
 ]
 `;
 
+exports[`getEthWithTokens 1`] = `2`;
+
+exports[`getEthWithTokens 2`] = `2`;
+
+exports[`getEthWithTokens 3`] = `2.5`;
+
+exports[`getEthWithTokens 4`] = `1.5`;
+
+exports[`getEthWithTokens 5`] = `3`;
+
 exports[`getTokenInterestOrLeverage 1`] = `0.8760000000000001`;
 
 exports[`getTokenInterestOrLeverage 2`] = `1.6666666666666667`;
