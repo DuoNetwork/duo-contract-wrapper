@@ -138,31 +138,26 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		);
 	}
 
-	public create(address: string, value: number) {
+	public create(address: string, value: number, wethAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-		return new Promise<string>(resolve =>
-			this.contract.methods
-				.create()
-				.send({
-					from: address,
-					value: this.web3Wrapper.toWei(value)
-				})
-				.on('transactionHash', txHash => resolve(txHash))
-		);
-	}
-
-	public createWithWETH(address: string, value: number, wethAddr: string) {
-		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
-		return new Promise<string>(resolve =>
-			this.contract.methods
-				.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
-				.send({
-					from: address
-				})
-				.on('transactionHash', txHash => resolve(txHash))
-		);
+		return new Promise<string>(resolve => {
+			if (wethAddr)
+				this.contract.methods
+					.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
+					.send({
+						from: address
+					})
+					.on('transactionHash', txHash => resolve(txHash));
+			else
+				this.contract.methods
+					.create()
+					.send({
+						from: address,
+						value: this.web3Wrapper.toWei(value)
+					})
+					.on('transactionHash', txHash => resolve(txHash));
+		});
 	}
 
 	public async redeemRaw(
