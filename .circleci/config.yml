@@ -12,7 +12,7 @@ jobs:
                 command: npm install
             - save_cache:
               key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-			  paths:
+              paths:
                 - /home/circleci/duo-contract-wrapper
     deploy:
         docker:
