@@ -11,9 +11,9 @@ jobs:
                 name: Install npm wee
                 command: npm install
             - save_cache:
-              key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-              paths:
-                - /home/circleci/duo-contract-wrapper
+				key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
+				paths:
+					- /home/circleci/duo-contract-wrapper
     deploy:
         docker:
             - image: circleci/python:2.7-jessie
