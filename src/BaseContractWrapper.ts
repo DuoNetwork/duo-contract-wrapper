@@ -1,5 +1,4 @@
 import { Contract } from 'web3/types';
-import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
@@ -35,7 +34,7 @@ export default abstract class BaseContractWrapper {
 	) {
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
-		this.web3Wrapper
+		return this.web3Wrapper
 			.sendSignedTransaction(
 				this.web3Wrapper.signTx(
 					this.web3Wrapper.createTxCommand(
@@ -48,9 +47,7 @@ export default abstract class BaseContractWrapper {
 					),
 					privateKey
 				)
-			)
-			.then((receipt: any) => util.logInfo(receipt))
-			.catch((error: any) => util.logInfo(error));
+			);
 	}
 
 	public async getContractCode(): Promise<string> {

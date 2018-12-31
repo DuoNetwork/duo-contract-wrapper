@@ -138,32 +138,31 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		);
 	}
 
-	public create(address: string, value: number, onTxHash: (hash: string) => any) {
+	public create(address: string, value: number) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-		return this.contract.methods
-			.create()
-			.send({
-				from: address,
-				value: this.web3Wrapper.toWei(value)
-			})
-			.on('transactionHash', onTxHash);
+		return new Promise<string>(resolve =>
+			this.contract.methods
+				.create()
+				.send({
+					from: address,
+					value: this.web3Wrapper.toWei(value)
+				})
+				.on('transactionHash', txHash => resolve(txHash))
+		);
 	}
 
-	public createWithWETH(
-		address: string,
-		value: number,
-		wethAddr: string,
-		onTxHash: (hash: string) => any
-	) {
+	public createWithWETH(address: string, value: number, wethAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-		return this.contract.methods
-			.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
-			.send({
-				from: address
-			})
-			.on('transactionHash', onTxHash);
+		return new Promise<string>(resolve =>
+			this.contract.methods
+				.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
+				.send({
+					from: address
+				})
+				.on('transactionHash', txHash => resolve(txHash))
+		);
 	}
 
 	public async redeemRaw(
@@ -218,26 +217,30 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		);
 	}
 
-	public redeem(address: string, amtA: number, amtB: number, onTxHash: (hash: string) => any) {
+	public redeem(address: string, amtA: number, amtB: number) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-		return this.contract.methods
-			.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
-			.send({
-				from: address
-			})
-			.on('transactionHash', onTxHash);
+		return new Promise<string>(resolve =>
+			this.contract.methods
+				.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
+				.send({
+					from: address
+				})
+				.on('transactionHash', txHash => resolve(txHash))
+		);
 	}
 
-	public redeemAll(address: string, onTxHash: (hash: string) => any) {
+	public redeemAll(address: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
-		return this.contract.methods
-			.redeemAll()
-			.send({
-				from: address
-			})
-			.on('transactionHash', onTxHash);
+		return new Promise<string>(resolve =>
+			this.contract.methods
+				.redeemAll()
+				.send({
+					from: address
+				})
+				.on('transactionHash', txHash => resolve(txHash))
+		);
 	}
 
 	private async trigger(
@@ -331,9 +334,9 @@ export default class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public static getEthWithTokens(states: IDualClassStates, amtA: number, amtB: number): number {
-		const adjAmtA = amtA  / states.alpha;
+		const adjAmtA = amtA / states.alpha;
 		const deductAmtB = Math.min(adjAmtA, amtB);
-		const deductAmtA = (deductAmtB * states.alpha);
+		const deductAmtA = deductAmtB * states.alpha;
 		return (deductAmtA + deductAmtB) / states.resetPrice / states.beta;
 	}
 

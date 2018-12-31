@@ -264,18 +264,23 @@ export default class Web3Wrapper {
 		address: string,
 		spender: string,
 		value: number,
-		onTxHash: (hash: string) => any,
 		unlimited: boolean = false
 	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
 
-		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+		return new Promise<string>(resolve => {
+			const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
 
-		return erc20Contract.methods
-			.approve(spender, unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value))
-			.send({
-				from: address
-			}).on('transactionHash', onTxHash);
+			return erc20Contract.methods
+				.approve(
+					spender,
+					unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value)
+				)
+				.send({
+					from: address
+				})
+				.on('transactionHash', txHash => resolve(txHash));
+		});
 	}
 
 	public getCurrentBlockNumber() {
@@ -373,6 +378,10 @@ export default class Web3Wrapper {
 	}
 
 	public sendSignedTransaction(signedTx: string) {
-		return this.web3.eth.sendSignedTransaction('0x' + signedTx);
+		return new Promise<string>(resolve =>
+			this.web3.eth
+				.sendSignedTransaction('0x' + signedTx)
+				.on('transactionHash', txHash => resolve(txHash))
+		);
 	}
 }
