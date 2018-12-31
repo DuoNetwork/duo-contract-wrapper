@@ -8,14 +8,14 @@ jobs:
             - checkout
             - run: cd /home/circleci/duo-contract-wrapper
             - restore_cache:
-						  key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
+              key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
             - run:
                 name: Install npm wee
                 command: npm install
-						- save_cache:
-						  key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
-							paths:
-							  - /home/circleci/duo-contract-wrapper
+            - save_cache:
+              key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
+              paths:
+                - /home/circleci/duo-contract-wrapper
 		deploy:
         docker:
             - image: circleci/python:2.7-jessie
