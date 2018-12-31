@@ -7,8 +7,6 @@ jobs:
         steps:
             - checkout
             - run: cd /home/circleci/duo-contract-wrapper
-            - restore_cache:
-              key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
             - run:
                 name: Install npm wee
                 command: npm install
