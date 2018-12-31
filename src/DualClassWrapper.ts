@@ -108,24 +108,38 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		gasPrice: number,
 		gasLimit: number,
 		eth: number,
+		wethAddr: string,
 		nonce: number = -1
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
-		util.logInfo(`the account ${address} is creating tokens`);
-		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
-		const abi = {
+		let abi: any = {
 			name: 'create',
 			type: 'function',
 			inputs: []
 		};
-		// const input = [];
-		const command = this.web3Wrapper.generateTxString(abi, []);
-		// sending out transaction
+		let input: any = [];
+		if (wethAddr) {
+			abi = {
+				inputs: [
+					{
+						name: 'amount',
+						type: 'uint256'
+					},
+					{
+						name: 'wethAddr',
+						type: 'address'
+					}
+				],
+				name: 'createWithWETH',
+				type: 'function'
+			};
+			input = [this.web3Wrapper.toWei(eth), wethAddr];
+		}
+
+		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
+		const command = this.web3Wrapper.generateTxString(abi, input);
 		gasPrice = Math.max((await this.web3Wrapper.getGasPrice()) || gasPrice, 5000000000);
-		util.logInfo(
-			`gasPrice price :${gasPrice} gasLimit : ${gasLimit} nonce : ${nonce} eth : ${eth}`
-		);
 		return this.sendTransactionRaw(
 			address,
 			privateKey,
