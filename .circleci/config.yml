@@ -12,7 +12,7 @@ jobs:
                 command: npm install
             - run:
                 name: test coverage
-            	command: npm test -- --coverage
+                command: npm test -- --coverage
             - save_cache:
                 key: dependency-test-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
