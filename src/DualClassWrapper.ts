@@ -371,7 +371,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (isBeethoven) {
 			const navParent = (price / resetPrice / beta) * (1 + alpha);
 
-			const navA = 1 + Math.floor((time - resetPriceTime) / 1000 / period) * periodCoupon;
+			const navA = 1 + Math.floor((time - resetPriceTime) / period) * periodCoupon;
 			const navAAdj = navA * alpha;
 			if (navParent <= navAAdj) return [navParent / alpha, 0];
 			else return [navA, navParent - navAAdj];

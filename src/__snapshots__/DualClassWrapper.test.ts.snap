@@ -2,15 +2,15 @@
 
 exports[`calculateNav beethoven 1`] = `
 Array [
-  1,
-  1.4,
+  1.000002,
+  1.3999979999999999,
 ]
 `;
 
 exports[`calculateNav beethoven 2`] = `
 Array [
-  1,
-  0.6000000000000001,
+  1.000002,
+  0.599998,
 ]
 `;
 
@@ -23,15 +23,15 @@ Array [
 
 exports[`calculateNav beethoven 4`] = `
 Array [
-  1,
-  1.5999999999999996,
+  1.000002,
+  1.5999959999999995,
 ]
 `;
 
 exports[`calculateNav beethoven 5`] = `
 Array [
-  1,
-  0.40000000000000036,
+  1.000002,
+  0.39999600000000024,
 ]
 `;
 
@@ -44,15 +44,15 @@ Array [
 
 exports[`calculateNav beethoven 7`] = `
 Array [
-  1,
-  1.2999999999999998,
+  1.000002,
+  1.2999989999999997,
 ]
 `;
 
 exports[`calculateNav beethoven 8`] = `
 Array [
-  1,
-  0.7000000000000002,
+  1.000002,
+  0.6999990000000001,
 ]
 `;
 
