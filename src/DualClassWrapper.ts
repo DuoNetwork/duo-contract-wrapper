@@ -38,7 +38,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		util.logInfo(`the account ${address} is starting custodian`);
+		util.logDebug(`the account ${address} is starting custodian`);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			name: 'startCustodian',
@@ -81,7 +81,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		gasLimit: number,
 		nonce: number = -1
 	) {
-		util.logInfo(`the account ${address} is fetching price`);
+		util.logDebug(`the account ${address} is fetching price`);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const abi = {
 			type: 'function',
@@ -185,11 +185,11 @@ export default class DualClassWrapper extends BaseContractWrapper {
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 
-		util.logInfo('the account ' + address + ' privateKey is ' + privateKey);
+		util.logDebug('the account ' + address + ' privateKey is ' + privateKey);
 		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
 		const balanceOfA = await this.contract.methods.balanceOf(0, address).call();
 		const balanceOfB = await this.contract.methods.balanceOf(1, address).call();
-		util.logInfo('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
+		util.logDebug('current balanceA: ' + balanceOfA + ' current balanceB: ' + balanceOfB);
 		const abi = {
 			name: 'redeem',
 			type: 'function',
@@ -201,17 +201,13 @@ export default class DualClassWrapper extends BaseContractWrapper {
 				{
 					name: 'amtInWeiB',
 					type: 'uint256'
-				},
-				{
-					name: 'payFeeInEth',
-					type: 'bool'
 				}
 			]
 		};
-		const input = [amtA, amtB, true];
+		const input = [amtA, amtB];
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
-		util.logInfo(
+		util.logDebug(
 			`gasPrice price :${gasPrice} gasLimit : ${gasLimit} nonce : ${nonce} amtA : ${amtA} amtB : ${amtB}`
 		);
 		return this.sendTransactionRaw(
@@ -284,7 +280,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			inputs: []
 		};
 		const gasPrice = (await this.web3Wrapper.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
-		util.logInfo('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.RESET_GAS_LIMIT);
+		util.logDebug('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.RESET_GAS_LIMIT);
 		const promiseList: Array<Promise<void>> = [];
 		for (let i = 0; i < count; i++)
 			promiseList.push(
@@ -303,7 +299,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			inputs: []
 		};
 		const gasPrice = (await this.web3Wrapper.getGasPrice()) || CST.DEFAULT_GAS_PRICE;
-		util.logInfo('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
+		util.logDebug('gasPrice price ' + gasPrice + ' gasLimit is ' + CST.PRE_RESET_GAS_LIMIT);
 		return this.trigger(address, privateKey, abi, [], gasPrice, CST.PRE_RESET_GAS_LIMIT); // 120000 for lastOne; 30000 for else
 	}
 
