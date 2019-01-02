@@ -144,9 +144,9 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			address,
 			privateKey,
 			this.address,
-			eth,
+			wethAddr ? 0 : eth,
 			gasPrice,
-			gasLimit,
+			Math.max(gasLimit, 200000),
 			nonce,
 			command
 		);
