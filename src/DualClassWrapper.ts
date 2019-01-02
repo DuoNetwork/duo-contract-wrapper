@@ -204,7 +204,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 				}
 			]
 		};
-		const input = [amtA, amtB];
+		const input = [this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtA)];
 		const command = this.web3Wrapper.generateTxString(abi, input);
 		// sending out transaction
 		util.logDebug(
