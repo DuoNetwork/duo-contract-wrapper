@@ -6,6 +6,7 @@ import erc20Abi from './static/ERC20.json';
 import { IContractAddresses, IEvent, Wallet } from './types';
 import util from './util';
 
+const HDWalletProvider = require('truffle-hdwallet-provider');
 const BigNumber = require('bignumber.js');
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
@@ -24,23 +25,25 @@ export default class Web3Wrapper {
 	private handleSwitchToMetaMask: Array<() => any>;
 	private handleSwitchToLedger: Array<() => any>;
 
-	constructor(window: any, source: string, provider: string, live: boolean) {
+	constructor(window: any, provider: string, privateKey: string, live: boolean) {
 		this.live = live;
 		this.contractAddresses = this.live ? mainnet : kovan;
 		this.provider = provider;
 		if (window && (window.ethereum || window.web3)) {
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
-		} else if (window) {
-			this.web3 = new Web3(new Web3.providers.HttpProvider(provider));
-			this.wallet = Wallet.None;
-		} else {
-			this.web3 = new Web3(
-				source
-					? new Web3.providers.HttpProvider(provider)
-					: new Web3.providers.WebsocketProvider(provider)
+		} else if (!window && privateKey) {
+			const hdWallet = new HDWalletProvider(
+				privateKey,
+				provider.startsWith('ws')
+					? new Web3.providers.WebsocketProvider(provider)
+					: new Web3.providers.HttpProvider(provider)
 			);
+			this.web3 = new Web3(hdWallet);
 			this.wallet = Wallet.Local;
+		} else {
+			this.web3 = new Web3(provider);
+			this.wallet = Wallet.None;
 		}
 		this.handleSwitchToMetaMask = [];
 		this.handleSwitchToLedger = [];
