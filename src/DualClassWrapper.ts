@@ -428,7 +428,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			feeCollector: addr[2],
 			oracle: addr[3],
 			aToken: addr[4],
-			bToken: addr[4]
+			bToken: addr[5]
 		};
 	}
 
