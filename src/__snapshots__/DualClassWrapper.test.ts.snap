@@ -3,60 +3,67 @@
 exports[`calculateNav beethoven 1`] = `
 Array [
   1.000002,
-  1.3999979999999999,
+  4.999998,
 ]
 `;
 
 exports[`calculateNav beethoven 2`] = `
 Array [
   1.000002,
-  0.599998,
+  1.3999979999999999,
 ]
 `;
 
 exports[`calculateNav beethoven 3`] = `
+Array [
+  1.000002,
+  0.599998,
+]
+`;
+
+exports[`calculateNav beethoven 4`] = `
 Array [
   0.8,
   0,
 ]
 `;
 
-exports[`calculateNav beethoven 4`] = `
+exports[`calculateNav beethoven 5`] = `
 Array [
   1.000002,
   1.5999959999999995,
 ]
 `;
 
-exports[`calculateNav beethoven 5`] = `
+exports[`calculateNav beethoven 6`] = `
 Array [
   1.000002,
   0.39999600000000024,
 ]
 `;
 
-exports[`calculateNav beethoven 6`] = `
+exports[`calculateNav beethoven 7`] = `
 Array [
   0.6000000000000001,
   0,
 ]
 `;
 
-exports[`calculateNav beethoven 7`] = `
+exports[`calculateNav beethoven 8`] = `
 Array [
   1.000002,
   1.2999989999999997,
 ]
 `;
 
-exports[`calculateNav beethoven 8`] = `
+exports[`calculateNav beethoven 9`] = `
 Array [
   1.000002,
   0.6999990000000001,
 ]
 `;
 
-exports[`calculateNav beethoven 9`] = `
+exports[`calculateNav beethoven 10`] = `
 Array [
   0.6000000000000001,
   0,
@@ -65,65 +72,134 @@ Array [
 
 exports[`calculateNav mozart 1`] = `
 Array [
+  0,
+  6,
+]
+`;
+
+exports[`calculateNav mozart 2`] = `
+Array [
   0.8,
   1.5999999999999996,
 ]
 `;
 
-exports[`calculateNav mozart 2`] = `
+exports[`calculateNav mozart 3`] = `
 Array [
   1.2,
   0.40000000000000036,
 ]
 `;
 
-exports[`calculateNav mozart 3`] = `
+exports[`calculateNav mozart 4`] = `
 Array [
   0.8,
   0,
 ]
 `;
 
-exports[`calculateNav mozart 4`] = `
+exports[`calculateNav mozart 5`] = `
 Array [
   0.8,
   2,
 ]
 `;
 
-exports[`calculateNav mozart 5`] = `
+exports[`calculateNav mozart 6`] = `
 Array [
   1.2000000000000002,
   0,
 ]
 `;
 
-exports[`calculateNav mozart 6`] = `
+exports[`calculateNav mozart 7`] = `
 Array [
   0.6000000000000001,
   0,
 ]
 `;
 
-exports[`calculateNav mozart 7`] = `
+exports[`calculateNav mozart 8`] = `
 Array [
   0.8,
   1.4,
 ]
 `;
 
-exports[`calculateNav mozart 8`] = `
+exports[`calculateNav mozart 9`] = `
 Array [
   1.2,
   0.6000000000000001,
 ]
 `;
 
-exports[`calculateNav mozart 9`] = `
+exports[`calculateNav mozart 10`] = `
 Array [
   0.6000000000000001,
   0,
 ]
+`;
+
+exports[`collectFee, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`collectFee, with option 1`] = `
+Array [
+  Array [
+    10000000000000000000,
+  ],
+]
+`;
+
+exports[`collectFee, without option 1`] = `
+Array [
+  Array [
+    10000000000000000000,
+  ],
+]
+`;
+
+exports[`create, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`create, with ETH 1`] = `Array []`;
+
+exports[`create, with WETH 1`] = `
+Array [
+  Array [
+    1000000000000000000,
+    "wethAddr",
+  ],
+]
+`;
+
+exports[`create, with option 1`] = `Array []`;
+
+exports[`fetchPrice, 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`fetchPrice, 2`] = `Array []`;
+
+exports[`fetchPrice, isLocal wallet 1`] = `"wrong env"`;
+
+exports[`fetchPrice, without option 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`fetchPrice, without option 2`] = `Array []`;
+
+exports[`getAddress 1`] = `
+Object {
+  "aToken": "aToken",
+  "bToken": "bToken",
+  "feeCollector": "feeCollector",
+  "operator": "operator",
+  "oracle": "oracle",
+  "roleManager": "roleManager",
+}
 `;
 
 exports[`getEthWithTokens 1`] = `2`;
@@ -136,13 +212,50 @@ exports[`getEthWithTokens 4`] = `1.5`;
 
 exports[`getEthWithTokens 5`] = `3`;
 
-exports[`getTokenInterestOrLeverage 1`] = `0.8760000000000001`;
+exports[`getStates 1`] = `
+Object {
+  "alpha": 100000000000000,
+  "beta": 1,
+  "createCommRate": 100000000000000,
+  "ethCollateral": 1,
+  "feeBalance": 100.00000000000001,
+  "iterationGasThreshold": 10000,
+  "lastOperationTime": 12345678980000,
+  "lastPrice": 1e-9,
+  "lastPriceTime": 1e+23,
+  "limitLower": 1,
+  "limitPeriodic": 15.000000000000002,
+  "limitUpper": 2,
+  "maturity": 1e+21,
+  "minBalance": 100000,
+  "navA": 2,
+  "navB": 100.00000000000001,
+  "nextResetAddrIndex": 10000000000000000000,
+  "operationCoolDown": 1e+24,
+  "period": 1e+21,
+  "periodCoupon": 0.00015000000000000001,
+  "preResetWaitingBlocks": 1000000000000000000,
+  "priceFetchCoolDown": 1e+24,
+  "redeemCommRate": 100000000000000,
+  "resetPrice": 10000000.000000002,
+  "resetPriceTime": 1e+21,
+  "resetState": "",
+  "state": "Loading",
+  "totalSupplyA": 1e-13,
+  "totalSupplyB": 1.0000000000000001e-16,
+  "totalUsers": 1e+21,
+}
+`;
 
-exports[`getTokenInterestOrLeverage 2`] = `1.6666666666666667`;
+exports[`getTokenInterestOrLeverage 1`] = `3153600.0000000005`;
 
-exports[`getTokenInterestOrLeverage 3`] = `-0.6666666666666667`;
+exports[`getTokenInterestOrLeverage 2`] = `0.8760000000000001`;
 
-exports[`getTokenInterestOrLeverage 4`] = `1.6666666666666667`;
+exports[`getTokenInterestOrLeverage 3`] = `1.6666666666666667`;
+
+exports[`getTokenInterestOrLeverage 4`] = `-0.6666666666666667`;
+
+exports[`getTokenInterestOrLeverage 5`] = `1.6666666666666667`;
 
 exports[`getTokensPerEth 1`] = `
 Array [
@@ -169,5 +282,167 @@ exports[`getTokensPerEth 4`] = `
 Array [
   66.66666666666667,
   33.333333333333336,
+]
+`;
+
+exports[`getUserAddress 1`] = `
+Array [
+  Array [
+    1,
+  ],
+]
+`;
+
+exports[`redeem, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`redeem, with option 1`] = `
+Array [
+  Array [
+    1000000000000000000,
+    1000000000000000000,
+  ],
+]
+`;
+
+exports[`redeem, with option 2`] = `Array []`;
+
+exports[`redeem, without option 1`] = `
+Array [
+  Array [
+    1000000000000000000,
+    1000000000000000000,
+  ],
+]
+`;
+
+exports[`redeemAll, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`redeemAll, with option 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`redeemAll, without option 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`setValue, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`setValue, with option 1`] = `
+Array [
+  Array [
+    1,
+    10,
+  ],
+]
+`;
+
+exports[`setValue, without option 1`] = `
+Array [
+  Array [
+    1,
+    10,
+  ],
+]
+`;
+
+exports[`startCustodian 1`] = `
+Array [
+  Array [
+    "aAddr",
+    "bAddr",
+    "oracleAddr",
+  ],
+]
+`;
+
+exports[`startCustodian, isLocal wallet 1`] = `"wrong env"`;
+
+exports[`startCustodian, without option 1`] = `
+Array [
+  Array [
+    "aAddr",
+    "bAddr",
+    "oracleAddr",
+  ],
+]
+`;
+
+exports[`triggerPreReset not local 1`] = `[TypeError: this.web3Wrapper.wrongEnvReject is not a function]`;
+
+exports[`triggerPreReset with option 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`triggerPreReset without option 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`triggerReset not local 1`] = `[TypeError: this.web3Wrapper.wrongEnvReject is not a function]`;
+
+exports[`triggerReset, with option 1`] = `
+Array [
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+]
+`;
+
+exports[`triggerReset, with option 2`] = `
+Array [
+  "triggerResettxHash0",
+  "triggerResettxHash1",
+  "triggerResettxHash2",
+  "triggerResettxHash3",
+  "triggerResettxHash4",
+  "triggerResettxHash5",
+  "triggerResettxHash6",
+  "triggerResettxHash7",
+  "triggerResettxHash8",
+  "triggerResettxHash9",
+]
+`;
+
+exports[`triggerReset, without option 1`] = `
+Array [
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+  Array [],
+]
+`;
+
+exports[`triggerReset, without option 2`] = `
+Array [
+  "triggerResettxHash0",
+  "triggerResettxHash1",
+  "triggerResettxHash2",
+  "triggerResettxHash3",
+  "triggerResettxHash4",
+  "triggerResettxHash5",
+  "triggerResettxHash6",
+  "triggerResettxHash7",
+  "triggerResettxHash8",
+  "triggerResettxHash9",
 ]
 `;

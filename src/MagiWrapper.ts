@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import magiAbi from './static/Magi.json';
-import { IContractPrice } from './types';
+import { IContractPrice, IEthTxOption } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -22,7 +22,7 @@ export default class MagiWrapper extends BaseContractWrapper {
 		return await this.contract.methods.started().call();
 	}
 
-	public async startMagi(
+	public async startMagiRaw(
 		address: string,
 		privateKey: string,
 		price: number,
@@ -54,7 +54,18 @@ export default class MagiWrapper extends BaseContractWrapper {
 		await this.commitInternal(input, command, address, privateKey, gasPrice, gasLimit, nonce);
 	}
 
-	public async commitPrice(
+	public async startMagi(account: string, price: number, timeInSecond: number, option: IEthTxOption = {}) {
+		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
+		const gasLimit = option.gasLimit || CST.START_MAGI_GAS;
+		return this.contract.methods.startOracle(this.web3Wrapper.toWei(price), timeInSecond).send({
+			from: account || this.address,
+			gasPrice: gasPrice,
+			gas: gasLimit
+		});
+	}
+
+	public async commitPriceRaw(
 		address: string,
 		privateKey: string,
 		price: number,
@@ -85,6 +96,17 @@ export default class MagiWrapper extends BaseContractWrapper {
 		await this.commitInternal(input, command, address, privateKey, gasPrice, gasLimit, nonce);
 	}
 
+	public async commitPrice(account: string, price: number, timeInSecond: number, option: IEthTxOption = {}) {
+		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
+		const gasLimit = option.gasLimit || CST.COMMIT_PRICE_GAS;
+		return this.contract.methods.startOracle(this.web3Wrapper.toWei(price), timeInSecond).send({
+			from: account || this.address,
+			gasPrice: gasPrice,
+			gas: gasLimit
+		});
+	}
+
 	public async commitInternal(
 		input: number[],
 		command: string,
@@ -101,16 +123,11 @@ export default class MagiWrapper extends BaseContractWrapper {
 				input[1]
 			}  gasPrice: ${gasPrice}, gasLimit: ${gasLimit}, nonce: ${nonce} `
 		);
-		return this.sendTransactionRaw(
-			address,
-			privateKey,
-			this.address,
-			0,
+		return this.sendTransactionRaw(address, privateKey, this.address, 0, command, {
 			gasPrice,
 			gasLimit,
-			nonce,
-			command
-		);
+			nonce
+		});
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {

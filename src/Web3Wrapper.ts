@@ -3,9 +3,10 @@ import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
-import { IContractAddresses, IEvent, Wallet } from './types';
+import { IContractAddresses, IEthTxOption, IEvent, Wallet } from './types';
 import util from './util';
 
+const HDWalletProvider = require('truffle-hdwallet-provider');
 const BigNumber = require('bignumber.js');
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
@@ -23,24 +24,29 @@ export default class Web3Wrapper {
 	public readonly inceptionBlockNumber: number;
 	private handleSwitchToMetaMask: Array<() => any>;
 	private handleSwitchToLedger: Array<() => any>;
+	public address: string = '';
 
-	constructor(window: any, source: string, provider: string, live: boolean) {
+	constructor(window: any, provider: string, privateKey: string, live: boolean) {
 		this.live = live;
 		this.contractAddresses = this.live ? mainnet : kovan;
 		this.provider = provider;
 		if (window && (window.ethereum || window.web3)) {
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
-		} else if (window) {
-			this.web3 = new Web3(new Web3.providers.HttpProvider(provider));
-			this.wallet = Wallet.None;
-		} else {
-			this.web3 = new Web3(
-				source
-					? new Web3.providers.HttpProvider(provider)
-					: new Web3.providers.WebsocketProvider(provider)
+		} else if (!window && privateKey) {
+			const hdWallet = new HDWalletProvider(
+				privateKey,
+				provider.startsWith('ws')
+					? new Web3.providers.WebsocketProvider(provider)
+					: new Web3.providers.HttpProvider(provider)
 			);
+
+			this.web3 = new Web3(hdWallet);
+			this.address = this.web3.eth.accounts.privateKeyToAccount(privateKey).address;
 			this.wallet = Wallet.Local;
+		} else {
+			this.web3 = new Web3(provider);
+			this.wallet = Wallet.None;
 		}
 		this.handleSwitchToMetaMask = [];
 		this.handleSwitchToLedger = [];
@@ -191,6 +197,20 @@ export default class Web3Wrapper {
 			.then(receipt => util.logInfo(JSON.stringify(receipt, null, 4)));
 	}
 
+	public async sendEther(from: string, to: string, value: number, option: IEthTxOption = {}) {
+		const gasPrice = option.gasPrice || (await this.getGasPrice());
+		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
+		const nonce = option.nonce || (await this.getTransactionCount(this.address));
+		return this.web3.eth.sendTransaction({
+			from: from || this.address,
+			to: to,
+			value: this.toWei(value),
+			gasPrice: gasPrice,
+			gas: gasLimit,
+			nonce: nonce
+		});
+	}
+
 	public async erc20TransferRaw(
 		tokenAddress: string,
 		address: string,
@@ -249,35 +269,43 @@ export default class Web3Wrapper {
 			.catch(error => util.logError(error));
 	}
 
-	public erc20Transfer(contractAddress: string, address: string, to: string, value: number) {
+	public async erc20Transfer(
+		contractAddress: string,
+		from: string,
+		to: string,
+		value: number,
+		option: IEthTxOption = {}
+	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
-
+		const gasPrice = option.gasPrice || (await this.getGasPrice());
+		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
+		const nonce = option.nonce || (await this.getTransactionCount(from || this.address));
 		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
-
 		return erc20Contract.methods.transfer(to, this.toWei(value)).send({
-			from: address
+			from: from || this.address,
+			gasPrice: gasPrice,
+			gas: gasLimit,
+			nonce: nonce
 		});
 	}
 
 	public erc20Approve(
 		contractAddress: string,
-		address: string,
+		from: string,
 		spender: string,
 		value: number,
 		unlimited: boolean = false
 	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
-
 		return new Promise<string>(resolve => {
 			const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
-
 			return erc20Contract.methods
 				.approve(
 					spender,
 					unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value)
 				)
 				.send({
-					from: address
+					from: from || this.address
 				})
 				.on('transactionHash', txHash => resolve(txHash));
 		});

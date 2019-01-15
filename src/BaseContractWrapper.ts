@@ -1,10 +1,12 @@
 import { Contract } from 'web3/types';
+import * as CST from './constants';
+import { IEthTxOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
 export default abstract class BaseContractWrapper {
 	public readonly web3Wrapper: Web3Wrapper;
-	public readonly address: string
+	public readonly address: string;
 	public readonly abi: any[];
 	public readonly events: string[] = [];
 	public contract: Contract;
@@ -27,27 +29,25 @@ export default abstract class BaseContractWrapper {
 		privateKey: string,
 		contractAddr: string,
 		value: number,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number,
-		command: string
+		command: string,
+		option: IEthTxOption = {}
 	) {
-		nonce = nonce === -1 ? await this.web3Wrapper.getTransactionCount(address) : nonce;
-		gasPrice = (await this.web3Wrapper.getGasPrice()) || gasPrice;
-		return this.web3Wrapper
-			.sendSignedTransaction(
-				this.web3Wrapper.signTx(
-					this.web3Wrapper.createTxCommand(
-						nonce,
-						gasPrice,
-						gasLimit,
-						contractAddr,
-						value,
-						command
-					),
-					privateKey
-				)
-			);
+		const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(address));
+		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
+		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
+		return this.web3Wrapper.sendSignedTransaction(
+			this.web3Wrapper.signTx(
+				this.web3Wrapper.createTxCommand(
+					nonce,
+					gasPrice,
+					gasLimit,
+					contractAddr,
+					value,
+					command
+				),
+				privateKey
+			)
+		);
 	}
 
 	public async getContractCode(): Promise<string> {

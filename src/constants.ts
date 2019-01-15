@@ -112,6 +112,10 @@ export const PRE_RESET_GAS_LIMIT = 120000;
 export const RESET_GAS_LIMIT = 4000000;
 export const EVENT_FETCH_BLOCK_INTERVAL = 100;
 export const EVENT_FETCH_TIME_INVERVAL = 600000;
+export const START_CUSTODIAN_GAS = 1000000;
+export const START_MAGI_GAS = 1000000;
+export const COMMIT_PRICE_GAS = 200000;
+export const DEFAULT_TX_GAS_LIMIT = 30000;
 
 export const LOG_INFO = 'INFO';
 export const LOG_DEBUG = 'DEBUG';

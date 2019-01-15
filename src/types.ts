@@ -133,3 +133,9 @@ export interface IContractAddresses {
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];
 }
+
+export interface IEthTxOption {
+	gasPrice?: number,
+	gasLimit?: number,
+	nonce?: number,
+}

@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import {IAddress, IEsplanadeAddresses, IEsplanadeStates, IVotingData } from './types';
+import { IAddress, IEsplanadeAddresses, IEsplanadeStates, IVotingData } from './types';
 import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -139,51 +139,51 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		};
 	}
 
-	public startContractVoting(address: string, candidateAddress: string) {
+	public startContractVoting(account: string, candidateAddress: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.startContractVoting(candidateAddress).send({
-			from: address
+			from: account || this.address
 		});
 	}
 
-	public terminateContractVoting(address: string) {
+	public terminateContractVoting(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.terminateContractVoting().send({
-			from: address
+			from: account || this.address
 		});
 	}
 
-	public terminateByTimeout(address: string) {
+	public terminateByTimeout(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.terminateByTimeout().send({
-			from: address
+			from: account || this.address
 		});
 	}
 
-	public startModeratorVoting(address: string) {
+	public startModeratorVoting(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.startModeratorVoting().send({
-			from: address
+			from: account || this.address
 		});
 	}
 
-	public vote(address: string, voteFor: boolean) {
+	public vote(account: string, voteFor: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.vote(voteFor).send({
-			from: address
+			from: account || this.address
 		});
 	}
 
-	public startManager(address: string) {
+	public startManager(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.startManager().send({
-			from: address
+			from: account || this.address
 		});
 	}
 
@@ -203,23 +203,18 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		};
 
 		const command = this.web3Wrapper.generateTxString(abi, []);
-		await this.sendTransactionRaw(
-			address,
-			privateKey,
-			this.address,
-			0,
+		await this.sendTransactionRaw(address, privateKey, this.address, 0, command, {
 			gasPrice,
 			gasLimit,
-			nonce,
-			command
-		);
+			nonce
+		});
 	}
 
-	public addCustodian(address: string, custodianAddr: string) {
+	public addCustodian(custodianAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.addCustodian(custodianAddr).send({
-			from: address
+			from: this.address
 		});
 	}
 
@@ -250,32 +245,35 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 			privateKey,
 			this.address,
 			0,
-			gasPrice,
-			gasLimit,
-			nonce,
-			command
+
+			command,
+			{
+				gasPrice,
+				gasLimit,
+				nonce
+			}
 		);
 	}
 
-	public addOtherContracts(address: string, contractAddr: string) {
+	public addOtherContracts(contractAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.addOtherContracts(contractAddr).send({
-			from: address
+			from: this.address
 		});
 	}
 
-	public addAddress(address: string, addr1: string, addr2: string, hot: boolean) {
+	public addAddress(addr1: string, addr2: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods.addAddress(addr1, addr2, this.getAddressPoolIndex(hot)).send({
-			from: address
+			from: this.address
 		});
 	}
 
-	public removeAddress(address: string, addr: string, hot: boolean) {
+	public removeAddress(addr: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods.removeAddress(addr, this.getAddressPoolIndex(hot)).send({
-			from: address
+			from: this.address
 		});
 	}
 }
