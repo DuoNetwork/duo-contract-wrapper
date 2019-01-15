@@ -31,9 +31,11 @@ export default class Web3Wrapper {
 		this.contractAddresses = this.live ? mainnet : kovan;
 		this.provider = provider;
 		if (window && (window.ethereum || window.web3)) {
+			console.log('##### provider ' + provider );
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else if (!window && privateKey) {
+			console.log('##### provider ' + provider );
 			const hdWallet = new HDWalletProvider(
 				privateKey,
 				provider.startsWith('ws')
@@ -45,6 +47,7 @@ export default class Web3Wrapper {
 			this.address = this.web3.eth.accounts.privateKeyToAccount(privateKey).address;
 			this.wallet = Wallet.Local;
 		} else {
+			console.log('##### provider ' + provider );
 			this.web3 = new Web3(provider);
 			this.wallet = Wallet.None;
 		}
