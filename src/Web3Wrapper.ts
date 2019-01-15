@@ -39,7 +39,7 @@ export default class Web3Wrapper {
 				new Web3.providers.HttpProvider(provider)
 			);
 			this.web3 = new Web3(hdWallet);
-			this.address = this.web3.eth.accounts.privateKeyToAccount(privateKey).address;
+			this.address = this.web3.eth.accounts.privateKeyToAccount('0x' + privateKey).address;
 			this.wallet = Wallet.Local;
 		} else {
 			this.web3 = new Web3(provider);
