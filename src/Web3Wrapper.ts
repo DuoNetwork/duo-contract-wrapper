@@ -36,6 +36,7 @@ export default class Web3Wrapper {
 			this.wallet = Wallet.MetaMask;
 		} else if (!window && privateKey) {
 			console.log('##### provider ' + provider );
+			console.log(provider.startsWith('ws'));
 			const hdWallet = new HDWalletProvider(
 				privateKey,
 				provider.startsWith('ws')
