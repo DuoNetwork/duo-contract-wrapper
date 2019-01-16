@@ -1,6 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`commitPrice 1`] = `
+exports[`commitPrice, with option 1`] = `
+Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
+]
+`;
+
+exports[`commitPrice, without account 1`] = `
+Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
+]
+`;
+
+exports[`commitPrice, without option 1`] = `
+Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
+]
+`;
+
+exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
+
+exports[`commitPriceRaw 1`] = `
 Array [
   Array [
     Array [
@@ -17,7 +46,53 @@ Array [
 ]
 `;
 
-exports[`startMagi 1`] = `
+exports[`getLastPrice 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`getLastPrice 2`] = `
+Object {
+  "price": 1e-16,
+  "timestamp": 123456789000,
+}
+`;
+
+exports[`isStarted 1`] = `Array []`;
+
+exports[`isStarted 2`] = `true`;
+
+exports[`startMagi, with option 1`] = `
+Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
+]
+`;
+
+exports[`startMagi, without account 1`] = `
+Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
+]
+`;
+
+exports[`startMagi, without option 1`] = `
+Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
+]
+`;
+
+exports[`startMagi, wrong env 1`] = `"Wrong Env"`;
+
+exports[`startMagiRaw 1`] = `
 Array [
   Array [
     Array [
