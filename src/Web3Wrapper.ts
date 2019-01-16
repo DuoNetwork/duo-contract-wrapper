@@ -6,7 +6,7 @@ import erc20Abi from './static/ERC20.json';
 import { IContractAddresses, IEthTxOption, IEvent, Wallet } from './types';
 import util from './util';
 
-const HDWalletProvider = require('./HDWalletProvider');
+const HDWalletProvider = require('./external/HDWalletProvider');
 const BigNumber = require('bignumber.js');
 const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
