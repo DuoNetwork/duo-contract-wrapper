@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`switchToLedger 1`] = `
-Array [
-  "account1",
-  "account2",
-  "account3",
-]
-`;

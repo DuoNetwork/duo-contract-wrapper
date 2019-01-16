@@ -124,3 +124,11 @@ test('onWeb3AccountUpdate', () => {
 	handleOn.mock.calls[1][1]();
 	expect(onUpdate.mock.calls).toMatchSnapshot();
 });
+
+test('isReadOnly', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	web3Wrapper.wallet = Wallet.MetaMask;
+	expect(web3Wrapper.isReadOnly()).toBeFalsy();
+	web3Wrapper.wallet = Wallet.None;
+	expect(web3Wrapper.isReadOnly()).toBeTruthy();
+});

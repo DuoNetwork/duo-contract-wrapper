@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getGasPrice 1`] = `1000000000`;
+
+exports[`sendEther, without option 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "from",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+      "to": "to",
+      "value": "1000000000000000000",
+    },
+  ],
+]
+`;
+
+exports[`switchToLedger 1`] = `
+Array [
+  "account1",
+  "account2",
+  "account3",
+]
+`;
