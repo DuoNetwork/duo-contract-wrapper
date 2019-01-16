@@ -4,7 +4,6 @@ import * as CST from './constants';
 import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
 import { IContractAddresses, IEthTxOption, IEvent, Wallet } from './types';
-import util from './util';
 
 const HDWalletProvider = require('./external/HDWalletProvider');
 const BigNumber = require('bignumber.js');
@@ -12,7 +11,6 @@ const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
 const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
-// const Tx = require('ethereumjs-tx');
 
 export default class Web3Wrapper {
 	private web3: Web3;
@@ -33,10 +31,7 @@ export default class Web3Wrapper {
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else if (!window && privateKey) {
-			const hdWallet = new HDWalletProvider(
-				privateKey,
-				providerUrl
-			);
+			const hdWallet = new HDWalletProvider(privateKey, providerUrl);
 			this.web3 = new Web3(hdWallet);
 			this.wallet = Wallet.Local;
 		} else {
@@ -69,7 +64,7 @@ export default class Web3Wrapper {
 			try {
 				h();
 			} catch (error) {
-				util.logError(error);
+				console.log(error);
 			}
 		});
 	}
@@ -95,7 +90,7 @@ export default class Web3Wrapper {
 			try {
 				h();
 			} catch (error) {
-				util.logError(error);
+				console.log(error);
 			}
 		});
 		return accounts;

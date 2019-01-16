@@ -24,8 +24,6 @@ test('startMagi, without option', async () => {
 	}));
 	await magiWrapper.startMagi('address', 100, 123456789);
 	expect((magiWrapper.contract.methods.startOracle as jest.Mock).mock.calls).toMatchSnapshot();
-
-	// expect((magiWrapper.commitInternal as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('startMagi, with option', async () => {

@@ -6,8 +6,6 @@ import sampleEvent from './samples/events.json';
 import { Wallet } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-jest.mock('web3');
-
 test('constructor privateKey', async () => {
 	const web3Wrapper = new Web3Wrapper(null, 'provider', 'privateKey', false);
 	expect(web3Wrapper.wallet === Wallet.Local);

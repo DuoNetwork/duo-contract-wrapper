@@ -117,15 +117,6 @@ export const START_MAGI_GAS = 1000000;
 export const COMMIT_PRICE_GAS = 200000;
 export const DEFAULT_TX_GAS_LIMIT = 30000;
 
-export const LOG_INFO = 'INFO';
-export const LOG_DEBUG = 'DEBUG';
-export const LOG_ERROR = 'ERROR';
-export const LOG_RANKING: { [level: string]: number } = {
-	[LOG_ERROR]: 0,
-	[LOG_INFO]: 1,
-	[LOG_DEBUG]: 2
-};
-
 export const BTV_STATE = {
 	LAST_OPERATION_TIME: 0,
 	OPERATION_COOLDOWN: 1,
