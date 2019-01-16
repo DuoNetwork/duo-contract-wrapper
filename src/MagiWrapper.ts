@@ -59,7 +59,7 @@ export default class MagiWrapper extends BaseContractWrapper {
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.START_MAGI_GAS;
 		return this.contract.methods.startOracle(this.web3Wrapper.toWei(price), timeInSecond).send({
-			from: account || this.address,
+			from: account || await this.web3Wrapper.getCurrentAddress(),
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
@@ -101,7 +101,7 @@ export default class MagiWrapper extends BaseContractWrapper {
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.COMMIT_PRICE_GAS;
 		return this.contract.methods.startOracle(this.web3Wrapper.toWei(price), timeInSecond).send({
-			from: account || this.address,
+			from: account || await this.web3Wrapper.getCurrentAddress(),
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});

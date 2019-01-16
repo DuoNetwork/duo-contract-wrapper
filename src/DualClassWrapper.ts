@@ -38,11 +38,12 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
+		const from = account || await this.web3Wrapper.getCurrentAddress();
 		return new Promise<string>(resolve => {
 			return this.contract.methods
 				.startCustodian(aAddr, bAddr, oracleAddr)
 				.send({
-					from: account || this.address,
+					from: from,
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
@@ -55,7 +56,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
 		const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(this.address));
 		return this.contract.methods.fetchPrice().send({
-			from: account || this.address,
+			from: account || await this.web3Wrapper.getCurrentAddress(),
 			gasPrice: gasPrice,
 			gas: gasLimit,
 			nonce: nonce
@@ -71,12 +72,13 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.CREATE_GAS;
+		const from = account || await this.web3Wrapper.getCurrentAddress();
 		return new Promise<string>(resolve => {
 			if (wethAddr)
 				this.contract.methods
 					.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
 					.send({
-						from: account || this.address,
+						from: from,
 						gasPrice: gasPrice,
 						gas: gasLimit
 					})
@@ -85,7 +87,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 				this.contract.methods
 					.create()
 					.send({
-						from: account || this.address,
+						from: from,
 						value: this.web3Wrapper.toWei(value),
 						gasPrice: gasPrice,
 						gas: gasLimit
@@ -98,12 +100,13 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.REDEEM_GAS;
+		const from = account || await this.web3Wrapper.getCurrentAddress();
 
 		return new Promise<string>(resolve =>
 			this.contract.methods
 				.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
 				.send({
-					from: account || this.address,
+					from: from,
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
@@ -115,12 +118,12 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.REDEEM_GAS;
-
+		const from = account || await this.web3Wrapper.getCurrentAddress();
 		return new Promise<string>(resolve =>
 			this.contract.methods
 				.redeemAll()
 				.send({
-					from: account || this.address,
+					from: from,
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
@@ -132,6 +135,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.RESET_GAS_LIMIT;
+		const from = account || await this.web3Wrapper.getCurrentAddress();
 		const promiseList: Array<Promise<string>> = [];
 		for (let i = 0; i < count; i++)
 			promiseList.push(
@@ -139,7 +143,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 					this.contract.methods
 						.startReset()
 						.send({
-							from: account || this.address,
+							from: from,
 							gasPrice: gasPrice,
 							gas: gasLimit
 						})
@@ -154,12 +158,12 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.PRE_RESET_GAS_LIMIT;
-
+		const from = account || await this.web3Wrapper.getCurrentAddress();
 		return new Promise<string>(resolve =>
 			this.contract.methods
 				.startPreReset()
 				.send({
-					from: account || this.address,
+					from: from,
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
@@ -305,7 +309,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.COLLECT_FEE_GAS;
 		return this.contract.methods.collectFee(this.web3Wrapper.toWei(amount)).send({
-			from: account || this.address,
+			from: account || await this.web3Wrapper.getCurrentAddress(),
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
@@ -321,7 +325,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.SET_VALUE_GAS;
 		return this.contract.methods.setValue(index, newValue).send({
-			from: account || this.address,
+			from: account || await this.web3Wrapper.getCurrentAddress(),
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});

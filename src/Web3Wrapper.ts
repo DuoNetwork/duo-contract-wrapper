@@ -24,7 +24,6 @@ export default class Web3Wrapper {
 	public readonly inceptionBlockNumber: number;
 	private handleSwitchToMetaMask: Array<() => any>;
 	private handleSwitchToLedger: Array<() => any>;
-	public address: string = '';
 
 	constructor(window: any, provider: string, privateKey: string, live: boolean) {
 		this.live = live;
@@ -39,7 +38,6 @@ export default class Web3Wrapper {
 				new Web3.providers.HttpProvider(provider)
 			);
 			this.web3 = new Web3(hdWallet);
-			this.address = this.web3.eth.accounts.privateKeyToAccount('0x' + privateKey).address;
 			this.wallet = Wallet.Local;
 		} else {
 			this.web3 = new Web3(provider);
@@ -180,7 +178,7 @@ export default class Web3Wrapper {
 		nonce: number
 	) {
 		if (!this.isLocal()) return this.wrongEnvReject();
-
+		from = from || (await this.getCurrentAddress());
 		const rawTx = {
 			nonce: nonce,
 			gasPrice: this.web3.utils.toHex((await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE),
@@ -197,9 +195,11 @@ export default class Web3Wrapper {
 	public async sendEther(from: string, to: string, value: number, option: IEthTxOption = {}) {
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
 		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
-		const nonce = option.nonce || (await this.getTransactionCount(this.address));
+		from = from || (await this.getCurrentAddress());
+		const nonce = option.nonce || (await this.getTransactionCount(from));
+
 		return this.web3.eth.sendTransaction({
-			from: from || this.address,
+			from: from,
 			to: to,
 			value: this.toWei(value),
 			gasPrice: gasPrice,
@@ -276,17 +276,19 @@ export default class Web3Wrapper {
 		if (this.isReadOnly()) return this.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
 		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
-		const nonce = option.nonce || (await this.getTransactionCount(from || this.address));
+		from = from || (await this.getCurrentAddress());
+		const nonce = option.nonce || (await this.getTransactionCount(from));
 		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+
 		return erc20Contract.methods.transfer(to, this.toWei(value)).send({
-			from: from || this.address,
+			from: from,
 			gasPrice: gasPrice,
 			gas: gasLimit,
 			nonce: nonce
 		});
 	}
 
-	public erc20Approve(
+	public async erc20Approve(
 		contractAddress: string,
 		from: string,
 		spender: string,
@@ -294,6 +296,7 @@ export default class Web3Wrapper {
 		unlimited: boolean = false
 	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
+		from = from || (await this.getCurrentAddress());
 		return new Promise<string>(resolve => {
 			const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
 			return erc20Contract.methods
@@ -302,7 +305,7 @@ export default class Web3Wrapper {
 					unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value)
 				)
 				.send({
-					from: from || this.address
+					from: from
 				})
 				.on('transactionHash', txHash => resolve(txHash));
 		});

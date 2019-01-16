@@ -139,51 +139,51 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		};
 	}
 
-	public startContractVoting(account: string, candidateAddress: string) {
+	public async startContractVoting(account: string, candidateAddress: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startContractVoting(candidateAddress).send({
-			from: account || this.address
+			from: from
 		});
 	}
 
-	public terminateContractVoting(account: string) {
+	public async terminateContractVoting(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.terminateContractVoting().send({
-			from: account || this.address
+			from: from
 		});
 	}
 
-	public terminateByTimeout(account: string) {
+	public async terminateByTimeout(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.terminateByTimeout().send({
-			from: account || this.address
+			from: from
 		});
 	}
 
-	public startModeratorVoting(account: string) {
+	public async startModeratorVoting(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startModeratorVoting().send({
-			from: account || this.address
+			from: from
 		});
 	}
 
-	public vote(account: string, voteFor: boolean) {
+	public async vote(account: string, voteFor: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.vote(voteFor).send({
-			from: account || this.address
+			from: from
 		});
 	}
 
-	public startManager(account: string) {
+	public async startManager(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startManager().send({
-			from: account || this.address
+			from: from
 		});
 	}
 

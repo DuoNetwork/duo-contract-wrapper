@@ -585,6 +585,7 @@ test('collectFee, readOnly', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -615,6 +616,7 @@ test('collectFee, without option', async () => {
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -644,6 +646,7 @@ test('collectFee, with option', async () => {
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -675,6 +678,7 @@ test('setValue, readOnly', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -701,6 +705,7 @@ test('setValue, without option', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
 		createContract: jest.fn(
@@ -730,6 +735,7 @@ test('setValue, with option', async () => {
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -758,6 +764,7 @@ test('create, readOnly', async () => {
 		isReadOnly: jest.fn(() => true),
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
 		createContract: jest.fn(
 			() =>
@@ -790,6 +797,7 @@ test('create, with WETH', async () => {
 		isReadOnly: jest.fn(() => false),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -832,6 +840,7 @@ test('create, with ETH', async () => {
 		isReadOnly: jest.fn(() => false),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -873,6 +882,7 @@ test('create, with option', async () => {
 		isReadOnly: jest.fn(() => false),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -918,6 +928,7 @@ test('redeem, readOnly', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -952,6 +963,7 @@ test('redeem, without option', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -984,6 +996,7 @@ test('redeem, with option', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1023,6 +1036,7 @@ test('redeemAll, readOnly', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1057,6 +1071,7 @@ test('redeemAll, without option', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1087,6 +1102,7 @@ test('redeemAll, with option', async () => {
 		toWei: jest.fn(value => value * 1e18),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1121,6 +1137,7 @@ test('startCustodian, isLocal wallet', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
 		createContract: jest.fn(
 			() =>
@@ -1155,6 +1172,7 @@ test('startCustodian, without option', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1187,6 +1205,7 @@ test('startCustodian', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1222,6 +1241,7 @@ test('fetchPrice, isLocal wallet', async () => {
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1250,6 +1270,7 @@ test('fetchPrice, without option', async () => {
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
 		createContract: jest.fn(
 			() =>
@@ -1283,6 +1304,7 @@ test('fetchPrice,', async () => {
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 		getTransactionCount: jest.fn(() => Promise.resolve(2)),
 		wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1318,6 +1340,7 @@ test('triggerPreReset not local', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1351,6 +1374,7 @@ test('triggerPreReset without option', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1384,6 +1408,7 @@ test('triggerPreReset with option', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1421,6 +1446,7 @@ test('triggerReset not local', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1455,6 +1481,7 @@ test('triggerReset, without option', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
@@ -1493,6 +1520,7 @@ test('triggerReset, with option', async () => {
 		onSwitchToMetaMask: jest.fn(() => ({} as any)),
 		onSwitchToLedger: jest.fn(() => ({} as any)),
 		getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddress')),
 		createContract: jest.fn(
 			() =>
 				({
