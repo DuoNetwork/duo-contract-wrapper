@@ -6,20 +6,7 @@ import sampleEvent from './samples/events.json';
 import { Wallet } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-test('parseEvent', () =>
-	sampleEvent.forEach(e => expect(Web3Wrapper.parseEvent(e, 1234567890)).toMatchSnapshot()));
-
-test('constructor metamask provider new', () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	expect(web3Wrapper.wallet === Wallet.MetaMask);
-	expect(web3Wrapper.contractAddresses).toBe(mainnet);
-});
-
-test('constructor metamask provider old', () => {
-	const web3Wrapper = new Web3Wrapper({ web3: { currentProvider: {} } }, '', '', false);
-	expect(web3Wrapper.wallet === Wallet.MetaMask);
-	expect(web3Wrapper.contractAddresses).toBe(kovan);
-});
+jest.mock('web3');
 
 test('constructor privateKey', async () => {
 	const web3Wrapper = new Web3Wrapper(null, 'provider', 'privateKey', false);
@@ -47,6 +34,18 @@ test('constructor none', async () => {
 	}
 });
 
+test('constructor metamask provider new', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	expect(web3Wrapper.wallet).toBe(Wallet.MetaMask);
+	expect(web3Wrapper.contractAddresses).toBe(mainnet);
+});
+
+test('constructor metamask provider old', () => {
+	const web3Wrapper = new Web3Wrapper({ web3: { currentProvider: {} } }, '', '', false);
+	expect(web3Wrapper.wallet).toBe(Wallet.MetaMask);
+	expect(web3Wrapper.contractAddresses).toBe(kovan);
+});
+
 test('onSwitchToMetaMask', () => {
 	const web3Wrapper = new Web3Wrapper(null, CST.PROVIDER_INFURA_KOVAN, '', false);
 	const handle = jest.fn();
@@ -63,8 +62,29 @@ test('onSwitchToLedger', () => {
 	expect(web3Wrapper.handleSwitchToLedger[0]).toBe(handle);
 });
 
+test('parseEvent', () =>
+	sampleEvent.forEach(e => expect(Web3Wrapper.parseEvent(e, 1234567890)).toMatchSnapshot()));
+
 test('pullEvents', async () => {
 	const getPastEvents = jest.fn(() => Promise.resolve());
 	await Web3Wrapper.pullEvents({ getPastEvents: getPastEvents } as any, 123, 456, 'event');
 	expect(getPastEvents.mock.calls).toMatchSnapshot();
+});
+
+test('switchToMetaMask, metaMask', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	web3Wrapper.handleSwitchToMetaMask = [jest.fn()];
+	web3Wrapper.switchToMetaMask({ ethereum: {} });
+	expect(web3Wrapper.wallet).toBe(Wallet.MetaMask);
+	expect(web3Wrapper.accountIndex).toBe(0);
+	expect(web3Wrapper.handleSwitchToMetaMask[0] as jest.Mock).toBeCalled();
+});
+
+test('switchToMetaMask, none', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	web3Wrapper.handleSwitchToMetaMask = [jest.fn()];
+	web3Wrapper.switchToMetaMask(null);
+	expect(web3Wrapper.wallet).toBe(Wallet.None);
+	expect(web3Wrapper.accountIndex).toBe(0);
+	expect(web3Wrapper.handleSwitchToMetaMask[0] as jest.Mock).toBeCalled();
 });
