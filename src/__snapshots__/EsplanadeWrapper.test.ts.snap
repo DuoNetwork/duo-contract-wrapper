@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAddrs 1`] = `
+Object {
+  "candidate": Object {
+    "address": "candidatre",
+    "balance": "10",
+  },
+  "moderator": Object {
+    "address": "moderator",
+    "balance": "10",
+  },
+}
+`;
+
+exports[`getAddrs 2`] = `
+Array [
+  Array [
+    "moderator",
+  ],
+  Array [
+    "candidatre",
+  ],
+]
+`;
+
+exports[`getStates 1`] = `
+Object {
+  "custodianContractAddrs": Array [
+    Object {
+      "address": "custodianContractAddr1",
+      "balance": 10,
+    },
+  ],
+  "isStarted": true,
+  "lastOperationTime": 123456789,
+  "operationCoolDown": 1000,
+  "otherContractAddrs": Array [
+    Object {
+      "address": "otherContractAddr1",
+      "balance": 10,
+    },
+  ],
+  "poolAddrsCold": Array [
+    Object {
+      "address": "hotAddr1",
+      "balance": 10,
+    },
+  ],
+  "poolAddrsHot": Array [
+    Object {
+      "address": "coldAddr1",
+      "balance": 10,
+    },
+  ],
+  "votingData": Object {
+    "started": 123456789,
+    "totalVoters": 100,
+    "votedAgainst": 3,
+    "votedFor": 4,
+  },
+  "votingStage": "Moderator",
+}
+`;
