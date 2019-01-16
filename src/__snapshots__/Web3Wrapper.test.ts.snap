@@ -4,6 +4,15 @@ exports[`constructor none 1`] = `"Read Only Mode"`;
 
 exports[`constructor privateKey 1`] = `"Wrong Env"`;
 
+exports[`onWeb3AccountUpdate 1`] = `
+Array [
+  Array [
+    "selectedAddress",
+    123,
+  ],
+]
+`;
+
 exports[`parseEvent 1`] = `
 Object {
   "blockHash": "0xb236fabff690963c1e38ba2bc0ed8fff6f24d2c2a06d3437e587858a343e1562",

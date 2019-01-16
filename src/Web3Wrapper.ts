@@ -13,7 +13,7 @@ const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
 const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
 
 export default class Web3Wrapper {
-	private web3: Web3;
+	public web3: Web3;
 	public wallet: Wallet = Wallet.None;
 	public accountIndex: number = 0;
 	private live: boolean;
@@ -102,10 +102,14 @@ export default class Web3Wrapper {
 		const store = (this.web3.currentProvider as any).publicConfigStore;
 		if (store)
 			store.on('update', () => {
-				if (this.wallet === Wallet.MetaMask)
+				if (
+					this.wallet === Wallet.MetaMask &&
+					store.getState().selectedAddress &&
+					store.getState().networkVersion
+				)
 					onUpdate(
-						store.getState().selectedAddress || '',
-						Number(store.getState().networkVersion || '')
+						store.getState().selectedAddress,
+						Number(store.getState().networkVersion)
 					);
 			});
 	}

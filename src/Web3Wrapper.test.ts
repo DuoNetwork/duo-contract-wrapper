@@ -86,3 +86,41 @@ test('switchToMetaMask, none', () => {
 	expect(web3Wrapper.accountIndex).toBe(0);
 	expect(web3Wrapper.handleSwitchToMetaMask[0] as jest.Mock).toBeCalled();
 });
+
+test('onWeb3AccountUpdate', () => {
+	const testWeb3Util = new Web3Wrapper(null, '', '', false);
+	const handleOn = jest.fn();
+	testWeb3Util.web3.currentProvider = {
+		publicConfigStore: {
+			on: handleOn,
+			getState: () => ({
+				selectedAddress: '',
+				networkVersion: ''
+			})
+		}
+	} as any;
+
+	testWeb3Util.onWeb3AccountUpdate(() => ({}));
+	expect(handleOn).not.toBeCalled();
+	testWeb3Util.wallet = Wallet.MetaMask;
+	const onUpdate = jest.fn();
+	testWeb3Util.onWeb3AccountUpdate(onUpdate);
+	expect(handleOn).toBeCalledTimes(1);
+	expect(handleOn.mock.calls[0][0]).toBe('update');
+	handleOn.mock.calls[0][1]();
+	expect(onUpdate).not.toBeCalled();
+	testWeb3Util.web3.currentProvider = {
+		publicConfigStore: {
+			on: handleOn,
+			getState: () => ({
+				selectedAddress: 'selectedAddress',
+				networkVersion: '123'
+			})
+		}
+	} as any;
+	testWeb3Util.onWeb3AccountUpdate(onUpdate);
+	expect(handleOn).toBeCalledTimes(2);
+	expect(handleOn.mock.calls[1][0]).toBe('update');
+	handleOn.mock.calls[1][1]();
+	expect(onUpdate.mock.calls).toMatchSnapshot();
+});
