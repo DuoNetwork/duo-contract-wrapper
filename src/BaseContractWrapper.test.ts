@@ -30,21 +30,21 @@ const baseClass = new BaseClass(
 	'contractAddress'
 );
 
-test('sendTransactionRaw, without option', async () => {
-	await baseClass.sendTransactionRaw('address', 'privateKey', 'contractAddr', 1, 'command');
-	expect((baseClass.web3Wrapper.createTxCommand as jest.Mock).mock.calls).toMatchSnapshot();
-	expect((baseClass.web3Wrapper.signTx as jest.Mock).mock.calls).toMatchSnapshot();
-});
+// test('sendTransactionRaw, without option', async () => {
+// 	await baseClass.sendTransactionRaw('address', 'privateKey', 'contractAddr', 1, 'command');
+// 	expect((baseClass.web3Wrapper.createTxCommand as jest.Mock).mock.calls).toMatchSnapshot();
+// 	expect((baseClass.web3Wrapper.signTx as jest.Mock).mock.calls).toMatchSnapshot();
+// });
 
-test('sendTransactionRaw, with option', async () => {
-	await baseClass.sendTransactionRaw('address', 'privateKey', 'contractAddr', 1, 'command', {
-		gasLimit: 40000,
-		gasPrice: 3000000000,
-		nonce: 20
-	});
-	expect((baseClass.web3Wrapper.createTxCommand as jest.Mock).mock.calls).toMatchSnapshot();
-	expect((baseClass.web3Wrapper.signTx as jest.Mock).mock.calls).toMatchSnapshot();
-});
+// test('sendTransactionRaw, with option', async () => {
+// 	await baseClass.sendTransactionRaw('address', 'privateKey', 'contractAddr', 1, 'command', {
+// 		gasLimit: 40000,
+// 		gasPrice: 3000000000,
+// 		nonce: 20
+// 	});
+// 	expect((baseClass.web3Wrapper.createTxCommand as jest.Mock).mock.calls).toMatchSnapshot();
+// 	expect((baseClass.web3Wrapper.signTx as jest.Mock).mock.calls).toMatchSnapshot();
+// });
 
 test('getContractCode', async () => {
 	baseClass.contract.methods.contractCode = jest.fn(() => ({

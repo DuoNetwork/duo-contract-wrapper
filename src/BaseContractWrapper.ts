@@ -1,6 +1,6 @@
 import { Contract } from 'web3/types';
-import * as CST from './constants';
-import { IEthTxOption } from './types';
+// import * as CST from './constants';
+// import { IEthTxOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
@@ -24,31 +24,31 @@ export default abstract class BaseContractWrapper {
 		});
 	}
 
-	public async sendTransactionRaw(
-		address: string,
-		privateKey: string,
-		contractAddr: string,
-		value: number,
-		command: string,
-		option: IEthTxOption = {}
-	) {
-		const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(address));
-		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
-		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
-		return this.web3Wrapper.sendSignedTransaction(
-			this.web3Wrapper.signTx(
-				this.web3Wrapper.createTxCommand(
-					nonce,
-					gasPrice,
-					gasLimit,
-					contractAddr,
-					value,
-					command
-				),
-				privateKey
-			)
-		);
-	}
+	// public async sendTransactionRaw(
+	// 	address: string,
+	// 	privateKey: string,
+	// 	contractAddr: string,
+	// 	value: number,
+	// 	command: string,
+	// 	option: IEthTxOption = {}
+	// ) {
+	// 	const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(address));
+	// 	const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
+	// 	const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
+	// 	return this.web3Wrapper.sendSignedTransaction(
+	// 		this.web3Wrapper.signTx(
+	// 			this.web3Wrapper.createTxCommand(
+	// 				nonce,
+	// 				gasPrice,
+	// 				gasLimit,
+	// 				contractAddr,
+	// 				value,
+	// 				command
+	// 			),
+	// 			privateKey
+	// 		)
+	// 	);
+	// }
 
 	public async getContractCode(): Promise<string> {
 		const code = await this.contract.methods.contractCode().call();

@@ -1,16 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createTxCommand 1`] = `
-Object {
-  "data": "data",
-  "gasLimit": "0x3",
-  "gasPrice": "0x2",
-  "nonce": 1,
-  "to": "toAddr",
-  "value": "0x3782dace9d900000",
-}
-`;
-
 exports[`parseEvent 1`] = `
 Object {
   "blockHash": "0xb236fabff690963c1e38ba2bc0ed8fff6f24d2c2a06d3437e587858a343e1562",
