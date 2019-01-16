@@ -134,3 +134,11 @@ Array [
   ],
 ]
 `;
+
+exports[`switchToLedger 1`] = `
+Array [
+  "account1",
+  "account2",
+  "account3",
+]
+`;
