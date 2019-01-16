@@ -22,8 +22,8 @@ export default class Web3Wrapper {
 	private provider: string;
 	public readonly contractAddresses: IContractAddresses;
 	public readonly inceptionBlockNumber: number;
-	private handleSwitchToMetaMask: Array<() => any>;
-	private handleSwitchToLedger: Array<() => any>;
+	public handleSwitchToMetaMask: Array<() => any>;
+	public handleSwitchToLedger: Array<() => any>;
 
 	constructor(window: any, provider: string, privateKey: string, live: boolean) {
 		this.live = live;
@@ -272,7 +272,7 @@ export default class Web3Wrapper {
 		return output;
 	}
 
-	public static async pullEvents(
+	public static pullEvents(
 		contract: Contract,
 		start: number,
 		end: number,
