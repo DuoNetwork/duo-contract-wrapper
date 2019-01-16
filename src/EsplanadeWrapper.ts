@@ -186,33 +186,33 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public addCustodian(custodianAddr: string) {
+	public async addCustodian(custodianAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.addCustodian(custodianAddr).send({
-			from: this.address
+			from: await this.web3Wrapper.getCurrentAddress()
 		});
 	}
 
-	public addOtherContracts(contractAddr: string) {
+	public async addOtherContracts(contractAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.addOtherContracts(contractAddr).send({
-			from: this.address
+			from: await this.web3Wrapper.getCurrentAddress()
 		});
 	}
 
-	public addAddress(addr1: string, addr2: string, hot: boolean) {
+	public  async addAddress(addr1: string, addr2: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods.addAddress(addr1, addr2, this.getAddressPoolIndex(hot)).send({
-			from: this.address
+			from: await this.web3Wrapper.getCurrentAddress()
 		});
 	}
 
-	public removeAddress(addr: string, hot: boolean) {
+	public async removeAddress(addr: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods.removeAddress(addr, this.getAddressPoolIndex(hot)).send({
-			from: this.address
+			from: await this.web3Wrapper.getCurrentAddress()
 		});
 	}
 }

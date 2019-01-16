@@ -19,28 +19,28 @@ export default class Web3Wrapper {
 	public wallet: Wallet = Wallet.None;
 	public accountIndex: number = 0;
 	private live: boolean;
-	private provider: string;
+	private providerUrl: string;
 	public readonly contractAddresses: IContractAddresses;
 	public readonly inceptionBlockNumber: number;
-	private handleSwitchToMetaMask: Array<() => any>;
-	private handleSwitchToLedger: Array<() => any>;
+	public handleSwitchToMetaMask: Array<() => any>;
+	public handleSwitchToLedger: Array<() => any>;
 
-	constructor(window: any, provider: string, privateKey: string, live: boolean) {
+	constructor(window: any, providerUrl: string, privateKey: string, live: boolean) {
 		this.live = live;
 		this.contractAddresses = this.live ? mainnet : kovan;
-		this.provider = provider;
+		this.providerUrl = providerUrl;
 		if (window && (window.ethereum || window.web3)) {
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else if (!window && privateKey) {
 			const hdWallet = new HDWalletProvider(
 				privateKey,
-				new Web3.providers.HttpProvider(provider)
+				providerUrl
 			);
 			this.web3 = new Web3(hdWallet);
 			this.wallet = Wallet.Local;
 		} else {
-			this.web3 = new Web3(provider);
+			this.web3 = new Web3(providerUrl);
 			this.wallet = Wallet.None;
 		}
 		this.handleSwitchToMetaMask = [];
@@ -61,12 +61,10 @@ export default class Web3Wrapper {
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 		} else {
-			this.web3 = new Web3(new Web3.providers.HttpProvider(this.provider));
+			this.web3 = new Web3(this.providerUrl);
 			this.wallet = Wallet.None;
 		}
-
 		this.accountIndex = 0;
-
 		this.handleSwitchToMetaMask.forEach(h => {
 			try {
 				h();
@@ -80,7 +78,7 @@ export default class Web3Wrapper {
 		const engine = new ProviderEngine();
 		const getTransport = () => TransportU2F.create();
 		const networkId = this.live ? CST.ETH_MAINNET_ID : CST.ETH_KOVAN_ID;
-		const rpcUrl = this.provider;
+		const rpcUrl = this.providerUrl;
 		const ledger = createLedgerSubprovider(getTransport, {
 			networkId,
 			accountsLength: 5
@@ -272,7 +270,7 @@ export default class Web3Wrapper {
 		return output;
 	}
 
-	public static async pullEvents(
+	public static pullEvents(
 		contract: Contract,
 		start: number,
 		end: number,
