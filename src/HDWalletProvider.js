@@ -114,6 +114,8 @@ function HDWalletProvider(
 	if (typeof provider === 'string') {
 		this.engine.addProvider(new ProviderSubprovider(new Web3.providers.HttpProvider(provider)));
 	} else {
+		if(!provider.sendAsync)
+			provider.sendAsync = provider.send;
 		this.engine.addProvider(new ProviderSubprovider(provider));
 	}
 	this.engine.start(); // Required by the provider engine.
