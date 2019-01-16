@@ -18,7 +18,10 @@ class Util {
 
 	private log(text: any, level: string): void {
 		if (CST.LOG_RANKING[this.logLevel] >= CST.LOG_RANKING[level])
-			console.log(`${moment().format('HH:mm:ss.SSS')} [${level}]: ` + text);
+			console.log(
+				`${moment.utc(util.getUTCNowTimestamp()).format('DD HH:mm:ss.SSS')} [${level}]: ` +
+					text
+			);
 	}
 
 	public isNumber(input: any): boolean {

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`log debug 1`] = `
+Array [
+  Array [
+    "15 06:56:07.890 [ERROR]: error",
+  ],
+  Array [
+    "15 06:56:07.890 [INFO]: info",
+  ],
+  Array [
+    "15 06:56:07.890 [DEBUG]: debug",
+  ],
+]
+`;
+
+exports[`log error 1`] = `
+Array [
+  Array [
+    "15 06:56:07.890 [ERROR]: error",
+  ],
+]
+`;
+
+exports[`log info 1`] = `
+Array [
+  Array [
+    "15 06:56:07.890 [ERROR]: error",
+  ],
+  Array [
+    "15 06:56:07.890 [INFO]: info",
+  ],
+]
+`;
