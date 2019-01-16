@@ -1,5 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`addAddress 1`] = `
+Array [
+  Array [
+    "addr1",
+    "addr2",
+    1,
+  ],
+]
+`;
+
+exports[`addAddress, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`addCustodian 1`] = `
+Array [
+  Array [
+    "custodianAddr",
+  ],
+]
+`;
+
+exports[`addCustodian, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`addOtherContracts 1`] = `
+Array [
+  Array [
+    "otherContractAddr",
+  ],
+]
+`;
+
+exports[`addOtherContracts, readOnly 1`] = `"Read Only Mode"`;
+
 exports[`getAddrs 1`] = `
 Object {
   "candidate": Object {
@@ -150,6 +182,17 @@ exports[`getVotingStage 1`] = `"Moderator"`;
 
 exports[`isStarted 1`] = `true`;
 
+exports[`removeAddress 1`] = `
+Array [
+  Array [
+    "addr",
+    1,
+  ],
+]
+`;
+
+exports[`removeAddress, readOnly 1`] = `"Read Only Mode"`;
+
 exports[`startContractVoting, readOnly 1`] = `"Read Only Mode"`;
 
 exports[`startContractVoting, with account 1`] = `
@@ -165,6 +208,20 @@ Array [
   Array [
     "candidateAdddr",
   ],
+]
+`;
+
+exports[`startManager, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`startManager, with account 1`] = `
+Array [
+  Array [],
+]
+`;
+
+exports[`startManager, without account 1`] = `
+Array [
+  Array [],
 ]
 `;
 
@@ -209,3 +266,21 @@ Array [
 `;
 
 exports[`terminateContractVting, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`vote, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`vote, with account 1`] = `
+Array [
+  Array [
+    true,
+  ],
+]
+`;
+
+exports[`vote, without account 1`] = `
+Array [
+  Array [
+    true,
+  ],
+]
+`;

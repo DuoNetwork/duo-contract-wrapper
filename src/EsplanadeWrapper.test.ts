@@ -525,6 +525,330 @@ test('startModeratorVoting, without account', async () => {
 	).toMatchSnapshot();
 });
 
+test('vote, readOnly', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => true),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn()
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	try {
+		await esplanadeWrapper.vote('account', true);
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+});
+
+test('vote, with account', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						vote: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	await esplanadeWrapper.vote('account', true);
+	expect(
+		(esplanadeWrapper.contract.methods.vote as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('vote, without account', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						vote: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	await esplanadeWrapper.vote('account', true);
+	expect(
+		(esplanadeWrapper.contract.methods.vote as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('startManager, readOnly', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => true),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn()
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	try {
+		await esplanadeWrapper.startManager('account');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+});
+
+test('startManager, with account', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						startManager: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	await esplanadeWrapper.startManager('account');
+	expect(
+		(esplanadeWrapper.contract.methods.startManager as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('startManager, without account', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						startManager: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	await esplanadeWrapper.startManager('account');
+	expect(
+		(esplanadeWrapper.contract.methods.startManager as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('addCustodian, readOnly', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => true),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn()
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	try {
+		await esplanadeWrapper.addCustodian('custodianAddr');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+});
+
+test('addCustodian', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						addCustodian: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	await esplanadeWrapper.addCustodian('custodianAddr');
+	expect(
+		(esplanadeWrapper.contract.methods.addCustodian as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('addOtherContracts, readOnly', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => true),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn()
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	try {
+		await esplanadeWrapper.addOtherContracts('contractAddr');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+});
+
+test('addOtherContracts', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						addOtherContracts: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	await esplanadeWrapper.addOtherContracts('otherContractAddr');
+	expect(
+		(esplanadeWrapper.contract.methods.addOtherContracts as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('addAddress, readOnly', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => true),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn()
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	try {
+		await esplanadeWrapper.addAddress('addr1', 'addr2', true);
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+});
+
+test('addAddress', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						addAddress: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	esplanadeWrapper.getAddressPoolIndex = jest.fn(() => 1);
+	await esplanadeWrapper.addAddress('addr1', 'addr2', true);
+	expect(
+		(esplanadeWrapper.contract.methods.addAddress as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('removeAddress, readOnly', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => true),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		createContract: jest.fn()
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	try {
+		await esplanadeWrapper.removeAddress('addr', true);
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+});
+
+test('removeAddress', async () => {
+	const web3Wrapper = {
+		isReadOnly: jest.fn(() => false),
+		onSwitchToMetaMask: jest.fn(() => ({} as any)),
+		fromWei: jest.fn(value => value * 1e-18),
+		onSwitchToLedger: jest.fn(() => ({} as any)),
+		readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
+		getEthBalance: jest.fn(() => Promise.resolve('10')),
+		getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
+		createContract: jest.fn(
+			() =>
+				({
+					methods: {
+						removeAddress: jest.fn(() => ({
+							send: jest.fn()
+						}))
+					}
+				} as any)
+		)
+	} as any;
+	const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
+	esplanadeWrapper.getAddressPoolIndex = jest.fn(() => 1);
+	await esplanadeWrapper.removeAddress('addr', true);
+	expect(
+		(esplanadeWrapper.contract.methods.removeAddress as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
 test('getStates', async () => {
 	const web3Wrapper = {
 		isReadOnly: jest.fn(() => true),
