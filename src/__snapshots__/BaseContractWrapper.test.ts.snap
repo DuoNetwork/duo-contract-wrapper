@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`decode 1`] = `"decodedOutput"`;
+
+exports[`getContractCode 1`] = `"contractCode"`;
+
 exports[`sendTransactionRaw, with option 1`] = `
 Array [
   Array [

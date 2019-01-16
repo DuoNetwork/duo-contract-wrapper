@@ -4,6 +4,8 @@ import '@babel/polyfill';
 import BaseContractWrapper from './BaseContractWrapper';
 import Web3Wrapper from './Web3Wrapper';
 
+const abiDecoder = require('abi-decoder');
+
 class BaseClass extends BaseContractWrapper {
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
 		super(web3Wrapper, [], address);
@@ -17,16 +19,16 @@ const baseClass = new BaseClass(
 		sendSignedTransaction: jest.fn(),
 		signTx: jest.fn(),
 		createTxCommand: jest.fn(() => 'createTxCommand'),
-		createContract: jest.fn(),
+		createContract: jest.fn(() => ({
+			methods: {
+				contractCode: jest.fn()
+			}
+		})),
 		onSwitchToMetaMask: jest.fn(),
 		onSwitchToLedger: jest.fn()
 	} as any,
 	'contractAddress'
 );
-
-// test('constructor', async () => {
-
-// });
 
 test('sendTransactionRaw, without option', async () => {
 	await baseClass.sendTransactionRaw('address', 'privateKey', 'contractAddr', 1, 'command');
@@ -42,4 +44,16 @@ test('sendTransactionRaw, with option', async () => {
 	});
 	expect((baseClass.web3Wrapper.createTxCommand as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((baseClass.web3Wrapper.signTx as jest.Mock).mock.calls).toMatchSnapshot();
+});
+
+test('getContractCode', async () => {
+	baseClass.contract.methods.contractCode = jest.fn(() => ({
+		call: jest.fn(() => Promise.resolve('contractCode'))
+	}));
+	expect(await baseClass.getContractCode()).toMatchSnapshot();
+});
+
+test('decode', async () => {
+	abiDecoder.decodeMethod = jest.fn(() => 'decodedOutput');
+	expect(await baseClass.decode('input')).toMatchSnapshot();
 });
