@@ -2,7 +2,6 @@ import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
 import { IAddress, IEsplanadeAddresses, IEsplanadeStates, IVotingData } from './types';
-import util from './util';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWrapper extends BaseContractWrapper {
@@ -187,72 +186,12 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async startManagerRaw(
-		address: string,
-		privateKey: string,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number = -1
-	) {
-		util.logInfo(`the account ${address} is starting esplanade`);
-
-		const abi = {
-			name: 'startManager',
-			type: 'function',
-			inputs: []
-		};
-
-		const command = this.web3Wrapper.generateTxString(abi, []);
-		await this.sendTransactionRaw(address, privateKey, this.address, 0, command, {
-			gasPrice,
-			gasLimit,
-			nonce
-		});
-	}
-
 	public addCustodian(custodianAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 
 		return this.contract.methods.addCustodian(custodianAddr).send({
 			from: this.address
 		});
-	}
-
-	public async addCustodianRaw(
-		address: string,
-		privateKey: string,
-		custodianAddr: string,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number = -1
-	) {
-		util.logInfo(`the account ${address} is addCustodian ${custodianAddr}`);
-		const abi = {
-			type: 'function',
-			inputs: [
-				{
-					name: 'custodianAddr',
-					type: 'address'
-				}
-			],
-			name: 'addCustodian'
-		};
-
-		const input = [custodianAddr];
-		const command = this.web3Wrapper.generateTxString(abi, input);
-		await this.sendTransactionRaw(
-			address,
-			privateKey,
-			this.address,
-			0,
-
-			command,
-			{
-				gasPrice,
-				gasLimit,
-				nonce
-			}
-		);
 	}
 
 	public addOtherContracts(contractAddr: string) {

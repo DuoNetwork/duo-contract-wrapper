@@ -208,64 +208,6 @@ export default class Web3Wrapper {
 		});
 	}
 
-	public async erc20TransferRaw(
-		tokenAddress: string,
-		address: string,
-		privateKey: string,
-		to: string,
-		value: number,
-		gasPrice: number,
-		gasLimit: number,
-		nonce: number = -1
-	) {
-		util.logInfo(
-			'the account ' +
-				address +
-				' privateKey is ' +
-				privateKey +
-				' transfering token (' +
-				tokenAddress +
-				') to ' +
-				to +
-				' with amt ' +
-				value
-		);
-		nonce = nonce === -1 ? await this.web3.eth.getTransactionCount(address) : nonce;
-		const abi = {
-			name: 'transfer',
-			type: 'function',
-			inputs: [
-				{
-					name: 'from',
-					type: 'address'
-				},
-				{
-					name: 'to',
-					type: 'address'
-				},
-				{
-					name: 'tokens',
-					type: 'uint256'
-				}
-			]
-		};
-		const input = [address, to, value];
-		const command = this.generateTxString(abi, input);
-		// sending out transaction
-		gasPrice = (await this.getGasPrice()) || gasPrice;
-		// gasPrice = gasPrice || await web3.eth.
-		this.web3.eth
-			.sendSignedTransaction(
-				'0x' +
-					this.signTx(
-						this.createTxCommand(nonce, gasPrice, gasLimit, tokenAddress, 0, command),
-						privateKey
-					)
-			)
-			.then(receipt => util.logInfo(receipt))
-			.catch(error => util.logError(error));
-	}
-
 	public async erc20Transfer(
 		contractAddress: string,
 		from: string,

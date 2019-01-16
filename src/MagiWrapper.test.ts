@@ -7,12 +7,6 @@ import Web3Wrapper from './Web3Wrapper';
 const web3Wrapper = new Web3Wrapper(null, CST.PROVIDER_INFURA_KOVAN, '', false);
 const magiWrapper = new MagiWrapper(web3Wrapper, web3Wrapper.contractAddresses.Oracles[0].address);
 
-test('startMagiRaw', async () => {
-	magiWrapper.commitInternal = jest.fn(() => Promise.resolve());
-	await magiWrapper.startMagiRaw('address', 'privateKey', 1, 2, 3, 4);
-	expect((magiWrapper.commitInternal as jest.Mock).mock.calls).toMatchSnapshot();
-});
-
 test('startMagi, wrong env', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => false);
 	try {
@@ -61,12 +55,6 @@ test('startMagi, without account', async () => {
 		gasLimit: 200000
 	});
 	expect((magiWrapper.contract.methods.startOracle as jest.Mock).mock.calls).toMatchSnapshot();
-});
-
-test('commitPriceRaw', async () => {
-	magiWrapper.commitInternal = jest.fn(() => Promise.resolve());
-	await magiWrapper.commitPriceRaw('address', 'privateKey', 1, 2, 3, 4);
-	expect((magiWrapper.commitInternal as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('commitPrice, wrong env', async () => {

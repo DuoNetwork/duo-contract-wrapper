@@ -29,23 +29,6 @@ Array [
 
 exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
 
-exports[`commitPriceRaw 1`] = `
-Array [
-  Array [
-    Array [
-      "1000000000000000000",
-      2,
-    ],
-    "0x03ee06f40000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000000000002",
-    "address",
-    "privateKey",
-    3,
-    4,
-    -1,
-  ],
-]
-`;
-
 exports[`getLastPrice 1`] = `
 Array [
   Array [],
@@ -91,20 +74,3 @@ Array [
 `;
 
 exports[`startMagi, wrong env 1`] = `"Wrong Env"`;
-
-exports[`startMagiRaw 1`] = `
-Array [
-  Array [
-    Array [
-      "1000000000000000000",
-      2,
-    ],
-    "0x660d6eaf0000000000000000000000000000000000000000000000000de0b6b3a76400000000000000000000000000000000000000000000000000000000000000000002",
-    "address",
-    "privateKey",
-    3,
-    4,
-    -1,
-  ],
-]
-`;
