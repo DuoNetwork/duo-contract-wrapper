@@ -100,7 +100,7 @@ export default class MagiWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.COMMIT_PRICE_GAS;
-		return this.contract.methods.startOracle(this.web3Wrapper.toWei(price), timeInSecond).send({
+		return this.contract.methods.commitPrice(this.web3Wrapper.toWei(price), timeInSecond).send({
 			from: account || await this.web3Wrapper.getCurrentAddress(),
 			gasPrice: gasPrice,
 			gas: gasLimit
