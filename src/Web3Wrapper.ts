@@ -133,64 +133,9 @@ export default class Web3Wrapper {
 		return Promise.reject('Wrong Env');
 	}
 
-	public generateTxString(abi: object, input: any[]): string {
-		return this.web3.eth.abi.encodeFunctionCall(abi, input);
-	}
-
-	// public createTxCommand(
-	// 	nonce: number,
-	// 	gasPrice: number,
-	// 	gasLimit: number,
-	// 	toAddr: string,
-	// 	amount: number,
-	// 	data: string
-	// ) {
-	// 	return {
-	// 		nonce, // web3.utils.toHex(nonce), //nonce,
-	// 		gasPrice: this.web3.utils.toHex(gasPrice),
-	// 		gasLimit: this.web3.utils.toHex(gasLimit),
-	// 		to: toAddr,
-	// 		value: this.web3.utils.toHex(this.web3.utils.toWei(amount.toString(), 'ether')),
-	// 		data
-	// 	};
-	// }
-
-	// public signTx(rawTx: object, privateKey: string): string {
-	// 	try {
-	// 		const tx = new Tx(rawTx);
-	// 		tx.sign(new Buffer(privateKey, 'hex'));
-	// 		return tx.serialize().toString('hex');
-	// 	} catch (err) {
-	// 		util.logError(err);
-	// 		return '';
-	// 	}
-	// }
-
 	public getGasPrice() {
 		return this.web3.eth.getGasPrice();
 	}
-
-	// public async ethTransferRaw(
-	// 	from: string,
-	// 	privatekey: string,
-	// 	to: string,
-	// 	amt: number,
-	// 	nonce: number
-	// ) {
-	// 	if (!this.isLocal()) return this.wrongEnvReject();
-	// 	from = from || (await this.getCurrentAddress());
-	// 	const rawTx = {
-	// 		nonce: nonce,
-	// 		gasPrice: this.web3.utils.toHex((await this.getGasPrice()) || CST.DEFAULT_GAS_PRICE),
-	// 		gasLimit: this.web3.utils.toHex(23000),
-	// 		from: from,
-	// 		to: to,
-	// 		value: this.web3.utils.toHex(this.web3.utils.toWei(amt.toPrecision(3) + '', 'ether'))
-	// 	};
-	// 	return this.web3.eth
-	// 		.sendSignedTransaction('0x' + this.signTx(rawTx, privatekey))
-	// 		.then(receipt => util.logInfo(JSON.stringify(receipt, null, 4)));
-	// }
 
 	public async sendEther(from: string, to: string, value: number, option: IEthTxOption = {}) {
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
