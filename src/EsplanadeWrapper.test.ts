@@ -184,12 +184,13 @@ test('startManager', async () => {
 test('addCustodian', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await esplanadeWrapper.addCustodian('custodianAddr');
+		await esplanadeWrapper.addCustodian('account', 'custodianAddr');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	await esplanadeWrapper.addCustodian('custodianAddr');
+	await esplanadeWrapper.addCustodian('account', 'custodianAddr');
+	await esplanadeWrapper.addCustodian('', 'custodianAddr');
 	expect(
 		(esplanadeWrapper.contract.methods.addCustodian as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -198,12 +199,13 @@ test('addCustodian', async () => {
 test('addOtherContracts', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await esplanadeWrapper.addOtherContracts('contractAddr');
+		await esplanadeWrapper.addOtherContracts('account', 'contractAddr');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	await esplanadeWrapper.addOtherContracts('otherContractAddr');
+	await esplanadeWrapper.addOtherContracts('account', 'otherContractAddr');
+	await esplanadeWrapper.addOtherContracts('', 'otherContractAddr');
 	expect(
 		(esplanadeWrapper.contract.methods.addOtherContracts as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -212,12 +214,13 @@ test('addOtherContracts', async () => {
 test('addAddress', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await esplanadeWrapper.addAddress('addr1', 'addr2', true);
+		await esplanadeWrapper.addAddress('account', 'addr1', 'addr2', true);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	await esplanadeWrapper.addAddress('addr1', 'addr2', true);
+	await esplanadeWrapper.addAddress('account', 'addr1', 'addr2', true);
+	await esplanadeWrapper.addAddress('', 'addr1', 'addr2', true);
 	expect(
 		(esplanadeWrapper.contract.methods.addAddress as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -226,12 +229,13 @@ test('addAddress', async () => {
 test('removeAddress', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await esplanadeWrapper.removeAddress('addr', true);
+		await esplanadeWrapper.removeAddress('account', 'addr', true);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	await esplanadeWrapper.removeAddress('addr', true);
+	await esplanadeWrapper.removeAddress('account', 'addr', true);
+	await esplanadeWrapper.removeAddress('', 'addr', true);
 	expect(
 		(esplanadeWrapper.contract.methods.removeAddress as jest.Mock).mock.calls
 	).toMatchSnapshot();
