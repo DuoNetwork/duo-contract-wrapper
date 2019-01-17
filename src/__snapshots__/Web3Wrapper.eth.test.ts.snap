@@ -139,3 +139,13 @@ Array [
   "account3",
 ]
 `;
+
+exports[`switchToLedger kovan 1`] = `
+Array [
+  "account1",
+  "account2",
+  "account3",
+]
+`;
+
+exports[`toWei 1`] = `1000000000000000000`;

@@ -71,8 +71,23 @@ test('pullEvents', async () => {
 
 test('switchToMetaMask, metaMask', () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.handleSwitchToMetaMask = [jest.fn()];
+	web3Wrapper.handleSwitchToMetaMask = [
+		jest.fn(),
+		jest.fn(() => {
+			throw new Error('switchToMetaMaskError');
+		})
+	];
 	web3Wrapper.switchToMetaMask({ ethereum: {} });
+	expect(web3Wrapper.wallet).toBe(Wallet.MetaMask);
+	expect(web3Wrapper.accountIndex).toBe(0);
+	expect(web3Wrapper.handleSwitchToMetaMask[0] as jest.Mock).toBeCalled();
+	expect(web3Wrapper.handleSwitchToMetaMask[1] as jest.Mock).toBeCalled();
+});
+
+test('switchToMetaMask, metaMask old', () => {
+	const web3Wrapper = new Web3Wrapper({ web3: { currentProvider: {} } }, '', '', true);
+	web3Wrapper.handleSwitchToMetaMask = [jest.fn()];
+	web3Wrapper.switchToMetaMask({ web3: { currentProvider: {} } });
 	expect(web3Wrapper.wallet).toBe(Wallet.MetaMask);
 	expect(web3Wrapper.accountIndex).toBe(0);
 	expect(web3Wrapper.handleSwitchToMetaMask[0] as jest.Mock).toBeCalled();

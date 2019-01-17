@@ -36,6 +36,24 @@ jest.mock('web3', () => {
 	});
 });
 
+jest.mock('web3-provider-engine/subproviders/fetch');
+jest.mock('@ledgerhq/web3-subprovider', () => ({
+	default: jest.fn()
+}));
+jest.mock('web3-provider-engine', () => {
+	return jest.fn().mockImplementation(() => {
+		return {
+			addProvider: jest.fn(),
+			start: jest.fn()
+		};
+	});
+});
+
+test('toWei', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	expect(web3Wrapper.toWei(1)).toMatchSnapshot();
+});
+
 test('getGasPrice', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	expect(await web3Wrapper.getGasPrice()).toMatchSnapshot();
@@ -100,7 +118,9 @@ test('getErc20Allowance', async () => {
 	web3Wrapper.createContract = jest.fn(() => ({
 		methods: method
 	}));
-	expect(await web3Wrapper.getErc20Allowance('contractAddr', 'addr', 'spender')).toMatchSnapshot();
+	expect(
+		await web3Wrapper.getErc20Allowance('contractAddr', 'addr', 'spender')
+	).toMatchSnapshot();
 });
 
 test('getTransactionReceipt', async () => {
@@ -115,7 +135,9 @@ test('checkAddress', async () => {
 
 test('checkAddress', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	expect(await web3Wrapper.checkAddress('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD')).toBeTruthy();
+	expect(
+		await web3Wrapper.checkAddress('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD')
+	).toBeTruthy();
 });
 
 test('sendEther, without option', async () => {
@@ -288,20 +310,22 @@ test('erc20Approve, unlimited', async () => {
 });
 
 test('switchToLedger', async () => {
-	jest.mock('web3-provider-engine/subproviders/fetch');
-	jest.mock('@ledgerhq/web3-subprovider', () => ({
-		default: jest.fn()
-	}));
-	jest.mock('web3-provider-engine', () => {
-		return jest.fn().mockImplementation(() => {
-			return {
-				addProvider: jest.fn(),
-				start: jest.fn()
-			};
-		});
-	});
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	web3Wrapper.handleSwitchToLedger = [jest.fn()];
+
+	const res = await web3Wrapper.switchToLedger();
+	expect(web3Wrapper.wallet).toBe(Wallet.Ledger);
+	expect(res).toMatchSnapshot();
+	expect(web3Wrapper.handleSwitchToLedger[0] as jest.Mock).toBeCalled();
+});
+
+test('switchToLedger kovan', async () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', false);
+	web3Wrapper.handleSwitchToLedger = [
+		jest.fn(() => {
+			throw new Error('switchToLedgerError');
+		})
+	];
 
 	const res = await web3Wrapper.switchToLedger();
 	expect(web3Wrapper.wallet).toBe(Wallet.Ledger);
