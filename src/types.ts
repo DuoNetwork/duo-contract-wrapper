@@ -134,7 +134,7 @@ export interface IContractAddresses {
 	Oracles: IContractAddress[];
 }
 
-export interface IEthTxOption {
+export interface ITransactionOption {
 	gasPrice?: number,
 	gasLimit?: number,
 	nonce?: number,

@@ -1,6 +1,6 @@
 import { Contract } from 'web3/types';
 // import * as CST from './constants';
-// import { IEthTxOption } from './types';
+// import { ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 

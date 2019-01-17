@@ -152,13 +152,6 @@ test('sendEther, without option', async () => {
 	expect((web3Wrapper.web3.eth.sendTransaction as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
-test('sendEther, without account', async () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
-	await web3Wrapper.sendEther('', 'to', 1);
-	expect((web3Wrapper.web3.eth.sendTransaction as jest.Mock).mock.calls).toMatchSnapshot();
-});
-
 test('sendEther, with option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
@@ -193,13 +186,6 @@ test('erc20Transfer, without option', async () => {
 	}));
 	await web3Wrapper.erc20Transfer('contractAddrdess', 'from', 'to', 1);
 	expect((method.transfer as jest.Mock).mock.calls).toMatchSnapshot();
-});
-
-test('erc20Transfer, without account', async () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
-	await web3Wrapper.erc20Transfer('contractAddrdess', '', 'to', 1);
-	expect((web3Wrapper.web3.eth.sendTransaction as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('erc20Transfer, with option', async () => {
@@ -252,26 +238,6 @@ test('erc20Approve, without option', async () => {
 	expect((method.approve as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
-test('erc20Approve, without account', async () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	const on = jest.fn();
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
-	const method = {
-		approve: jest.fn(() => ({
-			send: jest.fn(() => {
-				setTimeout(() => on.mock.calls[0][1]('createTxHash'), 0);
-				return {
-					on: on
-				};
-			})
-		}))
-	};
-	web3Wrapper.createContract = jest.fn(() => ({
-		methods: method
-	}));
-	await web3Wrapper.erc20Approve('contractAddress', '', 'spender', 1);
-	expect((method.approve as jest.Mock).mock.calls).toMatchSnapshot();
-});
 test('erc20Approve, unlimited', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	const on = jest.fn();

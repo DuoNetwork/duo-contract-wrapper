@@ -20,15 +20,6 @@ Array [
 ]
 `;
 
-exports[`erc20Approve, without account 1`] = `
-Array [
-  Array [
-    "spender",
-    "1000000000000000000",
-  ],
-]
-`;
-
 exports[`erc20Approve, without option 1`] = `
 Array [
   Array [
@@ -48,8 +39,6 @@ Array [
   ],
 ]
 `;
-
-exports[`erc20Transfer, without account 1`] = `Array []`;
 
 exports[`erc20Transfer, without option 1`] = `
 Array [
@@ -93,21 +82,6 @@ Array [
     Object {
       "from": "from",
       "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-      "to": "to",
-      "value": "1000000000000000000",
-    },
-  ],
-]
-`;
-
-exports[`sendEther, without account 1`] = `
-Array [
-  Array [
-    Object {
-      "from": "account1",
-      "gas": 5,
       "gasPrice": 1000000000,
       "nonce": 10,
       "to": "to",

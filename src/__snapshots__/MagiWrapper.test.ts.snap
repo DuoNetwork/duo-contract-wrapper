@@ -9,15 +9,6 @@ Array [
 ]
 `;
 
-exports[`commitPrice, without account 1`] = `
-Array [
-  Array [
-    "100000000000000000000",
-    123456789,
-  ],
-]
-`;
-
 exports[`commitPrice, without option 1`] = `
 Array [
   Array [
@@ -47,15 +38,6 @@ exports[`isStarted 1`] = `Array []`;
 exports[`isStarted 2`] = `true`;
 
 exports[`startMagi, with option 1`] = `
-Array [
-  Array [
-    "100000000000000000000",
-    123456789,
-  ],
-]
-`;
-
-exports[`startMagi, without account 1`] = `
 Array [
   Array [
     "100000000000000000000",

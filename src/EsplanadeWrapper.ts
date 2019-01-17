@@ -140,81 +140,71 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 
 	public async startContractVoting(account: string, candidateAddress: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startContractVoting(candidateAddress).send({
-			from: from
+			from: account
 		});
 	}
 
 	public async terminateContractVoting(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.terminateContractVoting().send({
-			from: from
+			from: account
 		});
 	}
 
 	public async terminateByTimeout(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.terminateByTimeout().send({
-			from: from
+			from: account
 		});
 	}
 
 	public async startModeratorVoting(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startModeratorVoting().send({
-			from: from
+			from: account
 		});
 	}
 
 	public async vote(account: string, voteFor: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.vote(voteFor).send({
-			from: from
+			from: account
 		});
 	}
 
 	public async startManager(account: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startManager().send({
-			from: from
+			from: account
 		});
 	}
 
 	public async addCustodian(account: string, custodianAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.addCustodian(custodianAddr).send({
-			from: from
+			from: account
 		});
 	}
 
 	public async addOtherContracts(account: string, contractAddr: string) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.addOtherContracts(contractAddr).send({
-			from: from
+			from: account
 		});
 	}
 
 	public  async addAddress(account: string, addr1: string, addr2: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.addAddress(addr1, addr2, this.getAddressPoolIndex(hot)).send({
-			from: from
+			from: account
 		});
 	}
 
 	public async removeAddress(account: string, addr: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.removeAddress(addr, this.getAddressPoolIndex(hot)).send({
-			from: from
+			from: account
 		});
 	}
 }

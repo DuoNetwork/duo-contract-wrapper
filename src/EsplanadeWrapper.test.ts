@@ -12,7 +12,6 @@ const web3Wrapper = {
 	onSwitchToLedger: jest.fn(() => ({} as any)),
 	readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
 	getEthBalance: jest.fn(() => Promise.resolve('10')),
-	getCurrentAddress: jest.fn(() => Promise.resolve('currentAddr')),
 	createContract: jest.fn(() => ({
 		methods: {
 			moderator: jest.fn(() => ({
@@ -108,7 +107,6 @@ test('startContractVoting', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.startContractVoting('account', 'candidateAdddr');
-	await esplanadeWrapper.startContractVoting('', 'candidateAdddr');
 	expect(
 		(esplanadeWrapper.contract.methods.startContractVoting as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -123,9 +121,8 @@ test('terminateContractVoting', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.terminateContractVoting('account');
-	await esplanadeWrapper.terminateContractVoting('');
 	expect(esplanadeWrapper.contract.methods.terminateContractVoting as jest.Mock).toBeCalledTimes(
-		2
+		1
 	);
 });
 
@@ -138,8 +135,7 @@ test('terminateByTimeout', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.terminateByTimeout('account');
-	await esplanadeWrapper.terminateByTimeout('');
-	expect(esplanadeWrapper.contract.methods.terminateByTimeout as jest.Mock).toBeCalledTimes(2);
+	expect(esplanadeWrapper.contract.methods.terminateByTimeout as jest.Mock).toBeCalledTimes(1);
 });
 
 test('startModeratorVoting', async () => {
@@ -151,8 +147,7 @@ test('startModeratorVoting', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.startModeratorVoting('account');
-	await esplanadeWrapper.startModeratorVoting('');
-	expect(esplanadeWrapper.contract.methods.startModeratorVoting as jest.Mock).toBeCalledTimes(2);
+	expect(esplanadeWrapper.contract.methods.startModeratorVoting as jest.Mock).toBeCalledTimes(1);
 });
 
 test('vote', async () => {
@@ -177,8 +172,7 @@ test('startManager', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.startManager('account');
-	await esplanadeWrapper.startManager('');
-	expect(esplanadeWrapper.contract.methods.startManager as jest.Mock).toBeCalledTimes(2);
+	expect(esplanadeWrapper.contract.methods.startManager as jest.Mock).toBeCalledTimes(1);
 });
 
 test('addCustodian', async () => {
@@ -190,7 +184,6 @@ test('addCustodian', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.addCustodian('account', 'custodianAddr');
-	await esplanadeWrapper.addCustodian('', 'custodianAddr');
 	expect(
 		(esplanadeWrapper.contract.methods.addCustodian as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -205,7 +198,6 @@ test('addOtherContracts', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.addOtherContracts('account', 'otherContractAddr');
-	await esplanadeWrapper.addOtherContracts('', 'otherContractAddr');
 	expect(
 		(esplanadeWrapper.contract.methods.addOtherContracts as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -220,7 +212,6 @@ test('addAddress', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.addAddress('account', 'addr1', 'addr2', true);
-	await esplanadeWrapper.addAddress('', 'addr1', 'addr2', true);
 	expect(
 		(esplanadeWrapper.contract.methods.addAddress as jest.Mock).mock.calls
 	).toMatchSnapshot();
@@ -235,7 +226,6 @@ test('removeAddress', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.removeAddress('account', 'addr', true);
-	await esplanadeWrapper.removeAddress('', 'addr', true);
 	expect(
 		(esplanadeWrapper.contract.methods.removeAddress as jest.Mock).mock.calls
 	).toMatchSnapshot();

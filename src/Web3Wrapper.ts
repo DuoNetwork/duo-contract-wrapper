@@ -3,7 +3,7 @@ import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
-import { IContractAddresses, IEthTxOption, IEvent, Wallet } from './types';
+import { IContractAddresses, ITransactionOption, IEvent, Wallet } from './types';
 
 const HDWalletProvider = require('./external/HDWalletProvider');
 const BigNumber = require('bignumber.js');
@@ -134,10 +134,9 @@ export default class Web3Wrapper {
 		return this.web3.eth.getGasPrice();
 	}
 
-	public async sendEther(from: string, to: string, value: number, option: IEthTxOption = {}) {
+	public async sendEther(from: string, to: string, value: number, option: ITransactionOption = {}) {
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
 		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
-		from = from || (await this.getCurrentAddress());
 		const nonce = option.nonce || (await this.getTransactionCount(from));
 
 		return this.web3.eth.sendTransaction({
@@ -155,12 +154,11 @@ export default class Web3Wrapper {
 		from: string,
 		to: string,
 		value: number,
-		option: IEthTxOption = {}
+		option: ITransactionOption = {}
 	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
 		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
-		from = from || (await this.getCurrentAddress());
 		const nonce = option.nonce || (await this.getTransactionCount(from));
 		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
@@ -180,7 +178,6 @@ export default class Web3Wrapper {
 		unlimited: boolean = false
 	) {
 		if (this.isReadOnly()) return this.readOnlyReject();
-		from = from || (await this.getCurrentAddress());
 		return new Promise<string>(resolve => {
 			const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 			return erc20Contract.methods

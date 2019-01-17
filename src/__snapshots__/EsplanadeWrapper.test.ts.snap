@@ -9,11 +9,6 @@ Array [
     "addr2",
     1,
   ],
-  Array [
-    "addr1",
-    "addr2",
-    1,
-  ],
 ]
 `;
 
@@ -24,9 +19,6 @@ Array [
   Array [
     "custodianAddr",
   ],
-  Array [
-    "custodianAddr",
-  ],
 ]
 `;
 
@@ -34,9 +26,6 @@ exports[`addOtherContracts 1`] = `"Read Only Mode"`;
 
 exports[`addOtherContracts 2`] = `
 Array [
-  Array [
-    "otherContractAddr",
-  ],
   Array [
     "otherContractAddr",
   ],
@@ -135,10 +124,6 @@ Array [
     "addr",
     1,
   ],
-  Array [
-    "addr",
-    1,
-  ],
 ]
 `;
 
@@ -146,9 +131,6 @@ exports[`startContractVoting 1`] = `"Read Only Mode"`;
 
 exports[`startContractVoting 2`] = `
 Array [
-  Array [
-    "candidateAdddr",
-  ],
   Array [
     "candidateAdddr",
   ],

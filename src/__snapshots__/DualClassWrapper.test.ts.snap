@@ -157,14 +157,14 @@ exports[`collectFee 3`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 40000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 2000000000,
     },
@@ -199,7 +199,7 @@ exports[`create 7`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 160000,
       "gasPrice": 1000000000,
       "value": 1000000000000000000,
@@ -207,7 +207,7 @@ Array [
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
       "value": 1000000000000000000,
@@ -220,14 +220,14 @@ exports[`create 8`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 160000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
     },
@@ -241,7 +241,7 @@ exports[`fetchPrice 2`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 1000000,
       "gasPrice": 1000000000,
       "nonce": 2,
@@ -249,7 +249,7 @@ Array [
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
       "nonce": 10,
@@ -383,14 +383,14 @@ exports[`redeem 5`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 80000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
     },
@@ -408,14 +408,14 @@ exports[`redeemAll 4`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 80000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 100000,
     },
@@ -442,14 +442,14 @@ exports[`setValue 3`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 50000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 2000000000,
     },
@@ -478,14 +478,14 @@ exports[`startCustodian 3`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 1000000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
     },
@@ -499,14 +499,14 @@ exports[`triggerPreReset 2`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 120000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
     },
@@ -520,14 +520,14 @@ exports[`triggerReset 2`] = `
 Array [
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 4000000,
       "gasPrice": 1000000000,
     },
   ],
   Array [
     Object {
-      "from": "currentAddress",
+      "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
     },

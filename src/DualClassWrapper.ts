@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import dualClassAbi from './static/DualClassCustodian.json';
-import { ICustodianAddresses, IDualClassStates, IEthTxOption } from './types';
+import { ICustodianAddresses, IDualClassStates, ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class DualClassWrapper extends BaseContractWrapper {
@@ -32,25 +32,24 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		aAddr: string,
 		bAddr: string,
 		oracleAddr: string,
-		option: IEthTxOption = {}
+		option: ITransactionOption = {}
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startCustodian(aAddr, bAddr, oracleAddr).send({
-			from: from,
+			from: account,
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
 	}
-	public async fetchPrice(account: string, option: IEthTxOption = {}) {
+	public async fetchPrice(account: string, option: ITransactionOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
 		const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(this.address));
 		return this.contract.methods.fetchPrice().send({
-			from: account || (await this.web3Wrapper.getCurrentAddress()),
+			from: account,
 			gasPrice: gasPrice,
 			gas: gasLimit,
 			nonce: nonce
@@ -61,18 +60,17 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		account: string,
 		value: number,
 		wethAddr: string,
-		option: IEthTxOption = {}
+		option: ITransactionOption = {}
 	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.CREATE_GAS;
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return new Promise<string>(resolve => {
 			if (wethAddr)
 				this.contract.methods
 					.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
 					.send({
-						from: from,
+						from: account,
 						gasPrice: gasPrice,
 						gas: gasLimit
 					})
@@ -81,7 +79,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 				this.contract.methods
 					.create()
 					.send({
-						from: from,
+						from: account,
 						value: this.web3Wrapper.toWei(value),
 						gasPrice: gasPrice,
 						gas: gasLimit
@@ -90,17 +88,16 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async redeem(account: string, amtA: number, amtB: number, option: IEthTxOption = {}) {
+	public async redeem(account: string, amtA: number, amtB: number, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.REDEEM_GAS;
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 
 		return new Promise<string>(resolve =>
 			this.contract.methods
 				.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
 				.send({
-					from: from,
+					from: account,
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
@@ -108,16 +105,15 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		);
 	}
 
-	public async redeemAll(account: string, option: IEthTxOption = {}) {
+	public async redeemAll(account: string, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.REDEEM_GAS;
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return new Promise<string>(resolve =>
 			this.contract.methods
 				.redeemAll()
 				.send({
-					from: from,
+					from: account,
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
@@ -125,25 +121,23 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		);
 	}
 
-	public async triggerReset(account: string, option: IEthTxOption = {}) {
+	public async triggerReset(account: string, option: ITransactionOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.RESET_GAS_LIMIT;
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startReset().send({
-			from: from,
+			from: account,
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
 	}
 
-	public async triggerPreReset(account: string, option: IEthTxOption = {}) {
+	public async triggerPreReset(account: string, option: ITransactionOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.PRE_RESET_GAS_LIMIT;
-		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return this.contract.methods.startPreReset().send({
-			from: from,
+			from: account,
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
@@ -282,12 +276,12 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return this.contract.methods.users(index).call();
 	}
 
-	public async collectFee(account: string, amount: number, option: IEthTxOption = {}) {
+	public async collectFee(account: string, amount: number, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.COLLECT_FEE_GAS;
 		return this.contract.methods.collectFee(this.web3Wrapper.toWei(amount)).send({
-			from: account || (await this.web3Wrapper.getCurrentAddress()),
+			from: account,
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
@@ -297,13 +291,13 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		account: string,
 		index: number,
 		newValue: number,
-		option: IEthTxOption = {}
+		option: ITransactionOption = {}
 	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.SET_VALUE_GAS;
 		return this.contract.methods.setValue(index, newValue).send({
-			from: account || (await this.web3Wrapper.getCurrentAddress()),
+			from: account,
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
