@@ -162,7 +162,7 @@ export default class Web3Wrapper {
 		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
 		from = from || (await this.getCurrentAddress());
 		const nonce = option.nonce || (await this.getTransactionCount(from));
-		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
 		return erc20Contract.methods.transfer(to, this.toWei(value)).send({
 			from: from,
@@ -182,7 +182,7 @@ export default class Web3Wrapper {
 		if (this.isReadOnly()) return this.readOnlyReject();
 		from = from || (await this.getCurrentAddress());
 		return new Promise<string>(resolve => {
-			const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+			const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 			return erc20Contract.methods
 				.approve(
 					spender,
@@ -223,13 +223,13 @@ export default class Web3Wrapper {
 	}
 
 	public async getErc20Balance(contractAddress: string, address: string) {
-		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
 		return this.fromWei(await erc20Contract.methods.balanceOf(address).call());
 	}
 
 	public async getErc20Allowance(contractAddress: string, address: string, spender: string) {
-		const erc20Contract = new this.web3.eth.Contract(erc20Abi.abi, contractAddress);
+		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
 		return this.fromWei(await erc20Contract.methods.allowance(address, spender).call());
 	}
@@ -287,13 +287,5 @@ export default class Web3Wrapper {
 
 	public getTransactionCount(address: string) {
 		return this.web3.eth.getTransactionCount(address);
-	}
-
-	public sendSignedTransaction(signedTx: string) {
-		return new Promise<string>(resolve =>
-			this.web3.eth
-				.sendSignedTransaction('0x' + signedTx)
-				.on('transactionHash', txHash => resolve(txHash))
-		);
 	}
 }

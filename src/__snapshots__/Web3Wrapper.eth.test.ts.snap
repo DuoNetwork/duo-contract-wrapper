@@ -1,6 +1,121 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`erc20Approve, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`erc20Approve, unlimited 1`] = `
+Array [
+  Array [
+    "spender",
+    "1.15792089237316195423570985008687907853269984665640564039457584007913129639935e+77",
+  ],
+]
+`;
+
+exports[`erc20Approve, unlimited 2`] = `
+Array [
+  Array [
+    "spender",
+    "1.15792089237316195423570985008687907853269984665640564039457584007913129639935e+77",
+  ],
+]
+`;
+
+exports[`erc20Approve, without account 1`] = `
+Array [
+  Array [
+    "spender",
+    "1000000000000000000",
+  ],
+]
+`;
+
+exports[`erc20Approve, without option 1`] = `
+Array [
+  Array [
+    "spender",
+    "1000000000000000000",
+  ],
+]
+`;
+
+exports[`erc20Transfer, readOnly 1`] = `"Read Only Mode"`;
+
+exports[`erc20Transfer, with option 1`] = `
+Array [
+  Array [
+    "to",
+    "1000000000000000000",
+  ],
+]
+`;
+
+exports[`erc20Transfer, without account 1`] = `Array []`;
+
+exports[`erc20Transfer, without option 1`] = `
+Array [
+  Array [
+    "to",
+    "1000000000000000000",
+  ],
+]
+`;
+
+exports[`getBlock 1`] = `
+Object {
+  "blockHash": "blockHash",
+  "timestamp": 123456789,
+}
+`;
+
+exports[`getBlockTimestamp, with blkNumber 1`] = `123456789000`;
+
+exports[`getBlockTimestamp, without blkNumber 1`] = `123456789000`;
+
+exports[`getCurrentAddress 1`] = `"0x0"`;
+
+exports[`getCurrentBlockNumber 1`] = `100000`;
+
+exports[`getCurretnNetwork 1`] = `42`;
+
+exports[`getErc20Allowance 1`] = `0.001`;
+
+exports[`getErc20Balance 1`] = `0.001`;
+
+exports[`getEthBalance 1`] = `0.00001`;
+
 exports[`getGasPrice 1`] = `1000000000`;
+
+exports[`getTransactionReceipt 1`] = `"receipt"`;
+
+exports[`sendEther, with option 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "from",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+      "to": "to",
+      "value": "1000000000000000000",
+    },
+  ],
+]
+`;
+
+exports[`sendEther, without account 1`] = `
+Array [
+  Array [
+    Object {
+      "from": "account1",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+      "to": "to",
+      "value": "1000000000000000000",
+    },
+  ],
+]
+`;
 
 exports[`sendEther, without option 1`] = `
 Array [
