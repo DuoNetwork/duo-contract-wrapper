@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`constructor 1`] = `
+Array [
+  Array [
+    Array [],
+    "contractAddress",
+  ],
+  Array [
+    Array [],
+    "contractAddress",
+  ],
+  Array [
+    Array [],
+    "contractAddress",
+  ],
+]
+`;
+
 exports[`decode 1`] = `"decodedOutput"`;
 
 exports[`getContractCode 1`] = `"contractCode"`;

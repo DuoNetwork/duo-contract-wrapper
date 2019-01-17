@@ -12,6 +12,12 @@ class BaseClass extends BaseContractWrapper {
 	}
 }
 
+const createContract = jest.fn(() => ({
+	methods: {
+		contractCode: jest.fn()
+	}
+}));
+
 const baseClass = new BaseClass(
 	{
 		getGasPrice: jest.fn(() => Promise.resolve(2000000000)),
@@ -19,16 +25,20 @@ const baseClass = new BaseClass(
 		sendSignedTransaction: jest.fn(),
 		signTx: jest.fn(),
 		createTxCommand: jest.fn(() => 'createTxCommand'),
-		createContract: jest.fn(() => ({
-			methods: {
-				contractCode: jest.fn()
-			}
-		})),
+		createContract: createContract,
 		onSwitchToMetaMask: jest.fn(),
 		onSwitchToLedger: jest.fn()
 	} as any,
 	'contractAddress'
 );
+
+test('constructor', () => {
+	expect(baseClass.web3Wrapper.onSwitchToLedger as jest.Mock).toBeCalledTimes(1);
+	(baseClass.web3Wrapper.onSwitchToLedger as jest.Mock).mock.calls[0][0]();
+	expect(baseClass.web3Wrapper.onSwitchToMetaMask as jest.Mock).toBeCalledTimes(1);
+	(baseClass.web3Wrapper.onSwitchToMetaMask as jest.Mock).mock.calls[0][0]();
+	expect(createContract.mock.calls).toMatchSnapshot();
+});
 
 test('getContractCode', async () => {
 	baseClass.contract.methods.contractCode = jest.fn(() => ({
