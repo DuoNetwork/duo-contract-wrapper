@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/FinBook/duo-contract-wrapper.svg?style=svg)](https://circleci.com/gh/FinBook/duo-contract-wrapper)
-[![Coverage Status](https://coveralls.io/repos/github/FinBook/duo-contract-wrapper/badge.svg)](https://coveralls.io/github/FinBook/duo-contract-wrapper)
+[![Coverage Status](https://coveralls.io/repos/github/FinBook/duo-contract-wrapper/badge.svg?branch=master)](https://coveralls.io/github/FinBook/duo-contract-wrapper?branch=master)
 # Introduction
 Contract utilities for DUO Network smart contracts
 
