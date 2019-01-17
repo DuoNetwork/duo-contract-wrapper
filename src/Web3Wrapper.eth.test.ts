@@ -38,7 +38,12 @@ jest.mock('web3', () => {
 
 jest.mock('web3-provider-engine/subproviders/fetch');
 jest.mock('@ledgerhq/web3-subprovider', () => ({
-	default: jest.fn()
+	default: jest.fn(getTransport => getTransport())
+}));
+jest.mock('@ledgerhq/hw-transport-u2f', () => ({
+	default: {
+		create: jest.fn()
+	}
 }));
 jest.mock('web3-provider-engine', () => {
 	return jest.fn().mockImplementation(() => {
