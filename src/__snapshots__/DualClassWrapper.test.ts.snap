@@ -140,30 +140,54 @@ Array [
 ]
 `;
 
-exports[`collectFee, readOnly 1`] = `"Read Only Mode"`;
+exports[`collectFee 1`] = `"Read Only Mode"`;
 
-exports[`collectFee, with option 1`] = `
+exports[`collectFee 2`] = `
 Array [
+  Array [
+    10000000000000000000,
+  ],
   Array [
     10000000000000000000,
   ],
 ]
 `;
 
-exports[`collectFee, without option 1`] = `
+exports[`collectFee 3`] = `
 Array [
   Array [
-    10000000000000000000,
+    Object {
+      "from": "currentAddress",
+      "gas": 40000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 2000000000,
+    },
   ],
 ]
 `;
 
-exports[`create, readOnly 1`] = `"Read Only Mode"`;
+exports[`create 1`] = `"Read Only Mode"`;
 
-exports[`create, with ETH 1`] = `Array []`;
+exports[`create 2`] = `"createWithWETHtxHash"`;
 
-exports[`create, with WETH 1`] = `
+exports[`create 3`] = `"createTxHash"`;
+
+exports[`create 4`] = `"createTxHash"`;
+
+exports[`create 5`] = `"createWithWETHtxHash"`;
+
+exports[`create 6`] = `
 Array [
+  Array [
+    1000000000000000000,
+    "wethAddr",
+  ],
   Array [
     1000000000000000000,
     "wethAddr",
@@ -171,25 +195,68 @@ Array [
 ]
 `;
 
-exports[`create, with option 1`] = `Array []`;
-
-exports[`fetchPrice, 1`] = `
+exports[`create 7`] = `
 Array [
-  Array [],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 160000,
+      "gasPrice": 1000000000,
+      "value": 1000000000000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "value": 1000000000000000000,
+    },
+  ],
 ]
 `;
 
-exports[`fetchPrice, 2`] = `Array []`;
-
-exports[`fetchPrice, isLocal wallet 1`] = `"wrong env"`;
-
-exports[`fetchPrice, without option 1`] = `
+exports[`create 8`] = `
 Array [
-  Array [],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 160000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+    },
+  ],
 ]
 `;
 
-exports[`fetchPrice, without option 2`] = `Array []`;
+exports[`fetchPrice 1`] = `"wrong env"`;
+
+exports[`fetchPrice 2`] = `
+Array [
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 1000000,
+      "gasPrice": 1000000000,
+      "nonce": 2,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
 
 exports[`getAddress 1`] = `
 Object {
@@ -293,10 +360,18 @@ Array [
 ]
 `;
 
-exports[`redeem, readOnly 1`] = `"Read Only Mode"`;
+exports[`redeem 1`] = `"Read Only Mode"`;
 
-exports[`redeem, with option 1`] = `
+exports[`redeem 2`] = `"redeemTxHash"`;
+
+exports[`redeem 3`] = `"redeemTxHash"`;
+
+exports[`redeem 4`] = `
 Array [
+  Array [
+    1000000000000000000,
+    1000000000000000000,
+  ],
   Array [
     1000000000000000000,
     1000000000000000000,
@@ -304,35 +379,58 @@ Array [
 ]
 `;
 
-exports[`redeem, with option 2`] = `Array []`;
-
-exports[`redeem, without option 1`] = `
+exports[`redeem 5`] = `
 Array [
   Array [
-    1000000000000000000,
-    1000000000000000000,
+    Object {
+      "from": "currentAddress",
+      "gas": 80000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+    },
   ],
 ]
 `;
 
-exports[`redeemAll, readOnly 1`] = `"Read Only Mode"`;
+exports[`redeemAll 1`] = `"Read Only Mode"`;
 
-exports[`redeemAll, with option 1`] = `
+exports[`redeemAll 2`] = `"redeemAllTxHash"`;
+
+exports[`redeemAll 3`] = `"redeemAllTxHash"`;
+
+exports[`redeemAll 4`] = `
 Array [
-  Array [],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 80000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 100000,
+    },
+  ],
 ]
 `;
 
-exports[`redeemAll, without option 1`] = `
-Array [
-  Array [],
-]
-`;
+exports[`setValue 1`] = `"Read Only Mode"`;
 
-exports[`setValue, readOnly 1`] = `"Read Only Mode"`;
-
-exports[`setValue, with option 1`] = `
+exports[`setValue 2`] = `
 Array [
+  Array [
+    1,
+    10,
+  ],
   Array [
     1,
     10,
@@ -340,17 +438,34 @@ Array [
 ]
 `;
 
-exports[`setValue, without option 1`] = `
+exports[`setValue 3`] = `
 Array [
   Array [
-    1,
-    10,
+    Object {
+      "from": "currentAddress",
+      "gas": 50000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 2000000000,
+    },
   ],
 ]
 `;
 
-exports[`startCustodian 1`] = `
+exports[`startCustodian 1`] = `"wrong env"`;
+
+exports[`startCustodian 2`] = `
 Array [
+  Array [
+    "aAddr",
+    "bAddr",
+    "oracleAddr",
+  ],
   Array [
     "aAddr",
     "bAddr",
@@ -359,90 +474,63 @@ Array [
 ]
 `;
 
-exports[`startCustodian, isLocal wallet 1`] = `"wrong env"`;
-
-exports[`startCustodian, without option 1`] = `
+exports[`startCustodian 3`] = `
 Array [
   Array [
-    "aAddr",
-    "bAddr",
-    "oracleAddr",
+    Object {
+      "from": "currentAddress",
+      "gas": 1000000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+    },
   ],
 ]
 `;
 
-exports[`triggerPreReset not local 1`] = `[TypeError: this.web3Wrapper.wrongEnvReject is not a function]`;
+exports[`triggerPreReset 1`] = `"wrong env"`;
 
-exports[`triggerPreReset with option 1`] = `
+exports[`triggerPreReset 2`] = `
 Array [
-  Array [],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 120000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+    },
+  ],
 ]
 `;
 
-exports[`triggerPreReset without option 1`] = `
-Array [
-  Array [],
-]
-`;
+exports[`triggerReset 1`] = `"wrong env"`;
 
-exports[`triggerReset not local 1`] = `[TypeError: this.web3Wrapper.wrongEnvReject is not a function]`;
-
-exports[`triggerReset, with option 1`] = `
+exports[`triggerReset 2`] = `
 Array [
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-]
-`;
-
-exports[`triggerReset, with option 2`] = `
-Array [
-  "triggerResettxHash0",
-  "triggerResettxHash1",
-  "triggerResettxHash2",
-  "triggerResettxHash3",
-  "triggerResettxHash4",
-  "triggerResettxHash5",
-  "triggerResettxHash6",
-  "triggerResettxHash7",
-  "triggerResettxHash8",
-  "triggerResettxHash9",
-]
-`;
-
-exports[`triggerReset, without option 1`] = `
-Array [
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-  Array [],
-]
-`;
-
-exports[`triggerReset, without option 2`] = `
-Array [
-  "triggerResettxHash0",
-  "triggerResettxHash1",
-  "triggerResettxHash2",
-  "triggerResettxHash3",
-  "triggerResettxHash4",
-  "triggerResettxHash5",
-  "triggerResettxHash6",
-  "triggerResettxHash7",
-  "triggerResettxHash8",
-  "triggerResettxHash9",
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 4000000,
+      "gasPrice": 1000000000,
+    },
+  ],
+  Array [
+    Object {
+      "from": "currentAddress",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+    },
+  ],
 ]
 `;

@@ -37,16 +37,11 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
-		const from = account || await this.web3Wrapper.getCurrentAddress();
-		return new Promise<string>(resolve => {
-			return this.contract.methods
-				.startCustodian(aAddr, bAddr, oracleAddr)
-				.send({
-					from: from,
-					gasPrice: gasPrice,
-					gas: gasLimit
-				})
-				.on('transactionHash', txHash => resolve(txHash));
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
+		return this.contract.methods.startCustodian(aAddr, bAddr, oracleAddr).send({
+			from: from,
+			gasPrice: gasPrice,
+			gas: gasLimit
 		});
 	}
 	public async fetchPrice(account: string, option: IEthTxOption = {}) {
@@ -55,7 +50,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
 		const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(this.address));
 		return this.contract.methods.fetchPrice().send({
-			from: account || await this.web3Wrapper.getCurrentAddress(),
+			from: account || (await this.web3Wrapper.getCurrentAddress()),
 			gasPrice: gasPrice,
 			gas: gasLimit,
 			nonce: nonce
@@ -71,7 +66,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.CREATE_GAS;
-		const from = account || await this.web3Wrapper.getCurrentAddress();
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return new Promise<string>(resolve => {
 			if (wethAddr)
 				this.contract.methods
@@ -99,7 +94,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.REDEEM_GAS;
-		const from = account || await this.web3Wrapper.getCurrentAddress();
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 
 		return new Promise<string>(resolve =>
 			this.contract.methods
@@ -117,7 +112,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.REDEEM_GAS;
-		const from = account || await this.web3Wrapper.getCurrentAddress();
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
 		return new Promise<string>(resolve =>
 			this.contract.methods
 				.redeemAll()
@@ -130,44 +125,28 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		);
 	}
 
-	public async triggerReset(account: string, count: number = 1, option: IEthTxOption = {}) {
+	public async triggerReset(account: string, option: IEthTxOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.RESET_GAS_LIMIT;
-		const from = account || await this.web3Wrapper.getCurrentAddress();
-		const promiseList: Array<Promise<string>> = [];
-		for (let i = 0; i < count; i++)
-			promiseList.push(
-				new Promise<string>(resolve =>
-					this.contract.methods
-						.startReset()
-						.send({
-							from: from,
-							gasPrice: gasPrice,
-							gas: gasLimit
-						})
-						.on('transactionHash', txHash => resolve(txHash))
-				)
-			);
-
-		return Promise.all(promiseList);
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
+		return this.contract.methods.startReset().send({
+			from: from,
+			gasPrice: gasPrice,
+			gas: gasLimit
+		});
 	}
 
 	public async triggerPreReset(account: string, option: IEthTxOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.PRE_RESET_GAS_LIMIT;
-		const from = account || await this.web3Wrapper.getCurrentAddress();
-		return new Promise<string>(resolve =>
-			this.contract.methods
-				.startPreReset()
-				.send({
-					from: from,
-					gasPrice: gasPrice,
-					gas: gasLimit
-				})
-				.on('transactionHash', txHash => resolve(txHash))
-		);
+		const from = account || (await this.web3Wrapper.getCurrentAddress());
+		return this.contract.methods.startPreReset().send({
+			from: from,
+			gasPrice: gasPrice,
+			gas: gasLimit
+		});
 	}
 
 	public static convertCustodianState(rawState: string) {
@@ -308,7 +287,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.COLLECT_FEE_GAS;
 		return this.contract.methods.collectFee(this.web3Wrapper.toWei(amount)).send({
-			from: account || await this.web3Wrapper.getCurrentAddress(),
+			from: account || (await this.web3Wrapper.getCurrentAddress()),
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
@@ -324,7 +303,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
 		const gasLimit = option.gasLimit || CST.SET_VALUE_GAS;
 		return this.contract.methods.setValue(index, newValue).send({
-			from: account || await this.web3Wrapper.getCurrentAddress(),
+			from: account || (await this.web3Wrapper.getCurrentAddress()),
 			gasPrice: gasPrice,
 			gas: gasLimit
 		});
