@@ -142,39 +142,11 @@ Array [
 
 exports[`startManager 1`] = `"Read Only Mode"`;
 
-exports[`startManager 2`] = `
-Array [
-  Array [],
-  Array [],
-]
-`;
-
 exports[`startModeratorVoting 1`] = `"Read Only Mode"`;
-
-exports[`startModeratorVoting 2`] = `
-Array [
-  Array [],
-  Array [],
-]
-`;
 
 exports[`terminateByTimeout 1`] = `"Read Only Mode"`;
 
-exports[`terminateByTimeout 2`] = `
-Array [
-  Array [],
-  Array [],
-]
-`;
-
 exports[`terminateContractVoting 1`] = `"Read Only Mode"`;
-
-exports[`terminateContractVoting 2`] = `
-Array [
-  Array [],
-  Array [],
-]
-`;
 
 exports[`vote 1`] = `"Read Only Mode"`;
 
