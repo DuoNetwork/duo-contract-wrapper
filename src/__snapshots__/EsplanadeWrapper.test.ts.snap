@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`addAddress 1`] = `
+exports[`addAddress 1`] = `"Read Only Mode"`;
+
+exports[`addAddress 2`] = `
 Array [
   Array [
     "addr1",
@@ -10,9 +12,9 @@ Array [
 ]
 `;
 
-exports[`addAddress, readOnly 1`] = `"Read Only Mode"`;
+exports[`addCustodian 1`] = `"Read Only Mode"`;
 
-exports[`addCustodian 1`] = `
+exports[`addCustodian 2`] = `
 Array [
   Array [
     "custodianAddr",
@@ -20,17 +22,15 @@ Array [
 ]
 `;
 
-exports[`addCustodian, readOnly 1`] = `"Read Only Mode"`;
+exports[`addOtherContracts 1`] = `"Read Only Mode"`;
 
-exports[`addOtherContracts 1`] = `
+exports[`addOtherContracts 2`] = `
 Array [
   Array [
     "otherContractAddr",
   ],
 ]
 `;
-
-exports[`addOtherContracts, readOnly 1`] = `"Read Only Mode"`;
 
 exports[`getAddrs 1`] = `
 Object {
@@ -45,144 +45,80 @@ Object {
 }
 `;
 
-exports[`getAddrs 2`] = `
-Array [
-  Array [
-    "moderator",
-  ],
-  Array [
-    "candidatre",
-  ],
-]
-`;
-
-exports[`getContractAddresses 1`] = `
-Array [
-  Object {
-    "address": "otherAddr1",
-    "balance": "10",
-  },
-  Object {
-    "address": "otherAddr2",
-    "balance": "10",
-  },
-  Object {
-    "address": "otherAddr3",
-    "balance": "10",
-  },
-]
-`;
-
-exports[`getContractAddresses 2`] = `
-Array [
-  Object {
-    "address": "custodianAddr1",
-    "balance": "10",
-  },
-  Object {
-    "address": "custodianAddr2",
-    "balance": "10",
-  },
-  Object {
-    "address": "custodianAddr3",
-    "balance": "10",
-  },
-]
-`;
-
-exports[`getLastOperationTime 1`] = `100000`;
-
-exports[`getModerator 1`] = `"moderator"`;
-
-exports[`getOperationCoolDown 1`] = `100000`;
-
-exports[`getPoolAddresses 1`] = `
-Array [
-  Object {
-    "address": "coldAddr1",
-    "balance": "10",
-  },
-  Object {
-    "address": "coldAddr2",
-    "balance": "10",
-  },
-  Object {
-    "address": "coldAddr3",
-    "balance": "10",
-  },
-]
-`;
-
-exports[`getPoolAddresses 2`] = `
-Array [
-  Object {
-    "address": "hotAddr1",
-    "balance": "10",
-  },
-  Object {
-    "address": "hotAddr2",
-    "balance": "10",
-  },
-  Object {
-    "address": "hotAddr3",
-    "balance": "10",
-  },
-]
-`;
-
 exports[`getStates 1`] = `
 Object {
   "custodianContractAddrs": Array [
     Object {
-      "address": "custodianContractAddr1",
-      "balance": 10,
+      "address": "custodianAddr1",
+      "balance": "10",
+    },
+    Object {
+      "address": "custodianAddr2",
+      "balance": "10",
+    },
+    Object {
+      "address": "custodianAddr3",
+      "balance": "10",
     },
   ],
   "isStarted": true,
-  "lastOperationTime": 123456789,
-  "operationCoolDown": 1000,
+  "lastOperationTime": 100000,
+  "operationCoolDown": 100000,
   "otherContractAddrs": Array [
     Object {
-      "address": "otherContractAddr1",
-      "balance": 10,
+      "address": "otherAddr1",
+      "balance": "10",
+    },
+    Object {
+      "address": "otherAddr2",
+      "balance": "10",
+    },
+    Object {
+      "address": "otherAddr3",
+      "balance": "10",
     },
   ],
   "poolAddrsCold": Array [
     Object {
-      "address": "hotAddr1",
-      "balance": 10,
+      "address": "coldAddr1",
+      "balance": "10",
+    },
+    Object {
+      "address": "coldAddr2",
+      "balance": "10",
+    },
+    Object {
+      "address": "coldAddr3",
+      "balance": "10",
     },
   ],
   "poolAddrsHot": Array [
     Object {
-      "address": "coldAddr1",
-      "balance": 10,
+      "address": "hotAddr1",
+      "balance": "10",
+    },
+    Object {
+      "address": "hotAddr2",
+      "balance": "10",
+    },
+    Object {
+      "address": "hotAddr3",
+      "balance": "10",
     },
   ],
   "votingData": Object {
-    "started": 123456789,
-    "totalVoters": 100,
-    "votedAgainst": 3,
-    "votedFor": 4,
+    "started": 123456789000,
+    "totalVoters": "3",
+    "votedAgainst": "5",
+    "votedFor": "10",
   },
   "votingStage": "Moderator",
 }
 `;
 
-exports[`getVotingData 1`] = `
-Object {
-  "started": 123456789000,
-  "totalVoters": "5",
-  "votedAgainst": "5",
-  "votedFor": "10",
-}
-`;
+exports[`removeAddress 1`] = `"Read Only Mode"`;
 
-exports[`getVotingStage 1`] = `"Moderator"`;
-
-exports[`isStarted 1`] = `true`;
-
-exports[`removeAddress 1`] = `
+exports[`removeAddress 2`] = `
 Array [
   Array [
     "addr",
@@ -191,94 +127,62 @@ Array [
 ]
 `;
 
-exports[`removeAddress, readOnly 1`] = `"Read Only Mode"`;
+exports[`startContractVoting 1`] = `"Read Only Mode"`;
 
-exports[`startContractVoting, readOnly 1`] = `"Read Only Mode"`;
-
-exports[`startContractVoting, with account 1`] = `
+exports[`startContractVoting 2`] = `
 Array [
+  Array [
+    "candidateAdddr",
+  ],
   Array [
     "candidateAdddr",
   ],
 ]
 `;
 
-exports[`startContractVoting, without account 1`] = `
-Array [
-  Array [
-    "candidateAdddr",
-  ],
-]
-`;
+exports[`startManager 1`] = `"Read Only Mode"`;
 
-exports[`startManager, readOnly 1`] = `"Read Only Mode"`;
-
-exports[`startManager, with account 1`] = `
+exports[`startManager 2`] = `
 Array [
+  Array [],
   Array [],
 ]
 `;
 
-exports[`startManager, without account 1`] = `
+exports[`startModeratorVoting 1`] = `"Read Only Mode"`;
+
+exports[`startModeratorVoting 2`] = `
 Array [
+  Array [],
   Array [],
 ]
 `;
 
-exports[`startModeratorVoting, readOnly 1`] = `"Read Only Mode"`;
+exports[`terminateByTimeout 1`] = `"Read Only Mode"`;
 
-exports[`startModeratorVoting, with account 1`] = `
+exports[`terminateByTimeout 2`] = `
 Array [
+  Array [],
   Array [],
 ]
 `;
 
-exports[`startModeratorVoting, without account 1`] = `
+exports[`terminateContractVoting 1`] = `"Read Only Mode"`;
+
+exports[`terminateContractVoting 2`] = `
 Array [
+  Array [],
   Array [],
 ]
 `;
 
-exports[`terminateByTimeout, readOnly 1`] = `"Read Only Mode"`;
+exports[`vote 1`] = `"Read Only Mode"`;
 
-exports[`terminateByTimeout, with account 1`] = `
-Array [
-  Array [],
-]
-`;
-
-exports[`terminateByTimeout, without account 1`] = `
-Array [
-  Array [],
-]
-`;
-
-exports[`terminateContractVoting, with account 1`] = `
-Array [
-  Array [],
-]
-`;
-
-exports[`terminateContractVoting, without account 1`] = `
-Array [
-  Array [],
-]
-`;
-
-exports[`terminateContractVting, readOnly 1`] = `"Read Only Mode"`;
-
-exports[`vote, readOnly 1`] = `"Read Only Mode"`;
-
-exports[`vote, with account 1`] = `
+exports[`vote 2`] = `
 Array [
   Array [
     true,
   ],
-]
-`;
-
-exports[`vote, without account 1`] = `
-Array [
   Array [
     true,
   ],
