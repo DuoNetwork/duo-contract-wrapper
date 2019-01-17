@@ -1,6 +1,5 @@
 // // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
-
 import BaseContractWrapper from './BaseContractWrapper';
 import Web3Wrapper from './Web3Wrapper';
 

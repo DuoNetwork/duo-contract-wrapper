@@ -3,7 +3,7 @@ import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
-import { IContractAddresses, ITransactionOption, IEvent, Wallet } from './types';
+import { IContractAddresses, IEvent, ITransactionOption, Wallet } from './types';
 
 const HDWalletProvider = require('./external/HDWalletProvider');
 const BigNumber = require('bignumber.js');
