@@ -46,7 +46,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 	public async fetchPrice(account: string, option: ITransactionOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
-		const gasLimit = option.gasLimit || CST.START_CUSTODIAN_GAS;
+		const gasLimit = option.gasLimit || CST.FETCH_PRICE_GAS;
 		const nonce = option.nonce || (await this.web3Wrapper.getTransactionCount(this.address));
 		return this.contract.methods.fetchPrice().send({
 			from: account,
@@ -74,7 +74,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 						gasPrice: gasPrice,
 						gas: gasLimit
 					})
-					.on('transactionHash', txHash => resolve(txHash));
+					.on('transactionHash', (txHash: string) => resolve(txHash));
 			else
 				this.contract.methods
 					.create()
@@ -84,7 +84,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 						gasPrice: gasPrice,
 						gas: gasLimit
 					})
-					.on('transactionHash', txHash => resolve(txHash));
+					.on('transactionHash', (txHash: string) => resolve(txHash));
 		});
 	}
 
@@ -101,7 +101,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
-				.on('transactionHash', txHash => resolve(txHash))
+				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
 	}
 
@@ -117,7 +117,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
-				.on('transactionHash', txHash => resolve(txHash))
+				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
 	}
 
