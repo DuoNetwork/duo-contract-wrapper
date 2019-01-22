@@ -74,7 +74,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 						gasPrice: gasPrice,
 						gas: gasLimit
 					})
-					.on('transactionHash', txHash => resolve(txHash));
+					.on('transactionHash', (txHash: string) => resolve(txHash));
 			else
 				this.contract.methods
 					.create()
@@ -84,7 +84,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 						gasPrice: gasPrice,
 						gas: gasLimit
 					})
-					.on('transactionHash', txHash => resolve(txHash));
+					.on('transactionHash', (txHash: string) => resolve(txHash));
 		});
 	}
 
@@ -101,7 +101,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
-				.on('transactionHash', txHash => resolve(txHash))
+				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
 	}
 
@@ -117,7 +117,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 					gasPrice: gasPrice,
 					gas: gasLimit
 				})
-				.on('transactionHash', txHash => resolve(txHash))
+				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
 	}
 
