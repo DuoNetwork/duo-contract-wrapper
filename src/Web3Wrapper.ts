@@ -188,7 +188,7 @@ export default class Web3Wrapper {
 				.send({
 					from: from
 				})
-				.on('transactionHash', txHash => resolve(txHash));
+				.on('transactionHash', (txHash: string) => resolve(txHash));
 		});
 	}
 
