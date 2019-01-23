@@ -3,6 +3,7 @@ import '@babel/polyfill';
 
 import * as CST from './constants';
 import DualClassWrapper from './DualClassWrapper';
+import { ITransactionOption } from './types';
 
 test('convertCustodianState', () => {
 	expect(DualClassWrapper.convertCustodianState(CST.STATE_INCEPTION)).toBe(CST.CTD_INCEPTION);
@@ -516,6 +517,14 @@ const web3Wrapper = {
 	wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
 	getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 	getTransactionCount: jest.fn(() => Promise.resolve(2)),
+	getTxOption: jest.fn((account: string, gasLimit: number, option: ITransactionOption = {}) =>
+		Promise.resolve({
+			from: account,
+			gasPrice: option.gasPrice || 1000000000,
+			gas: option.gasLimit || gasLimit,
+			nonce: option.nonce || 10
+		})
+	),
 	createContract: jest.fn(() => ({
 		methods: {
 			getStates: jest.fn(() => ({
@@ -652,6 +661,7 @@ test('setValue', async () => {
 		gasPrice: 2000000000,
 		nonce: 40
 	});
+	// expect((web3Wrapper.getTransactionCount as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((dualClassWrapper.contract.methods.setValue as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(setValueSend.mock.calls).toMatchSnapshot();
 });

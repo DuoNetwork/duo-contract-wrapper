@@ -160,6 +160,7 @@ Array [
       "from": "account",
       "gas": 40000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -167,6 +168,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
@@ -202,6 +204,7 @@ Array [
       "from": "account",
       "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
       "value": 1000000000000000000,
     },
   ],
@@ -210,6 +213,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
       "value": 1000000000000000000,
     },
   ],
@@ -223,6 +227,7 @@ Array [
       "from": "account",
       "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -230,6 +235,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
 ]
@@ -244,7 +250,7 @@ Array [
       "from": "account",
       "gas": 150000,
       "gasPrice": 1000000000,
-      "nonce": 2,
+      "nonce": 10,
     },
   ],
   Array [
@@ -384,8 +390,9 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 80000,
+      "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -393,6 +400,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
 ]
@@ -409,8 +417,9 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 80000,
+      "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -418,6 +427,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 100000,
+      "nonce": 30,
     },
   ],
 ]
@@ -445,6 +455,7 @@ Array [
       "from": "account",
       "gas": 50000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -452,6 +463,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
@@ -481,6 +493,7 @@ Array [
       "from": "account",
       "gas": 1000000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -488,6 +501,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
 ]
@@ -502,6 +516,7 @@ Array [
       "from": "account",
       "gas": 120000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -509,6 +524,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 30,
     },
   ],
 ]
@@ -523,6 +539,7 @@ Array [
       "from": "account",
       "gas": 4000000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -530,6 +547,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 40,
     },
   ],
 ]
