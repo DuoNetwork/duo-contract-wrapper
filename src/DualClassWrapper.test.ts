@@ -517,13 +517,14 @@ const web3Wrapper = {
 	wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
 	getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 	getTransactionCount: jest.fn(() => Promise.resolve(2)),
-	getTransactionOption: jest.fn((account: string, gasLimit: number, option: ITransactionOption = {}) =>
-		Promise.resolve({
-			from: account,
-			gasPrice: option.gasPrice || 1000000000,
-			gas: option.gasLimit || gasLimit,
-			nonce: option.nonce || 10
-		})
+	getTransactionOption: jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
 	),
 	createContract: jest.fn(() => ({
 		methods: {
@@ -628,6 +629,15 @@ test('getUserAddress', async () => {
 });
 
 test('collectFee', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	try {
 		await dualClassWrapper.collectFee('account', 10);
 	} catch (err) {
@@ -645,9 +655,19 @@ test('collectFee', async () => {
 		(dualClassWrapper.contract.methods.collectFee as jest.Mock).mock.calls
 	).toMatchSnapshot();
 	expect(collectFeeSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('setValue', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.setValue('account', 1, 10);
@@ -661,12 +681,21 @@ test('setValue', async () => {
 		gasPrice: 2000000000,
 		nonce: 40
 	});
-	// expect((web3Wrapper.getTransactionCount as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((dualClassWrapper.contract.methods.setValue as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(setValueSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('create', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.create('account', 1, '');
@@ -696,9 +725,19 @@ test('create', async () => {
 	).toMatchSnapshot();
 	expect(createSend.mock.calls).toMatchSnapshot();
 	expect(createWithWETHSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('redeem', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.redeem('account', 1, 1);
@@ -717,9 +756,19 @@ test('redeem', async () => {
 
 	expect((dualClassWrapper.contract.methods.redeem as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(redeemSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('redeemAll', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.redeemAll('account');
@@ -737,9 +786,19 @@ test('redeemAll', async () => {
 	).toMatchSnapshot();
 	expect(dualClassWrapper.contract.methods.redeemAll as jest.Mock).toBeCalledTimes(2);
 	expect(redeemAllSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('startCustodian', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	try {
 		await dualClassWrapper.startCustodian('account', 'aAddr', 'bAddr', 'oracleAddr');
 	} catch (err) {
@@ -756,9 +815,19 @@ test('startCustodian', async () => {
 		(dualClassWrapper.contract.methods.startCustodian as jest.Mock).mock.calls
 	).toMatchSnapshot();
 	expect(startCustodianSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('fetchPrice', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isLocal = jest.fn(() => false);
 	try {
 		await dualClassWrapper.fetchPrice('account');
@@ -774,9 +843,19 @@ test('fetchPrice', async () => {
 	});
 	expect(dualClassWrapper.contract.methods.fetchPrice as jest.Mock).toBeCalledTimes(2);
 	expect(fetchPriceSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('triggerPreReset', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isLocal = jest.fn(() => false);
 	try {
 		await dualClassWrapper.triggerPreReset('account');
@@ -792,9 +871,19 @@ test('triggerPreReset', async () => {
 	});
 	expect(dualClassWrapper.contract.methods.startPreReset as jest.Mock).toBeCalledTimes(2);
 	expect(startPreResetSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('triggerReset', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isLocal = jest.fn(() => false);
 	try {
 		await dualClassWrapper.triggerReset('account');
@@ -810,4 +899,5 @@ test('triggerReset', async () => {
 	});
 	expect(dualClassWrapper.contract.methods.startReset as jest.Mock).toBeCalledTimes(2);
 	expect(startResetSend.mock.calls).toMatchSnapshot();
+	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });

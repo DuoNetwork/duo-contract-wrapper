@@ -42,7 +42,7 @@ export default class MagiWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
 			.commitPrice(this.web3Wrapper.toWei(price), timeInSecond)
-			.send(await this.web3Wrapper.getTransactionOption(account, CST.START_MAGI_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.COMMIT_PRICE_GAS, option));
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {

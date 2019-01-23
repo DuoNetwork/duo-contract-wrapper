@@ -4,7 +4,7 @@ exports[`constructor none 1`] = `"Read Only Mode"`;
 
 exports[`constructor privateKey 1`] = `"Wrong Env"`;
 
-exports[`getTption, no option 1`] = `
+exports[`getTransactionOption, no option 1`] = `
 Object {
   "from": "account",
   "gas": 100000,
@@ -13,7 +13,7 @@ Object {
 }
 `;
 
-exports[`getTption, no option 2`] = `
+exports[`getTransactionOption, no option 2`] = `
 Array [
   Array [
     "account",
@@ -21,7 +21,7 @@ Array [
 ]
 `;
 
-exports[`getTption, with option 1`] = `
+exports[`getTransactionOption, with option 1`] = `
 Object {
   "from": "account",
   "gas": 200000,

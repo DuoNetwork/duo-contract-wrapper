@@ -9,6 +9,20 @@ Array [
 ]
 `;
 
+exports[`commitPrice, with option 2`] = `
+Array [
+  Array [
+    "address",
+    60000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`commitPrice, without option 1`] = `
 Array [
   Array [
@@ -18,24 +32,24 @@ Array [
 ]
 `;
 
-exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
-
-exports[`getLastPrice 1`] = `
+exports[`commitPrice, without option 2`] = `
 Array [
-  Array [],
+  Array [
+    "address",
+    60000,
+    Object {},
+  ],
 ]
 `;
 
-exports[`getLastPrice 2`] = `
+exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
+
+exports[`getLastPrice 1`] = `
 Object {
   "price": 1e-16,
   "timestamp": 123456789000,
 }
 `;
-
-exports[`isStarted 1`] = `Array []`;
-
-exports[`isStarted 2`] = `true`;
 
 exports[`startMagi, with option 1`] = `
 Array [
@@ -46,11 +60,35 @@ Array [
 ]
 `;
 
+exports[`startMagi, with option 2`] = `
+Array [
+  Array [
+    "address",
+    120000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`startMagi, without option 1`] = `
 Array [
   Array [
     "100000000000000000000",
     123456789,
+  ],
+]
+`;
+
+exports[`startMagi, without option 2`] = `
+Array [
+  Array [
+    "address",
+    120000,
+    Object {},
   ],
 ]
 `;
