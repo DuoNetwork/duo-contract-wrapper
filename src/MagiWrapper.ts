@@ -28,13 +28,9 @@ export default class MagiWrapper extends BaseContractWrapper {
 		option: ITransactionOption = {}
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
-		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
-		const gasLimit = option.gasLimit || CST.START_MAGI_GAS;
-		return this.contract.methods.startOracle(this.web3Wrapper.toWei(price), timeInSecond).send({
-			from: account,
-			gasPrice: gasPrice,
-			gas: gasLimit
-		});
+		return this.contract.methods
+			.startOracle(this.web3Wrapper.toWei(price), timeInSecond)
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.START_MAGI_GAS, option));
 	}
 
 	public async commitPrice(
@@ -44,13 +40,9 @@ export default class MagiWrapper extends BaseContractWrapper {
 		option: ITransactionOption = {}
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
-		const gasPrice = option.gasPrice || (await this.web3Wrapper.getGasPrice());
-		const gasLimit = option.gasLimit || CST.COMMIT_PRICE_GAS;
-		return this.contract.methods.commitPrice(this.web3Wrapper.toWei(price), timeInSecond).send({
-			from: account,
-			gasPrice: gasPrice,
-			gas: gasLimit
-		});
+		return this.contract.methods
+			.commitPrice(this.web3Wrapper.toWei(price), timeInSecond)
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.COMMIT_PRICE_GAS, option));
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {

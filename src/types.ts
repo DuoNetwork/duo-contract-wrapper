@@ -135,7 +135,7 @@ export interface IContractAddresses {
 }
 
 export interface ITransactionOption {
-	gasPrice?: number,
-	gasLimit?: number,
-	nonce?: number,
+	gasPrice?: number;
+	gasLimit?: number;
+	nonce?: number;
 }

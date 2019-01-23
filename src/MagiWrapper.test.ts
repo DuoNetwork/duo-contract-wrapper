@@ -2,6 +2,7 @@
 import '@babel/polyfill';
 import * as CST from './constants';
 import MagiWrapper from './MagiWrapper';
+import { ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 const web3Wrapper = new Web3Wrapper(null, CST.PROVIDER_INFURA_KOVAN, '', false);
@@ -19,24 +20,49 @@ test('startMagi, wrong env', async () => {
 test('startMagi, without option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
+	magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	magiWrapper.contract.methods.startOracle = jest.fn(() => ({
 		send: jest.fn()
 	}));
 	await magiWrapper.startMagi('address', 100, 123456789);
 	expect((magiWrapper.contract.methods.startOracle as jest.Mock).mock.calls).toMatchSnapshot();
+	expect(
+		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('startMagi, with option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
+	magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	magiWrapper.contract.methods.startOracle = jest.fn(() => ({
 		send: jest.fn()
 	}));
 	await magiWrapper.startMagi('address', 100, 123456789, {
 		gasPrice: 2000000000,
-		gasLimit: 200000
+		gasLimit: 200000,
+		nonce: 10
 	});
 	expect((magiWrapper.contract.methods.startOracle as jest.Mock).mock.calls).toMatchSnapshot();
+	expect(
+		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('commitPrice, wrong env', async () => {
@@ -51,50 +77,61 @@ test('commitPrice, wrong env', async () => {
 test('commitPrice, without option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
+	magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	magiWrapper.contract.methods.commitPrice = jest.fn(() => ({
 		send: jest.fn()
 	}));
 	await magiWrapper.commitPrice('address', 100, 123456789);
 	expect((magiWrapper.contract.methods.commitPrice as jest.Mock).mock.calls).toMatchSnapshot();
-
-	// expect((magiWrapper.commitInternal as jest.Mock).mock.calls).toMatchSnapshot();
+	expect(
+		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('commitPrice, with option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
+	magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	magiWrapper.contract.methods.commitPrice = jest.fn(() => ({
 		send: jest.fn()
 	}));
 	await magiWrapper.commitPrice('address', 100, 123456789, {
 		gasPrice: 2000000000,
-		gasLimit: 200000
+		gasLimit: 200000,
+		nonce: 10
 	});
 	expect((magiWrapper.contract.methods.commitPrice as jest.Mock).mock.calls).toMatchSnapshot();
+	expect(
+		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('getLastPrice', async () => {
-	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
-	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
 	magiWrapper.contract.methods.getLastPrice = jest.fn(() => ({
-		call: jest.fn(() => Promise.resolve(
-			['100', '123456789']
-		))
+		call: jest.fn(() => Promise.resolve(['100', '123456789']))
 	}));
-	const res = await magiWrapper.getLastPrice();
-	expect((magiWrapper.contract.methods.getLastPrice as jest.Mock).mock.calls).toMatchSnapshot();
-	expect(res).toMatchSnapshot();
+	expect(await magiWrapper.getLastPrice()).toMatchSnapshot();
 });
 
 test('isStarted', async () => {
-	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
-	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	magiWrapper.contract.methods.isStarted = jest.fn(() => ({
-		call: jest.fn(() => Promise.resolve(
-			false
-		))
+	magiWrapper.contract.methods.started = jest.fn(() => ({
+		call: jest.fn(() => Promise.resolve(false))
 	}));
-	const res = await magiWrapper.isStarted();
-	expect((magiWrapper.contract.methods.isStarted as jest.Mock).mock.calls).toMatchSnapshot();
-	expect(res).toMatchSnapshot();
+	expect(await magiWrapper.isStarted()).toBeFalsy();
 });

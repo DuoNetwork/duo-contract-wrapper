@@ -160,6 +160,7 @@ Array [
       "from": "account",
       "gas": 40000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -167,6 +168,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 2000000000,
+      "nonce": 40,
+    },
+  ],
+]
+`;
+
+exports[`collectFee 4`] = `
+Array [
+  Array [
+    "account",
+    40000,
+    Object {},
+  ],
+  Array [
+    "account",
+    40000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
@@ -202,6 +223,7 @@ Array [
       "from": "account",
       "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
       "value": 1000000000000000000,
     },
   ],
@@ -210,6 +232,7 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
       "value": 1000000000000000000,
     },
   ],
@@ -223,6 +246,7 @@ Array [
       "from": "account",
       "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -230,6 +254,40 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`create 9`] = `
+Array [
+  Array [
+    "account",
+    160000,
+    Object {},
+  ],
+  Array [
+    "account",
+    160000,
+    Object {},
+  ],
+  Array [
+    "account",
+    160000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    "account",
+    160000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
 ]
@@ -244,13 +302,32 @@ Array [
       "from": "account",
       "gas": 150000,
       "gasPrice": 1000000000,
-      "nonce": 2,
+      "nonce": 10,
     },
   ],
   Array [
     Object {
       "from": "account",
       "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`fetchPrice 3`] = `
+Array [
+  Array [
+    "account",
+    150000,
+    Object {},
+  ],
+  Array [
+    "account",
+    150000,
+    Object {
+      "gasLimit": 20000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -384,8 +461,9 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 80000,
+      "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -393,6 +471,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`redeem 6`] = `
+Array [
+  Array [
+    "account",
+    160000,
+    Object {},
+  ],
+  Array [
+    "account",
+    160000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
 ]
@@ -409,8 +507,9 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 80000,
+      "gas": 160000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -418,6 +517,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 100000,
+      "nonce": 30,
+    },
+  ],
+]
+`;
+
+exports[`redeemAll 5`] = `
+Array [
+  Array [
+    "account",
+    160000,
+    Object {},
+  ],
+  Array [
+    "account",
+    160000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 100000,
+      "nonce": 30,
     },
   ],
 ]
@@ -445,6 +564,7 @@ Array [
       "from": "account",
       "gas": 50000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -452,6 +572,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 2000000000,
+      "nonce": 40,
+    },
+  ],
+]
+`;
+
+exports[`setValue 4`] = `
+Array [
+  Array [
+    "account",
+    50000,
+    Object {},
+  ],
+  Array [
+    "account",
+    50000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
@@ -481,6 +621,7 @@ Array [
       "from": "account",
       "gas": 1000000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -488,6 +629,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`startCustodian 4`] = `
+Array [
+  Array [
+    "account",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "account",
+    1000000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
 ]
@@ -502,6 +663,7 @@ Array [
       "from": "account",
       "gas": 120000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -509,6 +671,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 30,
+    },
+  ],
+]
+`;
+
+exports[`triggerPreReset 3`] = `
+Array [
+  Array [
+    "account",
+    120000,
+    Object {},
+  ],
+  Array [
+    "account",
+    120000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 30,
     },
   ],
 ]
@@ -523,6 +705,7 @@ Array [
       "from": "account",
       "gas": 4000000,
       "gasPrice": 1000000000,
+      "nonce": 10,
     },
   ],
   Array [
@@ -530,6 +713,26 @@ Array [
       "from": "account",
       "gas": 20000,
       "gasPrice": 1000000000,
+      "nonce": 40,
+    },
+  ],
+]
+`;
+
+exports[`triggerReset 3`] = `
+Array [
+  Array [
+    "account",
+    4000000,
+    Object {},
+  ],
+  Array [
+    "account",
+    4000000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 40,
     },
   ],
 ]
