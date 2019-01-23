@@ -37,13 +37,13 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
 			.startCustodian(aAddr, bAddr, oracleAddr)
-			.send(await this.web3Wrapper.getTxOption(account, CST.START_CUSTODIAN_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.START_CUSTODIAN_GAS, option));
 	}
 	public async fetchPrice(account: string, option: ITransactionOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
 			.fetchPrice()
-			.send(await this.web3Wrapper.getTxOption(account, CST.FETCH_PRICE_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.FETCH_PRICE_GAS, option));
 	}
 
 	public async create(
@@ -58,14 +58,14 @@ export default class DualClassWrapper extends BaseContractWrapper {
 			if (wethAddr)
 				this.contract.methods
 					.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
-					.send(await this.web3Wrapper.getTxOption(account, CST.CREATE_GAS, option))
+					.send(await this.web3Wrapper.getTransactionOption(account, CST.CREATE_GAS, option))
 					.on('transactionHash', (txHash: string) => resolve(txHash));
 			else
 				this.contract.methods
 					.create()
 					.send(
 						Object.assign(
-							await this.web3Wrapper.getTxOption(account, CST.CREATE_GAS, option),
+							await this.web3Wrapper.getTransactionOption(account, CST.CREATE_GAS, option),
 							{
 								value: this.web3Wrapper.toWei(value)
 							}
@@ -86,7 +86,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return new Promise<string>(async resolve =>
 			this.contract.methods
 				.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
-				.send(await this.web3Wrapper.getTxOption(account, CST.REDEEM_GAS, option))
+				.send(await this.web3Wrapper.getTransactionOption(account, CST.REDEEM_GAS, option))
 				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
 	}
@@ -96,7 +96,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return new Promise<string>(async resolve =>
 			this.contract.methods
 				.redeemAll()
-				.send(await this.web3Wrapper.getTxOption(account, CST.REDEEM_GAS, option))
+				.send(await this.web3Wrapper.getTransactionOption(account, CST.REDEEM_GAS, option))
 				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
 	}
@@ -105,21 +105,21 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
 			.startReset()
-			.send(await this.web3Wrapper.getTxOption(account, CST.RESET_GAS_LIMIT, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.RESET_GAS_LIMIT, option));
 	}
 
 	public async triggerPreReset(account: string, option: ITransactionOption = {}) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
 			.startPreReset()
-			.send(await this.web3Wrapper.getTxOption(account, CST.PRE_RESET_GAS_LIMIT, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.PRE_RESET_GAS_LIMIT, option));
 	}
 
 	public async collectFee(account: string, amount: number, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.collectFee(this.web3Wrapper.toWei(amount))
-			.send(await this.web3Wrapper.getTxOption(account, CST.COLLECT_FEE_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.COLLECT_FEE_GAS, option));
 	}
 
 	public async setValue(
@@ -131,7 +131,7 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.setValue(index, newValue)
-			.send(await this.web3Wrapper.getTxOption(account, CST.SET_VALUE_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.SET_VALUE_GAS, option));
 	}
 
 	public static convertCustodianState(rawState: string) {

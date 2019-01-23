@@ -517,7 +517,7 @@ const web3Wrapper = {
 	wrongEnvReject: jest.fn(() => Promise.reject('wrong env')),
 	getGasPrice: jest.fn(() => Promise.resolve(1000000000)),
 	getTransactionCount: jest.fn(() => Promise.resolve(2)),
-	getTxOption: jest.fn((account: string, gasLimit: number, option: ITransactionOption = {}) =>
+	getTransactionOption: jest.fn((account: string, gasLimit: number, option: ITransactionOption = {}) =>
 		Promise.resolve({
 			from: account,
 			gasPrice: option.gasPrice || 1000000000,

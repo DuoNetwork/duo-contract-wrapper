@@ -291,7 +291,7 @@ export default class Web3Wrapper {
 		return this.web3.eth.getTransactionCount(address);
 	}
 
-	public async getTxOption(
+	public async getTransactionOption(
 		account: string,
 		defaultGasLimit: number,
 		option: ITransactionOption = {}

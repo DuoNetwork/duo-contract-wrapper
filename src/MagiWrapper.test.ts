@@ -20,7 +20,7 @@ test('startMagi, wrong env', async () => {
 test('startMagi, without option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	(magiWrapper.web3Wrapper.getTxOption = jest.fn(
+	(magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
 				from: account,
@@ -39,7 +39,7 @@ test('startMagi, without option', async () => {
 test('startMagi, with option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	(magiWrapper.web3Wrapper.getTxOption = jest.fn(
+	(magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
 				from: account,
@@ -70,7 +70,7 @@ test('commitPrice, wrong env', async () => {
 test('commitPrice, without option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	(magiWrapper.web3Wrapper.getTxOption = jest.fn(
+	(magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
 				from: account,
@@ -91,7 +91,7 @@ test('commitPrice, without option', async () => {
 test('commitPrice, with option', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	(magiWrapper.web3Wrapper.getTxOption = jest.fn(
+	(magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
 				from: account,
@@ -113,7 +113,7 @@ test('commitPrice, with option', async () => {
 test('getLastPrice', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	(magiWrapper.web3Wrapper.getTxOption = jest.fn(
+	(magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
 				from: account,
@@ -133,7 +133,7 @@ test('getLastPrice', async () => {
 test('isStarted', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
 	magiWrapper.web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
-	(magiWrapper.web3Wrapper.getTxOption = jest.fn(
+	(magiWrapper.web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
 				from: account,
