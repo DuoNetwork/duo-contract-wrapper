@@ -18,11 +18,11 @@ EsplanadeWrapper manages the custodian's administrator system. This system is de
 
 Under this system, each custodian contract has a list of ETH addresses, each assignable to administrative roles such as price feeds, address pool manager, and more. Each administrative role is assigned by one moderator to one unique address in the list, and all administrative addresses are removed from this list once assigned.
 
-Users can use this collection of wrappers to return states, address pool, moderators of each contract. Additionally, users can add or remove address, custodian, and new contracts.
+Users can use this collection of wrappers to return states, address pool, moderators of each contract. Additionally, users can add or remove address, custodian, and other contracts.
 
 ## MagiWrapper
 
-MagiWrapper deals with the price oracles for contract. Three price commit processes, or price oracles, are running on AWS, Azure, and GCP to feed prices to the custodian contracts. This minimizes the risk of manipulation of price committing system. More information on price commit can be found in Section 2.3.3 of [Technical Whitepaper](https://duo.network/papers/duo_technical_white_paper.pdf).
+MagiWrapper deals with the price oracles for contract. Three price commit processes, or price oracles, are running on AWS, Azure, and GCP to feed prices to the oracle contract, Magi. This minimizes the risk of manipulation of price committing system. More information on price commit can be found in Section 2.3.3 of [Technical Whitepaper](https://duo.network/papers/duo_technical_white_paper.pdf).
 
 Price oracles can initiate the price commit process and subsequently accepting prices fed to the underlying contract.
 
