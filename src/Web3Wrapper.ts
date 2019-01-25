@@ -141,7 +141,7 @@ export default class Web3Wrapper {
 		option: ITransactionOption = {}
 	) {
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
-		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
+		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
 		const nonce = option.nonce || (await this.getTransactionCount(from));
 
 		return this.web3.eth.sendTransaction({

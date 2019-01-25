@@ -96,7 +96,7 @@ Array [
   Array [
     Object {
       "from": "from",
-      "gas": 5,
+      "gas": 30000,
       "gasPrice": 1000000000,
       "nonce": 10,
       "to": "to",
