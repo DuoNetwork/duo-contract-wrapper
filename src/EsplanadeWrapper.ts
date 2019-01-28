@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import { IAddress, IEsplanadeAddresses, IEsplanadeStates, IVotingData } from './types';
+import { IAddress, IEsplanadeStates, IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWrapper extends BaseContractWrapper {
@@ -24,31 +24,19 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 	}
 
 	public async getStates(): Promise<IEsplanadeStates> {
+		const hotColdSizes = await this.contract.methods.getAddressPoolSizes().call();
+		const contractSizes = await this.contract.methods.getContractPoolSizes().call();
 		return {
 			isStarted: await this.isStarted(),
 			votingStage: await this.getVotingStage(),
-			poolAddrsHot: await this.getPoolAddresses(true),
-			poolAddrsCold: await this.getPoolAddresses(false),
-			custodianContractAddrs: await this.getContractAddresses(true),
-			otherContractAddrs: await this.getContractAddresses(false),
+			poolSizes: {
+				hot: Number(hotColdSizes[1].valueOf()),
+				cold: Number(hotColdSizes[0].valueOf()),
+				custodian: Number(contractSizes[0].valueOf()),
+				otherContract: Number(contractSizes[1].valueOf())
+			},
 			operationCoolDown: await this.getOperationCoolDown(),
 			lastOperationTime: await this.getLastOperationTime(),
-			votingData: await this.getVotingData()
-		};
-	}
-
-	public async getAddrs(): Promise<IEsplanadeAddresses> {
-		const moderator: string = await this.getModerator();
-		const candidate: string = await this.getCandidate();
-		return {
-			moderator: {
-				address: moderator,
-				balance: (await this.web3Wrapper.getEthBalance(moderator)).valueOf()
-			},
-			candidate: {
-				address: candidate,
-				balance: (await this.web3Wrapper.getEthBalance(candidate)).valueOf()
-			}
 		};
 	}
 

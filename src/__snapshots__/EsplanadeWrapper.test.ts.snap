@@ -32,85 +32,16 @@ Array [
 ]
 `;
 
-exports[`getAddrs 1`] = `
-Object {
-  "candidate": Object {
-    "address": "candidatre",
-    "balance": "10",
-  },
-  "moderator": Object {
-    "address": "moderator",
-    "balance": "10",
-  },
-}
-`;
-
 exports[`getStates 1`] = `
 Object {
-  "custodianContractAddrs": Array [
-    Object {
-      "address": "custodianAddr1",
-      "balance": "10",
-    },
-    Object {
-      "address": "custodianAddr2",
-      "balance": "10",
-    },
-    Object {
-      "address": "custodianAddr3",
-      "balance": "10",
-    },
-  ],
   "isStarted": true,
   "lastOperationTime": 100000,
   "operationCoolDown": 100000,
-  "otherContractAddrs": Array [
-    Object {
-      "address": "otherAddr1",
-      "balance": "10",
-    },
-    Object {
-      "address": "otherAddr2",
-      "balance": "10",
-    },
-    Object {
-      "address": "otherAddr3",
-      "balance": "10",
-    },
-  ],
-  "poolAddrsCold": Array [
-    Object {
-      "address": "coldAddr1",
-      "balance": "10",
-    },
-    Object {
-      "address": "coldAddr2",
-      "balance": "10",
-    },
-    Object {
-      "address": "coldAddr3",
-      "balance": "10",
-    },
-  ],
-  "poolAddrsHot": Array [
-    Object {
-      "address": "hotAddr1",
-      "balance": "10",
-    },
-    Object {
-      "address": "hotAddr2",
-      "balance": "10",
-    },
-    Object {
-      "address": "hotAddr3",
-      "balance": "10",
-    },
-  ],
-  "votingData": Object {
-    "started": 123456789000,
-    "totalVoters": "3",
-    "votedAgainst": "5",
-    "votedFor": "10",
+  "poolSizes": Object {
+    "cold": 3,
+    "custodian": 3,
+    "hot": 3,
+    "otherContract": 3,
   },
   "votingStage": "Moderator",
 }

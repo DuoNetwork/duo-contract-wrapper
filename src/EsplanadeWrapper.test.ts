@@ -94,10 +94,6 @@ const web3Wrapper = {
 } as any;
 const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
 
-test('getAddrs', async () => {
-	expect(await esplanadeWrapper.getAddrs()).toMatchSnapshot();
-});
-
 test('startContractVoting', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
