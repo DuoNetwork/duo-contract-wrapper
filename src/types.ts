@@ -55,9 +55,19 @@ export interface IEsplanadeStates {
 }
 
 export interface IEsplanadeAddresses {
-	[role: string]: {
+	moderator: {
 		address: string;
 		balance: number;
+	};
+	candidate: {
+		address: string;
+		balance: number;
+	};
+	poolAddrs: {
+		cold: Array<{address: string; balance: number}>;
+		hot: Array<{address: string; balance: number}>;
+		custodian: Array<{address: string; balance: number}>;
+		otherContract: Array<{address: string; balance: number}>;
 	}
 }
 
