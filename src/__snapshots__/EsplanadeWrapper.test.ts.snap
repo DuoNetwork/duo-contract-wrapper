@@ -32,6 +32,34 @@ Array [
 ]
 `;
 
+exports[`getCandidate 1`] = `"candidatre"`;
+
+exports[`getContractAddr 1`] = `"custodianAddr1"`;
+
+exports[`getContractAddr 2`] = `"custodianAddr2"`;
+
+exports[`getContractAddr 3`] = `"custodianAddr3"`;
+
+exports[`getContractAddr 4`] = `"otherAddr1"`;
+
+exports[`getContractAddr 5`] = `"otherAddr2"`;
+
+exports[`getContractAddr 6`] = `"otherAddr3"`;
+
+exports[`getModerator 1`] = `"moderator"`;
+
+exports[`getPoolAddr 1`] = `"hotAddr1"`;
+
+exports[`getPoolAddr 2`] = `"hotAddr2"`;
+
+exports[`getPoolAddr 3`] = `"hotAddr3"`;
+
+exports[`getPoolAddr 4`] = `"coldAddr1"`;
+
+exports[`getPoolAddr 5`] = `"coldAddr2"`;
+
+exports[`getPoolAddr 6`] = `"coldAddr3"`;
+
 exports[`getStates 1`] = `
 Object {
   "isStarted": true,
@@ -87,4 +115,13 @@ Array [
     true,
   ],
 ]
+`;
+
+exports[`voteStartTimestamp 1`] = `
+Object {
+  "started": 123456789000,
+  "totalVoters": "3",
+  "votedAgainst": "5",
+  "votedFor": "10",
+}
 `;

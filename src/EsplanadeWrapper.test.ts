@@ -242,3 +242,33 @@ test('getAddressPoolindex', () => {
 	expect(esplanadeWrapper.getAddressPoolIndex(true)).toBe(1);
 	expect(esplanadeWrapper.getAddressPoolIndex(false)).toBe(0);
 });
+
+test('getModerator', async () => {
+	expect(await esplanadeWrapper.getModerator()).toMatchSnapshot();
+});
+
+test('getCandidate', async () => {
+	expect(await esplanadeWrapper.getCandidate()).toMatchSnapshot();
+});
+
+test('getPoolAddr', async () => {
+	expect(await esplanadeWrapper.getPoolAddr(true, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getPoolAddr(true, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getPoolAddr(true, 2)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getPoolAddr(false, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getPoolAddr(false, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getPoolAddr(false, 2)).toMatchSnapshot();
+});
+
+test('getContractAddr', async () => {
+	expect(await esplanadeWrapper.getContractAddr(true, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractAddr(true, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractAddr(true, 2)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractAddr(false, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractAddr(false, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractAddr(false, 2)).toMatchSnapshot();
+});
+
+test('voteStartTimestamp', async () => {
+	expect(await esplanadeWrapper.getVotingData()).toMatchSnapshot();
+})

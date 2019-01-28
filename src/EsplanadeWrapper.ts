@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import { IAddress, IEsplanadeStates, IVotingData } from './types';
+import { IEsplanadeStates, IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export default class EsplanadeWrapper extends BaseContractWrapper {
@@ -36,7 +36,7 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 				otherContract: Number(contractSizes[1].valueOf())
 			},
 			operationCoolDown: await this.getOperationCoolDown(),
-			lastOperationTime: await this.getLastOperationTime(),
+			lastOperationTime: await this.getLastOperationTime()
 		};
 	}
 
@@ -68,38 +68,16 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		return (await this.contract.methods.candidate().call()).valueOf();
 	}
 
-	public async getPoolAddresses(hot: boolean): Promise<IAddress[]> {
-		const poolIndex = this.getAddressPoolIndex(hot);
-		const poolSizes = await this.contract.methods.getAddressPoolSizes().call();
-		const length = Number(poolSizes[poolIndex].valueOf());
-		const addresses: IAddress[] = [];
-		for (let i = 0; i < length; i++) {
-			const addr: string = (await this.contract.methods
-				.addrPool(poolIndex, i)
-				.call()).valueOf();
-			addresses.push({
-				address: addr,
-				balance: await this.web3Wrapper.getEthBalance(addr)
-			});
-		}
-
-		return addresses;
+	public async getPoolAddr(isHot: boolean, index: number): Promise<string> {
+		const poolIndex = this.getAddressPoolIndex(isHot);
+		return (await this.contract.methods.addrPool(poolIndex, index).call()).valueOf();
 	}
 
-	public async getContractAddresses(custodian: boolean): Promise<IAddress[]> {
-		const poolSizes = await this.contract.methods.getContractPoolSizes().call();
-		const length = Number(poolSizes[custodian ? 0 : 1].valueOf());
-		const addresses: IAddress[] = [];
-		for (let i = 0; i < length; i++) {
-			const addr = custodian
-				? await this.contract.methods.custodianPool(i).call()
-				: await this.contract.methods.otherContractPool(i).call();
-			addresses.push({
-				address: addr.valueOf(),
-				balance: await this.web3Wrapper.getEthBalance(addr.valueOf())
-			});
-		}
-		return addresses;
+	public async getContractAddr(isCustodian: boolean, index: number): Promise<string> {
+		const addr = isCustodian
+			? await this.contract.methods.custodianPool(index).call()
+			: await this.contract.methods.otherContractPool(index).call();
+		return addr.valueOf();
 	}
 
 	public async getOperationCoolDown(): Promise<number> {
@@ -182,7 +160,7 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public  async addAddress(account: string, addr1: string, addr2: string, hot: boolean) {
+	public async addAddress(account: string, addr1: string, addr2: string, hot: boolean) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods.addAddress(addr1, addr2, this.getAddressPoolIndex(hot)).send({
 			from: account
