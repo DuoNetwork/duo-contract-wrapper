@@ -269,6 +269,16 @@ test('getContractAddr', async () => {
 	expect(await esplanadeWrapper.getContractAddr(false, 2)).toMatchSnapshot();
 });
 
+test('getPoolSize', async () => {
+	expect(await esplanadeWrapper.getPoolSize(true)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getPoolSize(false)).toMatchSnapshot();
+})
+
+test('getContractSize', async () => {
+	expect(await esplanadeWrapper.getContractSize(true)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractSize(false)).toMatchSnapshot();
+})
+
 test('voteStartTimestamp', async () => {
 	expect(await esplanadeWrapper.getVotingData()).toMatchSnapshot();
 })

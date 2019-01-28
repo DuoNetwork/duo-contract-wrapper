@@ -68,6 +68,16 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		return (await this.contract.methods.candidate().call()).valueOf();
 	}
 
+	public async getPoolSize(isHot: boolean): Promise<number> {
+		const poolSize = await this.contract.methods.getAddressPoolSizes().call();
+		return Number(poolSize[isHot ? 1 : 0].valueOf());
+	}
+
+	public async getContractSize(isContract: boolean) {
+		const contractSizes = await this.contract.methods.getContractPoolSizes().call();
+		return Number(contractSizes[isContract ? 0 : 1].valueOf());
+	}
+
 	public async getPoolAddr(isHot: boolean, index: number): Promise<string> {
 		const poolIndex = this.getAddressPoolIndex(isHot);
 		return (await this.contract.methods.addrPool(poolIndex, index).call()).valueOf();
