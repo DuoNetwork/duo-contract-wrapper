@@ -1,11 +1,14 @@
 {
-	"name": "duo-contract-util",
+	"name": "@finbook/duo-contract-wrapper",
 	"version": "1.0.0",
-	"private": true,
-	"description": "DUO Contract Util",
+	"description": "DUO Contract Wrapper",
 	"author": "FinBook Pte Ltd",
+	"main": "dist/index.ts",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "jest",
+		"prebuild": "rimraf dist",
+		"build": "tsc --declarationDir dist -d --emitDeclarationOnly --allowJs false && tsc",
 		"tslint": "tslint -c tslint.json -p tsconfig.json src/**/*.ts{,x} --fix"
 	},
 	"jest": {
@@ -27,12 +30,14 @@
 	},
 	"devDependencies": {
 		"@babel/polyfill": "^7.2.5",
-		"@types/jest": "^23.3.12",
-		"@types/node": "^10.12.18",
+		"@types/bn.js": "^4.11.4",
+		"@types/jest": "^23.3.13",
+		"@types/node": "^10.12.19",
 		"coveralls": "^3.0.2",
 		"ganache-core": "^2.3.3",
 		"jest": "^23.6.0",
 		"pre-commit": "^1.2.2",
+		"rimraf": "^2.6.3",
 		"ts-jest": "^23.10.5",
 		"tslint": "^5.12.1",
 		"typescript": "^3.1.6"
@@ -43,6 +48,20 @@
 		"abi-decoder": "^1.2.0",
 		"bip39": "^2.5.0",
 		"ethereumjs-wallet": "^0.6.3",
-		"web3": "1.0.0-beta.35"
-	}
+		"web3": "^1.0.0-beta.37"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/FinBook/duo-contract-wrapper.git"
+	},
+	"keywords": [
+		"DUO",
+		"Contract",
+		"Wrapper"
+	],
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/FinBook/duo-contract-wrapper/issues"
+	},
+	"homepage": "https://github.com/FinBook/duo-contract-wrapper#readme"
 }

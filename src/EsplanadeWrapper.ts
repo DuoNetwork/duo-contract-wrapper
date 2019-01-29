@@ -4,7 +4,7 @@ import esplanadeAbi from './static/Esplanade.json';
 import { IEsplanadeStates, IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class EsplanadeWrapper extends BaseContractWrapper {
+export class EsplanadeWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_ADD_ADDRESS,
 		CST.EVENT_REMOVE_ADDRESS,
@@ -184,3 +184,5 @@ export default class EsplanadeWrapper extends BaseContractWrapper {
 		});
 	}
 }
+
+export default EsplanadeWrapper;

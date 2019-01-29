@@ -4,7 +4,7 @@ import magiAbi from './static/Magi.json';
 import { IContractPrice, ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class MagiWrapper extends BaseContractWrapper {
+export class MagiWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,
@@ -42,7 +42,9 @@ export default class MagiWrapper extends BaseContractWrapper {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
 			.commitPrice(this.web3Wrapper.toWei(price), timeInSecond)
-			.send(await this.web3Wrapper.getTransactionOption(account, CST.COMMIT_PRICE_GAS, option));
+			.send(
+				await this.web3Wrapper.getTransactionOption(account, CST.COMMIT_PRICE_GAS, option)
+			);
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {
@@ -53,3 +55,5 @@ export default class MagiWrapper extends BaseContractWrapper {
 		};
 	}
 }
+
+export default MagiWrapper;

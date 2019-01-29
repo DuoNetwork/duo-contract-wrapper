@@ -4,7 +4,7 @@ import dualClassAbi from './static/DualClassCustodian.json';
 import { ICustodianAddresses, IDualClassStates, ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-export default class DualClassWrapper extends BaseContractWrapper {
+export class DualClassWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,
@@ -298,3 +298,5 @@ export default class DualClassWrapper extends BaseContractWrapper {
 		return this.contract.methods.users(index).call();
 	}
 }
+
+export default DualClassWrapper;

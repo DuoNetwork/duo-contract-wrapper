@@ -78,8 +78,8 @@ export interface ICustodianStates extends IManagedStates {
 }
 export interface ICustodianWrappers {
 	[type: string]: {
-		[tenor: string]: DualClassWrapper
-	}
+		[tenor: string]: DualClassWrapper;
+	};
 }
 
 export interface IDualClassStates extends ICustodianStates {
@@ -112,12 +112,12 @@ export interface IContractAddress {
 }
 
 export interface ICustodianContractAddresses {
-	[tenor: string]: ICustodianContractAddress,
+	[tenor: string]: ICustodianContractAddress;
 }
 
 export interface IContractAddresses {
 	Custodians: {
-		[type: string]: ICustodianContractAddresses
+		[type: string]: ICustodianContractAddresses;
 	};
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];
