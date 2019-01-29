@@ -288,17 +288,19 @@ export class Web3Wrapper {
 		start: number,
 		end: number,
 		event: string
-	): Promise<{
-		event: string
-		address: string
-		returnValues: any
-		logIndex: number
-		transactionIndex: number
-		transactionHash: string
-		blockHash: string
-		blockNumber: number
-		raw?: { data: string, topics: string[] }
-	   }[]> {
+	): Promise<
+		Array<{
+			event: string;
+			address: string;
+			returnValues: any;
+			logIndex: number;
+			transactionIndex: number;
+			transactionHash: string;
+			blockHash: string;
+			blockNumber: number;
+			raw?: { data: string; topics: string[] };
+		}>
+	> {
 		return contract.getPastEvents(event, {
 			fromBlock: start,
 			toBlock: end
