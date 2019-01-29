@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "DUO Contract Wrapper",
 	"author": "FinBook Pte Ltd",
-	"main": "dist/index.ts",
+	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "jest",
@@ -64,5 +64,8 @@
 	"bugs": {
 		"url": "https://github.com/FinBook/duo-contract-wrapper/issues"
 	},
-	"homepage": "https://github.com/FinBook/duo-contract-wrapper#readme"
+	"homepage": "https://github.com/FinBook/duo-contract-wrapper#readme",
+	"files": [
+		"dist"
+	]
 }
