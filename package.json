@@ -9,6 +9,7 @@
 		"test": "jest",
 		"prebuild": "rimraf dist",
 		"build": "tsc --declarationDir dist -d --emitDeclarationOnly --allowJs false && tsc",
+		"postbuild": "npm pack",
 		"tslint": "tslint -c tslint.json -p tsconfig.json src/**/*.ts{,x} --fix"
 	},
 	"jest": {
