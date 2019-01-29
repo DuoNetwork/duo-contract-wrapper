@@ -32,41 +32,41 @@ Array [
 ]
 `;
 
+exports[`getAddressPoolAddress 1`] = `"hotAddr1"`;
+
+exports[`getAddressPoolAddress 2`] = `"hotAddr2"`;
+
+exports[`getAddressPoolAddress 3`] = `"hotAddr3"`;
+
+exports[`getAddressPoolAddress 4`] = `"coldAddr1"`;
+
+exports[`getAddressPoolAddress 5`] = `"coldAddr2"`;
+
+exports[`getAddressPoolAddress 6`] = `"coldAddr3"`;
+
+exports[`getAddressPoolSize 1`] = `3`;
+
+exports[`getAddressPoolSize 2`] = `3`;
+
 exports[`getCandidate 1`] = `"candidatre"`;
 
-exports[`getContractAddr 1`] = `"custodianAddr1"`;
+exports[`getContractPoolAddress 1`] = `"custodianAddr1"`;
 
-exports[`getContractAddr 2`] = `"custodianAddr2"`;
+exports[`getContractPoolAddress 2`] = `"custodianAddr2"`;
 
-exports[`getContractAddr 3`] = `"custodianAddr3"`;
+exports[`getContractPoolAddress 3`] = `"custodianAddr3"`;
 
-exports[`getContractAddr 4`] = `"otherAddr1"`;
+exports[`getContractPoolAddress 4`] = `"otherAddr1"`;
 
-exports[`getContractAddr 5`] = `"otherAddr2"`;
+exports[`getContractPoolAddress 5`] = `"otherAddr2"`;
 
-exports[`getContractAddr 6`] = `"otherAddr3"`;
+exports[`getContractPoolAddress 6`] = `"otherAddr3"`;
 
-exports[`getContractSize 1`] = `3`;
+exports[`getContractPoolSize 1`] = `3`;
 
-exports[`getContractSize 2`] = `3`;
+exports[`getContractPoolSize 2`] = `3`;
 
 exports[`getModerator 1`] = `"moderator"`;
-
-exports[`getPoolAddr 1`] = `"hotAddr1"`;
-
-exports[`getPoolAddr 2`] = `"hotAddr2"`;
-
-exports[`getPoolAddr 3`] = `"hotAddr3"`;
-
-exports[`getPoolAddr 4`] = `"coldAddr1"`;
-
-exports[`getPoolAddr 5`] = `"coldAddr2"`;
-
-exports[`getPoolAddr 6`] = `"coldAddr3"`;
-
-exports[`getPoolSize 1`] = `3`;
-
-exports[`getPoolSize 2`] = `3`;
 
 exports[`getStates 1`] = `
 Object {

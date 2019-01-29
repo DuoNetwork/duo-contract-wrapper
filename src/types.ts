@@ -54,28 +54,6 @@ export interface IEsplanadeStates {
 	lastOperationTime: number;
 }
 
-export interface IEsplanadeAddresses {
-	moderator: {
-		address: string;
-		balance: number;
-	};
-	candidate: {
-		address: string;
-		balance: number;
-	};
-	poolAddrs: {
-		cold: Array<{address: string; balance: number}>;
-		hot: Array<{address: string; balance: number}>;
-		custodian: Array<{address: string; balance: number}>;
-		otherContract: Array<{address: string; balance: number}>;
-	}
-}
-
-export interface IAddress {
-	address: string;
-	balance: number;
-}
-
 export interface ICustodianStates extends IManagedStates {
 	state: string;
 	minBalance: number;
