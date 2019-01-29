@@ -134,9 +134,14 @@ export default class Web3Wrapper {
 		return this.web3.eth.getGasPrice();
 	}
 
-	public async sendEther(from: string, to: string, value: number, option: ITransactionOption = {}) {
+	public async sendEther(
+		from: string,
+		to: string,
+		value: number,
+		option: ITransactionOption = {}
+	) {
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
-		const gasLimit = option.gasLimit || CST.DEFAULT_GAS_PRICE;
+		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
 		const nonce = option.nonce || (await this.getTransactionCount(from));
 
 		return this.web3.eth.sendTransaction({
@@ -284,5 +289,21 @@ export default class Web3Wrapper {
 
 	public getTransactionCount(address: string) {
 		return this.web3.eth.getTransactionCount(address);
+	}
+
+	public async getTransactionOption(
+		account: string,
+		defaultGasLimit: number,
+		option: ITransactionOption = {}
+	) {
+		const gasPrice = option.gasPrice || (await this.getGasPrice());
+		const gasLimit = option.gasLimit || defaultGasLimit;
+		const nonce = option.nonce || (await this.getTransactionCount(account));
+		return {
+			from: account,
+			gasPrice: gasPrice,
+			gas: gasLimit,
+			nonce: nonce
+		};
 	}
 }

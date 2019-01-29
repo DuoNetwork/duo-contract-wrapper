@@ -4,6 +4,32 @@ exports[`constructor none 1`] = `"Read Only Mode"`;
 
 exports[`constructor privateKey 1`] = `"Wrong Env"`;
 
+exports[`getTransactionOption, no option 1`] = `
+Object {
+  "from": "account",
+  "gas": 100000,
+  "gasPrice": 1000000000,
+  "nonce": 10,
+}
+`;
+
+exports[`getTransactionOption, no option 2`] = `
+Array [
+  Array [
+    "account",
+  ],
+]
+`;
+
+exports[`getTransactionOption, with option 1`] = `
+Object {
+  "from": "account",
+  "gas": 200000,
+  "gasPrice": 2000000000,
+  "nonce": 10,
+}
+`;
+
 exports[`onWeb3AccountUpdate 1`] = `
 Array [
   Array [

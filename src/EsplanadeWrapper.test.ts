@@ -94,10 +94,6 @@ const web3Wrapper = {
 } as any;
 const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
 
-test('getAddrs', async () => {
-	expect(await esplanadeWrapper.getAddrs()).toMatchSnapshot();
-});
-
 test('startContractVoting', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
@@ -245,4 +241,44 @@ test('convertVotingStage', () => {
 test('getAddressPoolindex', () => {
 	expect(esplanadeWrapper.getAddressPoolIndex(true)).toBe(1);
 	expect(esplanadeWrapper.getAddressPoolIndex(false)).toBe(0);
+});
+
+test('getModerator', async () => {
+	expect(await esplanadeWrapper.getModerator()).toMatchSnapshot();
+});
+
+test('getCandidate', async () => {
+	expect(await esplanadeWrapper.getCandidate()).toMatchSnapshot();
+});
+
+test('getAddressPoolAddress', async () => {
+	expect(await esplanadeWrapper.getAddressPoolAddress(true, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getAddressPoolAddress(true, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getAddressPoolAddress(true, 2)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getAddressPoolAddress(false, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getAddressPoolAddress(false, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getAddressPoolAddress(false, 2)).toMatchSnapshot();
+});
+
+test('getContractPoolAddress', async () => {
+	expect(await esplanadeWrapper.getContractPoolAddress(true, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractPoolAddress(true, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractPoolAddress(true, 2)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractPoolAddress(false, 0)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractPoolAddress(false, 1)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractPoolAddress(false, 2)).toMatchSnapshot();
+});
+
+test('getAddressPoolSize', async () => {
+	expect(await esplanadeWrapper.getAddressPoolSize(true)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getAddressPoolSize(false)).toMatchSnapshot();
+});
+
+test('getContractPoolSize', async () => {
+	expect(await esplanadeWrapper.getContractPoolSize(true)).toMatchSnapshot();
+	expect(await esplanadeWrapper.getContractPoolSize(false)).toMatchSnapshot();
+});
+
+test('voteStartTimestamp', async () => {
+	expect(await esplanadeWrapper.getVotingData()).toMatchSnapshot();
 });

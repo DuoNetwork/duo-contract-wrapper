@@ -44,25 +44,14 @@ export interface IManagedStates {
 export interface IEsplanadeStates {
 	isStarted: boolean;
 	votingStage: string;
-	poolAddrsHot: IAddress[];
-	poolAddrsCold: IAddress[];
-	custodianContractAddrs: IAddress[];
-	otherContractAddrs: IAddress[];
+	poolSizes: {
+		cold: number;
+		hot: number;
+		custodian: number;
+		otherContract: number;
+	};
 	operationCoolDown: number;
 	lastOperationTime: number;
-	votingData: IVotingData;
-}
-
-export interface IEsplanadeAddresses {
-	[role: string]: {
-		address: string;
-		balance: number;
-	}
-}
-
-export interface IAddress {
-	address: string;
-	balance: number;
 }
 
 export interface ICustodianStates extends IManagedStates {
@@ -135,7 +124,7 @@ export interface IContractAddresses {
 }
 
 export interface ITransactionOption {
-	gasPrice?: number,
-	gasLimit?: number,
-	nonce?: number,
+	gasPrice?: number;
+	gasLimit?: number;
+	nonce?: number;
 }
