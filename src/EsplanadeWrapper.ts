@@ -103,6 +103,10 @@ export class EsplanadeWrapper extends BaseContractWrapper {
 		return isStarted.valueOf();
 	}
 
+	public async getContractIsPassed(address: string): Promise<boolean> {
+		return await this.contract.methods.passedContract(address).call();
+	}
+
 	public async getVotingData(): Promise<IVotingData> {
 		return {
 			started: (await this.contract.methods.voteStartTimestamp().call()) * 1000,
