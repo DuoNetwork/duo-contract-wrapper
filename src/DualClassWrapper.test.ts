@@ -2,7 +2,7 @@
 import '@babel/polyfill';
 
 import * as CST from './constants';
-import {DualClassWrapper} from './DualClassWrapper';
+import DualClassWrapper from './DualClassWrapper';
 import { ITransactionOption } from './types';
 
 test('convertCustodianState', () => {
