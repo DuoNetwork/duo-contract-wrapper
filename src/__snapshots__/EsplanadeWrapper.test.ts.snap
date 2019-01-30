@@ -83,6 +83,8 @@ Object {
 }
 `;
 
+exports[`isContractPassed 1`] = `true`;
+
 exports[`removeAddress 1`] = `"Read Only Mode"`;
 
 exports[`removeAddress 2`] = `

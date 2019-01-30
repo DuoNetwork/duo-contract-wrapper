@@ -88,6 +88,9 @@ const web3Wrapper = {
 			})),
 			getAddresses: jest.fn(() => ({
 				call: jest.fn()
+			})),
+			passedContract: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(true))
 			}))
 		}
 	}))
@@ -281,4 +284,8 @@ test('getContractPoolSize', async () => {
 
 test('voteStartTimestamp', async () => {
 	expect(await esplanadeWrapper.getVotingData()).toMatchSnapshot();
+});
+
+test('isContractPassed', async () => {
+	expect(await esplanadeWrapper.isContractPassed('address')).toMatchSnapshot();
 });
