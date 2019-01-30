@@ -103,8 +103,8 @@ export class EsplanadeWrapper extends BaseContractWrapper {
 		return isStarted.valueOf();
 	}
 
-	public async getContractIsPassed(address: string): Promise<boolean> {
-		return await this.contract.methods.passedContract(address).call();
+	public isContractPassed(address: string): Promise<boolean> {
+		return this.contract.methods.passedContract(address).call();
 	}
 
 	public async getVotingData(): Promise<IVotingData> {

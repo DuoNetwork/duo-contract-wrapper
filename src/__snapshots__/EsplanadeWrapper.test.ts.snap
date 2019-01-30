@@ -50,8 +50,6 @@ exports[`getAddressPoolSize 2`] = `3`;
 
 exports[`getCandidate 1`] = `"candidatre"`;
 
-exports[`getContractIsPassed 1`] = `true`;
-
 exports[`getContractPoolAddress 1`] = `"custodianAddr1"`;
 
 exports[`getContractPoolAddress 2`] = `"custodianAddr2"`;
@@ -84,6 +82,8 @@ Object {
   "votingStage": "Moderator",
 }
 `;
+
+exports[`isContractPassed 1`] = `true`;
 
 exports[`removeAddress 1`] = `"Read Only Mode"`;
 

@@ -286,6 +286,6 @@ test('voteStartTimestamp', async () => {
 	expect(await esplanadeWrapper.getVotingData()).toMatchSnapshot();
 });
 
-test('getContractIsPassed', async () => {
-	expect(await esplanadeWrapper.getContractIsPassed('address')).toMatchSnapshot();
+test('isContractPassed', async () => {
+	expect(await esplanadeWrapper.isContractPassed('address')).toMatchSnapshot();
 });
