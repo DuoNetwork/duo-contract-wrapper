@@ -1,10 +1,9 @@
-import Web3 from 'web3';
-import { Contract, EventLog } from 'web3/types';
 import * as CST from './constants';
 import { kovan, mainnet } from './contractAddresses';
 import erc20Abi from './static/ERC20.json';
 import { IContractAddresses, IEvent, ITransactionOption, Wallet } from './types';
 
+const Web3 = require('web3');
 const HDWalletProvider = require('./external/HDWalletProvider');
 const BigNumber = require('bignumber.js');
 const ProviderEngine = require('web3-provider-engine');
@@ -12,8 +11,8 @@ const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
 const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
 
-export default class Web3Wrapper {
-	public web3: Web3;
+export class Web3Wrapper {
+	public web3: any;
 	public wallet: Wallet = Wallet.None;
 	public accountIndex: number = 0;
 	private live: boolean;
@@ -253,7 +252,20 @@ export default class Web3Wrapper {
 		return this.web3.eth.getTransactionReceipt(txHash);
 	}
 
-	public static parseEvent(eventLog: EventLog, timestamp: number): IEvent {
+	public static parseEvent(
+		eventLog: {
+			event: string;
+			address: string;
+			returnValues: any;
+			logIndex: number;
+			transactionIndex: number;
+			transactionHash: string;
+			blockHash: string;
+			blockNumber: number;
+			raw?: { data: string; topics: string[] };
+		},
+		timestamp: number
+	): IEvent {
 		const returnValue = eventLog.returnValues;
 		const output: IEvent = {
 			contractAddress: eventLog.address,
@@ -272,18 +284,30 @@ export default class Web3Wrapper {
 	}
 
 	public static pullEvents(
-		contract: Contract,
+		contract: any,
 		start: number,
 		end: number,
 		event: string
-	): Promise<EventLog[]> {
+	): Promise<
+		Array<{
+			event: string;
+			address: string;
+			returnValues: any;
+			logIndex: number;
+			transactionIndex: number;
+			transactionHash: string;
+			blockHash: string;
+			blockNumber: number;
+			raw?: { data: string; topics: string[] };
+		}>
+	> {
 		return contract.getPastEvents(event, {
 			fromBlock: start,
 			toBlock: end
 		});
 	}
 
-	public createContract(abi: any[], address: string): Contract {
+	public createContract(abi: any[], address: string): any {
 		return new this.web3.eth.Contract(abi, address);
 	}
 
@@ -307,3 +331,5 @@ export default class Web3Wrapper {
 		};
 	}
 }
+
+export default Web3Wrapper;

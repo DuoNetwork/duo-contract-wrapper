@@ -1,13 +1,12 @@
-import { Contract } from 'web3/types';
-import Web3Wrapper from './Web3Wrapper';
+import { Web3Wrapper } from './Web3Wrapper';
 const abiDecoder = require('abi-decoder');
 
-export default abstract class BaseContractWrapper {
+export abstract class BaseContractWrapper {
 	public readonly web3Wrapper: Web3Wrapper;
 	public readonly address: string;
 	public readonly abi: any[];
 	public readonly events: string[] = [];
-	public contract: Contract;
+	public contract: any;
 
 	constructor(web3Wrapper: Web3Wrapper, abi: any[], contractAddress: string) {
 		this.web3Wrapper = web3Wrapper;
@@ -32,3 +31,5 @@ export default abstract class BaseContractWrapper {
 		return abiDecoder.decodeMethod(input);
 	}
 }
+
+export default BaseContractWrapper;
