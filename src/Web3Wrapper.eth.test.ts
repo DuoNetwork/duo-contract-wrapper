@@ -25,16 +25,16 @@ jest.mock('web3', () => {
 						}))
 					}
 				}))
-			},
-			utils: {
-				fromWei: jest.fn(value => 1e-18 * value),
-				toWei: jest.fn(value => 1e18 * value),
-				checkAddressChecksum: jest.fn(() => true),
-				toChecksumAddress: jest.fn(() => '0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD')
 			}
 		};
 	});
 });
+
+const fromWei = jest.fn(value => 1e-18 * value);
+const toWei = jest.fn(value => 1e18 * value + '');
+
+Web3Wrapper.toWei = toWei.bind(Web3Wrapper);
+Web3Wrapper.fromWei = fromWei.bind(Web3Wrapper);
 
 jest.mock('web3-provider-engine/subproviders/fetch');
 jest.mock('@ledgerhq/web3-subprovider', () => ({
@@ -52,11 +52,6 @@ jest.mock('web3-provider-engine', () => {
 			start: jest.fn()
 		};
 	});
-});
-
-test('toWei', () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	expect(web3Wrapper.toWei(1)).toMatchSnapshot();
 });
 
 test('getGasPrice', async () => {
@@ -133,28 +128,14 @@ test('getTransactionReceipt', async () => {
 	expect(await web3Wrapper.getTransactionReceipt('txHash')).toMatchSnapshot();
 });
 
-test('checkAddress', async () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	expect(await web3Wrapper.checkAddress('xxx')).toBeFalsy();
-});
-
-test('checkAddress', async () => {
-	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	expect(
-		await web3Wrapper.checkAddress('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD')
-	).toBeTruthy();
-});
-
 test('sendEther, without option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	await web3Wrapper.sendEther('from', 'to', 1);
 	expect((web3Wrapper.web3.eth.sendTransaction as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('sendEther, with option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	await web3Wrapper.sendEther('from', 'to', 1, {
 		gasLimit: 20000,
 		gasPrice: 1000000000
@@ -164,7 +145,6 @@ test('sendEther, with option', async () => {
 
 test('erc20Transfer, readOnly', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await web3Wrapper.erc20Transfer('contractAddress', 'from', 'to', 1);
@@ -175,7 +155,6 @@ test('erc20Transfer, readOnly', async () => {
 
 test('erc20Transfer, without option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	const method = {
 		transfer: jest.fn(() => ({
 			send: jest.fn()
@@ -190,7 +169,6 @@ test('erc20Transfer, without option', async () => {
 
 test('erc20Transfer, with option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	const method = {
 		transfer: jest.fn(() => ({
 			send: jest.fn()
@@ -208,7 +186,6 @@ test('erc20Transfer, with option', async () => {
 
 test('erc20Approve, readOnly', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await web3Wrapper.erc20Approve('contractAddress', 'from', 'spender', 1);
@@ -220,7 +197,6 @@ test('erc20Approve, readOnly', async () => {
 test('erc20Approve, without option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	const on = jest.fn();
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	const method = {
 		approve: jest.fn(() => ({
 			send: jest.fn(() => {
@@ -241,7 +217,6 @@ test('erc20Approve, without option', async () => {
 test('erc20Approve, unlimited', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	const on = jest.fn();
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	const method = {
 		approve: jest.fn(() => ({
 			send: jest.fn(() => {
@@ -262,7 +237,6 @@ test('erc20Approve, unlimited', async () => {
 test('erc20Approve, unlimited', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	const on = jest.fn();
-	web3Wrapper.toWei = jest.fn(() => '1000000000000000000');
 	const method = {
 		approve: jest.fn(() => ({
 			send: jest.fn(() => {

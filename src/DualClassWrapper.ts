@@ -71,7 +71,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		return new Promise<string>(resolve => {
 			if (wethAddr)
 				this.contract.methods
-					.createWithWETH(this.web3Wrapper.toWei(value), wethAddr)
+					.createWithWETH(Web3Wrapper.toWei(value), wethAddr)
 					.send(txOption)
 					.on('transactionHash', (txHash: string) => resolve(txHash));
 			else
@@ -79,7 +79,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 					.create()
 					.send(
 						Object.assign(txOption, {
-							value: this.web3Wrapper.toWei(value)
+							value: Web3Wrapper.toWei(value)
 						})
 					)
 					.on('transactionHash', (txHash: string) => resolve(txHash));
@@ -101,7 +101,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		);
 		return new Promise<string>(resolve =>
 			this.contract.methods
-				.redeem(this.web3Wrapper.toWei(amtA), this.web3Wrapper.toWei(amtB))
+				.redeem(Web3Wrapper.toWei(amtA), Web3Wrapper.toWei(amtB))
 				.send(txOption)
 				.on('transactionHash', (txHash: string) => resolve(txHash))
 		);
@@ -147,7 +147,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	public async collectFee(account: string, amount: number, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
-			.collectFee(this.web3Wrapper.toWei(amount))
+			.collectFee(Web3Wrapper.toWei(amount))
 			.send(
 				await this.web3Wrapper.getTransactionOption(account, CST.COLLECT_FEE_GAS, option)
 			);
@@ -250,15 +250,15 @@ export class DualClassWrapper extends BaseContractWrapper {
 			lastOperationTime: Number(states[CST.BTV_STATE.LAST_OPERATION_TIME].valueOf()) * 1000,
 			operationCoolDown: Number(states[CST.BTV_STATE.OPERATION_COOLDOWN].valueOf()) * 1000,
 			state: DualClassWrapper.convertCustodianState(states[CST.BTV_STATE.STATE].valueOf()),
-			minBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.MIN_BALANCE]),
-			totalSupplyA: this.web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYA]),
-			totalSupplyB: this.web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYB]),
-			ethCollateral: this.web3Wrapper.fromWei(states[CST.BTV_STATE.ETH_COLLATERAL_INWEI]),
-			navA: this.web3Wrapper.fromWei(states[CST.BTV_STATE.NAVA_INWEI]),
-			navB: this.web3Wrapper.fromWei(states[CST.BTV_STATE.NAVB_INWEI]),
-			lastPrice: this.web3Wrapper.fromWei(states[CST.BTV_STATE.LAST_PRICE_INWEI]),
+			minBalance: Web3Wrapper.fromWei(states[CST.BTV_STATE.MIN_BALANCE]),
+			totalSupplyA: Web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYA]),
+			totalSupplyB: Web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYB]),
+			ethCollateral: Web3Wrapper.fromWei(states[CST.BTV_STATE.ETH_COLLATERAL_INWEI]),
+			navA: Web3Wrapper.fromWei(states[CST.BTV_STATE.NAVA_INWEI]),
+			navB: Web3Wrapper.fromWei(states[CST.BTV_STATE.NAVB_INWEI]),
+			lastPrice: Web3Wrapper.fromWei(states[CST.BTV_STATE.LAST_PRICE_INWEI]),
 			lastPriceTime: Number(states[CST.BTV_STATE.LAST_PRICETIME_INSECOND].valueOf()) * 1000,
-			resetPrice: this.web3Wrapper.fromWei(states[CST.BTV_STATE.RESET_PRICE_INWEI]),
+			resetPrice: Web3Wrapper.fromWei(states[CST.BTV_STATE.RESET_PRICE_INWEI]),
 			resetPriceTime: Number(states[CST.BTV_STATE.RESET_PRICETIME_INSECOND].valueOf()) * 1000,
 			createCommRate: Number(states[CST.BTV_STATE.CREATE_COMMINBP].valueOf()) / 10000,
 			redeemCommRate: Number(states[CST.BTV_STATE.REDEEM_COMMINBP].valueOf()) / 10000,
@@ -268,16 +268,16 @@ export class DualClassWrapper extends BaseContractWrapper {
 			priceFetchCoolDown: Number(states[CST.BTV_STATE.PRICE_FETCH_COOLDOWN].valueOf()) * 1000,
 			nextResetAddrIndex: Number(states[CST.BTV_STATE.NEXT_RESET_ADDR_INDEX].valueOf()),
 			totalUsers: Number(states[CST.BTV_STATE.TOTAL_USERS].valueOf()),
-			feeBalance: this.web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_INWEI]),
+			feeBalance: Web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_INWEI]),
 			resetState: DualClassWrapper.convertResetState(
 				states[CST.BTV_STATE.RESET_STATE].valueOf()
 			),
 			alpha: Number(states[CST.BTV_STATE.ALPHA_INBP].valueOf()) / 10000,
-			beta: this.web3Wrapper.fromWei(states[CST.BTV_STATE.BETA_INWEI]),
-			periodCoupon: this.web3Wrapper.fromWei(states[CST.BTV_STATE.PERIOD_COUPON_INWEI]),
-			limitPeriodic: this.web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_PERIODIC_INWEI]),
-			limitUpper: this.web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_UPPER_INWEI]),
-			limitLower: this.web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_LOWER_INWEI]),
+			beta: Web3Wrapper.fromWei(states[CST.BTV_STATE.BETA_INWEI]),
+			periodCoupon: Web3Wrapper.fromWei(states[CST.BTV_STATE.PERIOD_COUPON_INWEI]),
+			limitPeriodic: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_PERIODIC_INWEI]),
+			limitUpper: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_UPPER_INWEI]),
+			limitLower: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_LOWER_INWEI]),
 			iterationGasThreshold: Number(states[CST.BTV_STATE.ITERATION_GAS_THRESHOLD].valueOf())
 		};
 	}

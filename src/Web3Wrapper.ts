@@ -146,7 +146,7 @@ export class Web3Wrapper {
 		return this.web3.eth.sendTransaction({
 			from: from,
 			to: to,
-			value: this.toWei(value),
+			value: Web3Wrapper.toWei(value),
 			gasPrice: gasPrice,
 			gas: gasLimit,
 			nonce: nonce
@@ -166,7 +166,7 @@ export class Web3Wrapper {
 		const nonce = option.nonce || (await this.getTransactionCount(from));
 		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
-		return erc20Contract.methods.transfer(to, this.toWei(value)).send({
+		return erc20Contract.methods.transfer(to, Web3Wrapper.toWei(value)).send({
 			from: from,
 			gasPrice: gasPrice,
 			gas: gasLimit,
@@ -187,7 +187,7 @@ export class Web3Wrapper {
 			return erc20Contract.methods
 				.approve(
 					spender,
-					unlimited ? new BigNumber(2).pow(256).minus(1) : this.toWei(value)
+					unlimited ? new BigNumber(2).pow(256).minus(1) : Web3Wrapper.toWei(value)
 				)
 				.send({
 					from: from
@@ -220,32 +220,32 @@ export class Web3Wrapper {
 	}
 
 	public async getEthBalance(address: string): Promise<number> {
-		return this.fromWei(await this.web3.eth.getBalance(address));
+		return Web3Wrapper.fromWei(await this.web3.eth.getBalance(address));
 	}
 
 	public async getErc20Balance(contractAddress: string, address: string) {
 		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
-		return this.fromWei(await erc20Contract.methods.balanceOf(address).call());
+		return Web3Wrapper.fromWei(await erc20Contract.methods.balanceOf(address).call());
 	}
 
 	public async getErc20Allowance(contractAddress: string, address: string, spender: string) {
 		const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
 
-		return this.fromWei(await erc20Contract.methods.allowance(address, spender).call());
+		return Web3Wrapper.fromWei(await erc20Contract.methods.allowance(address, spender).call());
 	}
 
-	public fromWei(value: string | number) {
-		return Number(this.web3.utils.fromWei(value, 'ether'));
+	public static fromWei(value: string | number) {
+		return Number(Web3.utils.fromWei(value, 'ether'));
 	}
 
-	public toWei(value: string | number) {
-		return this.web3.utils.toWei(value + '', 'ether');
+	public static toWei(value: string | number) {
+		return Web3.utils.toWei(value + '', 'ether');
 	}
 
-	public checkAddress(addr: string) {
+	public static checkAddress(addr: string) {
 		if (!addr.startsWith('0x') || addr.length !== 42) return false;
-		return this.web3.utils.checkAddressChecksum(this.web3.utils.toChecksumAddress(addr));
+		return Web3.utils.checkAddressChecksum(Web3.utils.toChecksumAddress(addr));
 	}
 
 	public getTransactionReceipt(txHash: string) {
