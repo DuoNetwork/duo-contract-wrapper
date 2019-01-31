@@ -41,6 +41,25 @@ export interface IManagedStates {
 	operationCoolDown: number;
 }
 
+export interface IMagiStates {
+	isStarted: boolean;
+	firstPrice: {
+		price: number;
+		timestamp: number;
+		source: string;
+	};
+	secondPrice: {
+		price: number;
+		timestamp: number;
+		source: string;
+	};
+	priceTolerance: number;
+	priceFeedTolerance: number;
+	priceFeedTimeTolerance: number;
+	priceUpdateCoolDown: number;
+	numOfPrices: number;
+}
+
 export interface IEsplanadeStates {
 	isStarted: boolean;
 	votingStage: string;

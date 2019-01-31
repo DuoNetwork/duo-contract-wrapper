@@ -6,13 +6,17 @@ Array [
     "100000000000000000000",
     123456789,
   ],
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
 ]
 `;
 
 exports[`commitPrice, with option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     60000,
     Object {
       "gasLimit": 200000,
@@ -35,7 +39,7 @@ Array [
 exports[`commitPrice, without option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     60000,
     Object {},
   ],
@@ -44,6 +48,14 @@ Array [
 
 exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
 
+exports[`getAddresses 1`] = `
+Array [
+  "priceFeed1",
+  "priceFeed2",
+  "priceFeed3",
+]
+`;
+
 exports[`getLastPrice 1`] = `
 Object {
   "price": 1e-16,
@@ -51,8 +63,67 @@ Object {
 }
 `;
 
+exports[`getStates 1`] = `
+Object {
+  "firstPrice": Object {
+    "price": 100,
+    "source": "priceFeed1",
+    "timestamp": 123456789000,
+  },
+  "isStarted": false,
+  "numOfPrices": 0,
+  "priceFeedTimeTolerance": 60000,
+  "priceFeedTolerance": 0.01,
+  "priceTolerance": 0.05,
+  "priceUpdateCoolDown": 3600000,
+  "secondPrice": Object {
+    "price": 102,
+    "source": "priceFeed2",
+    "timestamp": 123456789000,
+  },
+}
+`;
+
+exports[`setValue 1`] = `"Read Only Mode"`;
+
+exports[`setValue 2`] = `
+Array [
+  Array [
+    0,
+    100,
+  ],
+  Array [
+    0,
+    100,
+  ],
+]
+`;
+
+exports[`setValue 3`] = `
+Array [
+  Array [
+    "account",
+    50000,
+    Object {},
+  ],
+  Array [
+    "account",
+    50000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`startMagi, with option 1`] = `
 Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
   Array [
     "100000000000000000000",
     123456789,
@@ -63,7 +134,7 @@ Array [
 exports[`startMagi, with option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     120000,
     Object {
       "gasLimit": 200000,
@@ -86,7 +157,7 @@ Array [
 exports[`startMagi, without option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     120000,
     Object {},
   ],
@@ -94,3 +165,88 @@ Array [
 `;
 
 exports[`startMagi, wrong env 1`] = `"Wrong Env"`;
+
+exports[`updateOperator 1`] = `"Read Only Mode"`;
+
+exports[`updateOperator 2`] = `
+Array [
+  Array [
+    "account",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "account",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updatePriceFeed 1`] = `"Read Only Mode"`;
+
+exports[`updatePriceFeed 2`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+  ],
+]
+`;
+
+exports[`updatePriceFeed 3`] = `
+Array [
+  Array [
+    "account",
+    120000,
+    Object {},
+  ],
+  Array [
+    "account",
+    120000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updateRoleManager 1`] = `"Read Only Mode"`;
+
+exports[`updateRoleManager 2`] = `
+Array [
+  Array [
+    "newRoleManager",
+  ],
+  Array [
+    "newRoleManager",
+  ],
+]
+`;
+
+exports[`updateRoleManager 3`] = `
+Array [
+  Array [
+    "account",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "account",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;

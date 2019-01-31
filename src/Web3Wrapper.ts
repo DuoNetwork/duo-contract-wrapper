@@ -129,7 +129,7 @@ export class Web3Wrapper {
 		return Promise.reject('Wrong Env');
 	}
 
-	public getGasPrice() {
+	public getGasPrice(): Promise<string> {
 		return this.web3.eth.getGasPrice();
 	}
 
@@ -138,7 +138,7 @@ export class Web3Wrapper {
 		to: string,
 		value: number,
 		option: ITransactionOption = {}
-	) {
+	): Promise<any> {
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
 		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
 		const nonce = option.nonce || (await this.getTransactionCount(from));
@@ -159,7 +159,7 @@ export class Web3Wrapper {
 		to: string,
 		value: number,
 		option: ITransactionOption = {}
-	) {
+	): Promise<any> {
 		if (this.isReadOnly()) return this.readOnlyReject();
 		const gasPrice = option.gasPrice || (await this.getGasPrice());
 		const gasLimit = option.gasLimit || CST.DEFAULT_TX_GAS_LIMIT;
@@ -180,7 +180,7 @@ export class Web3Wrapper {
 		spender: string,
 		value: number,
 		unlimited: boolean = false
-	) {
+	): Promise<any> {
 		if (this.isReadOnly()) return this.readOnlyReject();
 		return new Promise<string>(resolve => {
 			const erc20Contract = this.createContract(erc20Abi.abi, contractAddress);
@@ -196,17 +196,39 @@ export class Web3Wrapper {
 		});
 	}
 
-	public getCurrentBlockNumber() {
+	public getCurrentBlockNumber(): Promise<number> {
 		return this.web3.eth.getBlockNumber();
 	}
 
-	public getBlock(blkNumber: number) {
+	public getBlock(
+		blkNumber: number
+	): Promise<{
+		number: number;
+		hash: string;
+		parentHash: string;
+		nonce: string;
+		sha3Uncles: string;
+		logsBloom: string;
+		transactionsRoot: string;
+		stateRoot: string;
+		receiptsRoot: string;
+		miner: string;
+		difficulty: string;
+		totalDifficulty: string;
+		size: number;
+		extraData: string;
+		gasLimit: string;
+		gasUsed: string;
+		timestamp: number;
+		transactions: string[];
+		uncles: string[];
+	}> {
 		return this.web3.eth.getBlock(blkNumber);
 	}
 
-	public async getBlockTimestamp(blkNumber: number = 0): Promise<number> {
+	public async getBlockTimestamp(blkNumber: number = 0) {
 		if (!blkNumber) blkNumber = await this.getCurrentBlockNumber();
-		const blk = await this.web3.eth.getBlock(blkNumber);
+		const blk = await this.getBlock(blkNumber);
 		return blk.timestamp * 1000;
 	}
 
@@ -239,16 +261,39 @@ export class Web3Wrapper {
 		return Number(Web3.utils.fromWei(value, 'ether'));
 	}
 
-	public static toWei(value: string | number) {
+	public static toWei(value: string | number): any {
 		return Web3.utils.toWei(value + '', 'ether');
 	}
 
-	public static checkAddress(addr: string) {
+	public static checkAddress(addr: string): boolean {
 		if (!addr.startsWith('0x') || addr.length !== 42) return false;
 		return Web3.utils.checkAddressChecksum(Web3.utils.toChecksumAddress(addr));
 	}
 
-	public getTransactionReceipt(txHash: string) {
+	public getTransactionReceipt(
+		txHash: string
+	): Promise<null | {
+		status: boolean;
+		blockHash: string;
+		blockNumber: number;
+		transactionHash: string;
+		transactionIndex: number;
+		from: string;
+		to: string;
+		contractAddress: string | null;
+		cumulativeGasUsed: number;
+		gasUsed: number;
+		logs: Array<{
+			data: string;
+			topics: string[];
+			logIndex: number;
+			transactionIndex: number;
+			transactionHash: string;
+			blockHash: string;
+			blockNumber: number;
+			address: string;
+		}>;
+	}> {
 		return this.web3.eth.getTransactionReceipt(txHash);
 	}
 
@@ -311,7 +356,7 @@ export class Web3Wrapper {
 		return new this.web3.eth.Contract(abi, address);
 	}
 
-	public getTransactionCount(address: string) {
+	public getTransactionCount(address: string): Promise<number> {
 		return this.web3.eth.getTransactionCount(address);
 	}
 

@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import esplanadeAbi from './static/Esplanade.json';
-import { IEsplanadeStates, IVotingData } from './types';
+import { IEsplanadeStates, ITransactionOption, IVotingData } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export class EsplanadeWrapper extends BaseContractWrapper {
@@ -55,22 +55,23 @@ export class EsplanadeWrapper extends BaseContractWrapper {
 		}
 	}
 
-	public async getVotingStage(): Promise<string> {
-		const stage = await this.contract.methods.votingStage().call();
-		return EsplanadeWrapper.convertVotingStage(stage.valueOf());
+	public async getVotingStage() {
+		return EsplanadeWrapper.convertVotingStage(
+			await this.contract.methods.votingStage().call()
+		);
 	}
 
-	public async getModerator(): Promise<string> {
-		return (await this.contract.methods.moderator().call()).valueOf();
+	public getModerator(): Promise<string> {
+		return this.contract.methods.moderator().call();
 	}
 
-	public async getCandidate(): Promise<string> {
-		return (await this.contract.methods.candidate().call()).valueOf();
+	public getCandidate(): Promise<string> {
+		return this.contract.methods.candidate().call();
 	}
 
-	public async getAddressPoolSize(isHot: boolean): Promise<number> {
+	public async getAddressPoolSize(isHot: boolean) {
 		const poolSize = await this.contract.methods.getAddressPoolSizes().call();
-		return Number(poolSize[isHot ? 1 : 0].valueOf());
+		return Number(poolSize[this.getAddressPoolIndex(isHot)].valueOf());
 	}
 
 	public async getContractPoolSize(isCustodian: boolean) {
@@ -78,29 +79,26 @@ export class EsplanadeWrapper extends BaseContractWrapper {
 		return Number(contractSizes[isCustodian ? 0 : 1].valueOf());
 	}
 
-	public async getAddressPoolAddress(isHot: boolean, index: number): Promise<string> {
-		const poolIndex = this.getAddressPoolIndex(isHot);
-		return (await this.contract.methods.addrPool(poolIndex, index).call()).valueOf();
+	public getAddressPoolAddress(isHot: boolean, index: number): Promise<string> {
+		return this.contract.methods.addrPool(this.getAddressPoolIndex(isHot), index).call();
 	}
 
 	public async getContractPoolAddress(isCustodian: boolean, index: number): Promise<string> {
-		const addr = isCustodian
+		return isCustodian
 			? await this.contract.methods.custodianPool(index).call()
 			: await this.contract.methods.otherContractPool(index).call();
-		return addr.valueOf();
 	}
 
-	public async getOperationCoolDown(): Promise<number> {
+	public async getOperationCoolDown() {
 		return Number((await this.contract.methods.operatorCoolDown().call()).valueOf()) * 1000;
 	}
 
-	public async getLastOperationTime(): Promise<number> {
+	public async getLastOperationTime() {
 		return Number((await this.contract.methods.lastOperationTime().call()).valueOf()) * 1000;
 	}
 
-	public async isStarted(): Promise<boolean> {
-		const isStarted = await this.contract.methods.started().call();
-		return isStarted.valueOf();
+	public isStarted(): Promise<boolean> {
+		return this.contract.methods.started().call();
 	}
 
 	public isContractPassed(address: string): Promise<boolean> {
@@ -118,74 +116,97 @@ export class EsplanadeWrapper extends BaseContractWrapper {
 		};
 	}
 
-	public async startContractVoting(account: string, candidateAddress: string) {
+	public async startContractVoting(
+		account: string,
+		candidateAddress: string,
+		option: ITransactionOption = {}
+	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.startContractVoting(candidateAddress).send({
-			from: account
-		});
+		return this.contract.methods
+			.startContractVoting(candidateAddress)
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async terminateContractVoting(account: string) {
+	public async terminateContractVoting(account: string, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.terminateContractVoting().send({
-			from: account
-		});
+		return this.contract.methods
+			.terminateContractVoting()
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async terminateByTimeout(account: string) {
+	public async terminateByTimeout(account: string, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.terminateByTimeout().send({
-			from: account
-		});
+		return this.contract.methods
+			.terminateByTimeout()
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async startModeratorVoting(account: string) {
+	public async startModeratorVoting(account: string, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.startModeratorVoting().send({
-			from: account
-		});
+		return this.contract.methods
+			.startModeratorVoting()
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async vote(account: string, voteFor: boolean) {
+	public async vote(account: string, voteFor: boolean, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.vote(voteFor).send({
-			from: account
-		});
+		return this.contract.methods
+			.vote(voteFor)
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async startManager(account: string) {
+	public async startManager(account: string, option: ITransactionOption = {}) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.startManager().send({
-			from: account
-		});
+		return this.contract.methods
+			.startManager()
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async addCustodian(account: string, custodianAddr: string) {
+	public async addCustodian(
+		account: string,
+		custodianAddr: string,
+		option: ITransactionOption = {}
+	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.addCustodian(custodianAddr).send({
-			from: account
-		});
+		return this.contract.methods
+			.addCustodian(custodianAddr)
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async addOtherContracts(account: string, contractAddr: string) {
+	public async addOtherContracts(
+		account: string,
+		contractAddr: string,
+		option: ITransactionOption = {}
+	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.addOtherContracts(contractAddr).send({
-			from: account
-		});
+		return this.contract.methods
+			.addOtherContracts(contractAddr)
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async addAddress(account: string, addr1: string, addr2: string, hot: boolean) {
+	public async addAddress(
+		account: string,
+		addr1: string,
+		addr2: string,
+		hot: boolean,
+		option: ITransactionOption = {}
+	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.addAddress(addr1, addr2, this.getAddressPoolIndex(hot)).send({
-			from: account
-		});
+		return this.contract.methods
+			.addAddress(addr1, addr2, this.getAddressPoolIndex(hot))
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 
-	public async removeAddress(account: string, addr: string, hot: boolean) {
+	public async removeAddress(
+		account: string,
+		addr: string,
+		hot: boolean,
+		option: ITransactionOption = {}
+	) {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
-		return this.contract.methods.removeAddress(addr, this.getAddressPoolIndex(hot)).send({
-			from: account
-		});
+		return this.contract.methods
+			.removeAddress(addr, this.getAddressPoolIndex(hot))
+			.send(await this.web3Wrapper.getTransactionOption(account, 200000, option));
 	}
 }
 

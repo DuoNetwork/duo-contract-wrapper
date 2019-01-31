@@ -1,5 +1,6 @@
 import * as CST from './constants';
 import EsplanadeWrapper from './EsplanadeWrapper';
+import { ITransactionOption } from './types';
 
 const addrPool = [['coldAddr1', 'coldAddr2', 'coldAddr3'], ['hotAddr1', 'hotAddr2', 'hotAddr3']];
 const custodianPool = ['custodianAddr1', 'custodianAddr2', 'custodianAddr3'];
@@ -12,6 +13,15 @@ const web3Wrapper = {
 	onSwitchToLedger: jest.fn(() => ({} as any)),
 	readOnlyReject: jest.fn(() => Promise.reject('Read Only Mode')),
 	getEthBalance: jest.fn(() => Promise.resolve('10')),
+	getTransactionOption: jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	),
 	createContract: jest.fn(() => ({
 		methods: {
 			moderator: jest.fn(() => ({

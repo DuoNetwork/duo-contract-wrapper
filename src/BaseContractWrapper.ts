@@ -26,7 +26,7 @@ export abstract class BaseContractWrapper {
 		return code.valueOf();
 	}
 
-	public decode(input: string): any {
+	public decode(input: string): object {
 		abiDecoder.addABI(this.abi);
 		return abiDecoder.decodeMethod(input);
 	}

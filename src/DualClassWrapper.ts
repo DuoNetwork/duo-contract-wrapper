@@ -34,7 +34,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		oracleAddr: string,
 		option: ITransactionOption = {}
 	) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.startCustodian(aAddr, bAddr, oracleAddr)
 			.send(
@@ -47,7 +47,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async fetchPrice(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.fetchPrice()
 			.send(
@@ -123,7 +123,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async triggerReset(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.startReset()
 			.send(
@@ -132,7 +132,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async triggerPreReset(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.startPreReset()
 			.send(
@@ -294,8 +294,68 @@ export class DualClassWrapper extends BaseContractWrapper {
 		};
 	}
 
-	public getUserAddress(index: number) {
+	public getUserAddress(index: number): Promise<string> {
 		return this.contract.methods.users(index).call();
+	}
+
+	public async updateRoleManager(
+		account: string,
+		newManagerAddr: string,
+		option: ITransactionOption = {}
+	) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+		return this.contract.methods
+			.updateRoleManager(newManagerAddr)
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateOracle(
+		account: string,
+		newOracleAddr: string,
+		option: ITransactionOption = {}
+	) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+		return this.contract.methods
+			.updateOracle(newOracleAddr)
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateOperator(account: string, option: ITransactionOption = {}) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+		return this.contract.methods
+			.updateOperator()
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateFeeCollector(account: string, option: ITransactionOption = {}) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
+		return this.contract.methods
+			.updateFeeCollector()
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
 	}
 }
 
