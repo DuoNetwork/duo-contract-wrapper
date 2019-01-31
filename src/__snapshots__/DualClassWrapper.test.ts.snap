@@ -145,10 +145,10 @@ exports[`collectFee 1`] = `"Read Only Mode"`;
 exports[`collectFee 2`] = `
 Array [
   Array [
-    10000000000000000000,
+    "10000000000000000000",
   ],
   Array [
-    10000000000000000000,
+    "10000000000000000000",
   ],
 ]
 `;
@@ -206,11 +206,11 @@ exports[`create 5`] = `"createWithWETHtxHash"`;
 exports[`create 6`] = `
 Array [
   Array [
-    1000000000000000000,
+    "1000000000000000000",
     "wethAddr",
   ],
   Array [
-    1000000000000000000,
+    "1000000000000000000",
     "wethAddr",
   ],
 ]
@@ -224,7 +224,7 @@ Array [
       "gas": 160000,
       "gasPrice": 1000000000,
       "nonce": 10,
-      "value": 1000000000000000000,
+      "value": "1000000000000000000",
     },
   ],
   Array [
@@ -233,7 +233,7 @@ Array [
       "gas": 20000,
       "gasPrice": 1000000000,
       "nonce": 10,
-      "value": 1000000000000000000,
+      "value": "1000000000000000000",
     },
   ],
 ]
@@ -362,31 +362,31 @@ Object {
   "beta": 1,
   "createCommRate": 100000000000000,
   "ethCollateral": 1,
-  "feeBalance": 100.00000000000001,
+  "feeBalance": 100,
   "iterationGasThreshold": 10000,
   "lastOperationTime": 12345678980000,
   "lastPrice": 1e-9,
   "lastPriceTime": 1e+23,
   "limitLower": 1,
-  "limitPeriodic": 15.000000000000002,
+  "limitPeriodic": 15,
   "limitUpper": 2,
   "maturity": 1e+21,
   "minBalance": 100000,
   "navA": 2,
-  "navB": 100.00000000000001,
+  "navB": 100,
   "nextResetAddrIndex": 10000000000000000000,
   "operationCoolDown": 1e+24,
   "period": 1e+21,
-  "periodCoupon": 0.00015000000000000001,
+  "periodCoupon": 0.00015,
   "preResetWaitingBlocks": 1000000000000000000,
   "priceFetchCoolDown": 1e+24,
   "redeemCommRate": 100000000000000,
-  "resetPrice": 10000000.000000002,
+  "resetPrice": 10000000,
   "resetPriceTime": 1e+21,
   "resetState": "",
   "state": "Loading",
   "totalSupplyA": 1e-13,
-  "totalSupplyB": 1.0000000000000001e-16,
+  "totalSupplyB": 1e-16,
   "totalUsers": 1e+21,
 }
 `;
@@ -446,12 +446,12 @@ exports[`redeem 3`] = `"redeemTxHash"`;
 exports[`redeem 4`] = `
 Array [
   Array [
-    1000000000000000000,
-    1000000000000000000,
+    "1000000000000000000",
+    "1000000000000000000",
   ],
   Array [
-    1000000000000000000,
-    1000000000000000000,
+    "1000000000000000000",
+    "1000000000000000000",
   ],
 ]
 `;

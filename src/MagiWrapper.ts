@@ -29,7 +29,7 @@ export class MagiWrapper extends BaseContractWrapper {
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
-			.startOracle(this.web3Wrapper.toWei(price), timeInSecond)
+			.startOracle(Web3Wrapper.toWei(price), timeInSecond)
 			.send(await this.web3Wrapper.getTransactionOption(account, CST.START_MAGI_GAS, option));
 	}
 
@@ -41,7 +41,7 @@ export class MagiWrapper extends BaseContractWrapper {
 	) {
 		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
 		return this.contract.methods
-			.commitPrice(this.web3Wrapper.toWei(price), timeInSecond)
+			.commitPrice(Web3Wrapper.toWei(price), timeInSecond)
 			.send(
 				await this.web3Wrapper.getTransactionOption(account, CST.COMMIT_PRICE_GAS, option)
 			);
@@ -50,7 +50,7 @@ export class MagiWrapper extends BaseContractWrapper {
 	public async getLastPrice(): Promise<IContractPrice> {
 		const lastPrice = await this.contract.methods.getLastPrice().call();
 		return {
-			price: this.web3Wrapper.fromWei(lastPrice[0].valueOf()),
+			price: Web3Wrapper.fromWei(lastPrice[0].valueOf()),
 			timestamp: Number(lastPrice[1].valueOf()) * 1000
 		};
 	}

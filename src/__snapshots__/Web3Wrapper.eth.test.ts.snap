@@ -121,5 +121,3 @@ Array [
   "account3",
 ]
 `;
-
-exports[`toWei 1`] = `1000000000000000000`;
