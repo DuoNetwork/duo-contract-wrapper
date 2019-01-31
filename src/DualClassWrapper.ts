@@ -303,7 +303,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		newManagerAddr: string,
 		option: ITransactionOption = {}
 	) {
-		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateRoleManager(newManagerAddr)
 			.send(
@@ -320,7 +320,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		newOracleAddr: string,
 		option: ITransactionOption = {}
 	) {
-		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateOracle(newOracleAddr)
 			.send(
@@ -333,7 +333,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async updateOperator(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateOperator()
 			.send(
@@ -346,7 +346,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async updateFeeCollector(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateFeeCollector()
 			.send(
