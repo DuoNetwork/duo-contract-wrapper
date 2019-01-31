@@ -16,7 +16,7 @@ Array [
 exports[`commitPrice, with option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     60000,
     Object {
       "gasLimit": 200000,
@@ -39,7 +39,7 @@ Array [
 exports[`commitPrice, without option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     60000,
     Object {},
   ],
@@ -136,7 +136,7 @@ Array [
 exports[`startMagi, with option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     120000,
     Object {
       "gasLimit": 200000,
@@ -159,7 +159,7 @@ Array [
 exports[`startMagi, without option 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     120000,
     Object {},
   ],
@@ -237,12 +237,12 @@ Array [
 exports[`updateRoleManager 3`] = `
 Array [
   Array [
-    "address",
+    "account",
     1000000,
     Object {},
   ],
   Array [
-    "address",
+    "account",
     1000000,
     Object {
       "gasLimit": 200000,

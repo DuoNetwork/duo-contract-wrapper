@@ -91,7 +91,7 @@ const magiWrapper = new MagiWrapper(web3Wrapper, 'magiContractAddress');
 test('startMagi, wrong env', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => false);
 	try {
-		await magiWrapper.startMagi('address', 100, 123456789);
+		await magiWrapper.startMagi('account', 100, 123456789);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
@@ -108,7 +108,7 @@ test('startMagi, without option', async () => {
 			})
 	);
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
-	await magiWrapper.startMagi('address', 100, 123456789);
+	await magiWrapper.startMagi('account', 100, 123456789);
 	expect((magiWrapper.contract.methods.startOracle as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(
 		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
@@ -126,7 +126,7 @@ test('startMagi, with option', async () => {
 			})
 	);
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
-	await magiWrapper.startMagi('address', 100, 123456789, {
+	await magiWrapper.startMagi('account', 100, 123456789, {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -140,7 +140,7 @@ test('startMagi, with option', async () => {
 test('commitPrice, wrong env', async () => {
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => false);
 	try {
-		await magiWrapper.commitPrice('address', 100, 123456789);
+		await magiWrapper.commitPrice('account', 100, 123456789);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
@@ -157,7 +157,7 @@ test('commitPrice, without option', async () => {
 			})
 	);
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
-	await magiWrapper.commitPrice('address', 100, 123456789);
+	await magiWrapper.commitPrice('account', 100, 123456789);
 	expect((magiWrapper.contract.methods.commitPrice as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(
 		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
@@ -175,7 +175,7 @@ test('commitPrice, with option', async () => {
 			})
 	);
 	magiWrapper.web3Wrapper.isLocal = jest.fn(() => true);
-	await magiWrapper.commitPrice('address', 100, 123456789, {
+	await magiWrapper.commitPrice('account', 100, 123456789, {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -271,8 +271,8 @@ test('updateRoleManager', async () => {
 		expect(err).toMatchSnapshot();
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	await magiWrapper.updateRoleManager('address', 'newRoleManager');
-	await magiWrapper.updateRoleManager('address', 'newRoleManager', {
+	await magiWrapper.updateRoleManager('account', 'newRoleManager');
+	await magiWrapper.updateRoleManager('account', 'newRoleManager', {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
