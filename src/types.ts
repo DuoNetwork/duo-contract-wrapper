@@ -60,10 +60,6 @@ export interface IMagiStates {
 	numOfPrices: number;
 }
 
-export interface IMagiAddress {
-	priceFeed: string[];
-}
-
 export interface IEsplanadeStates {
 	isStarted: boolean;
 	votingStage: string;

@@ -49,13 +49,11 @@ Array [
 exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
 
 exports[`getAddresses 1`] = `
-Object {
-  "priceFeed": Array [
-    "priceFeed1",
-    "priceFeed2",
-    "priceFeed3",
-  ],
-}
+Array [
+  "priceFeed1",
+  "priceFeed2",
+  "priceFeed3",
+]
 `;
 
 exports[`getLastPrice 1`] = `
