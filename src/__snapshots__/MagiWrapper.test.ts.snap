@@ -6,6 +6,10 @@ Array [
     "100000000000000000000",
     123456789,
   ],
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
 ]
 `;
 
@@ -51,8 +55,44 @@ Object {
 }
 `;
 
+exports[`setValue 1`] = `
+Array [
+  Array [
+    0,
+    100,
+  ],
+  Array [
+    0,
+    100,
+  ],
+]
+`;
+
+exports[`setValue 2`] = `
+Array [
+  Array [
+    "address",
+    50000,
+    Object {},
+  ],
+  Array [
+    "address",
+    50000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`startMagi, with option 1`] = `
 Array [
+  Array [
+    "100000000000000000000",
+    123456789,
+  ],
   Array [
     "100000000000000000000",
     123456789,
@@ -94,3 +134,82 @@ Array [
 `;
 
 exports[`startMagi, wrong env 1`] = `"Wrong Env"`;
+
+exports[`updateOperator 1`] = `
+Array [
+  Array [
+    "address",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "address",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updatePriceFeed 1`] = `
+Array [
+  Array [
+    0,
+  ],
+  Array [
+    0,
+  ],
+]
+`;
+
+exports[`updatePriceFeed 2`] = `
+Array [
+  Array [
+    "address",
+    120000,
+    Object {},
+  ],
+  Array [
+    "address",
+    120000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updateRoleManager 1`] = `
+Array [
+  Array [
+    "newRoleManager",
+  ],
+  Array [
+    "newRoleManager",
+  ],
+]
+`;
+
+exports[`updateRoleManager 2`] = `
+Array [
+  Array [
+    "address",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "address",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;

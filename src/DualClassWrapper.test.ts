@@ -608,6 +608,18 @@ const web3Wrapper = {
 			})),
 			startPreReset: jest.fn(() => ({
 				send: startPreResetSend
+			})),
+			updateRoleManager: jest.fn(() => ({
+				send: jest.fn()
+			})),
+			updateOperator: jest.fn(() => ({
+				send: jest.fn()
+			})),
+			updateOracle: jest.fn(() => ({
+				send: jest.fn()
+			})),
+			updateFeeCollector: jest.fn(() => ({
+				send: jest.fn()
 			}))
 		}
 	}))
@@ -900,4 +912,94 @@ test('triggerReset', async () => {
 	expect(dualClassWrapper.contract.methods.startReset as jest.Mock).toBeCalledTimes(2);
 	expect(startResetSend.mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
+});
+
+test('updateRoleManager', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
+	await dualClassWrapper.updateRoleManager('address', 'newRoleManager');
+	await dualClassWrapper.updateRoleManager('address', 'newRoleManager', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(
+		(dualClassWrapper.contract.methods.updateRoleManager as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(dualClassWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('updateOperator', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
+	await dualClassWrapper.updateOperator('address');
+	await dualClassWrapper.updateOperator('address', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(
+		(dualClassWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('updateOracle', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
+	await dualClassWrapper.updateOracle('address', 'newOracleAddress');
+	await dualClassWrapper.updateOracle('address', 'newOracleAddress', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(
+		(dualClassWrapper.contract.methods.updateOracle as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(dualClassWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
+});
+
+test('updateFeeCollector', async () => {
+	web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
+	await dualClassWrapper.updateFeeCollector('address');
+	await dualClassWrapper.updateFeeCollector('address', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(
+		(dualClassWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });

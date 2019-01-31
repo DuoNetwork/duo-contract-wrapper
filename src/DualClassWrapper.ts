@@ -297,6 +297,62 @@ export class DualClassWrapper extends BaseContractWrapper {
 	public getUserAddress(index: number) {
 		return this.contract.methods.users(index).call();
 	}
+
+	public async updateRoleManager(
+		account: string,
+		newManagerAddr: string,
+		option: ITransactionOption = {}
+	) {
+		return this.contract.methods
+			.updateRoleManager(newManagerAddr)
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateOracle(
+		account: string,
+		newOracleAddr: string,
+		option: ITransactionOption = {}
+	) {
+		return this.contract.methods
+			.updateOracle(newOracleAddr)
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateOperator(account: string, option: ITransactionOption = {}) {
+		return this.contract.methods
+			.updateOperator()
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateFeeCollector(account: string, option: ITransactionOption = {}) {
+		return this.contract.methods
+			.updateFeeCollector()
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
 }
 
 export default DualClassWrapper;

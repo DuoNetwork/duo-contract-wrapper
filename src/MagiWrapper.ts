@@ -54,6 +54,53 @@ export class MagiWrapper extends BaseContractWrapper {
 			timestamp: Number(lastPrice[1].valueOf()) * 1000
 		};
 	}
+
+	public async updatePriceFeed(account: string, index: number, option: ITransactionOption = {}) {
+		return this.contract.methods
+			.updatePriceFeed(index)
+			.send(
+				await this.web3Wrapper.getTransactionOption(account, CST.UPDATE_PRICE_FEED, option)
+			);
+	}
+
+	public async setValue(
+		account: string,
+		index: number,
+		newValue: number,
+		option: ITransactionOption = {}
+	) {
+		return this.contract.methods
+			.setValue(index, newValue)
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.SET_VALUE_GAS, option));
+	}
+
+	public async updateRoleManager(
+		account: string,
+		newManagerAddr: string,
+		option: ITransactionOption = {}
+	) {
+		return this.contract.methods
+			.updateRoleManager(newManagerAddr)
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
+
+	public async updateOperator(account: string, option: ITransactionOption = {}) {
+		return this.contract.methods
+			.updateOperator()
+			.send(
+				await this.web3Wrapper.getTransactionOption(
+					account,
+					CST.UPDATE_ROLE_MANAGER_GAS,
+					option
+				)
+			);
+	}
 }
 
 export default MagiWrapper;

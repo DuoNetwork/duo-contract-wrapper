@@ -737,3 +737,101 @@ Array [
   ],
 ]
 `;
+
+exports[`updateFeeCollector 1`] = `
+Array [
+  Array [
+    "address",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "address",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updateOperator 1`] = `
+Array [
+  Array [
+    "address",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "address",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updateOracle 1`] = `
+Array [
+  Array [
+    "newOracleAddress",
+  ],
+  Array [
+    "newOracleAddress",
+  ],
+]
+`;
+
+exports[`updateOracle 2`] = `
+Array [
+  Array [
+    "address",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "address",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updateRoleManager 1`] = `
+Array [
+  Array [
+    "newRoleManager",
+  ],
+  Array [
+    "newRoleManager",
+  ],
+]
+`;
+
+exports[`updateRoleManager 2`] = `
+Array [
+  Array [
+    "address",
+    1000000,
+    Object {},
+  ],
+  Array [
+    "address",
+    1000000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
