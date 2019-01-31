@@ -924,8 +924,15 @@ test('updateRoleManager', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await dualClassWrapper.updateRoleManager('address', 'newRoleManager');
-	await dualClassWrapper.updateRoleManager('address', 'newRoleManager', {
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await dualClassWrapper.updateRoleManager('account', 'newRoleManager');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await dualClassWrapper.updateRoleManager('account', 'newRoleManager');
+	await dualClassWrapper.updateRoleManager('account', 'newRoleManager', {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -948,8 +955,15 @@ test('updateOperator', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await dualClassWrapper.updateOperator('address');
-	await dualClassWrapper.updateOperator('address', {
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await dualClassWrapper.updateOperator('account');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await dualClassWrapper.updateOperator('account');
+	await dualClassWrapper.updateOperator('account', {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -969,8 +983,15 @@ test('updateOracle', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await dualClassWrapper.updateOracle('address', 'newOracleAddress');
-	await dualClassWrapper.updateOracle('address', 'newOracleAddress', {
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await dualClassWrapper.updateOracle('account', 'newOracleAddress');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await dualClassWrapper.updateOracle('account', 'newOracleAddress');
+	await dualClassWrapper.updateOracle('account', 'newOracleAddress', {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -993,8 +1014,15 @@ test('updateFeeCollector', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await dualClassWrapper.updateFeeCollector('address');
-	await dualClassWrapper.updateFeeCollector('address', {
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await dualClassWrapper.updateFeeCollector('account');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await dualClassWrapper.updateFeeCollector('account');
+	await dualClassWrapper.updateFeeCollector('account', {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10

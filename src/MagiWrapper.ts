@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import magiAbi from './static/Magi.json';
-import { IContractPrice, ITransactionOption } from './types';
+import { IContractPrice, IMagiAddress, IMagiStates, ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export class MagiWrapper extends BaseContractWrapper {
@@ -19,6 +19,48 @@ export class MagiWrapper extends BaseContractWrapper {
 
 	public async isStarted(): Promise<boolean> {
 		return await this.contract.methods.started().call();
+	}
+
+	public async getStates(): Promise<IMagiStates> {
+		const firstPrice = await this.contract.methods.firstPrice().call();
+		const secondPrice = await this.contract.methods.secondPrice().call();
+
+		return {
+			isStarted: await this.isStarted(),
+			firstPrice: {
+				price: Web3Wrapper.fromWei(firstPrice[0].valueOf()),
+				timestamp: firstPrice[1].valueOf() * 1000,
+				source: firstPrice[2].valueOf()
+			},
+			secondPrice: {
+				price: Web3Wrapper.fromWei(secondPrice[0].valueOf()),
+				timestamp: secondPrice[1].valueOf() * 1000,
+				source: secondPrice[2].valueOf()
+			},
+			priceTolerance: (await this.contract.methods.priceTolInBP().call()) / 10000,
+			priceFeedTolerance: (await this.contract.methods.priceFeedTolInBP().call()) / 10000,
+			priceFeedTimeTolerance: (await this.contract.methods.priceFeedTimeTol().call()) * 1000,
+			priceUpdateCoolDown: (await this.contract.methods.priceUpdateCoolDown().call()) * 1000,
+			numOfPrices: Number(await this.contract.methods.numOfPrices().call())
+		};
+	}
+
+	public async getAddresses(): Promise<IMagiAddress> {
+		return {
+			priceFeed: [
+				await this.contract.methods.priceFeed1().call(),
+				await this.contract.methods.priceFeed2().call(),
+				await this.contract.methods.priceFeed3().call()
+			]
+		};
+	}
+
+	public async getLastPrice(): Promise<IContractPrice> {
+		const lastPrice = await this.contract.methods.getLastPrice().call();
+		return {
+			price: Web3Wrapper.fromWei(lastPrice[0].valueOf()),
+			timestamp: Number(lastPrice[1].valueOf()) * 1000
+		};
 	}
 
 	public async startMagi(
@@ -45,14 +87,6 @@ export class MagiWrapper extends BaseContractWrapper {
 			.send(
 				await this.web3Wrapper.getTransactionOption(account, CST.COMMIT_PRICE_GAS, option)
 			);
-	}
-
-	public async getLastPrice(): Promise<IContractPrice> {
-		const lastPrice = await this.contract.methods.getLastPrice().call();
-		return {
-			price: Web3Wrapper.fromWei(lastPrice[0].valueOf()),
-			timestamp: Number(lastPrice[1].valueOf()) * 1000
-		};
 	}
 
 	public async updatePriceFeed(account: string, index: number, option: ITransactionOption = {}) {

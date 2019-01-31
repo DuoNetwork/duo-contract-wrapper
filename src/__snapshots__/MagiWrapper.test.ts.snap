@@ -48,6 +48,16 @@ Array [
 
 exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
 
+exports[`getAddresses 1`] = `
+Object {
+  "priceFeed": Array [
+    "priceFeed1",
+    "priceFeed2",
+    "priceFeed3",
+  ],
+}
+`;
+
 exports[`getLastPrice 1`] = `
 Object {
   "price": 1e-16,
@@ -55,7 +65,30 @@ Object {
 }
 `;
 
-exports[`setValue 1`] = `
+exports[`getStates 1`] = `
+Object {
+  "firstPrice": Object {
+    "price": 100,
+    "source": "priceFeed1",
+    "timestamp": 123456789000,
+  },
+  "isStarted": false,
+  "numOfPrices": 0,
+  "priceFeedTimeTolerance": 60000,
+  "priceFeedTolerance": 0.01,
+  "priceTolerance": 0.05,
+  "priceUpdateCoolDown": 3600000,
+  "secondPrice": Object {
+    "price": 102,
+    "source": "priceFeed2",
+    "timestamp": 123456789000,
+  },
+}
+`;
+
+exports[`setValue 1`] = `"Read Only Mode"`;
+
+exports[`setValue 2`] = `
 Array [
   Array [
     0,
@@ -68,15 +101,15 @@ Array [
 ]
 `;
 
-exports[`setValue 2`] = `
+exports[`setValue 3`] = `
 Array [
   Array [
-    "address",
+    "account",
     50000,
     Object {},
   ],
   Array [
-    "address",
+    "account",
     50000,
     Object {
       "gasLimit": 200000,
@@ -135,15 +168,17 @@ Array [
 
 exports[`startMagi, wrong env 1`] = `"Wrong Env"`;
 
-exports[`updateOperator 1`] = `
+exports[`updateOperator 1`] = `"Read Only Mode"`;
+
+exports[`updateOperator 2`] = `
 Array [
   Array [
-    "address",
+    "account",
     1000000,
     Object {},
   ],
   Array [
-    "address",
+    "account",
     1000000,
     Object {
       "gasLimit": 200000,
@@ -154,26 +189,28 @@ Array [
 ]
 `;
 
-exports[`updatePriceFeed 1`] = `
-Array [
-  Array [
-    0,
-  ],
-  Array [
-    0,
-  ],
-]
-`;
+exports[`updatePriceFeed 1`] = `"Read Only Mode"`;
 
 exports[`updatePriceFeed 2`] = `
 Array [
   Array [
-    "address",
+    0,
+  ],
+  Array [
+    0,
+  ],
+]
+`;
+
+exports[`updatePriceFeed 3`] = `
+Array [
+  Array [
+    "account",
     120000,
     Object {},
   ],
   Array [
-    "address",
+    "account",
     120000,
     Object {
       "gasLimit": 200000,
@@ -184,7 +221,9 @@ Array [
 ]
 `;
 
-exports[`updateRoleManager 1`] = `
+exports[`updateRoleManager 1`] = `"Read Only Mode"`;
+
+exports[`updateRoleManager 2`] = `
 Array [
   Array [
     "newRoleManager",
@@ -195,7 +234,7 @@ Array [
 ]
 `;
 
-exports[`updateRoleManager 2`] = `
+exports[`updateRoleManager 3`] = `
 Array [
   Array [
     "address",

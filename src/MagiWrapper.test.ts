@@ -4,7 +4,7 @@ import MagiWrapper from './MagiWrapper';
 import { ITransactionOption } from './types';
 
 const web3Wrapper = {
-	isReadOnly: jest.fn(() => false),
+	isReadOnly: jest.fn(() => true),
 	onSwitchToMetaMask: jest.fn(() => ({} as any)),
 	fromWei: jest.fn(value => value * 1e-18),
 	onSwitchToLedger: jest.fn(() => ({} as any)),
@@ -46,6 +46,41 @@ const web3Wrapper = {
 			})),
 			updateOperator: jest.fn(() => ({
 				send: jest.fn()
+			})),
+			priceFeed1: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve('priceFeed1'))
+			})),
+			priceFeed2: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve('priceFeed2'))
+			})),
+			priceFeed3: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve('priceFeed3'))
+			})),
+
+			priceTolInBP: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(500))
+			})),
+			priceFeedTolInBP: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(100))
+			})),
+			priceFeedTimeTol: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(60))
+			})),
+			priceUpdateCoolDown: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(3600))
+			})),
+			numOfPrices: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(0))
+			})),
+			firstPrice: jest.fn(() => ({
+				call: jest.fn(() =>
+					Promise.resolve(['100000000000000000000', '123456789', 'priceFeed1'])
+				)
+			})),
+			secondPrice: jest.fn(() => ({
+				call: jest.fn(() =>
+					Promise.resolve(['102000000000000000000', '123456789', 'priceFeed2'])
+				)
 			}))
 		}
 	}))
@@ -169,8 +204,15 @@ test('updatePriceFeed', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await magiWrapper.updatePriceFeed('address', 0);
-	await magiWrapper.updatePriceFeed('address', 0, {
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await magiWrapper.updatePriceFeed('account', 0);
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await magiWrapper.updatePriceFeed('account', 0);
+	await magiWrapper.updatePriceFeed('account', 0, {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -193,8 +235,15 @@ test('setValue', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await magiWrapper.setValue('address', 0, 100);
-	await magiWrapper.setValue('address', 0, 100, {
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await magiWrapper.setValue('account', 0, 100);
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await magiWrapper.setValue('account', 0, 100);
+	await magiWrapper.setValue('account', 0, 100, {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -215,6 +264,13 @@ test('updateRoleManager', async () => {
 				nonce: option.nonce || 10
 			})
 	);
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await magiWrapper.updateRoleManager('account', 'newRoleManager');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await magiWrapper.updateRoleManager('address', 'newRoleManager');
 	await magiWrapper.updateRoleManager('address', 'newRoleManager', {
 		gasPrice: 2000000000,
@@ -239,8 +295,16 @@ test('updateOperator', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	await magiWrapper.updateOperator('address');
-	await magiWrapper.updateOperator('address', {
+
+	web3Wrapper.isReadOnly = jest.fn(() => true);
+	try {
+		await magiWrapper.updateOperator('account');
+	} catch (err) {
+		expect(err).toMatchSnapshot();
+	}
+	web3Wrapper.isReadOnly = jest.fn(() => false);
+	await magiWrapper.updateOperator('account');
+	await magiWrapper.updateOperator('account', {
 		gasPrice: 2000000000,
 		gasLimit: 200000,
 		nonce: 10
@@ -248,4 +312,12 @@ test('updateOperator', async () => {
 	expect(
 		(magiWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
 	).toMatchSnapshot();
+});
+
+test('getAddresses', async () => {
+	expect(await magiWrapper.getAddresses()).toMatchSnapshot();
+});
+
+test('getStates', async () => {
+	expect(await magiWrapper.getStates()).toMatchSnapshot();
 });
