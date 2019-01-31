@@ -293,7 +293,7 @@ Array [
 ]
 `;
 
-exports[`fetchPrice 1`] = `"wrong env"`;
+exports[`fetchPrice 1`] = `"Read Only Mode"`;
 
 exports[`fetchPrice 2`] = `
 Array [
@@ -597,7 +597,7 @@ Array [
 ]
 `;
 
-exports[`startCustodian 1`] = `"wrong env"`;
+exports[`startCustodian 1`] = `"Read Only Mode"`;
 
 exports[`startCustodian 2`] = `
 Array [
@@ -654,7 +654,7 @@ Array [
 ]
 `;
 
-exports[`triggerPreReset 1`] = `"wrong env"`;
+exports[`triggerPreReset 1`] = `"Read Only Mode"`;
 
 exports[`triggerPreReset 2`] = `
 Array [
@@ -696,7 +696,7 @@ Array [
 ]
 `;
 
-exports[`triggerReset 1`] = `"wrong env"`;
+exports[`triggerReset 1`] = `"Read Only Mode"`;
 
 exports[`triggerReset 2`] = `
 Array [

@@ -507,7 +507,6 @@ const startPreResetSend = jest.fn(() => Promise.resolve());
 const startResetSend = jest.fn(() => Promise.resolve());
 
 const web3Wrapper = {
-	isLocal: jest.fn(() => false),
 	isReadOnly: jest.fn(() => true),
 	onSwitchToMetaMask: jest.fn(() => ({} as any)),
 	fromWei: jest.fn(value => value * 1e-18),
@@ -811,12 +810,13 @@ test('startCustodian', async () => {
 				nonce: option.nonce || 10
 			})
 	);
+	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.startCustodian('account', 'aAddr', 'bAddr', 'oracleAddr');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
-	web3Wrapper.isLocal = jest.fn(() => true);
+	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await dualClassWrapper.startCustodian('account', 'aAddr', 'bAddr', 'oracleAddr');
 	await dualClassWrapper.startCustodian('account', 'aAddr', 'bAddr', 'oracleAddr', {
 		gasPrice: 1000000000,
@@ -840,13 +840,13 @@ test('fetchPrice', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	web3Wrapper.isLocal = jest.fn(() => false);
+	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.fetchPrice('account');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
-	web3Wrapper.isLocal = jest.fn(() => true);
+	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await dualClassWrapper.fetchPrice('account');
 	await dualClassWrapper.fetchPrice('account', {
 		gasPrice: 1000000000,
@@ -868,13 +868,13 @@ test('triggerPreReset', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	web3Wrapper.isLocal = jest.fn(() => false);
+	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.triggerPreReset('account');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
-	web3Wrapper.isLocal = jest.fn(() => true);
+	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await dualClassWrapper.triggerPreReset('account');
 	await dualClassWrapper.triggerPreReset('account', {
 		gasLimit: 20000,
@@ -896,13 +896,13 @@ test('triggerReset', async () => {
 				nonce: option.nonce || 10
 			})
 	);
-	web3Wrapper.isLocal = jest.fn(() => false);
+	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await dualClassWrapper.triggerReset('account');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
-	web3Wrapper.isLocal = jest.fn(() => true);
+	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await dualClassWrapper.triggerReset('account');
 	await dualClassWrapper.triggerReset('account', {
 		gasLimit: 20000,

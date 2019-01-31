@@ -56,6 +56,7 @@ export class MagiWrapper extends BaseContractWrapper {
 	}
 
 	public async updatePriceFeed(account: string, index: number, option: ITransactionOption = {}) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updatePriceFeed(index)
 			.send(
@@ -69,6 +70,7 @@ export class MagiWrapper extends BaseContractWrapper {
 		newValue: number,
 		option: ITransactionOption = {}
 	) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.setValue(index, newValue)
 			.send(await this.web3Wrapper.getTransactionOption(account, CST.SET_VALUE_GAS, option));
@@ -79,6 +81,7 @@ export class MagiWrapper extends BaseContractWrapper {
 		newManagerAddr: string,
 		option: ITransactionOption = {}
 	) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateRoleManager(newManagerAddr)
 			.send(
@@ -91,6 +94,7 @@ export class MagiWrapper extends BaseContractWrapper {
 	}
 
 	public async updateOperator(account: string, option: ITransactionOption = {}) {
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateOperator()
 			.send(

@@ -4,7 +4,7 @@ import MagiWrapper from './MagiWrapper';
 import { ITransactionOption } from './types';
 
 const web3Wrapper = {
-	isReadOnly: jest.fn(() => true),
+	isReadOnly: jest.fn(() => false),
 	onSwitchToMetaMask: jest.fn(() => ({} as any)),
 	fromWei: jest.fn(value => value * 1e-18),
 	onSwitchToLedger: jest.fn(() => ({} as any)),

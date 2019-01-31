@@ -34,7 +34,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		oracleAddr: string,
 		option: ITransactionOption = {}
 	) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.startCustodian(aAddr, bAddr, oracleAddr)
 			.send(
@@ -47,7 +47,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async fetchPrice(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.fetchPrice()
 			.send(
@@ -123,7 +123,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async triggerReset(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.startReset()
 			.send(
@@ -132,7 +132,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async triggerPreReset(account: string, option: ITransactionOption = {}) {
-		if (!this.web3Wrapper.isLocal()) return this.web3Wrapper.wrongEnvReject();
+		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.startPreReset()
 			.send(
@@ -294,7 +294,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		};
 	}
 
-	public getUserAddress(index: number) {
+	public getUserAddress(index: number): Promise<string> {
 		return this.contract.methods.users(index).call();
 	}
 
@@ -303,6 +303,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		newManagerAddr: string,
 		option: ITransactionOption = {}
 	) {
+		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateRoleManager(newManagerAddr)
 			.send(
@@ -319,6 +320,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		newOracleAddr: string,
 		option: ITransactionOption = {}
 	) {
+		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateOracle(newOracleAddr)
 			.send(
@@ -331,6 +333,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async updateOperator(account: string, option: ITransactionOption = {}) {
+		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateOperator()
 			.send(
@@ -343,6 +346,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 	}
 
 	public async updateFeeCollector(account: string, option: ITransactionOption = {}) {
+		if (!this.web3Wrapper.readOnlyReject()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.updateFeeCollector()
 			.send(
