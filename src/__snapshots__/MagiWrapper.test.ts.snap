@@ -77,7 +77,7 @@ Object {
   "isStarted": false,
   "lastOperationTime": 1234567890000,
   "numOfPrices": 0,
-  "operationCoolDown": 1234567890,
+  "operationCoolDown": 1234567890000,
   "priceFeedTimeTolerance": 60000,
   "priceFeedTolerance": 0.01,
   "priceTolerance": 0.05,
