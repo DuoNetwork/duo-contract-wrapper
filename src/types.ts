@@ -62,11 +62,6 @@ export interface IMagiStates {
 	operationCoolDown: number;
 }
 
-export interface IAccount {
-	balance: number;
-	address: string;
-}
-
 export interface IMagiAddresses {
 	priceFeed: string[];
 	operator: string;
