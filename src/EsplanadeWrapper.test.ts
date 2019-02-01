@@ -108,6 +108,15 @@ const web3Wrapper = {
 const esplanadeWrapper = new EsplanadeWrapper(web3Wrapper, 'address');
 
 test('startContractVoting', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.startContractVoting('account', 'candidateAddr');
@@ -116,12 +125,29 @@ test('startContractVoting', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.startContractVoting('account', 'candidateAdddr');
+	await esplanadeWrapper.startContractVoting('account', 'candidateAddr', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect(
 		(esplanadeWrapper.contract.methods.startContractVoting as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
 	).toMatchSnapshot();
 });
 
 test('terminateContractVoting', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.terminateContractVoting('account');
@@ -130,12 +156,29 @@ test('terminateContractVoting', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.terminateContractVoting('account');
+	await esplanadeWrapper.terminateContractVoting('account', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect(esplanadeWrapper.contract.methods.terminateContractVoting as jest.Mock).toBeCalledTimes(
-		1
+		2
 	);
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('terminateByTimeout', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.terminateByTimeout('account');
@@ -144,10 +187,27 @@ test('terminateByTimeout', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.terminateByTimeout('account');
-	expect(esplanadeWrapper.contract.methods.terminateByTimeout as jest.Mock).toBeCalledTimes(1);
+	await esplanadeWrapper.terminateByTimeout('account', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(esplanadeWrapper.contract.methods.terminateByTimeout as jest.Mock).toBeCalledTimes(2);
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('startModeratorVoting', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.startModeratorVoting('account');
@@ -156,10 +216,27 @@ test('startModeratorVoting', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.startModeratorVoting('account');
-	expect(esplanadeWrapper.contract.methods.startModeratorVoting as jest.Mock).toBeCalledTimes(1);
+	await esplanadeWrapper.startModeratorVoting('account', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(esplanadeWrapper.contract.methods.startModeratorVoting as jest.Mock).toBeCalledTimes(2);
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('vote', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.vote('account', true);
@@ -169,10 +246,27 @@ test('vote', async () => {
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.vote('account', true);
 	await esplanadeWrapper.vote('', true);
+	await esplanadeWrapper.vote('account', true, {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect((esplanadeWrapper.contract.methods.vote as jest.Mock).mock.calls).toMatchSnapshot();
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('startManager', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.startManager('account');
@@ -181,10 +275,27 @@ test('startManager', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.startManager('account');
-	expect(esplanadeWrapper.contract.methods.startManager as jest.Mock).toBeCalledTimes(1);
+	await esplanadeWrapper.startManager('account', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
+	expect(esplanadeWrapper.contract.methods.startManager as jest.Mock).toBeCalledTimes(2);
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('addCustodian', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.addCustodian('account', 'custodianAddr');
@@ -193,12 +304,29 @@ test('addCustodian', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.addCustodian('account', 'custodianAddr');
+	await esplanadeWrapper.addCustodian('account', 'custodianAddr', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect(
 		(esplanadeWrapper.contract.methods.addCustodian as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
 	).toMatchSnapshot();
 });
 
 test('addOtherContracts', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.addOtherContracts('account', 'contractAddr');
@@ -207,12 +335,29 @@ test('addOtherContracts', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.addOtherContracts('account', 'otherContractAddr');
+	await esplanadeWrapper.addOtherContracts('acount', 'contractAddr', {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect(
 		(esplanadeWrapper.contract.methods.addOtherContracts as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
 	).toMatchSnapshot();
 });
 
 test('addAddress', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.addAddress('account', 'addr1', 'addr2', true);
@@ -221,12 +366,29 @@ test('addAddress', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.addAddress('account', 'addr1', 'addr2', true);
+	await esplanadeWrapper.addAddress('account', 'addr1', 'addr2', true, {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect(
 		(esplanadeWrapper.contract.methods.addAddress as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
 	).toMatchSnapshot();
 });
 
 test('removeAddress', async () => {
+	esplanadeWrapper.web3Wrapper.getTransactionOption = jest.fn(
+		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
+			Promise.resolve({
+				from: account,
+				gasPrice: option.gasPrice || 1000000000,
+				gas: option.gasLimit || gasLimit,
+				nonce: option.nonce || 10
+			})
+	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
 		await esplanadeWrapper.removeAddress('account', 'addr', true);
@@ -235,8 +397,16 @@ test('removeAddress', async () => {
 	}
 	web3Wrapper.isReadOnly = jest.fn(() => false);
 	await esplanadeWrapper.removeAddress('account', 'addr', true);
+	await esplanadeWrapper.removeAddress('account', 'addr', true, {
+		gasPrice: 2000000000,
+		gasLimit: 200000,
+		nonce: 10
+	});
 	expect(
 		(esplanadeWrapper.contract.methods.removeAddress as jest.Mock).mock.calls
+	).toMatchSnapshot();
+	expect(
+		(esplanadeWrapper.web3Wrapper.getTransactionOption as jest.Mock).mock.calls
 	).toMatchSnapshot();
 });
 
