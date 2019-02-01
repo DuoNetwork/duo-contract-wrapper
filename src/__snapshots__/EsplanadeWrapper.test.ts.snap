@@ -9,6 +9,30 @@ Array [
     "addr2",
     1,
   ],
+  Array [
+    "addr1",
+    "addr2",
+    1,
+  ],
+]
+`;
+
+exports[`addAddress 3`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
 ]
 `;
 
@@ -19,6 +43,28 @@ Array [
   Array [
     "custodianAddr",
   ],
+  Array [
+    "custodianAddr",
+  ],
+]
+`;
+
+exports[`addCustodian 3`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
 ]
 `;
 
@@ -28,6 +74,28 @@ exports[`addOtherContracts 2`] = `
 Array [
   Array [
     "otherContractAddr",
+  ],
+  Array [
+    "contractAddr",
+  ],
+]
+`;
+
+exports[`addOtherContracts 3`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "acount",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
   ],
 ]
 `;
@@ -93,6 +161,29 @@ Array [
     "addr",
     1,
   ],
+  Array [
+    "addr",
+    1,
+  ],
+]
+`;
+
+exports[`removeAddress 3`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
 ]
 `;
 
@@ -103,16 +194,114 @@ Array [
   Array [
     "candidateAdddr",
   ],
+  Array [
+    "candidateAddr",
+  ],
+]
+`;
+
+exports[`startContractVoting 3`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
 ]
 `;
 
 exports[`startManager 1`] = `"Read Only Mode"`;
 
+exports[`startManager 2`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`startModeratorVoting 1`] = `"Read Only Mode"`;
+
+exports[`startModeratorVoting 2`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
 
 exports[`terminateByTimeout 1`] = `"Read Only Mode"`;
 
+exports[`terminateByTimeout 2`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`terminateContractVoting 1`] = `"Read Only Mode"`;
+
+exports[`terminateContractVoting 2`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
 
 exports[`vote 1`] = `"Read Only Mode"`;
 
@@ -123,6 +312,33 @@ Array [
   ],
   Array [
     true,
+  ],
+  Array [
+    true,
+  ],
+]
+`;
+
+exports[`vote 3`] = `
+Array [
+  Array [
+    "account",
+    200000,
+    Object {},
+  ],
+  Array [
+    "",
+    200000,
+    Object {},
+  ],
+  Array [
+    "account",
+    200000,
+    Object {
+      "gasLimit": 200000,
+      "gasPrice": 2000000000,
+      "nonce": 10,
+    },
   ],
 ]
 `;

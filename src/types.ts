@@ -58,6 +58,14 @@ export interface IMagiStates {
 	priceFeedTimeTolerance: number;
 	priceUpdateCoolDown: number;
 	numOfPrices: number;
+	lastOperationTime: number;
+	operationCoolDown: number;
+}
+
+export interface IMagiAddresses {
+	priceFeed: string[];
+	operator: string;
+	roleManagerAddress: string;
 }
 
 export interface IEsplanadeStates {
