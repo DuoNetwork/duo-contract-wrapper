@@ -49,11 +49,15 @@ Array [
 exports[`commitPrice, wrong env 1`] = `"Wrong Env"`;
 
 exports[`getAddresses 1`] = `
-Array [
-  "priceFeed1",
-  "priceFeed2",
-  "priceFeed3",
-]
+Object {
+  "operator": "operatorAddress",
+  "priceFeed": Array [
+    "priceFeed1",
+    "priceFeed2",
+    "priceFeed3",
+  ],
+  "roleManagerAddress": "roleManagerAddress",
+}
 `;
 
 exports[`getLastPrice 1`] = `
@@ -71,7 +75,9 @@ Object {
     "timestamp": 123456789000,
   },
   "isStarted": false,
+  "lastOperationTime": 1234567890000,
   "numOfPrices": 0,
+  "operationCoolDown": 1234567890,
   "priceFeedTimeTolerance": 60000,
   "priceFeedTolerance": 0.01,
   "priceTolerance": 0.05,

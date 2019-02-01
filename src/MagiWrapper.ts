@@ -1,7 +1,7 @@
 import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import magiAbi from './static/Magi.json';
-import { IContractPrice, IMagiStates, ITransactionOption } from './types';
+import { IContractPrice, IMagiAddresses, IMagiStates, ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
 export class MagiWrapper extends BaseContractWrapper {
@@ -41,16 +41,22 @@ export class MagiWrapper extends BaseContractWrapper {
 			priceFeedTolerance: (await this.contract.methods.priceFeedTolInBP().call()) / 10000,
 			priceFeedTimeTolerance: (await this.contract.methods.priceFeedTimeTol().call()) * 1000,
 			priceUpdateCoolDown: (await this.contract.methods.priceUpdateCoolDown().call()) * 1000,
-			numOfPrices: Number(await this.contract.methods.numOfPrices().call())
+			numOfPrices: Number(await this.contract.methods.numOfPrices().call()),
+			lastOperationTime: (await this.contract.methods.lastOperationTime().call()) * 1000,
+			operationCoolDown: await this.contract.methods.lastOperationTime().call()
 		};
 	}
 
-	public async getAddresses(): Promise<string[]> {
-		return [
-			await this.contract.methods.priceFeed1().call(),
-			await this.contract.methods.priceFeed2().call(),
-			await this.contract.methods.priceFeed3().call()
-		];
+	public async getAddresses(): Promise<IMagiAddresses> {
+		return {
+			priceFeed: [
+				await this.contract.methods.priceFeed1().call(),
+				await this.contract.methods.priceFeed2().call(),
+				await this.contract.methods.priceFeed3().call()
+			],
+			operator: await this.contract.methods.operator().call(),
+			roleManagerAddress: await this.contract.methods.roleManagerAddress().call()
+		};
 	}
 
 	public async getLastPrice(): Promise<IContractPrice> {

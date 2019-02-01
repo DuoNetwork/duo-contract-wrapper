@@ -81,6 +81,18 @@ const web3Wrapper = {
 				call: jest.fn(() =>
 					Promise.resolve(['102000000000000000000', '123456789', 'priceFeed2'])
 				)
+			})),
+			operator: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve('operatorAddress'))
+			})),
+			roleManagerAddress: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve('roleManagerAddress'))
+			})),
+			lastOperationTime: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(1234567890))
+			})),
+			operationCoolDown: jest.fn(() => ({
+				call: jest.fn(() => Promise.resolve(1000))
 			}))
 		}
 	}))
