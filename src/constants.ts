@@ -95,7 +95,7 @@ export const START_CUSTODIAN_GAS = 1000000;
 export const FETCH_PRICE_GAS = 150000;
 export const START_MAGI_GAS = 120000;
 export const UPDATE_PRICE_FEED = 120000;
-export const COMMIT_PRICE_GAS = 60000;
+export const COMMIT_PRICE_GAS = 80000;
 export const UPDATE_ROLE_MANAGER_GAS = 1000000;
 export const DEFAULT_TX_GAS_LIMIT = 30000;
 
