@@ -162,7 +162,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.setValue(index, newValue)
-			.send(await this.web3Wrapper.getTransactionOption(account, CST.SET_VALUE_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.DUAL_CLASS_SET_VALUE_GAS, option));
 	}
 
 	public static convertCustodianState(rawState: string) {

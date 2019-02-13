@@ -111,7 +111,7 @@ export class MagiWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.setValue(index, newValue)
-			.send(await this.web3Wrapper.getTransactionOption(account, CST.SET_VALUE_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.MAGI_SET_VALUE_GAS, option));
 	}
 
 	public async updateRoleManager(
