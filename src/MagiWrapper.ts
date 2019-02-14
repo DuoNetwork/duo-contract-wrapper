@@ -43,7 +43,7 @@ export class MagiWrapper extends BaseContractWrapper {
 			priceUpdateCoolDown: (await this.contract.methods.priceUpdateCoolDown().call()) * 1000,
 			numOfPrices: Number(await this.contract.methods.numOfPrices().call()),
 			lastOperationTime: (await this.contract.methods.lastOperationTime().call()) * 1000,
-			operationCoolDown: (await this.contract.methods.lastOperationTime().call()) * 1000
+			operationCoolDown: (await this.contract.methods.operationCoolDown().call()) * 1000
 		};
 	}
 
@@ -111,7 +111,7 @@ export class MagiWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		return this.contract.methods
 			.setValue(index, newValue)
-			.send(await this.web3Wrapper.getTransactionOption(account, CST.SET_VALUE_GAS, option));
+			.send(await this.web3Wrapper.getTransactionOption(account, CST.MAGI_SET_VALUE_GAS, option));
 	}
 
 	public async updateRoleManager(
@@ -138,7 +138,7 @@ export class MagiWrapper extends BaseContractWrapper {
 			.send(
 				await this.web3Wrapper.getTransactionOption(
 					account,
-					CST.UPDATE_ROLE_MANAGER_GAS,
+					CST.UPDATE_OPERATOR,
 					option
 				)
 			);

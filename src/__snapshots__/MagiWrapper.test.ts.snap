@@ -77,7 +77,7 @@ Object {
   "isStarted": false,
   "lastOperationTime": 1234567890000,
   "numOfPrices": 0,
-  "operationCoolDown": 1234567890000,
+  "operationCoolDown": 1000000,
   "priceFeedTimeTolerance": 60000,
   "priceFeedTolerance": 0.01,
   "priceTolerance": 0.05,
@@ -109,12 +109,12 @@ exports[`setValue 3`] = `
 Array [
   Array [
     "account",
-    50000,
+    100000,
     Object {},
   ],
   Array [
     "account",
-    50000,
+    100000,
     Object {
       "gasLimit": 200000,
       "gasPrice": 2000000000,
@@ -178,12 +178,12 @@ exports[`updateOperator 2`] = `
 Array [
   Array [
     "account",
-    1000000,
+    100000,
     Object {},
   ],
   Array [
     "account",
-    1000000,
+    100000,
     Object {
       "gasLimit": 200000,
       "gasPrice": 2000000000,
@@ -210,12 +210,12 @@ exports[`updatePriceFeed 3`] = `
 Array [
   Array [
     "account",
-    120000,
+    100000,
     Object {},
   ],
   Array [
     "account",
-    120000,
+    100000,
     Object {
       "gasLimit": 200000,
       "gasPrice": 2000000000,

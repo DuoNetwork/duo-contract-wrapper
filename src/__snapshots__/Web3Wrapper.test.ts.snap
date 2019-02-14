@@ -8,7 +8,7 @@ exports[`getTransactionOption, no option 1`] = `
 Object {
   "from": "account",
   "gas": 100000,
-  "gasPrice": 1000000000,
+  "gasPrice": "1000000000",
   "nonce": 10,
 }
 `;
