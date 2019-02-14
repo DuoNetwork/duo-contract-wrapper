@@ -310,7 +310,7 @@ test('isReadOnly', () => {
 
 test('getTransactionOption, no option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
+	web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve('1000000000'));
 	web3Wrapper.getTransactionCount = jest.fn(() => Promise.resolve(10));
 	expect(await web3Wrapper.getTransactionOption('account', 100000)).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionCount as jest.Mock).mock.calls).toMatchSnapshot();
@@ -319,7 +319,7 @@ test('getTransactionOption, no option', async () => {
 
 test('getTransactionOption, with option', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
-	web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve(1000000000));
+	web3Wrapper.getGasPrice = jest.fn(() => Promise.resolve('1000000000'));
 	web3Wrapper.getTransactionCount = jest.fn(() => Promise.resolve(10));
 	expect(
 		await web3Wrapper.getTransactionOption('account', 100000, {
