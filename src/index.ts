@@ -7,3 +7,4 @@ export { EsplanadeWrapper } from './EsplanadeWrapper';
 export { MagiWrapper } from './MagiWrapper';
 export * from './types';
 export { Web3Wrapper } from './Web3Wrapper';
+export { VivaldiWrapper } from './VivaldiWrapper';

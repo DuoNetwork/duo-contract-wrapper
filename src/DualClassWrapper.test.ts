@@ -14,7 +14,7 @@ test('convertCustodianState', () => {
 	expect(DualClassWrapper.convertCustodianState('any')).toBe(CST.CTD_LOADING);
 });
 
-test('convertCustodianState', () => {
+test('convertResetState', () => {
 	expect(DualClassWrapper.convertResetState(CST.RESET_STATE_DOWN)).toBe(CST.BTV_DOWN_RESET);
 	expect(DualClassWrapper.convertResetState(CST.RESET_STATE_UP)).toBe(CST.BTV_UP_RESET);
 	expect(DualClassWrapper.convertResetState(CST.RESET_STATE_PERIOD)).toBe(CST.BTV_PERIOD_RESET);
