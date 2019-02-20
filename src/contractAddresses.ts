@@ -66,15 +66,15 @@ export const kovan: IContractAddresses = {
 			'100C-3H': {
 				custodian: {
 					code: 'VIVALDI-100C-3H',
-					address: '0x97e7476C044C5E14d7414f3A0cC3DfE4dC4Eb24d'
+					address: '0xdAe93661F5d44E331bbf852C661363427607cF7D'
 				},
 				aToken: {
 					code: 'ETH-100C-3H',
-					address: '0x63650A6B8a5d51Fffa493c180eE99a6C1729276f'
+					address: '0x1A93a7ce3Dc8858648482A4763a9f3B9e6E97873'
 				},
 				bToken: {
 					code: 'ETH-100P-3H',
-					address: '0x430F5B186C9e8e9d88CA709D3Ee055f5940707d1'
+					address: '0x8e158382191E23B299375d16Ce614f8c456CDB3a'
 				}
 			},
 			'105C-3H': {
