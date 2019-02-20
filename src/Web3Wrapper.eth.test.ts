@@ -32,9 +32,11 @@ jest.mock('web3', () => {
 
 const fromWei = jest.fn(value => 1e-18 * value);
 const toWei = jest.fn(value => 1e18 * value + '');
+const toHex = jest.fn(value => 'hex for ' + value);
 
 Web3Wrapper.toWei = toWei.bind(Web3Wrapper);
 Web3Wrapper.fromWei = fromWei.bind(Web3Wrapper);
+Web3Wrapper.toHex = toHex.bind(Web3Wrapper);
 
 jest.mock('web3-provider-engine/subproviders/fetch');
 jest.mock('@ledgerhq/web3-subprovider', () => ({

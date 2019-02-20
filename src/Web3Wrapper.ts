@@ -187,7 +187,9 @@ export class Web3Wrapper {
 			return erc20Contract.methods
 				.approve(
 					spender,
-					unlimited ? new BigNumber(2).pow(256).minus(1) : Web3Wrapper.toWei(value)
+					unlimited
+						? Web3Wrapper.toHex(new BigNumber(2).pow(256).minus(1))
+						: Web3Wrapper.toWei(value)
 				)
 				.send({
 					from: from
@@ -263,6 +265,10 @@ export class Web3Wrapper {
 
 	public static toWei(value: string | number): any {
 		return Web3.utils.toWei(value + '', 'ether');
+	}
+
+	public static toHex(value: any): string {
+		return Web3.utils.toHex(value);
 	}
 
 	public static checkAddress(addr: string): boolean {

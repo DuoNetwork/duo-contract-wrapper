@@ -36,6 +36,10 @@ export interface ICustodianAddresses extends IManagedAddresses {
 	bToken: string;
 }
 
+export interface IERC20CustodianAddresses extends ICustodianAddresses {
+	collateralToken: string;
+}
+
 export interface IManagedStates {
 	lastOperationTime: number;
 	operationCoolDown: number;
@@ -86,9 +90,7 @@ export interface ICustodianStates extends IManagedStates {
 	minBalance: number;
 	totalSupplyA: number;
 	totalSupplyB: number;
-	ethCollateral: number;
-	navA: number;
-	navB: number;
+	collateral: number;
 	lastPrice: number;
 	lastPriceTime: number;
 	resetPrice: number;
@@ -103,6 +105,7 @@ export interface ICustodianStates extends IManagedStates {
 	totalUsers: number;
 	feeBalance: number;
 }
+
 export interface ICustodianWrappers {
 	[type: string]: {
 		[tenor: string]: DualClassWrapper;
@@ -110,6 +113,8 @@ export interface ICustodianWrappers {
 }
 
 export interface IDualClassStates extends ICustodianStates {
+	navA: number;
+	navB: number;
 	resetState: string;
 	alpha: number;
 	beta: number;
@@ -118,6 +123,13 @@ export interface IDualClassStates extends ICustodianStates {
 	limitUpper: number;
 	limitLower: number;
 	iterationGasThreshold: number;
+}
+
+export interface IVivaldiStates extends ICustodianStates {
+	clearCommRate: number;
+	iterationGasThreshold: number;
+	roundStrike: number;
+	isKnockedIn: boolean;
 }
 
 export interface IVotingData {

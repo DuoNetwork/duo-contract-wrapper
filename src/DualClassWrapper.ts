@@ -64,7 +64,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.CREATE_GAS,
+			CST.DUAL_CLASS_CREATE_GAS,
 			option
 		);
 
@@ -96,7 +96,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.REDEEM_GAS,
+			CST.DUAL_CLASS_REDEEM_GAS,
 			option
 		);
 		return new Promise<string>(resolve =>
@@ -111,7 +111,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.REDEEM_GAS,
+			CST.DUAL_CLASS_REDEEM_GAS,
 			option
 		);
 		return new Promise<string>(resolve =>
@@ -138,7 +138,7 @@ export class DualClassWrapper extends BaseContractWrapper {
 			.send(
 				await this.web3Wrapper.getTransactionOption(
 					account,
-					CST.PRE_RESET_GAS_LIMIT,
+					CST.DUAL_CLASS_PRE_RESET_GAS_LIMIT,
 					option
 				)
 			);
@@ -253,31 +253,31 @@ export class DualClassWrapper extends BaseContractWrapper {
 			minBalance: Web3Wrapper.fromWei(states[CST.BTV_STATE.MIN_BALANCE]),
 			totalSupplyA: Web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYA]),
 			totalSupplyB: Web3Wrapper.fromWei(states[CST.BTV_STATE.TOTAL_SUPPLYB]),
-			ethCollateral: Web3Wrapper.fromWei(states[CST.BTV_STATE.ETH_COLLATERAL_INWEI]),
-			navA: Web3Wrapper.fromWei(states[CST.BTV_STATE.NAVA_INWEI]),
-			navB: Web3Wrapper.fromWei(states[CST.BTV_STATE.NAVB_INWEI]),
-			lastPrice: Web3Wrapper.fromWei(states[CST.BTV_STATE.LAST_PRICE_INWEI]),
-			lastPriceTime: Number(states[CST.BTV_STATE.LAST_PRICETIME_INSECOND].valueOf()) * 1000,
-			resetPrice: Web3Wrapper.fromWei(states[CST.BTV_STATE.RESET_PRICE_INWEI]),
-			resetPriceTime: Number(states[CST.BTV_STATE.RESET_PRICETIME_INSECOND].valueOf()) * 1000,
-			createCommRate: Number(states[CST.BTV_STATE.CREATE_COMMINBP].valueOf()) / 10000,
-			redeemCommRate: Number(states[CST.BTV_STATE.REDEEM_COMMINBP].valueOf()) / 10000,
+			collateral: Web3Wrapper.fromWei(states[CST.BTV_STATE.ETH_COLLATERAL_IN_WEI]),
+			navA: Web3Wrapper.fromWei(states[CST.BTV_STATE.NAVA_IN_WEI]),
+			navB: Web3Wrapper.fromWei(states[CST.BTV_STATE.NAVB_IN_WEI]),
+			lastPrice: Web3Wrapper.fromWei(states[CST.BTV_STATE.LAST_PRICE_IN_WEI]),
+			lastPriceTime: Number(states[CST.BTV_STATE.LAST_PRICETIME_IN_SECOND].valueOf()) * 1000,
+			resetPrice: Web3Wrapper.fromWei(states[CST.BTV_STATE.RESET_PRICE_IN_WEI]),
+			resetPriceTime: Number(states[CST.BTV_STATE.RESET_PRICETIME_IN_SECOND].valueOf()) * 1000,
+			createCommRate: Number(states[CST.BTV_STATE.CREATE_COMM_IN_BP].valueOf()) / 10000,
+			redeemCommRate: Number(states[CST.BTV_STATE.REDEEM_COMM_IN_BP].valueOf()) / 10000,
 			period: Number(states[CST.BTV_STATE.PERIOD].valueOf()) * 1000,
 			maturity: Number(states[CST.BTV_STATE.MATURITY].valueOf()) * 1000,
 			preResetWaitingBlocks: Number(states[CST.BTV_STATE.PRERESET_WAITING_BLOCKS].valueOf()),
 			priceFetchCoolDown: Number(states[CST.BTV_STATE.PRICE_FETCH_COOLDOWN].valueOf()) * 1000,
 			nextResetAddrIndex: Number(states[CST.BTV_STATE.NEXT_RESET_ADDR_INDEX].valueOf()),
 			totalUsers: Number(states[CST.BTV_STATE.TOTAL_USERS].valueOf()),
-			feeBalance: Web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_INWEI]),
+			feeBalance: Web3Wrapper.fromWei(states[CST.BTV_STATE.FEE_BALANCE_IN_WEI]),
 			resetState: DualClassWrapper.convertResetState(
 				states[CST.BTV_STATE.RESET_STATE].valueOf()
 			),
 			alpha: Number(states[CST.BTV_STATE.ALPHA_INBP].valueOf()) / 10000,
-			beta: Web3Wrapper.fromWei(states[CST.BTV_STATE.BETA_INWEI]),
-			periodCoupon: Web3Wrapper.fromWei(states[CST.BTV_STATE.PERIOD_COUPON_INWEI]),
-			limitPeriodic: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_PERIODIC_INWEI]),
-			limitUpper: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_UPPER_INWEI]),
-			limitLower: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_LOWER_INWEI]),
+			beta: Web3Wrapper.fromWei(states[CST.BTV_STATE.BETA_IN_WEI]),
+			periodCoupon: Web3Wrapper.fromWei(states[CST.BTV_STATE.PERIOD_COUPON_IN_WEI]),
+			limitPeriodic: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_PERIODIC_IN_WEI]),
+			limitUpper: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_UPPER_IN_WEI]),
+			limitLower: Web3Wrapper.fromWei(states[CST.BTV_STATE.LIMIT_LOWER_IN_WEI]),
 			iterationGasThreshold: Number(states[CST.BTV_STATE.ITERATION_GAS_THRESHOLD].valueOf())
 		};
 	}

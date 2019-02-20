@@ -1,145 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`calculateNav beethoven 1`] = `
-Array [
-  1.000002,
-  4.999998,
-]
-`;
-
-exports[`calculateNav beethoven 2`] = `
-Array [
-  1.000002,
-  1.3999979999999999,
-]
-`;
-
-exports[`calculateNav beethoven 3`] = `
-Array [
-  1.000002,
-  0.599998,
-]
-`;
-
-exports[`calculateNav beethoven 4`] = `
-Array [
-  0.8,
-  0,
-]
-`;
-
-exports[`calculateNav beethoven 5`] = `
-Array [
-  1.000002,
-  1.5999959999999995,
-]
-`;
-
-exports[`calculateNav beethoven 6`] = `
-Array [
-  1.000002,
-  0.39999600000000024,
-]
-`;
-
-exports[`calculateNav beethoven 7`] = `
-Array [
-  0.6000000000000001,
-  0,
-]
-`;
-
-exports[`calculateNav beethoven 8`] = `
-Array [
-  1.000002,
-  1.2999989999999997,
-]
-`;
-
-exports[`calculateNav beethoven 9`] = `
-Array [
-  1.000002,
-  0.6999990000000001,
-]
-`;
-
-exports[`calculateNav beethoven 10`] = `
-Array [
-  0.6000000000000001,
-  0,
-]
-`;
-
-exports[`calculateNav mozart 1`] = `
-Array [
-  0,
-  6,
-]
-`;
-
-exports[`calculateNav mozart 2`] = `
-Array [
-  0.8,
-  1.5999999999999996,
-]
-`;
-
-exports[`calculateNav mozart 3`] = `
-Array [
-  1.2,
-  0.40000000000000036,
-]
-`;
-
-exports[`calculateNav mozart 4`] = `
-Array [
-  0.8,
-  0,
-]
-`;
-
-exports[`calculateNav mozart 5`] = `
-Array [
-  0.8,
-  2,
-]
-`;
-
-exports[`calculateNav mozart 6`] = `
-Array [
-  1.2000000000000002,
-  0,
-]
-`;
-
-exports[`calculateNav mozart 7`] = `
-Array [
-  0.6000000000000001,
-  0,
-]
-`;
-
-exports[`calculateNav mozart 8`] = `
-Array [
-  0.8,
-  1.4,
-]
-`;
-
-exports[`calculateNav mozart 9`] = `
-Array [
-  1.2,
-  0.6000000000000001,
-]
-`;
-
-exports[`calculateNav mozart 10`] = `
-Array [
-  0.6000000000000001,
-  0,
-]
-`;
-
 exports[`collectFee 1`] = `"Read Only Mode"`;
 
 exports[`collectFee 2`] = `
@@ -195,56 +55,16 @@ Array [
 
 exports[`create 1`] = `"Read Only Mode"`;
 
-exports[`create 2`] = `"createWithWETHtxHash"`;
+exports[`create 2`] = `"createTxHash"`;
 
 exports[`create 3`] = `"createTxHash"`;
 
-exports[`create 4`] = `"createTxHash"`;
-
-exports[`create 5`] = `"createWithWETHtxHash"`;
-
-exports[`create 6`] = `
-Array [
-  Array [
-    "1000000000000000000",
-    "wethAddr",
-  ],
-  Array [
-    "1000000000000000000",
-    "wethAddr",
-  ],
-]
-`;
-
-exports[`create 7`] = `
+exports[`create 4`] = `
 Array [
   Array [
     Object {
       "from": "account",
-      "gas": 160000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-      "value": "1000000000000000000",
-    },
-  ],
-  Array [
-    Object {
-      "from": "account",
-      "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-      "value": "1000000000000000000",
-    },
-  ],
-]
-`;
-
-exports[`create 8`] = `
-Array [
-  Array [
-    Object {
-      "from": "account",
-      "gas": 160000,
+      "gas": 250000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -260,30 +80,16 @@ Array [
 ]
 `;
 
-exports[`create 9`] = `
+exports[`create 5`] = `
 Array [
   Array [
     "account",
-    160000,
+    250000,
     Object {},
   ],
   Array [
     "account",
-    160000,
-    Object {},
-  ],
-  Array [
-    "account",
-    160000,
-    Object {
-      "gasLimit": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-  Array [
-    "account",
-    160000,
+    250000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -293,14 +99,21 @@ Array [
 ]
 `;
 
-exports[`fetchPrice 1`] = `"Read Only Mode"`;
+exports[`endRound 1`] = `"Read Only Mode"`;
 
-exports[`fetchPrice 2`] = `
+exports[`endRound 2`] = `
+Array [
+  Array [],
+  Array [],
+]
+`;
+
+exports[`endRound 3`] = `
 Array [
   Array [
     Object {
       "from": "account",
-      "gas": 150000,
+      "gas": 300000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -309,27 +122,82 @@ Array [
     Object {
       "from": "account",
       "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
+      "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
 `;
 
-exports[`fetchPrice 3`] = `
+exports[`endRound 4`] = `
 Array [
   Array [
     "account",
-    150000,
+    300000,
     Object {},
   ],
   Array [
     "account",
-    150000,
+    300000,
     Object {
       "gasLimit": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
+    },
+  ],
+]
+`;
+
+exports[`forceEndRound 1`] = `"Read Only Mode"`;
+
+exports[`forceEndRound 2`] = `
+Array [
+  Array [
+    "123000000000000000000",
+    456,
+  ],
+  Array [
+    "123000000000000000000",
+    456,
+  ],
+]
+`;
+
+exports[`forceEndRound 3`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 300000,
       "gasPrice": 1000000000,
       "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
+    },
+  ],
+]
+`;
+
+exports[`forceEndRound 4`] = `
+Array [
+  Array [
+    "account",
+    300000,
+    Object {},
+  ],
+  Array [
+    "account",
+    300000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
@@ -339,6 +207,7 @@ exports[`getAddress 1`] = `
 Object {
   "aToken": "aToken",
   "bToken": "bToken",
+  "collateralToken": "collateralToken",
   "feeCollector": "feeCollector",
   "operator": "operator",
   "oracle": "oracle",
@@ -346,87 +215,33 @@ Object {
 }
 `;
 
-exports[`getEthWithTokens 1`] = `2`;
-
-exports[`getEthWithTokens 2`] = `2`;
-
-exports[`getEthWithTokens 3`] = `2.5`;
-
-exports[`getEthWithTokens 4`] = `1.5`;
-
-exports[`getEthWithTokens 5`] = `3`;
-
 exports[`getStates 1`] = `
 Object {
-  "alpha": 100000000000000,
-  "beta": 1,
+  "clearCommRate": 100000000000000,
   "collateral": 1,
-  "createCommRate": 100000000000000,
-  "feeBalance": 100,
-  "iterationGasThreshold": 10000,
+  "createCommRate": 1.0000000000000001e+21,
+  "feeBalance": 1000,
+  "isKnockedIn": true,
+  "iterationGasThreshold": 100000000000000000000,
   "lastOperationTime": 12345678980000,
-  "lastPrice": 1e-9,
+  "lastPrice": 2,
   "lastPriceTime": 1e+23,
-  "limitLower": 1,
-  "limitPeriodic": 15,
-  "limitUpper": 2,
   "maturity": 1e+21,
   "minBalance": 100000,
-  "navA": 2,
-  "navB": 100,
-  "nextResetAddrIndex": 10000000000000000000,
+  "nextResetAddrIndex": 1e+21,
   "operationCoolDown": 1e+24,
   "period": 1e+21,
-  "periodCoupon": 0.00015,
   "preResetWaitingBlocks": 1000000000000000000,
-  "priceFetchCoolDown": 1e+24,
+  "priceFetchCoolDown": 1e+21,
   "redeemCommRate": 100000000000000,
-  "resetPrice": 10000000,
-  "resetPriceTime": 1e+21,
-  "resetState": "",
+  "resetPrice": 1e-9,
+  "resetPriceTime": 1e+23,
+  "roundStrike": 1,
   "state": "Loading",
   "totalSupplyA": 1e-13,
   "totalSupplyB": 1e-16,
-  "totalUsers": 1e+21,
+  "totalUsers": 10000000000000000000,
 }
-`;
-
-exports[`getTokenInterestOrLeverage 1`] = `3153600.0000000005`;
-
-exports[`getTokenInterestOrLeverage 2`] = `0.8760000000000001`;
-
-exports[`getTokenInterestOrLeverage 3`] = `1.6666666666666667`;
-
-exports[`getTokenInterestOrLeverage 4`] = `-0.6666666666666667`;
-
-exports[`getTokenInterestOrLeverage 5`] = `1.6666666666666667`;
-
-exports[`getTokensPerEth 1`] = `
-Array [
-  50,
-  50,
-]
-`;
-
-exports[`getTokensPerEth 2`] = `
-Array [
-  40,
-  40,
-]
-`;
-
-exports[`getTokensPerEth 3`] = `
-Array [
-  33.333333333333336,
-  66.66666666666667,
-]
-`;
-
-exports[`getTokensPerEth 4`] = `
-Array [
-  66.66666666666667,
-  33.333333333333336,
-]
 `;
 
 exports[`getUserAddress 1`] = `
@@ -496,52 +311,6 @@ Array [
 ]
 `;
 
-exports[`redeemAll 1`] = `"Read Only Mode"`;
-
-exports[`redeemAll 2`] = `"redeemAllTxHash"`;
-
-exports[`redeemAll 3`] = `"redeemAllTxHash"`;
-
-exports[`redeemAll 4`] = `
-Array [
-  Array [
-    Object {
-      "from": "account",
-      "gas": 160000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-  Array [
-    Object {
-      "from": "account",
-      "gas": 20000,
-      "gasPrice": 100000,
-      "nonce": 30,
-    },
-  ],
-]
-`;
-
-exports[`redeemAll 5`] = `
-Array [
-  Array [
-    "account",
-    160000,
-    Object {},
-  ],
-  Array [
-    "account",
-    160000,
-    Object {
-      "gasLimit": 20000,
-      "gasPrice": 100000,
-      "nonce": 30,
-    },
-  ],
-]
-`;
-
 exports[`setValue 1`] = `"Read Only Mode"`;
 
 exports[`setValue 2`] = `
@@ -605,11 +374,17 @@ Array [
     "aAddr",
     "bAddr",
     "oracleAddr",
+    "123000000000000000000",
+    true,
+    true,
   ],
   Array [
     "aAddr",
     "bAddr",
     "oracleAddr",
+    "123000000000000000000",
+    true,
+    true,
   ],
 ]
 `;
@@ -649,6 +424,55 @@ Array [
       "gasLimit": 20000,
       "gasPrice": 1000000000,
       "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`startRound 1`] = `"Read Only Mode"`;
+
+exports[`startRound 2`] = `
+Array [
+  Array [],
+  Array [],
+]
+`;
+
+exports[`startRound 3`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 300000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
+    },
+  ],
+]
+`;
+
+exports[`startRound 4`] = `
+Array [
+  Array [
+    "account",
+    300000,
+    Object {},
+  ],
+  Array [
+    "account",
+    300000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 2000000000,
+      "nonce": 40,
     },
   ],
 ]
