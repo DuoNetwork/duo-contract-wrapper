@@ -187,15 +187,15 @@ export const mainnet: IContractAddresses = {
 			'100C-3H': {
 				custodian: {
 					code: 'VIVALDI-100C-3H',
-					address: '0xFCba8F2aFa126aCDb5F2110f0DA1B18E34959070'
+					address: '0xBEFf9eEE8E1055A5ACd7a690Fe5B295a346D7346'
 				},
 				aToken: {
 					code: 'ETH-100C-3H',
-					address: '0x2C922A42Daa338e5ab3ceDF60eC7C98e273343a7'
+					address: '0xaaa743285bcAB4F015890f67354204fF2228fc3f'
 				},
 				bToken: {
 					code: 'ETH-100P-3H',
-					address: '0x77B9DED1Fbf94610688F093b1Ce72388d4B90501'
+					address: '0x5EEfab02C9A7059Ba463c41BeC2233A9Fac5f0F1'
 				}
 			},
 			'105C-3H': {
