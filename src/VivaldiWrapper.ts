@@ -21,7 +21,9 @@ export class VivaldiWrapper extends BaseContractWrapper {
 		CST.EVENT_COLLECT_FEE,
 		CST.EVENT_UPDATE_ORACLE,
 		CST.EVENT_UPDATE_FEE_COLLECTOR,
-		CST.EVENT_SET_VALUE
+		CST.EVENT_SET_VALUE,
+		CST.EVENT_START_ROUND,
+		CST.EVENT_END_ROUND
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
 		super(web3Wrapper, vivaldiAbi.abi, address);
