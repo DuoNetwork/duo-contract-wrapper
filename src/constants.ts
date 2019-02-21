@@ -63,6 +63,10 @@ export const EVENT_SET_VALUE = 'SetValue';
 export const EVENT_COMMIT_PRICE = 'CommitPrice';
 export const EVENT_UPDATE_PRICE_FEED = 'UpdatePriceFeed';
 
+// vivaldi
+export const EVENT_START_ROUND = 'StartRound';
+export const EVENT_END_ROUND = 'EndRound';
+
 export const STATE_INCEPTION = '0';
 export const STATE_TRADING = '1';
 export const STATE_PRERESET = '2';
