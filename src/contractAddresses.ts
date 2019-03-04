@@ -71,15 +71,15 @@ export const mainnet: IContractAddresses = {
 			[CST.TENOR_PPT]: {
 				custodian: {
 					code: 'BEETHOVEN-PPT',
-					address: '0x3Ea93BF7F80f7b976d6BC7a8AE0D4F558E1A8c11'
+					address: '0x55c4ec02D22cC26d9DACd5ab5977A62439476e79'
 				},
 				aToken: {
 					code: 'aETH',
-					address: '0x482f94cF654d9B753039DFa2E49405825581172F'
+					address: '0x6186258287372Bfde88c74312e417bD19cbec550'
 				},
 				bToken: {
 					code: 'bETH',
-					address: '0xD3E376FdD6071071A9209dc98406297c3e9E7336'
+					address: '0x765B73E0E2d6b6F16B36b4881E40bD433Be95A5a'
 				}
 			}
 		},
