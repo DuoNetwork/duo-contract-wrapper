@@ -300,6 +300,16 @@ test('onWeb3AccountUpdate', () => {
 	expect(onUpdate.mock.calls).toMatchSnapshot();
 });
 
+test('isLive, live', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	expect(web3Wrapper.isLive()).toBeTruthy();
+});
+
+test('isLive, dev', () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', false);
+	expect(web3Wrapper.isLive()).toBeFalsy();
+});
+
 test('isReadOnly', () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	web3Wrapper.wallet = Wallet.MetaMask;
@@ -345,7 +355,5 @@ test('checkAddress', () => {
 });
 
 test('checkAddress', () => {
-	expect(
-		Web3Wrapper.checkAddress('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD')
-	).toBeTruthy();
+	expect(Web3Wrapper.checkAddress('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD')).toBeTruthy();
 });
