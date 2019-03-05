@@ -125,6 +125,10 @@ export class Web3Wrapper {
 		return this.wallet === Wallet.Local;
 	}
 
+	public isLive() {
+		return this.live;
+	}
+
 	public wrongEnvReject() {
 		return Promise.reject('Wrong Env');
 	}
