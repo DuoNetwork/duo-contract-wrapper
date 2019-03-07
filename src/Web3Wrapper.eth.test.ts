@@ -87,6 +87,16 @@ test('getBlockTimestamp, without blkNumber', async () => {
 	expect(await web3Wrapper.getBlockTimestamp()).toMatchSnapshot();
 });
 
+test('getBlockTimestamp, no block', async () => {
+	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
+	web3Wrapper.getBlock = jest.fn(() => null) as any;
+	try {
+		await web3Wrapper.getBlockTimestamp();
+	} catch (error) {
+		expect(error).toMatchSnapshot();
+	}
+});
+
 test('getCurretnNetwork', async () => {
 	const web3Wrapper = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	expect(await web3Wrapper.getCurrentNetwork()).toMatchSnapshot();
