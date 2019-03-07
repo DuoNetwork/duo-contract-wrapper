@@ -346,6 +346,10 @@ test('toWei', () => {
 	expect(Web3Wrapper.toWei(1)).toBe('1000000000000000000');
 });
 
+test('toHex', () => {
+	expect(Web3Wrapper.toHex(1234567890)).toMatchSnapshot();
+});
+
 test('fromWei', () => {
 	expect(Web3Wrapper.fromWei('1000000000000000000')).toBe(1);
 });

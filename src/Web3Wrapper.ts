@@ -207,7 +207,7 @@ export class Web3Wrapper {
 	}
 
 	public getBlock(
-		blkNumber: number
+		blkNumber: number | string
 	): Promise<{
 		number: number;
 		hash: string;
@@ -233,8 +233,9 @@ export class Web3Wrapper {
 	}
 
 	public async getBlockTimestamp(blkNumber: number = 0) {
-		if (!blkNumber) blkNumber = await this.getCurrentBlockNumber();
-		const blk = await this.getBlock(blkNumber);
+		const blk = await this.getBlock(blkNumber || 'latest');
+		if (!blk)
+			throw new Error('Error: no block found for ' + blkNumber);
 		return blk.timestamp * 1000;
 	}
 

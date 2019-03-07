@@ -56,6 +56,8 @@ Object {
 }
 `;
 
+exports[`getBlockTimestamp, no block 1`] = `[Error: Error: no block found for 0]`;
+
 exports[`getBlockTimestamp, with blkNumber 1`] = `123456789000`;
 
 exports[`getBlockTimestamp, without blkNumber 1`] = `123456789000`;

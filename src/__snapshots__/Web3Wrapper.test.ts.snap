@@ -169,3 +169,5 @@ Array [
   ],
 ]
 `;
+
+exports[`toHex 1`] = `"0x499602d2"`;
