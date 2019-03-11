@@ -43,7 +43,7 @@ export const kovan: IContractAddresses = {
 				},
 				aToken: {
 					code: 'ETH-100C-1H',
-					address: '0x9d26644705f993A373646E0E113b3488F21d5DC9 '
+					address: '0x9d26644705f993A373646E0E113b3488F21d5DC9'
 				},
 				bToken: {
 					code: 'ETH-100P-1H',
