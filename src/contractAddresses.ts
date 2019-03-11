@@ -39,15 +39,15 @@ export const kovan: IContractAddresses = {
 			'100C-1H': {
 				custodian: {
 					code: 'VIVALDI-100C-1H',
-					address: '0xd49C2CfcA78EeCF00bD503c85225790264A176eb'
+					address: '0x32a42AeDe34Cd0D2D76e02E0d3A3440706A9c619'
 				},
 				aToken: {
 					code: 'ETH-100C-1H',
-					address: '0x9d26644705f993A373646E0E113b3488F21d5DC9'
+					address: '0x75Bcb8C5f50Cc05d0B82c6321f22E848FEbB5F88'
 				},
 				bToken: {
 					code: 'ETH-100P-1H',
-					address: '0x5B312EC6D16BdC7e9Bcad2E972d9d571A505c5c1'
+					address: '0xCfC7C9792975193a9d0E78f0350041Ceb4fa388C'
 				}
 
 			}
