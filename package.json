@@ -1,6 +1,6 @@
 {
 	"name": "@finbook/duo-contract-wrapper",
-	"version": "1.3.6",
+	"version": "1.3.7",
 	"description": "DUO Contract Wrapper",
 	"author": "FinBook Pte Ltd",
 	"main": "dist/index.js",
