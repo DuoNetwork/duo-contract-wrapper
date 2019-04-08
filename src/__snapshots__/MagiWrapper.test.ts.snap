@@ -17,7 +17,7 @@ exports[`commitPrice, with option 2`] = `
 Array [
   Array [
     "account",
-    80000,
+    160000,
     Object {
       "gasLimit": 200000,
       "gasPrice": 2000000000,
@@ -40,7 +40,7 @@ exports[`commitPrice, without option 2`] = `
 Array [
   Array [
     "account",
-    80000,
+    160000,
     Object {},
   ],
 ]
