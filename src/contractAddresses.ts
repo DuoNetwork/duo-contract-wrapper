@@ -101,7 +101,23 @@ export const mainnet: IContractAddresses = {
 				}
 			}
 		},
-		[CST.VIVALDI]: {}
+		[CST.VIVALDI]: {
+			'100C-1H': {
+				custodian: {
+					code: 'VIVALDI-100C-1H',
+					address: '0xa7C3BaEEbf4293480b0E2E6241e938a6dA01e76d'
+				},
+				aToken: {
+					code: 'ETH-100C-1H',
+					address: '0x518DE7CE6FbF0046b5a22E6794C814d6B139B114'
+				},
+				bToken: {
+					code: 'ETH-100P-1H',
+					address: '0x99490666CB17eaF6F862eD2428055F21dd93C5F5'
+				}
+
+			}
+		}
 	},
 	Oracles: [
 		{
