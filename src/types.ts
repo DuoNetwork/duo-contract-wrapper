@@ -72,6 +72,20 @@ export interface IMagiAddresses {
 	roleManagerAddress: string;
 }
 
+export interface IStakeStates {
+	canStake: boolean;
+	canUnstake: boolean;
+	lockMinTimeInSecond: number;
+	minStakeAmt: number;
+	maxStakePerPf: number;
+	totalAwardsToDistribute: number;
+}
+
+export interface IStakeAddress {
+	operator: string;
+	priceFeedList: string[];
+}
+
 export interface IEsplanadeStates {
 	isStarted: boolean;
 	votingStage: string;
