@@ -86,6 +86,16 @@ export interface IStakeAddress {
 	priceFeedList: string[];
 }
 
+export interface IStakeLot {
+	timestamp: number;
+	amount: number;
+}
+
+export interface IStakeQueueIdx {
+	first: number;
+	last: number;
+}
+
 export interface IEsplanadeStates {
 	isStarted: boolean;
 	votingStage: string;

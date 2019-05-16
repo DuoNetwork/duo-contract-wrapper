@@ -21,6 +21,25 @@
       "type": "function"
     },
     {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "isWhiteListOracle",
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "constant": false,
       "inputs": [
         {
@@ -55,8 +74,27 @@
     },
     {
       "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "oracleList",
+      "outputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
       "inputs": [],
-      "name": "maxStakePerPfInWei",
+      "name": "maxOracleStakeAmtInWei",
       "outputs": [
         {
           "name": "",
@@ -97,64 +135,31 @@
     },
     {
       "constant": true,
-      "inputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "priceFeedList",
-      "outputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
-      "name": "openForStake",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "name": "awards",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
       "inputs": [],
       "name": "canStake",
       "outputs": [
         {
           "name": "",
           "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "awardsInWei",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -181,25 +186,6 @@
         {
           "name": "",
           "type": "address"
-        }
-      ],
-      "name": "isWhiteListCommitter",
-      "outputs": [
-        {
-          "name": "",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "",
-          "type": "address"
         },
         {
           "name": "",
@@ -212,10 +198,6 @@
       ],
       "name": "userStakeQueue",
       "outputs": [
-        {
-          "name": "pf",
-          "type": "address"
-        },
         {
           "name": "timestamp",
           "type": "uint256"
@@ -274,20 +256,6 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "totalAwardsToDistribute",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [],
       "name": "duoTokenAddress",
       "outputs": [
         {
@@ -333,6 +301,20 @@
         },
         {
           "name": "last",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "totalAwardsToDistributeInWei",
+      "outputs": [
+        {
+          "name": "",
           "type": "uint256"
         }
       ],
@@ -529,7 +511,7 @@
       "constant": false,
       "inputs": [
         {
-          "name": "pfAddr",
+          "name": "oracleAddr",
           "type": "address"
         },
         {
@@ -552,7 +534,7 @@
       "constant": false,
       "inputs": [
         {
-          "name": "pfAddr",
+          "name": "oracleAddr",
           "type": "address"
         }
       ],
@@ -660,7 +642,7 @@
       "type": "function"
     },
     {
-      "constant": false,
+      "constant": true,
       "inputs": [],
       "name": "getPfSize",
       "outputs": [
@@ -670,7 +652,7 @@
         }
       ],
       "payable": false,
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
