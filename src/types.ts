@@ -185,6 +185,7 @@ export interface IContractAddresses {
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];
 	Stake: string;
+	DUO: string;
 }
 
 export interface ITransactionOption {

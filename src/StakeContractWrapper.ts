@@ -198,7 +198,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async disableStaking(account: string, option: ITransactionOption = {}): Promise<string> {
+	public async disableStakingAndUnstaking(account: string, option: ITransactionOption = {}): Promise<string> {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
