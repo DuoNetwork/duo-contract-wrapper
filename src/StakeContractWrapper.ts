@@ -32,10 +32,10 @@ export class StakeContractWrapper extends BaseContractWrapper {
 				(await this.contract.methods.minStakeAmtInWei().call()).valueOf()
 			),
 			maxStakePerPf: Web3Wrapper.fromWei(
-				(await this.contract.methods.maxStakePerPfInWei().call()).valueOf()
+				(await this.contract.methods.maxOracleStakeAmtInWei().call()).valueOf()
 			),
 			totalAwardsToDistribute: Web3Wrapper.fromWei(
-				(await this.contract.methods.totalAwardsToDistribute().call()).valueOf()
+				(await this.contract.methods.totalAwardsToDistributeInWei().call()).valueOf()
 			)
 		};
 	}
@@ -50,7 +50,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	private async getPfList(): Promise<string[]> {
 		const pfSize = await this.contract.methods.getPfSize().call();
 		const pfList = [];
-		for (let i = 0; i < pfSize; i++) pfList.push(await this.contract.methods.pfList().call(i));
+		for (let i = 0; i < pfSize; i++) pfList.push(await this.contract.methods.oracleList(i));
 
 		return pfList;
 	}
