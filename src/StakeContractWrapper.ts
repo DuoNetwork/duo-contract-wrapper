@@ -70,14 +70,14 @@ export class StakeContractWrapper extends BaseContractWrapper {
 			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods.userQueueIdx(
 				account,
 				pf
-			);
+			).call();
 			if (stakeQueueIdx.last >= stakeQueueIdx.first)
 				for (let i = Number(stakeQueueIdx.first); i <= Number(stakeQueueIdx.last); i++) {
 					const stakeLot: IStakeLot = await this.contract.methods.userStakeQueue(
 						account,
 						pf,
 						i
-					);
+					).call();
 					userStake[pf].push(stakeLot);
 				}
 		}
