@@ -50,7 +50,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	private async getPfList(): Promise<string[]> {
 		const pfSize = await this.contract.methods.getPfSize().call();
 		const pfList = [];
-		for (let i = 0; i < pfSize; i++) pfList.push(await this.contract.methods.oracleList(i));
+		for (let i = 0; i < pfSize; i++) pfList.push(await this.contract.methods.oracleList(i).call());
 
 		return pfList;
 	}
@@ -62,13 +62,11 @@ export class StakeContractWrapper extends BaseContractWrapper {
 			if (!userStake[pf]) userStake[pf] = [];
 
 			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods
-				.userQueueIdx()
-				.call(account, pf);
+				.userQueueIdx(account, pf)
 			if (stakeQueueIdx.last >= stakeQueueIdx.first)
 				for (let i = Number(stakeQueueIdx.first); i <= Number(stakeQueueIdx.last); i++) {
 					const stakeLot: IStakeLot = await this.contract.methods
-						.userStakeQueue()
-						.call(account, pf, i);
+						.userStakeQueue(account, pf, i);
 					userStake[pf].push(stakeLot);
 				}
 		}
