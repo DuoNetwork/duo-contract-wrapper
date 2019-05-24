@@ -50,9 +50,15 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	private async getPfList(): Promise<string[]> {
 		const pfSize = await this.contract.methods.getPfSize().call();
 		const pfList = [];
-		for (let i = 0; i < pfSize; i++) pfList.push(await this.contract.methods.oracleList(i).call());
+		for (let i = 0; i < pfSize; i++)
+			pfList.push(await this.contract.methods.oracleList(i).call());
 
 		return pfList;
+	}
+
+	private async getUserSize(): Promise<number> {
+		const userSize = await this.contract.methods.getUserSize().call();
+		return Number(userSize.valueOf());
 	}
 
 	public async getUserStakes(account: string): Promise<{ [key: string]: IStakeLot[] }> {
@@ -61,16 +67,37 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		for (const pf of pfList) {
 			if (!userStake[pf]) userStake[pf] = [];
 
-			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods
-				.userQueueIdx(account, pf)
+			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods.userQueueIdx(
+				account,
+				pf
+			);
 			if (stakeQueueIdx.last >= stakeQueueIdx.first)
 				for (let i = Number(stakeQueueIdx.first); i <= Number(stakeQueueIdx.last); i++) {
-					const stakeLot: IStakeLot = await this.contract.methods
-						.userStakeQueue(account, pf, i);
+					const stakeLot: IStakeLot = await this.contract.methods.userStakeQueue(
+						account,
+						pf,
+						i
+					);
 					userStake[pf].push(stakeLot);
 				}
 		}
 		return userStake;
+	}
+
+	public async getOracleStakes(): Promise<{ [key: string]: number }> {
+		const userSize = await this.getUserSize();
+		const oracleStakes: { [key: string]: number } = {};
+		for (let i = 0; i < userSize; i++) {
+			const user = await this.contract.methods.users(i).call();
+			const userStake = await this.getUserStakes(user.valueOf());
+
+			for (const oracleAddr of Object.keys(userStake)) {
+				if (!oracleStakes[oracleAddr]) oracleStakes[oracleAddr] = 0;
+
+				for (const stake of userStake[oracleAddr]) oracleStakes[oracleAddr] += stake.amount;
+			}
+		}
+		return oracleStakes;
 	}
 
 	public async getUserAward(account: string): Promise<number> {
@@ -196,7 +223,10 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async disableStakingAndUnstaking(account: string, option: ITransactionOption = {}): Promise<string> {
+	public async disableStakingAndUnstaking(
+		account: string,
+		option: ITransactionOption = {}
+	): Promise<string> {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
