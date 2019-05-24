@@ -47,7 +47,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		};
 	}
 
-	private async getPfList(): Promise<string[]> {
+	public async getPfList(): Promise<string[]> {
 		const pfSize = await this.contract.methods.getPfSize().call();
 		const pfList = [];
 		for (let i = 0; i < pfSize; i++)
@@ -61,8 +61,8 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		return Number(userSize.valueOf());
 	}
 
-	public async getUserStakes(account: string): Promise<{ [key: string]: IStakeLot[] }> {
-		const pfList = await this.getPfList();
+	public async getUserStakes(account: string, pfList: string[]): Promise<{ [key: string]: IStakeLot[] }> {
+		// const pfList = await this.getPfList();
 		const userStake: { [key: string]: IStakeLot[] } = {};
 		for (const pf of pfList) {
 			if (!userStake[pf]) userStake[pf] = [];
@@ -87,9 +87,10 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	public async getOracleStakes(): Promise<{ [key: string]: number }> {
 		const userSize = await this.getUserSize();
 		const oracleStakes: { [key: string]: number } = {};
+		const pfList = await this.getPfList();
 		for (let i = 0; i < userSize; i++) {
 			const user = await this.contract.methods.users(i).call();
-			const userStake = await this.getUserStakes(user.valueOf());
+			const userStake = await this.getUserStakes(user.valueOf(), pfList);
 
 			for (const oracleAddr of Object.keys(userStake)) {
 				if (!oracleStakes[oracleAddr]) oracleStakes[oracleAddr] = 0;
