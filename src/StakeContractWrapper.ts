@@ -61,23 +61,23 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		return Number(userSize.valueOf());
 	}
 
-	public async getUserStakes(account: string, pfList: string[]): Promise<{ [key: string]: IStakeLot[] }> {
+	public async getUserStakes(
+		account: string,
+		pfList: string[]
+	): Promise<{ [key: string]: IStakeLot[] }> {
 		// const pfList = await this.getPfList();
 		const userStake: { [key: string]: IStakeLot[] } = {};
 		for (const pf of pfList) {
 			if (!userStake[pf]) userStake[pf] = [];
 
-			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods.userQueueIdx(
-				account,
-				pf
-			).call();
+			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods
+				.userQueueIdx(account, pf)
+				.call();
 			if (stakeQueueIdx.last >= stakeQueueIdx.first)
 				for (let i = Number(stakeQueueIdx.first); i <= Number(stakeQueueIdx.last); i++) {
-					const stakeLot: IStakeLot = await this.contract.methods.userStakeQueue(
-						account,
-						pf,
-						i
-					).call();
+					const stakeLot: IStakeLot = await this.contract.methods
+						.userStakeQueue(account, pf, i)
+						.call();
 					userStake[pf].push(stakeLot);
 				}
 		}
@@ -95,14 +95,15 @@ export class StakeContractWrapper extends BaseContractWrapper {
 			for (const oracleAddr of Object.keys(userStake)) {
 				if (!oracleStakes[oracleAddr]) oracleStakes[oracleAddr] = 0;
 
-				for (const stake of userStake[oracleAddr]) oracleStakes[oracleAddr] += Web3Wrapper.fromWei((stake as any)['amtInWei']);
+				for (const stake of userStake[oracleAddr])
+					oracleStakes[oracleAddr] += Web3Wrapper.fromWei((stake as any)['amtInWei']);
 			}
 		}
 		return oracleStakes;
 	}
 
 	public async getUserAward(account: string): Promise<number> {
-		const awardsInWei = this.contract.methods.awardsInWei(account).call();
+		const awardsInWei = await this.contract.methods.awardsInWei(account).call();
 		return Web3Wrapper.fromWei(awardsInWei);
 	}
 
@@ -178,7 +179,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 
 		return new Promise<string>(resolve => {
 			this.contract.methods
-				.claimAwabatchAddAwardrd(addrList, awardList.map(award => Web3Wrapper.toWei(award)))
+				.batchAddAward(addrList, awardList.map(award => Web3Wrapper.toWei(award)))
 				.send(txOption)
 				.on('transactionHash', (txHash: string) => resolve(txHash));
 		});
