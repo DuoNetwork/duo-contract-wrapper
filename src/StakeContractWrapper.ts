@@ -95,7 +95,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 			for (const oracleAddr of Object.keys(userStake)) {
 				if (!oracleStakes[oracleAddr]) oracleStakes[oracleAddr] = 0;
 
-				for (const stake of userStake[oracleAddr]) oracleStakes[oracleAddr] += stake.amount;
+				for (const stake of userStake[oracleAddr]) oracleStakes[oracleAddr] += Web3Wrapper.fromWei((stake as any)['amtInWei']);
 			}
 		}
 		return oracleStakes;
