@@ -133,6 +133,6 @@ export const mainnet: IContractAddresses = {
 			address: '0xbaa6a5B0b63597bCF8a81b2B3E12BEcF591B77a9'
 		}
 	],
-	Stake: '0xbaa6a5B0b63597bCF8a81b2B3E12BEcF591B77a9',
-	DUO: '0x61ca89cfc5e8099702e64e97d9b5fc457cf1d355'
+	Stake: '0x0',
+	DUO: '0x56e0b2c7694e6e10391e870774daa45cf6583486'
 };

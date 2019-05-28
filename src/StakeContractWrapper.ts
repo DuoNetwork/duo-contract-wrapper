@@ -56,7 +56,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		return pfList;
 	}
 
-	private async getUserSize(): Promise<number> {
+	public async getUserSize(): Promise<number> {
 		const userSize = await this.contract.methods.getUserSize().call();
 		return Number(userSize.valueOf());
 	}
@@ -84,20 +84,11 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		return userStake;
 	}
 
-	public async getOracleStakes(): Promise<{ [key: string]: number }> {
-		const userSize = await this.getUserSize();
+	public async getOracleStakes(pfList: string[]): Promise<{ [key: string]: number }> {
 		const oracleStakes: { [key: string]: number } = {};
-		const pfList = await this.getPfList();
-		for (let i = 0; i < userSize; i++) {
-			const user = await this.contract.methods.users(i).call();
-			const userStake = await this.getUserStakes(user.valueOf(), pfList);
-
-			for (const oracleAddr of Object.keys(userStake)) {
-				if (!oracleStakes[oracleAddr]) oracleStakes[oracleAddr] = 0;
-
-				for (const stake of userStake[oracleAddr])
-					oracleStakes[oracleAddr] += Web3Wrapper.fromWei((stake as any)['amtInWei']);
-			}
+		for (const oracleAddr of pfList) {
+			const oracleStake = await this.contract.methods.totalStakAmtInWei(oracleAddr).call();
+			oracleStakes[oracleAddr] = Web3Wrapper.fromWei((oracleStake));
 		}
 		return oracleStakes;
 	}
