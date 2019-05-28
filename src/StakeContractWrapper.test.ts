@@ -133,7 +133,7 @@ const web3Wrapper = {
 					Promise.resolve("50000000000000000000000")
 				)
 			})),
-			getPfSize: jest.fn(() => ({
+			getOracleSize: jest.fn(() => ({
 				call: jest.fn(() =>
 					Promise.resolve(3)
 				)
@@ -190,8 +190,8 @@ test('getAddresses', async () => {
 	expect(await stakeWrapper.getAddresses()).toMatchSnapshot();
 });
 
-test('getPfList', async () => {
-	expect(await stakeWrapper.getPfList()).toMatchSnapshot();
+test('getOracleList', async () => {
+	expect(await stakeWrapper.getOracleList()).toMatchSnapshot();
 });
 
 test('getUserSize', async () => {
@@ -199,7 +199,7 @@ test('getUserSize', async () => {
 });
 
 test('getUserStakes', async () => {
-	expect(await stakeWrapper.getUserStakes('account', ['pf0', 'pf1'])).toMatchSnapshot();
+	expect(await stakeWrapper.getUserStakes('account', ['oracle0', 'oracle1'])).toMatchSnapshot();
 	expect(
 		(stakeWrapper.contract.methods.userQueueIdx as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(
@@ -207,7 +207,7 @@ test('getUserStakes', async () => {
 });
 
 test('getOracleStakes', async () => {
-	expect(await stakeWrapper.getOracleStakes(['pf0', 'pf1'])).toMatchSnapshot();
+	expect(await stakeWrapper.getOracleStakes(['oracle0', 'oracle1'])).toMatchSnapshot();
 	expect(
 		(stakeWrapper.contract.methods.totalStakAmtInWei as jest.Mock).mock.calls).toMatchSnapshot();
 });
@@ -499,7 +499,7 @@ test('setMinStakingAmt', async () => {
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
-test('setMaxStakePerPfAmt', async () => {
+test('setMaxStakePerOracleAmt', async () => {
 	web3Wrapper.getTransactionOption = jest.fn(
 		(account: string, gasLimit: number, option: ITransactionOption = {}) =>
 			Promise.resolve({
@@ -511,15 +511,15 @@ test('setMaxStakePerPfAmt', async () => {
 	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await stakeWrapper.setMaxStakePerPfAmt('account', 10000);
+		await stakeWrapper.setMaxStakePerOracleAmt('account', 10000);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	expect(await stakeWrapper.setMaxStakePerPfAmt('account', 10000)).toMatchSnapshot();
+	expect(await stakeWrapper.setMaxStakePerOracleAmt('account', 10000)).toMatchSnapshot();
 	expect(
-		await stakeWrapper.setMaxStakePerPfAmt('account', 10000, {
+		await stakeWrapper.setMaxStakePerOracleAmt('account', 10000, {
 			gasPrice: 1000000000,
 			gasLimit: 20000,
 			nonce: 10

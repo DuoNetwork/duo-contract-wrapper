@@ -31,7 +31,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 			minStakeAmt: Web3Wrapper.fromWei(
 				(await this.contract.methods.minStakeAmtInWei().call()).valueOf()
 			),
-			maxStakePerPf: Web3Wrapper.fromWei(
+			maxStakePerOracle: Web3Wrapper.fromWei(
 				(await this.contract.methods.maxOracleStakeAmtInWei().call()).valueOf()
 			),
 			totalAwardsToDistribute: Web3Wrapper.fromWei(
@@ -42,18 +42,18 @@ export class StakeContractWrapper extends BaseContractWrapper {
 
 	public async getAddresses(): Promise<IStakeAddress> {
 		return {
-			priceFeedList: await this.getPfList(),
+			priceFeedList: await this.getOracleList(),
 			operator: await this.contract.methods.operator().call()
 		};
 	}
 
-	public async getPfList(): Promise<string[]> {
-		const pfSize = await this.contract.methods.getPfSize().call();
-		const pfList = [];
-		for (let i = 0; i < pfSize; i++)
-			pfList.push(await this.contract.methods.oracleList(i).call());
+	public async getOracleList(): Promise<string[]> {
+		const oracleSize = await this.contract.methods.getOracleSize().call();
+		const oracleList = [];
+		for (let i = 0; i < oracleSize; i++)
+			oracleList.push(await this.contract.methods.oracleList(i).call());
 
-		return pfList;
+		return oracleList;
 	}
 
 	public async getUserSize(): Promise<number> {
@@ -63,30 +63,29 @@ export class StakeContractWrapper extends BaseContractWrapper {
 
 	public async getUserStakes(
 		account: string,
-		pfList: string[]
+		oracleList: string[]
 	): Promise<{ [key: string]: IStakeLot[] }> {
-		// const pfList = await this.getPfList();
 		const userStake: { [key: string]: IStakeLot[] } = {};
-		for (const pf of pfList) {
-			if (!userStake[pf]) userStake[pf] = [];
+		for (const oracle of oracleList) {
+			if (!userStake[oracle]) userStake[oracle] = [];
 
 			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods
-				.userQueueIdx(account, pf)
+				.userQueueIdx(account, oracle)
 				.call();
 			if (stakeQueueIdx.last >= stakeQueueIdx.first)
 				for (let i = Number(stakeQueueIdx.first); i <= Number(stakeQueueIdx.last); i++) {
 					const stakeLot: IStakeLot = await this.contract.methods
-						.userStakeQueue(account, pf, i)
+						.userStakeQueue(account, oracle, i)
 						.call();
-					userStake[pf].push(stakeLot);
+					userStake[oracle].push(stakeLot);
 				}
 		}
 		return userStake;
 	}
 
-	public async getOracleStakes(pfList: string[]): Promise<{ [key: string]: number }> {
+	public async getOracleStakes(oracleList: string[]): Promise<{ [key: string]: number }> {
 		const oracleStakes: { [key: string]: number } = {};
-		for (const oracleAddr of pfList) {
+		for (const oracleAddr of oracleList) {
 			const oracleStake = await this.contract.methods.totalStakAmtInWei(oracleAddr).call();
 			oracleStakes[oracleAddr] = Web3Wrapper.fromWei((oracleStake));
 		}
@@ -255,9 +254,9 @@ export class StakeContractWrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async setMaxStakePerPfAmt(
+	public async setMaxStakePerOracleAmt(
 		account: string,
-		maxStakePerPf: number,
+		maxStakePerOracle: number,
 		option: ITransactionOption = {}
 	): Promise<string> {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
@@ -269,7 +268,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 
 		return new Promise<string>(resolve => {
 			this.contract.methods
-				.setValue(0, Web3Wrapper.toWei(maxStakePerPf))
+				.setValue(0, Web3Wrapper.toWei(maxStakePerOracle))
 				.send(txOption)
 				.on('transactionHash', (txHash: string) => resolve(txHash));
 		});

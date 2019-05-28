@@ -77,7 +77,7 @@ export interface IStakeStates {
 	canUnstake: boolean;
 	lockMinTimeInSecond: number;
 	minStakeAmt: number;
-	maxStakePerPf: number;
+	maxStakePerOracle: number;
 	totalAwardsToDistribute: number;
 }
 
