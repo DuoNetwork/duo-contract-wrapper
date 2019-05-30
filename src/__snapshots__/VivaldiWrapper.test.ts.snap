@@ -485,7 +485,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 120000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -505,12 +505,12 @@ exports[`triggerPreReset 3`] = `
 Array [
   Array [
     "account",
-    120000,
+    240000,
     Object {},
   ],
   Array [
     "account",
-    120000,
+    240000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
