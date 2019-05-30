@@ -10,7 +10,7 @@ import {
 } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-export class StakeContractWrapper extends BaseContractWrapper {
+export class StakeWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,
@@ -69,7 +69,7 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	): Promise<{ [key: string]: IStakeLot[] }> {
 		const userStake: { [key: string]: IStakeLot[] } = {};
 		for (const oracle of oracleList) {
-			if (!userStake[oracle]) userStake[oracle] = [];
+			userStake[oracle] = [];
 
 			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods
 				.userQueueIdx(account, oracle)
@@ -277,4 +277,4 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	}
 }
 
-export default StakeContractWrapper;
+export default StakeWrapper;

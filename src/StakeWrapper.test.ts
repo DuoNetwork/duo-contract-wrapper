@@ -1,6 +1,6 @@
 // fix for @ledgerhq/hw-transport-u2f 4.28.0
 import '@babel/polyfill';
-import StakeContractWrapper from './StakeContractWrapper';
+import StakeContractWrapper from './StakeWrapper';
 import { ITransactionOption } from './types';
 
 
