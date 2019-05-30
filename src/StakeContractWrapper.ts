@@ -14,10 +14,12 @@ export class StakeContractWrapper extends BaseContractWrapper {
 	public readonly events = [
 		CST.EVENT_UPDATE_ROLE_MANAGER,
 		CST.EVENT_UPDATE_OPERATOR,
-		CST.EVENT_COMMIT_PRICE,
-		CST.EVENT_ACCEPT_PRICE,
 		CST.EVENT_SET_VALUE,
-		CST.EVENT_UPDATE_PRICE_FEED
+		CST.EVENT_ADD_STAKE,
+		CST.EVENT_UN_STAKE,
+		CST.EVENT_ADD_AWARD,
+		CST.EVENT_REDUCE_AWARD,
+		CST.EVENT_CLAIM_AWARD 
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
 		super(web3Wrapper, stakeAbi.abi, address);

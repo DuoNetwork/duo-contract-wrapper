@@ -27,6 +27,13 @@ export const INCEPTION_BLK_MAIN = 7278544;
 export const EVENT_UPDATE_ROLE_MANAGER = 'UpdateRoleManager';
 export const EVENT_UPDATE_OPERATOR = 'UpdateOperator';
 
+// Stake
+export const EVENT_ADD_STAKE ='AddStake';
+export const EVENT_UN_STAKE ='Unstake';
+export const EVENT_ADD_AWARD ='AddAward';
+export const EVENT_REDUCE_AWARD ='ReduceAward';
+export const EVENT_CLAIM_AWARD ='ClaimAward';
+
 // esplanade
 export const EVENT_ADD_ADDRESS = 'AddAddress';
 export const EVENT_REMOVE_ADDRESS = 'RemoveAddress';
