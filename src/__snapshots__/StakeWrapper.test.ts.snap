@@ -1,0 +1,681 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`batchAddAward 1`] = `"Read Only Mode"`;
+
+exports[`batchAddAward 2`] = `"batchAddAwardTxHash"`;
+
+exports[`batchAddAward 3`] = `"batchAddAwardTxHash"`;
+
+exports[`batchAddAward 4`] = `
+Array [
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+]
+`;
+
+exports[`batchAddAward 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`batchAddAward 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`batchReduceAward 1`] = `"Read Only Mode"`;
+
+exports[`batchReduceAward 2`] = `"batchReduceAwardTxHash"`;
+
+exports[`batchReduceAward 3`] = `"batchReduceAwardTxHash"`;
+
+exports[`batchReduceAward 4`] = `
+Array [
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+]
+`;
+
+exports[`batchReduceAward 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`batchReduceAward 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`claimAward 1`] = `"Read Only Mode"`;
+
+exports[`claimAward 2`] = `"claimAwardTxHash"`;
+
+exports[`claimAward 3`] = `"claimAwardTxHash"`;
+
+exports[`claimAward 4`] = `
+Array [
+  Array [
+    true,
+    0,
+  ],
+  Array [
+    true,
+    0,
+  ],
+]
+`;
+
+exports[`claimAward 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`claimAward 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`disableStakingAndUnstaking 1`] = `"Read Only Mode"`;
+
+exports[`disableStakingAndUnstaking 2`] = `"setStakeFlagTxHash"`;
+
+exports[`disableStakingAndUnstaking 3`] = `"setStakeFlagTxHash"`;
+
+exports[`disableStakingAndUnstaking 4`] = `
+Array [
+  Array [
+    true,
+    true,
+  ],
+  Array [
+    true,
+    true,
+  ],
+  Array [
+    false,
+    false,
+  ],
+  Array [
+    false,
+    false,
+  ],
+]
+`;
+
+exports[`disableStakingAndUnstaking 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`disableStakingAndUnstaking 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`enableStakingAndUnstaking 1`] = `"Read Only Mode"`;
+
+exports[`enableStakingAndUnstaking 2`] = `"setStakeFlagTxHash"`;
+
+exports[`enableStakingAndUnstaking 3`] = `"setStakeFlagTxHash"`;
+
+exports[`enableStakingAndUnstaking 4`] = `
+Array [
+  Array [
+    true,
+    true,
+  ],
+  Array [
+    true,
+    true,
+  ],
+]
+`;
+
+exports[`enableStakingAndUnstaking 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`enableStakingAndUnstaking 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`getAddresses 1`] = `
+Object {
+  "operator": "operatorAddr",
+  "priceFeedList": Array [
+    "oracleAddr0",
+    "oracleAddr1",
+    "oracleAddr2",
+  ],
+}
+`;
+
+exports[`getOracleList 1`] = `
+Array [
+  "oracleAddr0",
+  "oracleAddr1",
+  "oracleAddr2",
+]
+`;
+
+exports[`getOracleStakes 1`] = `
+Object {
+  "oracle0": 100,
+  "oracle1": 100,
+}
+`;
+
+exports[`getOracleStakes 2`] = `
+Array [
+  Array [
+    "oracle0",
+  ],
+  Array [
+    "oracle1",
+  ],
+]
+`;
+
+exports[`getStates 1`] = `
+Object {
+  "canStake": true,
+  "canUnstake": true,
+  "lockMinTimeInSecond": 3600,
+  "maxStakePerOracle": 50000,
+  "minStakeAmt": 5000,
+  "totalAwardsToDistribute": 50000,
+}
+`;
+
+exports[`getUserAward 1`] = `100`;
+
+exports[`getUserAward 2`] = `
+Array [
+  Array [
+    "account",
+  ],
+]
+`;
+
+exports[`getUserSize 1`] = `100`;
+
+exports[`getUserStakes 1`] = `
+Object {
+  "oracle0": Array [
+    100,
+    100,
+  ],
+  "oracle1": Array [
+    100,
+    100,
+  ],
+}
+`;
+
+exports[`getUserStakes 2`] = `
+Array [
+  Array [
+    "account",
+    "oracle0",
+  ],
+  Array [
+    "account",
+    "oracle1",
+  ],
+]
+`;
+
+exports[`getUserStakes 3`] = `
+Array [
+  Array [
+    "account",
+    "oracle0",
+    1,
+  ],
+  Array [
+    "account",
+    "oracle0",
+    2,
+  ],
+  Array [
+    "account",
+    "oracle1",
+    1,
+  ],
+  Array [
+    "account",
+    "oracle1",
+    2,
+  ],
+]
+`;
+
+exports[`setMaxStakePerOracleAmt 1`] = `"Read Only Mode"`;
+
+exports[`setMaxStakePerOracleAmt 2`] = `"setValueTxHash"`;
+
+exports[`setMaxStakePerOracleAmt 3`] = `"setValueTxHash"`;
+
+exports[`setMaxStakePerOracleAmt 4`] = `
+Array [
+  Array [
+    0,
+    "100000000000000000000",
+  ],
+  Array [
+    0,
+    "100000000000000000000",
+  ],
+  Array [
+    0,
+    "10000000000000000000000",
+  ],
+  Array [
+    0,
+    "10000000000000000000000",
+  ],
+]
+`;
+
+exports[`setMaxStakePerOracleAmt 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`setMaxStakePerOracleAmt 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`setMinStakingAmt 1`] = `"Read Only Mode"`;
+
+exports[`setMinStakingAmt 2`] = `"setValueTxHash"`;
+
+exports[`setMinStakingAmt 3`] = `"setValueTxHash"`;
+
+exports[`setMinStakingAmt 4`] = `
+Array [
+  Array [
+    0,
+    "100000000000000000000",
+  ],
+  Array [
+    0,
+    "100000000000000000000",
+  ],
+]
+`;
+
+exports[`setMinStakingAmt 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`setMinStakingAmt 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`stake 1`] = `"Read Only Mode"`;
+
+exports[`stake 2`] = `"stakeTxHash"`;
+
+exports[`stake 3`] = `"stakeTxHash"`;
+
+exports[`stake 4`] = `
+Array [
+  Array [
+    "oracleAddr",
+    "100000000000000000000",
+  ],
+  Array [
+    "oracleAddr",
+    "100000000000000000000",
+  ],
+]
+`;
+
+exports[`stake 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`stake 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`unstake 1`] = `"Read Only Mode"`;
+
+exports[`unstake 2`] = `"unstakeTxHash"`;
+
+exports[`unstake 3`] = `"unstakeTxHash"`;
+
+exports[`unstake 4`] = `
+Array [
+  Array [
+    "oracleAddr",
+  ],
+  Array [
+    "oracleAddr",
+  ],
+]
+`;
+
+exports[`unstake 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`unstake 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;

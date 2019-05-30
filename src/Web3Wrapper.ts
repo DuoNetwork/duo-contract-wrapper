@@ -75,7 +75,7 @@ export class Web3Wrapper {
 		const rpcUrl = this.providerUrl;
 		const ledger = createLedgerSubprovider(getTransport, {
 			networkId,
-			accountsLength: 5
+			accountsLength: 20
 		});
 		engine.addProvider(ledger);
 		engine.addProvider(new FetchSubprovider({ rpcUrl }));
