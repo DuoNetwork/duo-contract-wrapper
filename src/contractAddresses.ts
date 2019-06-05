@@ -71,7 +71,7 @@ export const kovan: IContractAddresses = {
 	},
 	DUO: {
 		code: 'DUO',
-		address: '0x61ca89cfc5e8099702e64e97d9b5fc457cf1d355'
+		address: '0x61cA89CfC5E8099702e64e97D9b5FC457cf1d355'
 	}
 };
 
@@ -141,10 +141,10 @@ export const mainnet: IContractAddresses = {
 	],
 	Stake: {
 		code: 'Stake',
-		address: '0x395cca6dec865eb1f633d84c77220c40f26395bf'
+		address: '0x395cca6DeC865eb1F633D84C77220c40f26395bf'
 	},
 	DUO: {
 		code: 'DUO',
-		address: '0x56e0b2c7694e6e10391e870774daa45cf6583486'
+		address: '0x56e0B2C7694E6e10391E870774daA45cf6583486'
 	}
 };
