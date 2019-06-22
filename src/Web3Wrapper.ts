@@ -10,6 +10,7 @@ const ProviderEngine = require('web3-provider-engine');
 const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
 const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
+const Web3Personal = require('web3-eth-personal');
 
 export class Web3Wrapper {
 	public web3: any;
@@ -21,14 +22,18 @@ export class Web3Wrapper {
 	public readonly inceptionBlockNumber: number;
 	public handleSwitchToMetaMask: Array<() => any>;
 	public handleSwitchToLedger: Array<() => any>;
+	public rawMetamaskProvider: any = null;
+	public web3Personal: any = null;
 
 	constructor(window: any, providerUrl: string, privateKey: string, live: boolean) {
 		this.live = live;
 		this.contractAddresses = this.live ? mainnet : kovan;
 		this.providerUrl = providerUrl;
 		if (window && (window.ethereum || window.web3)) {
+			this.rawMetamaskProvider = window.ethereum || window.web3.currentProvider;
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
+			this.web3Personal = new Web3Personal(this.rawMetamaskProvider);
 		} else if (!window && privateKey) {
 			const hdWallet = new HDWalletProvider(privateKey, providerUrl);
 			this.web3 = new Web3(hdWallet);
@@ -385,6 +390,11 @@ export class Web3Wrapper {
 			gas: gasLimit,
 			nonce: nonce
 		};
+	}
+
+	public web3PersonalSign(account: string, message: string): Promise<string> {
+		if (this.wallet === Wallet.None) return Promise.reject('canot sign');
+		return this.web3Personal.sign(message, account);
 	}
 }
 
