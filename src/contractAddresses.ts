@@ -149,7 +149,7 @@ export const mainnet: IContractAddresses = {
 		},
 		{
 			code: 'Stake-60',
-			address: '0x0762233727d0369ACeB3f702416A48A527bfbFf1'
+			address: '0xb4bD4885ED177a8328F6034d5E5660C57Aa495e5'
 		}
 	],
 
