@@ -172,6 +172,17 @@ Array [
 
 exports[`toHex 1`] = `"0x499602d2"`;
 
+exports[`web3AccountsRecover 1`] = `
+Array [
+  Array [
+    "message",
+    "signature",
+  ],
+]
+`;
+
+exports[`web3AccountsRecover, no web3Accounts 1`] = `""`;
+
 exports[`web3PersonalSign 1`] = `
 Array [
   Array [

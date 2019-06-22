@@ -366,7 +366,10 @@ test('web3PersonalSign, reject', async () => {
 	const testWeb3Util = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	testWeb3Util.wallet = Wallet.None;
 	try {
-		await testWeb3Util.web3PersonalSign('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD', 'message');
+		await testWeb3Util.web3PersonalSign(
+			'0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD',
+			'message'
+		);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
@@ -376,7 +379,24 @@ test('web3PersonalSign', async () => {
 	const testWeb3Util = new Web3Wrapper({ ethereum: {} }, '', '', true);
 	testWeb3Util.web3Personal = {
 		sign: jest.fn()
-	}
+	};
 	await testWeb3Util.web3PersonalSign('0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD', 'message');
 	expect((testWeb3Util.web3Personal.sign as jest.Mock).mock.calls).toMatchSnapshot();
+});
+
+test('web3AccountsRecover, no web3Accounts', async () => {
+	const testWeb3Util = new Web3Wrapper({ ethereum: {} }, '', '', true);
+
+	testWeb3Util.web3Accounts = null;
+	expect(await testWeb3Util.web3AccountsRecover('message', 'signature')).toMatchSnapshot();
+});
+
+test('web3AccountsRecover', async () => {
+	const testWeb3Util = new Web3Wrapper({ ethereum: {} }, '', '', true);
+
+	testWeb3Util.web3Accounts = {
+		recover: jest.fn()
+	};
+	await testWeb3Util.web3AccountsRecover('message', 'signature');
+	expect((testWeb3Util.web3Accounts.recover as jest.Mock).mock.calls).toMatchSnapshot();
 });

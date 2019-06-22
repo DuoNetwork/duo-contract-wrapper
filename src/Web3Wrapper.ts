@@ -11,6 +11,7 @@ const FetchSubprovider = require('web3-provider-engine/subproviders/fetch');
 const createLedgerSubprovider = require('@ledgerhq/web3-subprovider').default;
 const TransportU2F = require('@ledgerhq/hw-transport-u2f').default;
 const Web3Personal = require('web3-eth-personal');
+const Web3Accounts = require('web3-eth-accounts');
 
 export class Web3Wrapper {
 	public web3: any;
@@ -24,6 +25,7 @@ export class Web3Wrapper {
 	public handleSwitchToLedger: Array<() => any>;
 	public rawMetamaskProvider: any = null;
 	public web3Personal: any = null;
+	public web3Accounts: any = null;
 
 	constructor(window: any, providerUrl: string, privateKey: string, live: boolean) {
 		this.live = live;
@@ -34,6 +36,7 @@ export class Web3Wrapper {
 			this.web3 = new Web3(window.ethereum || window.web3.currentProvider);
 			this.wallet = Wallet.MetaMask;
 			this.web3Personal = new Web3Personal(this.rawMetamaskProvider);
+			this.web3Accounts = new Web3Accounts(this.rawMetamaskProvider);
 		} else if (!window && privateKey) {
 			const hdWallet = new HDWalletProvider(privateKey, providerUrl);
 			this.web3 = new Web3(hdWallet);
@@ -395,6 +398,11 @@ export class Web3Wrapper {
 	public web3PersonalSign(account: string, message: string): Promise<string> {
 		if (this.wallet === Wallet.None) return Promise.reject('canot sign');
 		return this.web3Personal.sign(message, account);
+	}
+
+	public web3AccountsRecover(message: string, signature: string): string {
+		if (!this.web3Accounts) return '';
+		return this.web3Accounts.recover(message, signature);
 	}
 }
 
