@@ -171,3 +171,25 @@ Array [
 `;
 
 exports[`toHex 1`] = `"0x499602d2"`;
+
+exports[`web3AccountsRecover 1`] = `
+Array [
+  Array [
+    "message",
+    "signature",
+  ],
+]
+`;
+
+exports[`web3AccountsRecover, no web3Accounts 1`] = `""`;
+
+exports[`web3PersonalSign 1`] = `
+Array [
+  Array [
+    "message",
+    "0x0017d61f0B0a28E2F0eBB3B6E269738a6252CFeD",
+  ],
+]
+`;
+
+exports[`web3PersonalSign, reject 1`] = `"canot sign"`;

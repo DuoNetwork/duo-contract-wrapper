@@ -19,7 +19,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		CST.EVENT_UN_STAKE,
 		CST.EVENT_ADD_AWARD,
 		CST.EVENT_REDUCE_AWARD,
-		CST.EVENT_CLAIM_AWARD 
+		CST.EVENT_CLAIM_AWARD
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
 		super(web3Wrapper, stakeAbi.abi, address);
