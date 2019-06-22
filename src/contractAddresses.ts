@@ -35,7 +35,6 @@ export const kovan: IContractAddresses = {
 			}
 		},
 		[CST.VIVALDI]: {
-
 			'100C-1H': {
 				custodian: {
 					code: 'VIVALDI-100C-1H',
@@ -49,7 +48,6 @@ export const kovan: IContractAddresses = {
 					code: 'ETH-100P-1H',
 					address: '0xCfC7C9792975193a9d0E78f0350041Ceb4fa388C'
 				}
-
 			}
 		}
 	},
@@ -65,10 +63,16 @@ export const kovan: IContractAddresses = {
 			address: '0xD728681490d63582047A6Cd2fC80B1343C6AbA20'
 		}
 	],
-	Stake: {
-		code: 'Stake',
-		address: '0x71E17030E49A1361b8E1902d613C4e5dD2185e8A'
-	},
+	Stakes: [
+		{
+			code: 'Stake-0',
+			address: '0x71E17030E49A1361b8E1902d613C4e5dD2185e8A'
+		},
+		{
+			code: 'Stake-60',
+			address: '0x0646B77D768a459aA5F84E6A160A5B72b88d76eA'
+		}
+	],
 	DUO: {
 		code: 'DUO',
 		address: '0x61cA89CfC5E8099702e64e97D9b5FC457cf1d355'
@@ -123,7 +127,6 @@ export const mainnet: IContractAddresses = {
 					code: 'ETH-100P-1H',
 					address: '0x8fc1D8f251304fB68Aa633dB2782b2Bcc058fb20'
 				}
-
 			}
 		}
 	},
@@ -139,10 +142,17 @@ export const mainnet: IContractAddresses = {
 			address: '0xbaa6a5B0b63597bCF8a81b2B3E12BEcF591B77a9'
 		}
 	],
-	Stake: {
-		code: 'Stake',
-		address: '0x395cca6DeC865eb1F633D84C77220c40f26395bf'
-	},
+	Stakes: [
+		{
+			code: 'Stake-0',
+			address: '0x395cca6DeC865eb1F633D84C77220c40f26395bf'
+		},
+		{
+			code: 'Stake-60',
+			address: '0x0762233727d0369ACeB3f702416A48A527bfbFf1'
+		}
+	],
+
 	DUO: {
 		code: 'DUO',
 		address: '0x56e0B2C7694E6e10391E870774daA45cf6583486'
