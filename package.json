@@ -1,6 +1,6 @@
 {
 	"name": "@finbook/duo-contract-wrapper",
-	"version": "1.4.3",
+	"version": "1.5.0",
 	"description": "DUO Contract Wrapper",
 	"author": "FinBook Pte Ltd",
 	"main": "dist/index.js",
@@ -30,24 +30,23 @@
 		]
 	},
 	"devDependencies": {
-		"@babel/polyfill": "^7.2.5",
-		"@types/bn.js": "^4.11.4",
-		"@types/jest": "^23.3.13",
-		"@types/node": "^10.12.19",
-		"coveralls": "^3.0.2",
-		"ganache-core": "^2.3.3",
-		"jest": "^23.6.0",
+		"@babel/polyfill": "^7.4.4",
+		"@types/bn.js": "^4.11.5",
+		"@types/jest": "^24.0.17",
+		"@types/node": "^12.6.9",
+		"coveralls": "^3.0.5",
+		"jest": "^24.8.0",
 		"pre-commit": "^1.2.2",
 		"rimraf": "^2.6.3",
-		"ts-jest": "^23.10.5",
-		"tslint": "^5.12.1",
-		"typescript": "^3.1.6"
+		"ts-jest": "^24.0.2",
+		"tslint": "^5.18.0",
+		"typescript": "^3.5.3"
 	},
 	"dependencies": {
-		"@ledgerhq/hw-transport-u2f": "^4.32.0",
-		"@ledgerhq/web3-subprovider": "^4.32.0",
+		"@ledgerhq/hw-transport-u2f": "^4.68.2",
+		"@ledgerhq/web3-subprovider": "^4.68.2",
 		"abi-decoder": "^1.2.0",
-		"bip39": "^2.5.0",
+		"bip39": "^3.0.2",
 		"ethereumjs-wallet": "^0.6.3",
 		"web3": "1.0.0-beta.37"
 	},
