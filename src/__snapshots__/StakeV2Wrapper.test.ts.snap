@@ -1,0 +1,230 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAddresses 1`] = `
+Object {
+  "burnAddress": "duoBurnAddr",
+  "duoTokenAddress": "duoTokenAddr",
+  "operator": "operatorAddr",
+  "priceFeedList": Array [
+    "oracleAddr0",
+    "oracleAddr1",
+    "oracleAddr2",
+  ],
+  "uploader": "uploaderAddr",
+}
+`;
+
+exports[`getOracleList 1`] = `
+Array [
+  "oracleAddr0",
+  "oracleAddr1",
+  "oracleAddr2",
+]
+`;
+
+exports[`getOracleStakes 1`] = `
+Object {
+  "oracle0": 100,
+  "oracle1": 100,
+}
+`;
+
+exports[`getOracleStakes 2`] = `
+Array [
+  Array [
+    "oracle0",
+  ],
+  Array [
+    "oracle1",
+  ],
+]
+`;
+
+exports[`getStates 1`] = `
+Object {
+  "lockMinTimeInSecond": 3600,
+  "maxStakePerOracle": 50000,
+  "minStakeAmt": 5000,
+  "stakingEnabled": true,
+  "totalAwardsToDistribute": 50000,
+}
+`;
+
+exports[`getUserAward 1`] = `100`;
+
+exports[`getUserAward 2`] = `
+Array [
+  Array [
+    "account",
+  ],
+]
+`;
+
+exports[`getUserSize 1`] = `100`;
+
+exports[`getUserStakes 1`] = `
+Object {
+  "oracle0": Array [
+    100,
+    100,
+  ],
+  "oracle1": Array [
+    100,
+    100,
+  ],
+}
+`;
+
+exports[`getUserStakes 2`] = `
+Array [
+  Array [
+    "account",
+    "oracle0",
+  ],
+  Array [
+    "account",
+    "oracle1",
+  ],
+]
+`;
+
+exports[`getUserStakes 3`] = `
+Array [
+  Array [
+    "account",
+    "oracle0",
+    1,
+  ],
+  Array [
+    "account",
+    "oracle0",
+    2,
+  ],
+  Array [
+    "account",
+    "oracle1",
+    1,
+  ],
+  Array [
+    "account",
+    "oracle1",
+    2,
+  ],
+]
+`;
+
+exports[`stake 1`] = `"Read Only Mode"`;
+
+exports[`stake 2`] = `"stakeTxHash"`;
+
+exports[`stake 3`] = `"stakeTxHash"`;
+
+exports[`stake 4`] = `
+Array [
+  Array [
+    "oracleAddr",
+    "100000000000000000000",
+  ],
+  Array [
+    "oracleAddr",
+    "100000000000000000000",
+  ],
+]
+`;
+
+exports[`stake 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`stake 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`unstake 1`] = `"Read Only Mode"`;
+
+exports[`unstake 2`] = `"unstakeTxHash"`;
+
+exports[`unstake 3`] = `"unstakeTxHash"`;
+
+exports[`unstake 4`] = `
+Array [
+  Array [
+    "oracleAddr",
+  ],
+  Array [
+    "oracleAddr",
+  ],
+]
+`;
+
+exports[`unstake 5`] = `
+Array [
+  Array [
+    Object {
+      "from": "account",
+      "gas": 5,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+  Array [
+    Object {
+      "from": "account",
+      "gas": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`unstake 6`] = `
+Array [
+  Array [
+    "account",
+    5,
+    Object {},
+  ],
+  Array [
+    "account",
+    5,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;

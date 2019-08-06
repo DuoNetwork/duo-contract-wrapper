@@ -72,18 +72,30 @@ export interface IMagiAddresses {
 	roleManagerAddress: string;
 }
 
-export interface IStakeStates {
-	canStake: boolean;
-	canUnstake: boolean;
+export interface IStakeBaseStates {
 	lockMinTimeInSecond: number;
 	minStakeAmt: number;
 	maxStakePerOracle: number;
 	totalAwardsToDistribute: number;
 }
+export interface IStakeStates extends IStakeBaseStates {
+	canStake: boolean;
+	canUnstake: boolean;
+}
+
+export interface IStakeV2States extends IStakeBaseStates {
+	stakingEnabled: boolean;
+}
 
 export interface IStakeAddress {
 	operator: string;
 	priceFeedList: string[];
+}
+
+export interface IStakeV2Address extends IStakeAddress {
+	burnAddress: string;
+	duoTokenAddress: string;
+	uploader: string;
 }
 
 export interface IStakeLot {

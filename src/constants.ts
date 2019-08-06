@@ -34,6 +34,11 @@ export const EVENT_ADD_AWARD ='AddAward';
 export const EVENT_REDUCE_AWARD ='ReduceAward';
 export const EVENT_CLAIM_AWARD ='ClaimAward';
 
+// StakeV2
+export const EVENT_COMMIT_ADD_REWARD= "CommitAddReward";
+export const EVENT_COMMIT_REDUCE_REWARD="CommitReduceReward";
+export const EVENT_UPDATE_UPLOADER="UpdateUploader";
+
 // esplanade
 export const EVENT_ADD_ADDRESS = 'AddAddress';
 export const EVENT_REMOVE_ADDRESS = 'RemoveAddress';
