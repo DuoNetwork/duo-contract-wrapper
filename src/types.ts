@@ -103,6 +103,16 @@ export interface IStakeLot {
 	amount: number;
 }
 
+export interface IRewardList {
+	user: string;
+	amount: number;
+}
+
+export interface IRewardFromContract {
+	user: string;
+	amtInWei: string;
+}
+
 export interface IStakeQueueIdx {
 	first: number;
 	last: number;
