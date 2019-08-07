@@ -8,7 +8,8 @@ import {
 	IStakeV2States,
 	ITransactionOption,
 	IRewardList,
-	IRewardFromContract
+	IRewardFromContract,
+	IStagingIndex
 } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -67,45 +68,46 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		const userSize = await this.contract.methods.getUserSize().call();
 		return Number(userSize.valueOf());
 	}
-	
-	public async getAddRewardList():Promise<IRewardList[]> {
-		const addRewardStagingIdx = await this.contract.methods.addRewardStagingIdx.call();
-		let first = Number(addRewardStagingIdx.first);
-		let last = Number(addRewardStagingIdx.last);
-		const result: IRewardList[] = [];
-		if (first === 0 || last === 0) return result;
-		while(first <= last) {
-			const userReward: IRewardFromContract= await this.contract.methods.addRewardStagingList.call(
-				first
-			);
-			result.push({
-				user: userReward.user,
-				amount: Web3Wrapper.fromWei(userReward.amtInWei)
-			})
-			first++
+
+	public async getStagingAddReward(index: number): Promise<IRewardList> {
+
+		const userReward: IRewardFromContract = await this.contract.methods.addRewardStagingList.call(
+			index
+		);
+		return {
+			user: userReward.user,
+			amount: Web3Wrapper.fromWei(userReward.amtInWei)
 		}
-		return result;
+
 	}
 
-		
-	public async getReduceRewardList():Promise<IRewardList[]> {
-		const reduceRewardStagingIdx = await this.contract.methods.reduceRewardStagingIdx.call();
-		let first = Number(reduceRewardStagingIdx.first);
-		let last = Number(reduceRewardStagingIdx.last);
-		const result: IRewardList[] = [];
-		if (first === 0 || last === 0) return result;
-		while(first <= last) {
-			const userReward: IRewardFromContract= await this.contract.methods.reduceRewardStagingList.call(
-				first
-			);
-			result.push({
-				user: userReward.user,
-				amount: Web3Wrapper.fromWei(userReward.amtInWei)
-			})
-			first++
+	public async getStagingReduceReward(index: number): Promise<IRewardList> {
+
+		const userReward: IRewardFromContract = await this.contract.methods.reduceRewardStagingList.call(
+			index
+		);
+		return {
+			user: userReward.user,
+			amount: Web3Wrapper.fromWei(userReward.amtInWei)
 		}
-		return result;
+
 	}
+
+	public async getStagingIndex(): Promise<IStagingIndex> {
+		const addRewardStagingIdx = await this.contract.methods.addRewardStagingIdx.call();
+		const reduceRewardStagingIdx = await this.contract.methods.reduceRewardStagingIdx.call();
+		return {
+			add: {
+				first: Number(addRewardStagingIdx.first),
+				last: Number(addRewardStagingIdx.last)
+			},
+			reduce: {
+				first: Number(reduceRewardStagingIdx.first),
+				last: Number(reduceRewardStagingIdx.last)
+			}
+		}
+	}
+
 
 	public async getUserStakes(
 		account: string,

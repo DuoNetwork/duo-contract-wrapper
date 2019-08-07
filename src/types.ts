@@ -103,6 +103,16 @@ export interface IStakeLot {
 	amount: number;
 }
 
+export interface IIndex {
+	first: number;
+	last: number;
+}
+
+export interface IStagingIndex {
+	add :IIndex;
+	reduce: IIndex;
+}
+
 export interface IRewardList {
 	user: string;
 	amount: number;
