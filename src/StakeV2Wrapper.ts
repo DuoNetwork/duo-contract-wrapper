@@ -71,7 +71,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 
 	public async getStagingAddReward(index: number): Promise<IRewardList> {
 
-		const userReward: IRewardFromContract = await this.contract.methods.addRewardStagingList.call(
+		const userReward: IRewardFromContract = await this.contract.methods.addRewardStagingList().call(
 			index
 		);
 		return {
@@ -83,7 +83,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 
 	public async getStagingReduceReward(index: number): Promise<IRewardList> {
 
-		const userReward: IRewardFromContract = await this.contract.methods.reduceRewardStagingList.call(
+		const userReward: IRewardFromContract = await this.contract.methods.reduceRewardStagingList().call(
 			index
 		);
 		return {
@@ -94,8 +94,8 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 	}
 
 	public async getStagingIndex(): Promise<IStagingIndex> {
-		const addRewardStagingIdx = await this.contract.methods.addRewardStagingIdx.call();
-		const reduceRewardStagingIdx = await this.contract.methods.reduceRewardStagingIdx.call();
+		const addRewardStagingIdx = await this.contract.methods.addRewardStagingIdx().call();
+		const reduceRewardStagingIdx = await this.contract.methods.reduceRewardStagingIdx().call();
 		return {
 			add: {
 				first: Number(addRewardStagingIdx.first),
@@ -154,7 +154,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -174,7 +174,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -190,7 +190,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -211,7 +211,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -232,7 +232,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -252,7 +252,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -272,7 +272,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -291,7 +291,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -312,7 +312,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -331,7 +331,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -350,7 +350,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -371,7 +371,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -391,7 +391,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -411,7 +411,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
@@ -431,7 +431,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_GAS_PRICE,
+			CST.DEFAULT_TX_GAS_LIMIT,
 			option
 		);
 
