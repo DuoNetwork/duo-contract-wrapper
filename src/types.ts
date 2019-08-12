@@ -217,6 +217,7 @@ export interface IContractAddresses {
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];
 	Stakes: IContractAddress[];
+	StakesV2: IContractAddress[];
 	DUO: IContractAddress;
 }
 
