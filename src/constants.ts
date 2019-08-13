@@ -121,6 +121,10 @@ export const UPDATE_ROLE_MANAGER_GAS = 1000000;
 export const DEFAULT_TX_GAS_LIMIT = 30000;
 export const START_ROUND_GAS = 300000;
 export const END_ROUND_GAS = 300000;
+// stake v2
+export const STAKE_V2_STAKING_GAS = 240000;
+export const STAKE_V2_UNSTAKING_GAS = 240000;
+export const STAKE_V2_CLAIM_REWARD_GAS = 60000;
 
 export const BTV_STATE = {
 	LAST_OPERATION_TIME: 0,
