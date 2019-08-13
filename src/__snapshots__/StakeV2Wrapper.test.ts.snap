@@ -211,12 +211,12 @@ exports[`disableStaking 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    50000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    50000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -247,12 +247,12 @@ exports[`enableStaking 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    50000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    50000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -595,12 +595,12 @@ exports[`stageAddReward 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -645,12 +645,12 @@ exports[`stageReduceReward 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,

@@ -206,7 +206,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V2_STAGE_ADD_REWAD_LIMIT,
 			option
 		);
 
@@ -227,7 +227,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V2_STAGE_REDUCE_REWAD_LIMIT,
 			option
 		);
 
@@ -323,7 +323,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V2_ENABLE_STAKING_GAS,
 			option
 		);
 
@@ -339,7 +339,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V2_DISENABLE_STAKING_GAS,
 			option
 		);
 

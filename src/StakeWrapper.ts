@@ -108,7 +108,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_STAKING_GAS,
 			option
 		);
 
@@ -128,7 +128,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_UNSTAKING_GAS,
 			option
 		);
 
@@ -144,7 +144,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_CLAIM_REWARD_GAS,
 			option
 		);
 
@@ -165,7 +165,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_BATCH_ADD_REWAD_LIMIT,
 			option
 		);
 
@@ -186,7 +186,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_BATCH_REDUCE_REWAD_LIMIT,
 			option
 		);
 
@@ -205,7 +205,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_ENABLE_STAKING_GAS,
 			option
 		);
 
@@ -224,7 +224,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
-			CST.DEFAULT_TX_GAS_LIMIT,
+			CST.STAKE_V1_DISENABLE_STAKING_GAS,
 			option
 		);
 

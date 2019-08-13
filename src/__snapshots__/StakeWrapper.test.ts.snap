@@ -36,7 +36,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -56,12 +56,12 @@ exports[`batchAddAward 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -107,7 +107,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -127,12 +127,12 @@ exports[`batchReduceAward 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -166,7 +166,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -186,12 +186,12 @@ exports[`claimAward 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    60000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    60000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -233,7 +233,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -253,12 +253,12 @@ exports[`disableStakingAndUnstaking 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    50000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    50000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -292,7 +292,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -312,12 +312,12 @@ exports[`enableStakingAndUnstaking 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    50000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    50000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -470,7 +470,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -529,7 +529,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -588,7 +588,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -608,12 +608,12 @@ exports[`stake 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    240000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    240000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -645,7 +645,7 @@ Array [
   Array [
     Object {
       "from": "account",
-      "gas": 30000,
+      "gas": 240000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -665,12 +665,12 @@ exports[`unstake 6`] = `
 Array [
   Array [
     "account",
-    30000,
+    240000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    240000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
