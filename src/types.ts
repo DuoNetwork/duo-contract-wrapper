@@ -72,13 +72,19 @@ export interface IMagiAddresses {
 	roleManagerAddress: string;
 }
 
-export interface IStakeStates {
-	canStake: boolean;
-	canUnstake: boolean;
+export interface IStakeBaseStates {
 	lockMinTimeInSecond: number;
 	minStakeAmt: number;
 	maxStakePerOracle: number;
 	totalAwardsToDistribute: number;
+}
+export interface IStakeStates extends IStakeBaseStates {
+	canStake: boolean;
+	canUnstake: boolean;
+}
+
+export interface IStakeV2States extends IStakeBaseStates {
+	stakingEnabled: boolean;
 }
 
 export interface IStakeAddress {
@@ -86,9 +92,35 @@ export interface IStakeAddress {
 	priceFeedList: string[];
 }
 
+export interface IStakeV2Address extends IStakeAddress {
+	burnAddress: string;
+	duoTokenAddress: string;
+	uploader: string;
+}
+
 export interface IStakeLot {
 	timestamp: number;
 	amount: number;
+}
+
+export interface IIndex {
+	first: number;
+	last: number;
+}
+
+export interface IStagingIndex {
+	add :IIndex;
+	reduce: IIndex;
+}
+
+export interface IRewardList {
+	user: string;
+	amount: number;
+}
+
+export interface IRewardFromContract {
+	user: string;
+	amtInWei: string;
 }
 
 export interface IStakeQueueIdx {
@@ -185,6 +217,7 @@ export interface IContractAddresses {
 	MultiSigManagers: IContractAddress[];
 	Oracles: IContractAddress[];
 	Stakes: IContractAddress[];
+	StakesV2: IContractAddress[];
 	DUO: IContractAddress;
 }
 

@@ -1,67 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`batchAddAward 1`] = `"Read Only Mode"`;
+exports[`addOracle 1`] = `"Read Only Mode"`;
 
-exports[`batchAddAward 2`] = `"batchAddAwardTxHash"`;
+exports[`addOracle 2`] = `"addOracleHash"`;
 
-exports[`batchAddAward 3`] = `"batchAddAwardTxHash"`;
+exports[`addOracle 3`] = `"addOracleHash"`;
 
-exports[`batchAddAward 4`] = `
+exports[`addOracle 4`] = `
 Array [
   Array [
-    Array [
-      "addr0",
-      "addr1",
-    ],
-    Array [
-      "10000000000000000000",
-      "20000000000000000000",
-    ],
+    "newOracleAddr",
   ],
   Array [
-    Array [
-      "addr0",
-      "addr1",
-    ],
-    Array [
-      "10000000000000000000",
-      "20000000000000000000",
-    ],
+    "newOracleAddr",
   ],
 ]
 `;
 
-exports[`batchAddAward 5`] = `
-Array [
-  Array [
-    Object {
-      "from": "account",
-      "gas": 240000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-  Array [
-    Object {
-      "from": "account",
-      "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-]
-`;
-
-exports[`batchAddAward 6`] = `
+exports[`addOracle 5`] = `
 Array [
   Array [
     "account",
-    500000,
+    30000,
     Object {},
   ],
   Array [
     "account",
-    500000,
+    30000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -71,68 +36,35 @@ Array [
 ]
 `;
 
-exports[`batchReduceAward 1`] = `"Read Only Mode"`;
+exports[`autoRoll 1`] = `"Read Only Mode"`;
 
-exports[`batchReduceAward 2`] = `"batchReduceAwardTxHash"`;
+exports[`autoRoll 2`] = `"autoRollHash"`;
 
-exports[`batchReduceAward 3`] = `"batchReduceAwardTxHash"`;
+exports[`autoRoll 3`] = `"autoRollHash"`;
 
-exports[`batchReduceAward 4`] = `
+exports[`autoRoll 4`] = `
 Array [
   Array [
-    Array [
-      "addr0",
-      "addr1",
-    ],
-    Array [
-      "10000000000000000000",
-      "20000000000000000000",
-    ],
+    "oracleAddr",
+    "100000000000000000000",
   ],
   Array [
-    Array [
-      "addr0",
-      "addr1",
-    ],
-    Array [
-      "10000000000000000000",
-      "20000000000000000000",
-    ],
+    "oracleAddr",
+    "100000000000000000000",
   ],
 ]
 `;
 
-exports[`batchReduceAward 5`] = `
-Array [
-  Array [
-    Object {
-      "from": "account",
-      "gas": 240000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-  Array [
-    Object {
-      "from": "account",
-      "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-]
-`;
-
-exports[`batchReduceAward 6`] = `
+exports[`autoRoll 5`] = `
 Array [
   Array [
     "account",
-    500000,
+    30000,
     Object {},
   ],
   Array [
     "account",
-    500000,
+    30000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -142,13 +74,13 @@ Array [
 ]
 `;
 
-exports[`claimAward 1`] = `"Read Only Mode"`;
+exports[`claimReward 1`] = `"Read Only Mode"`;
 
-exports[`claimAward 2`] = `"claimAwardTxHash"`;
+exports[`claimReward 2`] = `"claimRewardTxHash"`;
 
-exports[`claimAward 3`] = `"claimAwardTxHash"`;
+exports[`claimReward 3`] = `"claimRewardTxHash"`;
 
-exports[`claimAward 4`] = `
+exports[`claimReward 4`] = `
 Array [
   Array [
     true,
@@ -161,28 +93,7 @@ Array [
 ]
 `;
 
-exports[`claimAward 5`] = `
-Array [
-  Array [
-    Object {
-      "from": "account",
-      "gas": 240000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-  Array [
-    Object {
-      "from": "account",
-      "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-]
-`;
-
-exports[`claimAward 6`] = `
+exports[`claimReward 5`] = `
 Array [
   Array [
     "account",
@@ -201,47 +112,35 @@ Array [
 ]
 `;
 
-exports[`disableStakingAndUnstaking 1`] = `"Read Only Mode"`;
+exports[`commitAddReward 1`] = `"Read Only Mode"`;
 
-exports[`disableStakingAndUnstaking 2`] = `"setStakeFlagTxHash"`;
+exports[`commitAddReward 2`] = `"commitAddRewardHash"`;
 
-exports[`disableStakingAndUnstaking 3`] = `"setStakeFlagTxHash"`;
+exports[`commitAddReward 3`] = `"commitAddRewardHash"`;
 
-exports[`disableStakingAndUnstaking 4`] = `
+exports[`commitAddReward 4`] = `
 Array [
   Array [
-    true,
-    true,
+    2,
   ],
   Array [
-    true,
-    true,
-  ],
-  Array [
-    false,
-    false,
-  ],
-  Array [
-    false,
-    false,
+    2,
   ],
 ]
 `;
 
-exports[`disableStakingAndUnstaking 5`] = `
+exports[`commitAddReward 5`] = `
 Array [
   Array [
-    Object {
-      "from": "account",
-      "gas": 240000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
+    "account",
+    30000,
+    Object {},
   ],
   Array [
+    "account",
+    30000,
     Object {
-      "from": "account",
-      "gas": 20000,
+      "gasLimit": 20000,
       "gasPrice": 1000000000,
       "nonce": 10,
     },
@@ -249,7 +148,66 @@ Array [
 ]
 `;
 
-exports[`disableStakingAndUnstaking 6`] = `
+exports[`commitReduceReward 1`] = `"Read Only Mode"`;
+
+exports[`commitReduceReward 2`] = `"commitReduceRewardHash"`;
+
+exports[`commitReduceReward 3`] = `"commitReduceRewardHash"`;
+
+exports[`commitReduceReward 4`] = `
+Array [
+  Array [
+    2,
+  ],
+  Array [
+    2,
+  ],
+]
+`;
+
+exports[`commitReduceReward 5`] = `
+Array [
+  Array [
+    "account",
+    30000,
+    Object {},
+  ],
+  Array [
+    "account",
+    30000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`disableStaking 1`] = `"Read Only Mode"`;
+
+exports[`disableStaking 2`] = `"setStakeFlagTxHash"`;
+
+exports[`disableStaking 3`] = `"setStakeFlagTxHash"`;
+
+exports[`disableStaking 4`] = `
+Array [
+  Array [
+    true,
+  ],
+  Array [
+    true,
+  ],
+  Array [
+    false,
+  ],
+  Array [
+    false,
+  ],
+]
+`;
+
+exports[`disableStaking 5`] = `
 Array [
   Array [
     "account",
@@ -268,47 +226,24 @@ Array [
 ]
 `;
 
-exports[`enableStakingAndUnstaking 1`] = `"Read Only Mode"`;
+exports[`enableStaking 1`] = `"Read Only Mode"`;
 
-exports[`enableStakingAndUnstaking 2`] = `"setStakeFlagTxHash"`;
+exports[`enableStaking 2`] = `"setStakeFlagTxHash"`;
 
-exports[`enableStakingAndUnstaking 3`] = `"setStakeFlagTxHash"`;
+exports[`enableStaking 3`] = `"setStakeFlagTxHash"`;
 
-exports[`enableStakingAndUnstaking 4`] = `
+exports[`enableStaking 4`] = `
 Array [
   Array [
     true,
-    true,
   ],
   Array [
-    true,
     true,
   ],
 ]
 `;
 
-exports[`enableStakingAndUnstaking 5`] = `
-Array [
-  Array [
-    Object {
-      "from": "account",
-      "gas": 240000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-  Array [
-    Object {
-      "from": "account",
-      "gas": 20000,
-      "gasPrice": 1000000000,
-      "nonce": 10,
-    },
-  ],
-]
-`;
-
-exports[`enableStakingAndUnstaking 6`] = `
+exports[`enableStaking 5`] = `
 Array [
   Array [
     "account",
@@ -329,12 +264,15 @@ Array [
 
 exports[`getAddresses 1`] = `
 Object {
+  "burnAddress": "duoBurnAddr",
+  "duoTokenAddress": "duoTokenAddr",
   "operator": "operatorAddr",
   "priceFeedList": Array [
     "oracleAddr0",
     "oracleAddr1",
     "oracleAddr2",
   ],
+  "uploader": "uploaderAddr",
 }
 `;
 
@@ -364,13 +302,39 @@ Array [
 ]
 `;
 
+exports[`getStagingAddReward 1`] = `
+Object {
+  "amount": 10,
+  "user": "addUser",
+}
+`;
+
+exports[`getStagingIndex 1`] = `
+Object {
+  "add": Object {
+    "first": 1,
+    "last": 3,
+  },
+  "reduce": Object {
+    "first": 1,
+    "last": 3,
+  },
+}
+`;
+
+exports[`getStagingReduceReward 1`] = `
+Object {
+  "amount": 10,
+  "user": "reduceUser",
+}
+`;
+
 exports[`getStates 1`] = `
 Object {
-  "canStake": true,
-  "canUnstake": true,
   "lockMinTimeInSecond": 3600,
   "maxStakePerOracle": 50000,
   "minStakeAmt": 5000,
+  "stakingEnabled": true,
   "totalAwardsToDistribute": 50000,
 }
 `;
@@ -434,6 +398,38 @@ Array [
     "account",
     "oracle1",
     2,
+  ],
+]
+`;
+
+exports[`resetStagingAwards 1`] = `"Read Only Mode"`;
+
+exports[`resetStagingAwards 2`] = `"resetStagingAwardsHash"`;
+
+exports[`resetStagingAwards 3`] = `"resetStagingAwardsHash"`;
+
+exports[`resetStagingAwards 4`] = `
+Array [
+  Array [],
+  Array [],
+]
+`;
+
+exports[`resetStagingAwards 5`] = `
+Array [
+  Array [
+    "account",
+    30000,
+    Object {},
+  ],
+  Array [
+    "account",
+    30000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
   ],
 ]
 `;
@@ -564,6 +560,106 @@ Array [
 ]
 `;
 
+exports[`stageAddReward 1`] = `"Read Only Mode"`;
+
+exports[`stageAddReward 2`] = `"stageAddRewardHash"`;
+
+exports[`stageAddReward 3`] = `"stageAddRewardHash"`;
+
+exports[`stageAddReward 4`] = `
+Array [
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+]
+`;
+
+exports[`stageAddReward 5`] = `
+Array [
+  Array [
+    "account",
+    500000,
+    Object {},
+  ],
+  Array [
+    "account",
+    500000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`stageReduceReward 1`] = `"Read Only Mode"`;
+
+exports[`stageReduceReward 2`] = `"stageReduceRewardHash"`;
+
+exports[`stageReduceReward 3`] = `"stageReduceRewardHash"`;
+
+exports[`stageReduceReward 4`] = `
+Array [
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+  Array [
+    Array [
+      "addr0",
+      "addr1",
+    ],
+    Array [
+      "10000000000000000000",
+      "20000000000000000000",
+    ],
+  ],
+]
+`;
+
+exports[`stageReduceReward 5`] = `
+Array [
+  Array [
+    "account",
+    500000,
+    Object {},
+  ],
+  Array [
+    "account",
+    500000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
 exports[`stake 1`] = `"Read Only Mode"`;
 
 exports[`stake 2`] = `"stakeTxHash"`;
@@ -671,6 +767,42 @@ Array [
   Array [
     "account",
     240000,
+    Object {
+      "gasLimit": 20000,
+      "gasPrice": 1000000000,
+      "nonce": 10,
+    },
+  ],
+]
+`;
+
+exports[`updateUploaderByOperator 1`] = `"Read Only Mode"`;
+
+exports[`updateUploaderByOperator 2`] = `"updateUploaderByOperatorSendHash"`;
+
+exports[`updateUploaderByOperator 3`] = `"updateUploaderByOperatorSendHash"`;
+
+exports[`updateUploaderByOperator 4`] = `
+Array [
+  Array [
+    "newUploaderAddr",
+  ],
+  Array [
+    "newUploaderAddr",
+  ],
+]
+`;
+
+exports[`updateUploaderByOperator 5`] = `
+Array [
+  Array [
+    "account",
+    30000,
+    Object {},
+  ],
+  Array [
+    "account",
+    30000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,

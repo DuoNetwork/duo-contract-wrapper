@@ -28,11 +28,16 @@ export const EVENT_UPDATE_ROLE_MANAGER = 'UpdateRoleManager';
 export const EVENT_UPDATE_OPERATOR = 'UpdateOperator';
 
 // Stake
-export const EVENT_ADD_STAKE ='AddStake';
-export const EVENT_UN_STAKE ='Unstake';
-export const EVENT_ADD_AWARD ='AddAward';
-export const EVENT_REDUCE_AWARD ='ReduceAward';
-export const EVENT_CLAIM_AWARD ='ClaimAward';
+export const EVENT_ADD_STAKE = 'AddStake';
+export const EVENT_UN_STAKE = 'Unstake';
+export const EVENT_ADD_AWARD = 'AddAward';
+export const EVENT_REDUCE_AWARD = 'ReduceAward';
+export const EVENT_CLAIM_AWARD = 'ClaimAward';
+
+// StakeV2
+export const EVENT_COMMIT_ADD_REWARD = 'CommitAddReward';
+export const EVENT_COMMIT_REDUCE_REWARD = 'CommitReduceReward';
+export const EVENT_UPDATE_UPLOADER = 'UpdateUploader';
 
 // esplanade
 export const EVENT_ADD_ADDRESS = 'AddAddress';
@@ -52,7 +57,7 @@ export const EVENT_REPLACE_MODERATOR = 'ReplaceModerator';
 export const EVENT_START_TRADING = 'StartTrading';
 export const EVENT_START_PRE_RESET = 'StartPreReset';
 export const EVENT_START_RESET = 'StartReset';
-export const EVENT_MATURED = 'Matured'
+export const EVENT_MATURED = 'Matured';
 export const EVENT_ACCEPT_PRICE = 'AcceptPrice';
 export const EVENT_CREATE = 'Create';
 export const EVENT_REDEEM = 'Redeem';
@@ -116,6 +121,24 @@ export const UPDATE_ROLE_MANAGER_GAS = 1000000;
 export const DEFAULT_TX_GAS_LIMIT = 30000;
 export const START_ROUND_GAS = 300000;
 export const END_ROUND_GAS = 300000;
+
+// stake v1
+export const STAKE_V1_STAKING_GAS = 240000;
+export const STAKE_V1_UNSTAKING_GAS = 240000;
+export const STAKE_V1_CLAIM_REWARD_GAS = 60000;
+export const STAKE_V1_ENABLE_STAKING_GAS = 50000;
+export const STAKE_V1_DISENABLE_STAKING_GAS = 50000;
+export const STAKE_V1_BATCH_ADD_REWAD_LIMIT = 500000;
+export const STAKE_V1_BATCH_REDUCE_REWAD_LIMIT = 500000;
+
+// stake v2
+export const STAKE_V2_STAKING_GAS = 240000;
+export const STAKE_V2_UNSTAKING_GAS = 240000;
+export const STAKE_V2_CLAIM_REWARD_GAS = 60000;
+export const STAKE_V2_ENABLE_STAKING_GAS = 50000;
+export const STAKE_V2_DISENABLE_STAKING_GAS = 50000;
+export const STAKE_V2_STAGE_ADD_REWAD_LIMIT = 500000;
+export const STAKE_V2_STAGE_REDUCE_REWAD_LIMIT = 500000;
 
 export const BTV_STATE = {
 	LAST_OPERATION_TIME: 0,
