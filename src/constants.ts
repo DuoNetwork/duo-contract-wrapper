@@ -28,16 +28,16 @@ export const EVENT_UPDATE_ROLE_MANAGER = 'UpdateRoleManager';
 export const EVENT_UPDATE_OPERATOR = 'UpdateOperator';
 
 // Stake
-export const EVENT_ADD_STAKE ='AddStake';
-export const EVENT_UN_STAKE ='Unstake';
-export const EVENT_ADD_AWARD ='AddAward';
-export const EVENT_REDUCE_AWARD ='ReduceAward';
-export const EVENT_CLAIM_AWARD ='ClaimAward';
+export const EVENT_ADD_STAKE = 'AddStake';
+export const EVENT_UN_STAKE = 'Unstake';
+export const EVENT_ADD_AWARD = 'AddAward';
+export const EVENT_REDUCE_AWARD = 'ReduceAward';
+export const EVENT_CLAIM_AWARD = 'ClaimAward';
 
 // StakeV2
-export const EVENT_COMMIT_ADD_REWARD= "CommitAddReward";
-export const EVENT_COMMIT_REDUCE_REWARD="CommitReduceReward";
-export const EVENT_UPDATE_UPLOADER="UpdateUploader";
+export const EVENT_COMMIT_ADD_REWARD = 'CommitAddReward';
+export const EVENT_COMMIT_REDUCE_REWARD = 'CommitReduceReward';
+export const EVENT_UPDATE_UPLOADER = 'UpdateUploader';
 
 // esplanade
 export const EVENT_ADD_ADDRESS = 'AddAddress';
@@ -57,7 +57,7 @@ export const EVENT_REPLACE_MODERATOR = 'ReplaceModerator';
 export const EVENT_START_TRADING = 'StartTrading';
 export const EVENT_START_PRE_RESET = 'StartPreReset';
 export const EVENT_START_RESET = 'StartReset';
-export const EVENT_MATURED = 'Matured'
+export const EVENT_MATURED = 'Matured';
 export const EVENT_ACCEPT_PRICE = 'AcceptPrice';
 export const EVENT_CREATE = 'Create';
 export const EVENT_REDEEM = 'Redeem';

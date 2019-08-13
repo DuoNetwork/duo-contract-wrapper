@@ -89,7 +89,7 @@ export class StakeWrapper extends BaseContractWrapper {
 		const oracleStakes: { [key: string]: number } = {};
 		for (const oracleAddr of oracleList) {
 			const oracleStake = await this.contract.methods.totalStakAmtInWei(oracleAddr).call();
-			oracleStakes[oracleAddr] = Web3Wrapper.fromWei((oracleStake));
+			oracleStakes[oracleAddr] = Web3Wrapper.fromWei(oracleStake);
 		}
 		return oracleStakes;
 	}

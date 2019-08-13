@@ -1,968 +1,968 @@
 {
 	"contractName": "StakeV2",
 	"abi": [
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"name": "totalStakeInWei",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"name": "isWhiteListOracle",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "newManagerAddr",
-			"type": "address"
-		  }
-		],
-		"name": "updateRoleManager",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "lastOperationTime",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "stakingEnabled",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"name": "oracleList",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "maxOracleStakeAmtInWei",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"name": "users",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "operationCoolDown",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "operator",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "totalRewardsToDistributeInWei",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "uploader",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "burnAddress",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "addRewardStagingIdx",
-		"outputs": [
-		  {
-			"name": "first",
-			"type": "uint256"
-		  },
-		  {
-			"name": "last",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"name": "existingUsers",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"name": "addRewardStagingList",
-		"outputs": [
-		  {
-			"name": "user",
-			"type": "address"
-		  },
-		  {
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"name": "reduceRewardStagingList",
-		"outputs": [
-		  {
-			"name": "user",
-			"type": "address"
-		  },
-		  {
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "roleManagerAddress",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  },
-		  {
-			"name": "",
-			"type": "address"
-		  },
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"name": "userStakeQueue",
-		"outputs": [
-		  {
-			"name": "timestamp",
-			"type": "uint256"
-		  },
-		  {
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [],
-		"name": "updateOperator",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"name": "rewardsInWei",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "minStakeAmtInWei",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "lockMinTimeInSecond",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "duoTokenAddress",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [
-		  {
-			"name": "",
-			"type": "address"
-		  },
-		  {
-			"name": "",
-			"type": "address"
-		  }
-		],
-		"name": "userQueueIdx",
-		"outputs": [
-		  {
-			"name": "first",
-			"type": "uint256"
-		  },
-		  {
-			"name": "last",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "reduceRewardStagingIdx",
-		"outputs": [
-		  {
-			"name": "first",
-			"type": "uint256"
-		  },
-		  {
-			"name": "last",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"inputs": [
-		  {
-			"name": "duoTokenAddr",
-			"type": "address"
-		  },
-		  {
-			"name": "duoBurnAddr",
-			"type": "address"
-		  },
-		  {
-			"name": "oracleAddrList",
-			"type": "address[]"
-		  },
-		  {
-			"name": "lockTime",
-			"type": "uint256"
-		  },
-		  {
-			"name": "minStakeAmt",
-			"type": "uint256"
-		  },
-		  {
-			"name": "maxStakePerOracle",
-			"type": "uint256"
-		  },
-		  {
-			"name": "roleManagerAddr",
-			"type": "address"
-		  },
-		  {
-			"name": "opt",
-			"type": "address"
-		  },
-		  {
-			"name": "upl",
-			"type": "address"
-		  },
-		  {
-			"name": "optCoolDown",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": true,
-			"name": "from",
-			"type": "address"
-		  },
-		  {
-			"indexed": true,
-			"name": "oracle",
-			"type": "address"
-		  },
-		  {
-			"indexed": false,
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "AddStake",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": true,
-			"name": "from",
-			"type": "address"
-		  },
-		  {
-			"indexed": true,
-			"name": "oracle",
-			"type": "address"
-		  },
-		  {
-			"indexed": false,
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "Unstake",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "index",
-			"type": "uint256"
-		  },
-		  {
-			"indexed": false,
-			"name": "oldValue",
-			"type": "uint256"
-		  },
-		  {
-			"indexed": false,
-			"name": "newValue",
-			"type": "uint256"
-		  }
-		],
-		"name": "SetValue",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "rewardAmtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "CommitAddReward",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "rewardAmtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "CommitReduceReward",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "claimer",
-			"type": "address"
-		  },
-		  {
-			"indexed": false,
-			"name": "rewardAmtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "ClaimReward",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "updater",
-			"type": "address"
-		  },
-		  {
-			"indexed": false,
-			"name": "newUploader",
-			"type": "address"
-		  }
-		],
-		"name": "UpdateUploader",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "newManagerAddress",
-			"type": "address"
-		  }
-		],
-		"name": "UpdateRoleManager",
-		"type": "event"
-	  },
-	  {
-		"anonymous": false,
-		"inputs": [
-		  {
-			"indexed": false,
-			"name": "updater",
-			"type": "address"
-		  },
-		  {
-			"indexed": false,
-			"name": "newOperator",
-			"type": "address"
-		  }
-		],
-		"name": "UpdateOperator",
-		"type": "event"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "oracleAddr",
-			"type": "address"
-		  },
-		  {
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "stake",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "oracleAddr",
-			"type": "address"
-		  }
-		],
-		"name": "unstake",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "addrsList",
-			"type": "address[]"
-		  },
-		  {
-			"name": "amtInWeiList",
-			"type": "uint256[]"
-		  }
-		],
-		"name": "stageAddRewards",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "addrsList",
-			"type": "address[]"
-		  },
-		  {
-			"name": "amtInWeiList",
-			"type": "uint256[]"
-		  }
-		],
-		"name": "stageReduceRewards",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "numOfRewards",
-			"type": "uint256"
-		  }
-		],
-		"name": "commitAddRewards",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "numOfRewards",
-			"type": "uint256"
-		  }
-		],
-		"name": "commitReduceRewards",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [],
-		"name": "resetStagingAwards",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "oracleAddress",
-			"type": "address"
-		  },
-		  {
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "autoRoll",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "isAll",
-			"type": "bool"
-		  },
-		  {
-			"name": "amtInWei",
-			"type": "uint256"
-		  }
-		],
-		"name": "claimReward",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "isEnabled",
-			"type": "bool"
-		  }
-		],
-		"name": "setStakeFlag",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "getOracleSize",
-		"outputs": [
-		  {
-			"name": "size",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": true,
-		"inputs": [],
-		"name": "getUserSize",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "uint256"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "newUploader",
-			"type": "address"
-		  }
-		],
-		"name": "updateUploaderByOperator",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [],
-		"name": "updateUploaderByRoleManager",
-		"outputs": [
-		  {
-			"name": "",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "oracleAddr",
-			"type": "address"
-		  }
-		],
-		"name": "addOracle",
-		"outputs": [
-		  {
-			"name": "success",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  },
-	  {
-		"constant": false,
-		"inputs": [
-		  {
-			"name": "idx",
-			"type": "uint256"
-		  },
-		  {
-			"name": "newValue",
-			"type": "uint256"
-		  }
-		],
-		"name": "setValue",
-		"outputs": [
-		  {
-			"name": "success",
-			"type": "bool"
-		  }
-		],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	  }
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "totalStakeInWei",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "isWhiteListOracle",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "newManagerAddr",
+					"type": "address"
+				}
+			],
+			"name": "updateRoleManager",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "lastOperationTime",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "stakingEnabled",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "oracleList",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "maxOracleStakeAmtInWei",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "users",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "operationCoolDown",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "operator",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "totalRewardsToDistributeInWei",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "uploader",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "burnAddress",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "addRewardStagingIdx",
+			"outputs": [
+				{
+					"name": "first",
+					"type": "uint256"
+				},
+				{
+					"name": "last",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "existingUsers",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "addRewardStagingList",
+			"outputs": [
+				{
+					"name": "user",
+					"type": "address"
+				},
+				{
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "reduceRewardStagingList",
+			"outputs": [
+				{
+					"name": "user",
+					"type": "address"
+				},
+				{
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "roleManagerAddress",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				},
+				{
+					"name": "",
+					"type": "address"
+				},
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"name": "userStakeQueue",
+			"outputs": [
+				{
+					"name": "timestamp",
+					"type": "uint256"
+				},
+				{
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "updateOperator",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "rewardsInWei",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "minStakeAmtInWei",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "lockMinTimeInSecond",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "duoTokenAddress",
+			"outputs": [
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [
+				{
+					"name": "",
+					"type": "address"
+				},
+				{
+					"name": "",
+					"type": "address"
+				}
+			],
+			"name": "userQueueIdx",
+			"outputs": [
+				{
+					"name": "first",
+					"type": "uint256"
+				},
+				{
+					"name": "last",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "reduceRewardStagingIdx",
+			"outputs": [
+				{
+					"name": "first",
+					"type": "uint256"
+				},
+				{
+					"name": "last",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"name": "duoTokenAddr",
+					"type": "address"
+				},
+				{
+					"name": "duoBurnAddr",
+					"type": "address"
+				},
+				{
+					"name": "oracleAddrList",
+					"type": "address[]"
+				},
+				{
+					"name": "lockTime",
+					"type": "uint256"
+				},
+				{
+					"name": "minStakeAmt",
+					"type": "uint256"
+				},
+				{
+					"name": "maxStakePerOracle",
+					"type": "uint256"
+				},
+				{
+					"name": "roleManagerAddr",
+					"type": "address"
+				},
+				{
+					"name": "opt",
+					"type": "address"
+				},
+				{
+					"name": "upl",
+					"type": "address"
+				},
+				{
+					"name": "optCoolDown",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "constructor"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"name": "from",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"name": "oracle",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "AddStake",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"name": "from",
+					"type": "address"
+				},
+				{
+					"indexed": true,
+					"name": "oracle",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "Unstake",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "index",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "oldValue",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"name": "newValue",
+					"type": "uint256"
+				}
+			],
+			"name": "SetValue",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "rewardAmtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "CommitAddReward",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "rewardAmtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "CommitReduceReward",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "claimer",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "rewardAmtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "ClaimReward",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "updater",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "newUploader",
+					"type": "address"
+				}
+			],
+			"name": "UpdateUploader",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "newManagerAddress",
+					"type": "address"
+				}
+			],
+			"name": "UpdateRoleManager",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"name": "updater",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"name": "newOperator",
+					"type": "address"
+				}
+			],
+			"name": "UpdateOperator",
+			"type": "event"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "oracleAddr",
+					"type": "address"
+				},
+				{
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "stake",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "oracleAddr",
+					"type": "address"
+				}
+			],
+			"name": "unstake",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "addrsList",
+					"type": "address[]"
+				},
+				{
+					"name": "amtInWeiList",
+					"type": "uint256[]"
+				}
+			],
+			"name": "stageAddRewards",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "addrsList",
+					"type": "address[]"
+				},
+				{
+					"name": "amtInWeiList",
+					"type": "uint256[]"
+				}
+			],
+			"name": "stageReduceRewards",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "numOfRewards",
+					"type": "uint256"
+				}
+			],
+			"name": "commitAddRewards",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "numOfRewards",
+					"type": "uint256"
+				}
+			],
+			"name": "commitReduceRewards",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "resetStagingAwards",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "oracleAddress",
+					"type": "address"
+				},
+				{
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "autoRoll",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "isAll",
+					"type": "bool"
+				},
+				{
+					"name": "amtInWei",
+					"type": "uint256"
+				}
+			],
+			"name": "claimReward",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "isEnabled",
+					"type": "bool"
+				}
+			],
+			"name": "setStakeFlag",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getOracleSize",
+			"outputs": [
+				{
+					"name": "size",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": true,
+			"inputs": [],
+			"name": "getUserSize",
+			"outputs": [
+				{
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"payable": false,
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "newUploader",
+					"type": "address"
+				}
+			],
+			"name": "updateUploaderByOperator",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [],
+			"name": "updateUploaderByRoleManager",
+			"outputs": [
+				{
+					"name": "",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "oracleAddr",
+					"type": "address"
+				}
+			],
+			"name": "addOracle",
+			"outputs": [
+				{
+					"name": "success",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"constant": false,
+			"inputs": [
+				{
+					"name": "idx",
+					"type": "uint256"
+				},
+				{
+					"name": "newValue",
+					"type": "uint256"
+				}
+			],
+			"name": "setValue",
+			"outputs": [
+				{
+					"name": "success",
+					"type": "bool"
+				}
+			],
+			"payable": false,
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
 	]
-  }
+}

@@ -4,9 +4,6 @@ import StakeContractWrapper from './StakeV2Wrapper';
 import { ITransactionOption } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
-
-
-
 const stakeSend = jest.fn(() => {
 	const on = jest.fn();
 	setTimeout(() => on.mock.calls[0][1]('stakeTxHash'), 0);
@@ -132,9 +129,7 @@ const web3Wrapper = {
 	createContract: jest.fn(() => ({
 		methods: {
 			stakingEnabled: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve(true)
-				)
+				call: jest.fn(() => Promise.resolve(true))
 			})),
 			stake: jest.fn(() => ({
 				send: stakeSend
@@ -145,10 +140,10 @@ const web3Wrapper = {
 			claimReward: jest.fn(() => ({
 				send: claimRewardSend
 			})),
-			stageAddRewards:  jest.fn(() => ({
+			stageAddRewards: jest.fn(() => ({
 				send: stageAddRewardSend
 			})),
-			stageReduceRewards:  jest.fn(() => ({
+			stageReduceRewards: jest.fn(() => ({
 				send: stageReduceRewardSend
 			})),
 			commitAddRewards: jest.fn(() => ({
@@ -201,66 +196,44 @@ const web3Wrapper = {
 					})
 				)
 			})),
-			setStakeFlag:  jest.fn(() => ({
+			setStakeFlag: jest.fn(() => ({
 				send: setStakeFlagSend
 			})),
-			setValue:  jest.fn(() => ({
+			setValue: jest.fn(() => ({
 				send: setValueSend
 			})),
 			lockMinTimeInSecond: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve(3600)
-				)
+				call: jest.fn(() => Promise.resolve(3600))
 			})),
 			minStakeAmtInWei: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve("5000000000000000000000")
-				)
+				call: jest.fn(() => Promise.resolve('5000000000000000000000'))
 			})),
 			maxOracleStakeAmtInWei: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve("50000000000000000000000")
-				)
+				call: jest.fn(() => Promise.resolve('50000000000000000000000'))
 			})),
 			totalAwardsToDistributeInWei: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve("50000000000000000000000")
-				)
+				call: jest.fn(() => Promise.resolve('50000000000000000000000'))
 			})),
 			getOracleSize: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve(3)
-				)
+				call: jest.fn(() => Promise.resolve(3))
 			})),
 			oracleList: jest.fn((index: number) => ({
-				call: jest.fn(() =>
-					Promise.resolve('oracleAddr' + index)
-				)
+				call: jest.fn(() => Promise.resolve('oracleAddr' + index))
 			})),
 			operator: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve('operatorAddr')
-				)
+				call: jest.fn(() => Promise.resolve('operatorAddr'))
 			})),
 			uploader: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve('uploaderAddr')
-				)
+				call: jest.fn(() => Promise.resolve('uploaderAddr'))
 			})),
 			duoTokenAddress: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve('duoTokenAddr')
-				)
+				call: jest.fn(() => Promise.resolve('duoTokenAddr'))
 			})),
 			burnAddress: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve('duoBurnAddr')
-				)
+				call: jest.fn(() => Promise.resolve('duoBurnAddr'))
 			})),
 			getUserSize: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve(100)
-				)
+				call: jest.fn(() => Promise.resolve(100))
 			})),
 			userQueueIdx: jest.fn(() => ({
 				call: jest.fn(() =>
@@ -271,19 +244,13 @@ const web3Wrapper = {
 				)
 			})),
 			userStakeQueue: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve(100)
-				)
+				call: jest.fn(() => Promise.resolve(100))
 			})),
 			totalStakeInWei: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve("100000000000000000000")
-				)
+				call: jest.fn(() => Promise.resolve('100000000000000000000'))
 			})),
 			rewardsInWei: jest.fn(() => ({
-				call: jest.fn(() =>
-					Promise.resolve("100000000000000000000")
-				)
+				call: jest.fn(() => Promise.resolve('100000000000000000000'))
 			}))
 		}
 	}))
@@ -313,10 +280,10 @@ test('getUserSize', async () => {
 
 test('getUserStakes', async () => {
 	expect(await stakeWrapper.getUserStakes('account', ['oracle0', 'oracle1'])).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.userQueueIdx as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(
-		(stakeWrapper.contract.methods.userQueueIdx as jest.Mock).mock.calls).toMatchSnapshot();
-	expect(
-		(stakeWrapper.contract.methods.userStakeQueue as jest.Mock).mock.calls).toMatchSnapshot();
+		(stakeWrapper.contract.methods.userStakeQueue as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('getStagingAddReward', async () => {
@@ -330,13 +297,13 @@ test('getStagingReduceReward', async () => {
 test('getOracleStakes', async () => {
 	expect(await stakeWrapper.getOracleStakes(['oracle0', 'oracle1'])).toMatchSnapshot();
 	expect(
-		(stakeWrapper.contract.methods.totalStakeInWei as jest.Mock).mock.calls).toMatchSnapshot();
+		(stakeWrapper.contract.methods.totalStakeInWei as jest.Mock).mock.calls
+	).toMatchSnapshot();
 });
 
 test('getUserAward', async () => {
 	expect(await stakeWrapper.getUserReward('account')).toMatchSnapshot();
-	expect(
-		(stakeWrapper.contract.methods.rewardsInWei as jest.Mock).mock.calls).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.rewardsInWei as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
 test('stake', async () => {
@@ -365,11 +332,9 @@ test('stake', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.stake as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.stake as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.stake as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(stakeSend.mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
@@ -386,25 +351,23 @@ test('unstake', async () => {
 	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await stakeWrapper.unstake('account','oracleAddr');
+		await stakeWrapper.unstake('account', 'oracleAddr');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	expect(await stakeWrapper.unstake('account','oracleAddr')).toMatchSnapshot();
+	expect(await stakeWrapper.unstake('account', 'oracleAddr')).toMatchSnapshot();
 	expect(
-		await stakeWrapper.unstake('account','oracleAddr', {
+		await stakeWrapper.unstake('account', 'oracleAddr', {
 			gasPrice: 1000000000,
 			gasLimit: 20000,
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.unstake as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.unstake as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.unstake as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(stakeSend.mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
@@ -421,21 +384,23 @@ test('stageAddReward', async () => {
 	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await stakeWrapper.stageAddRewards('account', ['addr0', 'addr1'], [10,20]);
+		await stakeWrapper.stageAddRewards('account', ['addr0', 'addr1'], [10, 20]);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	expect(await stakeWrapper.stageAddRewards('account', ['addr0', 'addr1'], [10,20])).toMatchSnapshot();
 	expect(
-		await stakeWrapper.stageAddRewards('account', ['addr0', 'addr1'], [10,20], {
+		await stakeWrapper.stageAddRewards('account', ['addr0', 'addr1'], [10, 20])
+	).toMatchSnapshot();
+	expect(
+		await stakeWrapper.stageAddRewards('account', ['addr0', 'addr1'], [10, 20], {
 			gasPrice: 1000000000,
 			gasLimit: 20000,
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.stageAddRewards as jest.Mock).toBeCalledTimes(2);
 	expect(
 		(stakeWrapper.contract.methods.stageAddRewards as jest.Mock).mock.calls
@@ -455,21 +420,23 @@ test('stageReduceReward', async () => {
 	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await stakeWrapper.stageReduceRewards('account', ['addr0', 'addr1'], [10,20]);
+		await stakeWrapper.stageReduceRewards('account', ['addr0', 'addr1'], [10, 20]);
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	expect(await stakeWrapper.stageReduceRewards('account', ['addr0', 'addr1'], [10,20])).toMatchSnapshot();
 	expect(
-		await stakeWrapper.stageReduceRewards('account', ['addr0', 'addr1'], [10,20], {
+		await stakeWrapper.stageReduceRewards('account', ['addr0', 'addr1'], [10, 20])
+	).toMatchSnapshot();
+	expect(
+		await stakeWrapper.stageReduceRewards('account', ['addr0', 'addr1'], [10, 20], {
 			gasPrice: 1000000000,
 			gasLimit: 20000,
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.stageReduceRewards as jest.Mock).toBeCalledTimes(2);
 	expect(
 		(stakeWrapper.contract.methods.stageReduceRewards as jest.Mock).mock.calls
@@ -503,7 +470,7 @@ test('commitAddReward', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.commitAddRewards as jest.Mock).toBeCalledTimes(2);
 	expect(
 		(stakeWrapper.contract.methods.commitAddRewards as jest.Mock).mock.calls
@@ -537,7 +504,7 @@ test('commitReduceReward', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.commitReduceRewards as jest.Mock).toBeCalledTimes(2);
 	expect(
 		(stakeWrapper.contract.methods.commitReduceRewards as jest.Mock).mock.calls
@@ -571,11 +538,9 @@ test('claimReward', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.claimReward as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.claimReward as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.claimReward as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
@@ -605,7 +570,7 @@ test('resetStagingAwards', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.resetStagingAwards as jest.Mock).toBeCalledTimes(2);
 	expect(
 		(stakeWrapper.contract.methods.resetStagingAwards as jest.Mock).mock.calls
@@ -639,11 +604,9 @@ test('autoRoll', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.autoRoll as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.autoRoll as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.autoRoll as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
@@ -673,11 +636,9 @@ test('enableStaking', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.setStakeFlag as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.setStakeFlag as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.setStakeFlag as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
@@ -707,11 +668,9 @@ test('disableStaking', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.setStakeFlag as jest.Mock).toBeCalledTimes(4);
-	expect(
-		(stakeWrapper.contract.methods.setStakeFlag as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.setStakeFlag as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
@@ -727,25 +686,23 @@ test('addOracle', async () => {
 	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await stakeWrapper.addOracle('account','newOracleAddr');
+		await stakeWrapper.addOracle('account', 'newOracleAddr');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	expect(await stakeWrapper.addOracle('account','newOracleAddr')).toMatchSnapshot();
+	expect(await stakeWrapper.addOracle('account', 'newOracleAddr')).toMatchSnapshot();
 	expect(
-		await stakeWrapper.addOracle('account','newOracleAddr', {
+		await stakeWrapper.addOracle('account', 'newOracleAddr', {
 			gasPrice: 1000000000,
 			gasLimit: 20000,
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.addOracle as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.addOracle as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.addOracle as jest.Mock).mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
 
@@ -761,21 +718,23 @@ test('updateUploaderByOperator', async () => {
 	);
 	web3Wrapper.isReadOnly = jest.fn(() => true);
 	try {
-		await stakeWrapper.updateUploaderByOperator('account','newUploaderAddr');
+		await stakeWrapper.updateUploaderByOperator('account', 'newUploaderAddr');
 	} catch (err) {
 		expect(err).toMatchSnapshot();
 	}
 
 	web3Wrapper.isReadOnly = jest.fn(() => false);
-	expect(await stakeWrapper.updateUploaderByOperator('account','newUploaderAddr')).toMatchSnapshot();
 	expect(
-		await stakeWrapper.updateUploaderByOperator('account','newUploaderAddr', {
+		await stakeWrapper.updateUploaderByOperator('account', 'newUploaderAddr')
+	).toMatchSnapshot();
+	expect(
+		await stakeWrapper.updateUploaderByOperator('account', 'newUploaderAddr', {
 			gasPrice: 1000000000,
 			gasLimit: 20000,
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.updateUploaderByOperator as jest.Mock).toBeCalledTimes(2);
 	expect(
 		(stakeWrapper.contract.methods.updateUploaderByOperator as jest.Mock).mock.calls
@@ -809,11 +768,9 @@ test('setMinStakingAmt', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.setValue as jest.Mock).toBeCalledTimes(2);
-	expect(
-		(stakeWrapper.contract.methods.setValue as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.setValue as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(stakeSend.mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });
@@ -844,11 +801,9 @@ test('setMaxStakePerOracleAmt', async () => {
 			nonce: 10
 		})
 	).toMatchSnapshot();
-	
+
 	expect(stakeWrapper.contract.methods.setValue as jest.Mock).toBeCalledTimes(4);
-	expect(
-		(stakeWrapper.contract.methods.setValue as jest.Mock).mock.calls
-	).toMatchSnapshot();
+	expect((stakeWrapper.contract.methods.setValue as jest.Mock).mock.calls).toMatchSnapshot();
 	expect(stakeSend.mock.calls).toMatchSnapshot();
 	expect((web3Wrapper.getTransactionOption as jest.Mock).mock.calls).toMatchSnapshot();
 });

@@ -2,14 +2,14 @@ import BaseContractWrapper from './BaseContractWrapper';
 import * as CST from './constants';
 import stakeAbi from './static/StakeV2.json';
 import {
-	IStakeV2Address,
+	IRewardFromContract,
+	IRewardList,
+	IStagingIndex,
 	IStakeLot,
 	IStakeQueueIdx,
+	IStakeV2Address,
 	IStakeV2States,
-	ITransactionOption,
-	IRewardList,
-	IRewardFromContract,
-	IStagingIndex
+	ITransactionOption
 } from './types';
 import Web3Wrapper from './Web3Wrapper';
 
@@ -70,27 +70,23 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 	}
 
 	public async getStagingAddReward(index: number): Promise<IRewardList> {
-
-		const userReward: IRewardFromContract = await this.contract.methods.addRewardStagingList().call(
-			index
-		);
+		const userReward: IRewardFromContract = await this.contract.methods
+			.addRewardStagingList()
+			.call(index);
 		return {
 			user: userReward.user,
 			amount: Web3Wrapper.fromWei(userReward.amtInWei)
-		}
-
+		};
 	}
 
 	public async getStagingReduceReward(index: number): Promise<IRewardList> {
-
-		const userReward: IRewardFromContract = await this.contract.methods.reduceRewardStagingList().call(
-			index
-		);
+		const userReward: IRewardFromContract = await this.contract.methods
+			.reduceRewardStagingList()
+			.call(index);
 		return {
 			user: userReward.user,
 			amount: Web3Wrapper.fromWei(userReward.amtInWei)
-		}
-
+		};
 	}
 
 	public async getStagingIndex(): Promise<IStagingIndex> {
@@ -105,9 +101,8 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 				first: Number(reduceRewardStagingIdx.first),
 				last: Number(reduceRewardStagingIdx.last)
 			}
-		}
+		};
 	}
-
 
 	public async getUserStakes(
 		account: string,
@@ -135,7 +130,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		const oracleStakes: { [key: string]: number } = {};
 		for (const oracleAddr of oracleList) {
 			const oracleStake = await this.contract.methods.totalStakeInWei(oracleAddr).call();
-			oracleStakes[oracleAddr] = Web3Wrapper.fromWei((oracleStake));
+			oracleStakes[oracleAddr] = Web3Wrapper.fromWei(oracleStake);
 		}
 		return oracleStakes;
 	}
@@ -324,10 +319,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async enableStaking(
-		account: string,
-		option: ITransactionOption = {}
-	): Promise<string> {
+	public async enableStaking(account: string, option: ITransactionOption = {}): Promise<string> {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
@@ -343,10 +335,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		});
 	}
 
-	public async disableStaking(
-		account: string,
-		option: ITransactionOption = {}
-	): Promise<string> {
+	public async disableStaking(account: string, option: ITransactionOption = {}): Promise<string> {
 		if (this.web3Wrapper.isReadOnly()) return this.web3Wrapper.readOnlyReject();
 		const txOption = await this.web3Wrapper.getTransactionOption(
 			account,
@@ -361,7 +350,6 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 				.on('transactionHash', (txHash: string) => resolve(txHash));
 		});
 	}
-
 
 	public async updateUploaderByOperator(
 		account: string,
