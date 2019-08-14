@@ -9,3 +9,4 @@ export * from './types';
 export { Web3Wrapper } from './Web3Wrapper';
 export { VivaldiWrapper } from './VivaldiWrapper';
 export { StakeWrapper } from './StakeWrapper';
+export { StakeV2Wrapper } from './StakeV2Wrapper';
