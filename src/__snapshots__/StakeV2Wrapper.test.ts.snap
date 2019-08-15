@@ -335,7 +335,7 @@ Object {
   "maxStakePerOracle": 50000,
   "minStakeAmt": 5000,
   "stakingEnabled": true,
-  "totalAwardsToDistribute": 50000,
+  "totalRewardsToDistribute": 50000,
 }
 `;
 

@@ -39,8 +39,8 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 			maxStakePerOracle: Web3Wrapper.fromWei(
 				(await this.contract.methods.maxOracleStakeAmtInWei().call()).valueOf()
 			),
-			totalAwardsToDistribute: Web3Wrapper.fromWei(
-				(await this.contract.methods.totalAwardsToDistributeInWei().call()).valueOf()
+			totalRewardsToDistribute: Web3Wrapper.fromWei(
+				(await this.contract.methods.totalRewardsToDistributeInWei().call()).valueOf()
 			)
 		};
 	}
@@ -71,8 +71,8 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 
 	public async getStagingAddReward(index: number): Promise<IRewardList> {
 		const userReward: IRewardFromContract = await this.contract.methods
-			.addRewardStagingList()
-			.call(index);
+			.addRewardStagingList(index)
+			.call();
 		return {
 			user: userReward.user,
 			amount: Web3Wrapper.fromWei(userReward.amtInWei)
@@ -81,8 +81,8 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 
 	public async getStagingReduceReward(index: number): Promise<IRewardList> {
 		const userReward: IRewardFromContract = await this.contract.methods
-			.reduceRewardStagingList()
-			.call(index);
+			.reduceRewardStagingList(index)
+			.call();
 		return {
 			user: userReward.user,
 			amount: Web3Wrapper.fromWei(userReward.amtInWei)

@@ -211,7 +211,7 @@ const web3Wrapper = {
 			maxOracleStakeAmtInWei: jest.fn(() => ({
 				call: jest.fn(() => Promise.resolve('50000000000000000000000'))
 			})),
-			totalAwardsToDistributeInWei: jest.fn(() => ({
+			totalRewardsToDistributeInWei: jest.fn(() => ({
 				call: jest.fn(() => Promise.resolve('50000000000000000000000'))
 			})),
 			getOracleSize: jest.fn(() => ({

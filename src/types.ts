@@ -76,15 +76,17 @@ export interface IStakeBaseStates {
 	lockMinTimeInSecond: number;
 	minStakeAmt: number;
 	maxStakePerOracle: number;
-	totalAwardsToDistribute: number;
+
 }
 export interface IStakeStates extends IStakeBaseStates {
 	canStake: boolean;
 	canUnstake: boolean;
+	totalAwardsToDistribute: number;
 }
 
 export interface IStakeV2States extends IStakeBaseStates {
 	stakingEnabled: boolean;
+	totalRewardsToDistribute: number;
 }
 
 export interface IStakeAddress {
