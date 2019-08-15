@@ -133,12 +133,12 @@ exports[`commitAddReward 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -169,12 +169,12 @@ exports[`commitReduceReward 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
