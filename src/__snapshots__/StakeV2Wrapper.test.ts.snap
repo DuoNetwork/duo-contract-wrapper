@@ -59,12 +59,12 @@ exports[`autoRoll 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    200000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    200000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -419,12 +419,12 @@ exports[`resetStagingAwards 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    100000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    100000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
