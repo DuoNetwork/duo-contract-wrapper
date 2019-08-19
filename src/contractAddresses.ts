@@ -161,7 +161,7 @@ export const mainnet: IContractAddresses = {
 	StakesV2: [
 		{
 			code: 'Stake-0',
-			address: '0x0000000000000000000000000000000000000000'
+			address: '0xb74437bb3bc31821d2f3446f2e75f615ac03f412'
 		}
 	],
 	DUO: {
