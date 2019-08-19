@@ -59,12 +59,12 @@ exports[`autoRoll 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    200000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    200000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -133,12 +133,12 @@ exports[`commitAddReward 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -169,12 +169,12 @@ exports[`commitReduceReward 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    500000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    500000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
@@ -335,7 +335,7 @@ Object {
   "maxStakePerOracle": 50000,
   "minStakeAmt": 5000,
   "stakingEnabled": true,
-  "totalAwardsToDistribute": 50000,
+  "totalRewardsToDistribute": 50000,
 }
 `;
 
@@ -419,12 +419,12 @@ exports[`resetStagingAwards 5`] = `
 Array [
   Array [
     "account",
-    30000,
+    100000,
     Object {},
   ],
   Array [
     "account",
-    30000,
+    100000,
     Object {
       "gasLimit": 20000,
       "gasPrice": 1000000000,
