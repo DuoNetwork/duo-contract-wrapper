@@ -76,7 +76,7 @@ export const kovan: IContractAddresses = {
 	StakesV2: [
 		{
 			code: 'Stake-0',
-			address: '0xc99814003fdeb4eb77d808cb1cf08bca0d8502e5'
+			address: '0xC99814003FDEB4EB77d808Cb1Cf08bCA0D8502e5'
 		}
 	],
 	DUO: {
@@ -161,7 +161,7 @@ export const mainnet: IContractAddresses = {
 	StakesV2: [
 		{
 			code: 'Stake-0',
-			address: '0xb74437bb3bc31821d2f3446f2e75f615ac03f412'
+			address: '0xb74437bB3Bc31821d2F3446F2e75f615aC03F412'
 		}
 	],
 	DUO: {
