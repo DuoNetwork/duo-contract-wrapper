@@ -23,7 +23,7 @@ export class StakeV2Wrapper extends BaseContractWrapper {
 		CST.EVENT_COMMIT_ADD_REWARD,
 		CST.EVENT_COMMIT_REDUCE_REWARD,
 		CST.EVENT_UPDATE_UPLOADER,
-		CST.EVENT_CLAIM_AWARD
+		CST.EVENT_CLAIM_REWARD,
 	];
 	constructor(web3Wrapper: Web3Wrapper, address: string) {
 		super(web3Wrapper, stakeAbi.abi, address);
