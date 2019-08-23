@@ -38,6 +38,7 @@ export const EVENT_CLAIM_AWARD = 'ClaimAward';
 export const EVENT_COMMIT_ADD_REWARD = 'CommitAddReward';
 export const EVENT_COMMIT_REDUCE_REWARD = 'CommitReduceReward';
 export const EVENT_UPDATE_UPLOADER = 'UpdateUploader';
+export const EVENT_CLAIM_REWARD = 'ClaimReward';
 
 // esplanade
 export const EVENT_ADD_ADDRESS = 'AddAddress';
