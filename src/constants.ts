@@ -20,8 +20,8 @@ export const ESP_MODERATOR = 'Moderator';
 export const ESP_CONTRACT = 'Contract';
 
 // wallet and contract
-export const INCEPTION_BLK_KOVAN = 12786926;
-export const INCEPTION_BLK_MAIN = 8380553;
+export const INCEPTION_BLK_KOVAN = 9355871;
+export const INCEPTION_BLK_MAIN = 7278544;
 
 // managed
 export const EVENT_UPDATE_ROLE_MANAGER = 'UpdateRoleManager';
