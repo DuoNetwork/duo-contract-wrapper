@@ -74,8 +74,10 @@ export class StakeWrapper extends BaseContractWrapper {
 			const stakeQueueIdx: IStakeQueueIdx = await this.contract.methods
 				.userQueueIdx(account, oracle)
 				.call();
-			if (stakeQueueIdx.last >= stakeQueueIdx.first)
-				for (let i = Number(stakeQueueIdx.first); i <= Number(stakeQueueIdx.last); i++) {
+			const first = Number(stakeQueueIdx.first);
+			const last = Number(stakeQueueIdx.last);
+			if (last >= first)
+				for (let i = first; i <= last; i++) {
 					const stakeLot: IStakeLot = await this.contract.methods
 						.userStakeQueue(account, oracle, i)
 						.call();
