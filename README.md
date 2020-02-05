@@ -1,5 +1,3 @@
-[![CircleCI](https://circleci.com/gh/FinBook/duo-contract-wrapper.svg?style=svg)](https://circleci.com/gh/FinBook/duo-contract-wrapper)
-[![Coverage Status](https://coveralls.io/repos/github/FinBook/duo-contract-wrapper/badge.svg?branch=master)](https://coveralls.io/github/FinBook/duo-contract-wrapper?branch=master)
 # DUO-CONTRACT-WRAPPER
 
 We provide wrapper classes for our smart contracts. These classes come with simple but informative contract wrappers, making it easier for developers to understand and interact with contracts.
