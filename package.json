@@ -44,7 +44,7 @@
 	},
 	"dependencies": {
 		"@ledgerhq/hw-transport-u2f": "^4.68.2",
-		"@ledgerhq/web3-subprovider": "^4.68.2",
+		"@ledgerhq/web3-subprovider": "^5.36.0-deprecated",
 		"abi-decoder": "^1.2.0",
 		"bip39": "^3.0.2",
 		"ethereumjs-wallet": "^0.6.3",
